@@ -61,6 +61,12 @@
       align-items: center;
       margin-bottom: 14px;
     }
+    .app-logo {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
     .user-mini {
       display: flex;
       align-items: center;
@@ -609,17 +615,14 @@
 
   <div class="container">
     <div class="top-bar">
-      <div class="user-mini">
-        <img id="user-header-avatar" class="mini-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='%2338bdf8'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" alt="Avatar" />
-        <span id="user-header-name" style="font-size: 13px; font-weight: 600; color: #fff;">Инвестор</span>
-      </div>
-      <div class="lang-switcher">
-        <button class="lang-btn" onclick="setLanguage('en')">EN</button>
-        <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
-        <button class="lang-btn" onclick="setLanguage('vi')">VI</button>
-        <button class="lang-btn active" onclick="setLanguage('ru')">RU</button>
-      </div>
-    </div>
+  <img src="logo.png" alt="EquiCore" class="app-logo" />
+  <div class="lang-switcher">
+    <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+    <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
+    <button class="lang-btn" onclick="setLanguage('vi')">VI</button>
+    <button class="lang-btn active" onclick="setLanguage('ru')">RU</button>
+  </div>
+</div>
 
     <!-- Верхняя панель балансов -->
     <div class="hero-card">
@@ -1470,15 +1473,14 @@
 
     async function initUserSession() {
       if (currentPhotoUrl) {
-        document.getElementById('user-header-avatar').src = currentPhotoUrl;
-        document.getElementById('profile-avatar').src = currentPhotoUrl;
-      }
-      document.getElementById('user-header-name').innerText = currentFirstName;
+  const profAvatar = document.getElementById('profile-avatar');
+  if (profAvatar) profAvatar.src = currentPhotoUrl;
+}
       document.getElementById('profile-name').innerText = currentFirstName;
       document.getElementById('profile-username').innerText = currentUsername;
       document.getElementById('profile-tg-id').innerText = currentTgId;
 
-      document.getElementById('ref-link').innerText = `https://t.me/your_launchpad_bot?start=ref_${currentTgId}`;
+      document.getElementById('ref-link').innerText = `https://t.me/PreIpoInvestAppBot?start=ref_${currentTgId}`;
 
       if (supabaseClient) {
         try {
