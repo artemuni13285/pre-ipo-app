@@ -1,0 +1,1935 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Pre-IPO Launchpad TMA</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-main: #090d16;
+      --bg-surface: #111827;
+      --bg-card: rgba(17, 24, 39, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(56, 189, 248, 0.4);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --primary: #38bdf8;
+      --primary-hover: #0284c7;
+      --primary-gradient: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+      --accent-gold: #f59e0b;
+      --accent-green: #10b981;
+      --accent-red: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      outline: none !important;
+      font-family: 'Inter', -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      padding-bottom: 84px;
+      min-height: 100vh;
+      user-select: none;
+      background-image: 
+        radial-gradient(circle at 10% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(37, 99, 235, 0.08) 0%, transparent 45%);
+      background-attachment: fixed;
+    }
+
+    .container {
+      padding: 16px;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .user-mini {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .mini-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--primary);
+      object-fit: cover;
+      background: #1e293b;
+    }
+    .lang-switcher {
+      display: flex;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 2px;
+      gap: 2px;
+    }
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 9px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .lang-btn.active {
+      background: var(--primary-gradient);
+      color: #030712;
+    }
+
+    .hero-card {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 22px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.5), transparent);
+    }
+    
+    .partner-account-box {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .partner-balance-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-green);
+    }
+    .btn-withdraw-small {
+      background: var(--accent-green);
+      color: #030712;
+      border: none;
+      border-radius: 8px;
+      padding: 7px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: opacity 0.15s ease;
+    }
+    .btn-withdraw-small:active {
+      opacity: 0.8;
+    }
+
+    .hero-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .hero-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 600;
+    }
+    .hero-badge {
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .hero-balance {
+      font-size: 28px;
+      font-weight: 700;
+      color: #ffffff;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: -0.5px;
+    }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .stat-item span {
+      font-size: 10px;
+      color: var(--text-dim);
+      display: block;
+      margin-bottom: 3px;
+    }
+    .stat-item b {
+      font-size: 13px;
+      color: var(--text-main);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .screen {
+      display: none;
+      animation: fadeIn 0.25s ease forwards;
+    }
+    .screen.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      letter-spacing: -0.3px;
+    }
+    .section-sub {
+      font-size: 12px;
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 16px;
+      transition: border-color 0.2s ease;
+    }
+    .project-card:hover {
+      border-color: var(--border-focus);
+    }
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+    .project-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .project-tag {
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--primary);
+      padding: 4px 9px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .project-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    .equity-specs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .equity-col span {
+      font-size: 10px;
+      color: var(--text-dim);
+      display: block;
+      margin-bottom: 2px;
+    }
+    .equity-col b {
+      font-size: 12px;
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .progress-box {
+      margin-bottom: 14px;
+    }
+    .progress-bar {
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 99px;
+      height: 6px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+    .progress-fill {
+      background: var(--primary-gradient);
+      height: 100%;
+      border-radius: 99px;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+    }
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .btn {
+      width: 100%;
+      background: var(--primary-gradient);
+      color: #030712;
+      border: none;
+      border-radius: 12px;
+      padding: 13px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.15s ease, transform 0.1s ease;
+    }
+    .btn:active {
+      opacity: 0.85;
+      transform: scale(0.98);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      border: 1px solid var(--card-border);
+      margin-top: 8px;
+    }
+
+    .tier-selector {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 16px 0;
+    }
+    .tier-box {
+      background: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tier-box.selected {
+      border-color: var(--primary);
+      background: rgba(56, 189, 248, 0.08);
+      box-shadow: 0 0 16px -4px rgba(56, 189, 248, 0.3);
+    }
+    .tier-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .tier-sub {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+    .tier-price {
+      text-align: right;
+    }
+    .tier-price b {
+      font-size: 15px;
+      color: var(--primary);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .tier-price span {
+      display: block;
+      font-size: 10px;
+      color: var(--text-dim);
+    }
+
+    .ref-box {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 14px 0;
+    }
+    .ref-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--primary);
+      word-break: break-all;
+    }
+
+    .info-tile {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .info-tile-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .info-tile-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: rgba(56, 189, 248, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 16px;
+    }
+
+    .profile-hero {
+      text-align: center;
+      padding: 20px 0;
+      background: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    .profile-avatar-lg {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      border: 2px solid var(--primary);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+      object-fit: cover;
+      margin: 0 auto 10px;
+      display: block;
+      background: #1e293b;
+    }
+    .profile-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .profile-username {
+      font-size: 12px;
+      color: var(--primary);
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 2px;
+    }
+
+    .boost-zone {
+      text-align: center;
+      padding: 30px 10px;
+    }
+    .boost-token {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #38bdf8 0%, #1e40af 80%, #0f172a 100%);
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 35px rgba(56, 189, 248, 0.35);
+      cursor: pointer;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.08s ease;
+    }
+    .boost-token:active {
+      transform: scale(0.93);
+    }
+    .boost-token svg {
+      width: 60px;
+      height: 60px;
+      fill: #ffffff;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    .modal-window {
+      background: #111827;
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 22px;
+      width: 100%;
+      max-width: 390px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .modal-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .modal-input-group {
+      margin-bottom: 14px;
+    }
+    .modal-input-group label {
+      display: block;
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .modal-input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 12px;
+      color: #fff;
+      font-size: 14px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .modal-input:focus {
+      border-color: var(--primary);
+    }
+
+    .tabbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(9, 13, 22, 0.95);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 0;
+      z-index: 1000;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 9px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: color 0.2s ease;
+      width: 20%;
+    }
+    .tab-btn svg,
+    .tab-btn span {
+      pointer-events: none;
+    }
+    .tab-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .tab-btn.active {
+      color: var(--primary);
+    }
+    .tab-btn.active svg {
+      stroke: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-bar">
+      <div class="user-mini">
+        <img id="user-header-avatar" class="mini-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='%2338bdf8'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" alt="Avatar" />
+        <span id="user-header-name" style="font-size: 13px; font-weight: 600; color: #fff;">Инвестор</span>
+      </div>
+      <div class="lang-switcher">
+        <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
+        <button class="lang-btn" onclick="setLanguage('vi')">VI</button>
+        <button class="lang-btn active" onclick="setLanguage('ru')">RU</button>
+      </div>
+    </div>
+
+    <!-- Верхняя панель балансов -->
+    <div class="hero-card">
+      <div class="hero-header">
+        <span class="hero-label" data-i18n="balance_label">Инвест-баланс</span>
+        <span class="hero-badge" data-i18n="badge_locked">🔒 Долевой пул</span>
+      </div>
+      <div class="hero-balance" id="user-balance">$1,000.00 <span style="font-size: 15px; color: var(--text-dim);">USDT</span></div>
+      
+      <div class="partner-account-box">
+        <div>
+          <span style="font-size: 10px; color: var(--text-dim); display: block; font-weight: 600;" data-i18n="partner_acc_label">ПАРТНЕРСКИЙ СЧЕТ (РЕФЕРАЛ)</span>
+          <span class="partner-balance-val" id="partner-balance">$0.00 USDT</span>
+        </div>
+        <button class="btn-withdraw-small" onclick="openWithdrawModal()" data-i18n="btn_withdraw">
+          Вывод
+        </button>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span data-i18n="shares_label">ДОЛЕЙ В ПОРТФЕЛЕ</span>
+          <b id="total-shares">0 SHARES</b>
+        </div>
+        <div class="stat-item">
+          <span data-i18n="valuation_label">ОЦЕНКА НА IPO</span>
+          <b id="potential-valuation" style="color: var(--accent-green);">$0.00</b>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. Экран: Pre-IPO Раунды -->
+    <div id="screen-hub" class="screen active">
+      <div class="section-title">
+        <span data-i18n="section_rounds">Pre-IPO Раунды</span>
+        <span class="section-sub" data-i18n="stage_label">Стадия: Seed / Round A</span>
+      </div>
+
+      <!-- Проект 1 -->
+      <div class="project-card">
+        <div class="project-top">
+          <div>
+            <div class="project-name">Media Network X</div>
+            <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;" data-i18n="p1_ticker">Целевой тикер: $MNX</div>
+          </div>
+          <span class="project-tag">AI Media</span>
+        </div>
+        <p class="project-desc" data-i18n="p1_desc">Автоматизированная экосистема детских и развлекательных видеоканалов с глобальной монетизацией.</p>
+        
+        <div class="equity-specs">
+          <div class="equity-col">
+            <span data-i18n="col_share_price">ЦЕНА ДОЛИ</span>
+            <b>$5.00</b>
+          </div>
+          <div class="equity-col">
+            <span data-i18n="col_ipo_ratio">НОМИНАЛ IPO</span>
+            <b data-i18n="p1_ratio">1 доля = 4 акции</b>
+          </div>
+          <div class="equity-col">
+            <span data-i18n="col_valuation">ОЦЕНКА</span>
+            <b>$2.5M</b>
+          </div>
+        </div>
+
+        <div class="progress-box">
+          <div class="progress-bar"><div class="progress-fill" style="width: 68%;"></div></div>
+          <div class="progress-labels">
+            <span><span data-i18n="raised">Собрано:</span> $68,000</span>
+            <span>Hard Cap: $100,000</span>
+          </div>
+        </div>
+
+        <button class="btn" onclick="openInvestScreen('Media Network X', 5, '$MNX')" data-i18n="btn_buy_shares">
+          Приобрести доли
+        </button>
+      </div>
+
+      <!-- Проект 2 -->
+      <div class="project-card">
+        <div class="project-top">
+          <div>
+            <div class="project-name">Cloud Render Core</div>
+            <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;" data-i18n="p2_ticker">Целевой тикер: $CRND</div>
+          </div>
+          <span class="project-tag">Compute</span>
+        </div>
+        <p class="project-desc" data-i18n="p2_desc">Распределенная инфраструктура вычислительных мощностей для 3D-рендеринга и генерации видео.</p>
+        
+        <div class="equity-specs">
+          <div class="equity-col">
+            <span data-i18n="col_share_price">ЦЕНА ДОЛИ</span>
+            <b>$10.00</b>
+          </div>
+          <div class="equity-col">
+            <span data-i18n="col_ipo_ratio">НОМИНАЛ IPO</span>
+            <b data-i18n="p2_ratio">1 доля = 8 акций</b>
+          </div>
+          <div class="equity-col">
+            <span data-i18n="col_valuation">ОЦЕНКА</span>
+            <b>$5.0M</b>
+          </div>
+        </div>
+
+        <div class="progress-box">
+          <div class="progress-bar"><div class="progress-fill" style="width: 35%;"></div></div>
+          <div class="progress-labels">
+            <span><span data-i18n="raised">Собрано:</span> $70,000</span>
+            <span>Hard Cap: $200,000</span>
+          </div>
+        </div>
+
+        <button class="btn" onclick="openInvestScreen('Cloud Render Core', 10, '$CRND')" data-i18n="btn_buy_shares">
+          Приобрести доли
+        </button>
+      </div>
+
+      <!-- Проект 3 -->
+      <div class="project-card">
+        <div class="project-top">
+          <div>
+            <div class="project-name">MegaWatt Mining Cluster</div>
+            <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;" data-i18n="p3_ticker">Целевой тикер: $MWMC</div>
+          </div>
+          <span class="project-tag" style="background: rgba(245, 158, 11, 0.15); color: var(--accent-gold);">Mining & Energy</span>
+        </div>
+        <p class="project-desc" data-i18n="p3_desc">
+          Промышленный майнинг-кластер с прямым подключением к гидрогенерации. Инвестиции в доли хешрейта без покупки оборудования.
+        </p>
+        
+        <div class="equity-specs">
+          <div class="equity-col">
+            <span data-i18n="col_share_price">ЦЕНА ДОЛИ</span>
+            <b>$15.00</b>
+          </div>
+          <div class="equity-col">
+            <span data-i18n="col_ipo_ratio">НОМИНАЛ IPO</span>
+            <b data-i18n="p3_ratio">1 доля = 12 акций</b>
+          </div>
+          <div class="equity-col">
+            <span data-i18n="col_valuation">ОЦЕНКА</span>
+            <b>$8.5M</b>
+          </div>
+        </div>
+
+        <div class="progress-box">
+          <div class="progress-bar"><div class="progress-fill" style="width: 52%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);"></div></div>
+          <div class="progress-labels">
+            <span><span data-i18n="raised">Собрано:</span> $156,000</span>
+            <span>Hard Cap: $300,000</span>
+          </div>
+        </div>
+
+        <button class="btn" onclick="openInvestScreen('MegaWatt Mining Cluster', 15, '$MWMC')" data-i18n="btn_buy_shares">
+          Приобрести доли
+        </button>
+      </div>
+    </div>
+
+    <!-- 2. Экран: Оформление пакета долей -->
+    <div id="screen-invest" class="screen">
+      <div class="section-title">
+        <span data-i18n="title_tiers">Оформление пакета долей</span>
+      </div>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
+        <span data-i18n="project_prefix">Проект:</span> <b id="inv-project-name" style="color: #fff;">Media Network X</b>
+      </p>
+
+      <div class="tier-selector">
+        <div class="tier-box selected" onclick="selectTier(this, 20, 100)">
+          <div>
+            <div class="tier-title" data-i18n="tier_early">Пакет «Ранний инвестор»</div>
+            <div class="tier-sub" data-i18n="tier_early_sub">20 долей компании</div>
+          </div>
+          <div class="tier-price">
+            <b>$100</b>
+            <span data-i18n="tier_early_conv">Конвертация: 80 акций</span>
+          </div>
+        </div>
+
+        <div class="tier-box" onclick="selectTier(this, 50, 250)">
+          <div>
+            <div class="tier-title" data-i18n="tier_syndicate">Пакет «Синдикат»</div>
+            <div class="tier-sub" data-i18n="tier_syndicate_sub">50 долей компании</div>
+          </div>
+          <div class="tier-price">
+            <b>$250</b>
+            <span data-i18n="tier_syndicate_conv">Конвертация: 200 акций</span>
+          </div>
+        </div>
+
+        <div class="tier-box" onclick="selectTier(this, 100, 500)">
+          <div>
+            <div class="tier-title" data-i18n="tier_strategist">Пакет «Стратег»</div>
+            <div class="tier-sub" data-i18n="tier_strategist_sub">100 долей компании</div>
+          </div>
+          <div class="tier-price">
+            <b>$500</b>
+            <span data-i18n="tier_strategist_conv">Конвертация: 400 акций</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 12px; margin-bottom: 16px; border: 1px solid var(--card-border);">
+        <div style="font-size: 11px; color: var(--text-dim); line-height: 1.5;" data-i18n="tier_disclaimer">
+          * Доли фиксируются в корпоративном реестре pre-IPO раунда. При IPO доли конвертируются в обыкновенные акции.
+        </div>
+      </div>
+
+      <button class="btn" onclick="executeSharePurchase()" data-i18n="btn_confirm_deal">Подтвердить сделку</button>
+      <button class="btn btn-secondary" onclick="switchTab('hub')" data-i18n="btn_back">Назад</button>
+    </div>
+
+    <!-- 3. Экран: Портфель долей -->
+    <div id="screen-portfolio" class="screen">
+      <div class="section-title">
+        <span data-i18n="title_portfolio">Реестр активов</span>
+        <span class="section-sub" data-i18n="sub_portfolio">Защищено реестром</span>
+      </div>
+      <div id="portfolio-list"></div>
+    </div>
+
+    <!-- 4. Экран: Партнерская сеть Pre-IPO -->
+    <div id="screen-referrals" class="screen">
+      <div class="section-title">
+        <span data-i18n="title_partners">Партнерская программа</span>
+      </div>
+      
+      <div class="info-tile" style="margin-bottom: 14px;">
+        <div class="info-tile-left">
+          <div class="info-tile-icon">🤝</div>
+          <div>
+            <span style="font-size: 11px; color: var(--text-dim);" data-i18n="upline_label">Вас пригласил наставник:</span>
+            <div id="upline-display" style="font-size: 13px; font-weight: 600; color: var(--text-muted);">Прямая регистрация</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <p class="project-desc" data-i18n="ref_desc">
+          Привлекайте соинвесторов на этапе Pre-IPO раундов и получайте 10% агентского вознаграждения в USDT сразу на ваш партнерский счет.
+        </p>
+        
+        <div class="ref-box">
+          <span class="ref-code" id="ref-link">Загрузка реферальной ссылки...</span>
+          <button style="background: none; border: none; color: var(--primary); font-size: 12px; font-weight: 600; cursor: pointer;" onclick="copyRefLink()" data-i18n="btn_copy">Копировать</button>
+        </div>
+
+        <button class="btn" onclick="copyRefLink()" data-i18n="btn_share_link">Поделиться ссылкой</button>
+      </div>
+
+      <div class="hero-stats" style="margin-top: 0; padding-top: 0; border: none; margin-bottom: 16px;">
+        <div class="stat-item" style="background: var(--bg-card); padding: 12px; border-radius: 12px; border: 1px solid var(--card-border);">
+          <span data-i18n="ref_invited_label">ПРИГЛАШЕНО ПАРТНЕРОВ</span>
+          <b id="ref-count">0 чел.</b>
+        </div>
+        <div class="stat-item" style="background: var(--bg-card); padding: 12px; border-radius: 12px; border: 1px solid var(--card-border);">
+          <span data-i18n="ref_earnings_label">ДОСТУПНО К ВЫВОДУ</span>
+          <b id="ref-earnings-display" style="color: var(--accent-green);">$0.00 USDT</b>
+        </div>
+      </div>
+
+      <div class="section-title">
+        <span data-i18n="structure_title">Ваша структура (1 линия)</span>
+      </div>
+      <div id="referrals-list">
+        <div style="text-align: center; padding: 20px; color: var(--text-dim); font-size: 12px;" data-i18n="structure_empty">
+          У вас пока нет прямых партнеров.
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Экран: Буст -->
+    <div id="screen-activity" class="screen">
+      <div class="section-title">
+        <span data-i18n="title_boost">Комьюнити-буст</span>
+      </div>
+      <div class="boost-zone">
+        <div class="boost-token" onclick="tapBoost()">
+          <svg viewBox="0 0 24 24">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+        </div>
+        <p style="font-size: 13px; color: var(--text-muted); max-width: 280px; margin: 0 auto;" data-i18n="boost_desc">
+          Накапливайте Karma Points за активность для внеочередной аллокации.
+        </p>
+        <div style="font-size: 20px; font-weight: 700; margin-top: 14px; font-family: 'JetBrains Mono';" id="karma-points">
+          Points: 0
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Экран: Профиль пользователя -->
+    <div id="screen-profile" class="screen">
+      <div class="profile-hero">
+        <img id="profile-avatar" class="profile-avatar-lg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='76' height='76' viewBox='0 0 24 24' fill='%2338bdf8'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" alt="Avatar" />
+        <div class="profile-name" id="profile-name">Инвестор</div>
+        <div class="profile-username" id="profile-username">@user</div>
+        <div style="margin-top: 8px;">
+          <span class="hero-badge" data-i18n="profile_accredited">● Аккредитованный инвестор</span>
+        </div>
+      </div>
+
+      <div class="info-tile">
+        <span style="font-size: 12px; color: var(--text-dim);" data-i18n="prof_tg_id">Telegram ID</span>
+        <b style="font-family: 'JetBrains Mono'; font-size: 13px;" id="profile-tg-id">00000000</b>
+      </div>
+
+      <div class="info-tile">
+        <span style="font-size: 12px; color: var(--text-dim);" data-i18n="upline_label">Вас пригласил наставник</span>
+        <b style="font-size: 13px; color: var(--text-muted);" id="profile-upline-name">Прямая регистрация</b>
+      </div>
+
+      <div class="section-title" style="margin-top: 20px;">
+        <span data-i18n="docs_title">Юридические документы</span>
+      </div>
+
+      <div class="info-tile" onclick="openDocModal('SAFE')">
+        <div class="info-tile-left">
+          <div class="info-tile-icon">📄</div>
+          <div>
+            <div style="font-size: 13px; font-weight: 600; color: #fff;" data-i18n="doc_safe_title">Договор конвертации (SAFE)</div>
+            <div style="font-size: 11px; color: var(--accent-green);" data-i18n="doc_signed">● Подписано электронной офертой</div>
+          </div>
+        </div>
+        <span style="font-size: 11px; color: var(--primary); font-weight: 600;" data-i18n="doc_view">Открыть</span>
+      </div>
+
+      <div class="info-tile" onclick="openDocModal('AGENT')">
+        <div class="info-tile-left">
+          <div class="info-tile-icon">⚖️</div>
+          <div>
+            <div style="font-size: 13px; font-weight: 600; color: #fff;" data-i18n="doc_agent_title">Агентское соглашение (10%)</div>
+            <div style="font-size: 11px; color: var(--accent-green);" data-i18n="doc_signed">● Подписано электронной офертой</div>
+          </div>
+        </div>
+        <span style="font-size: 11px; color: var(--primary); font-weight: 600;" data-i18n="doc_view">Открыть</span>
+      </div>
+
+      <div class="info-tile" onclick="openDocModal('RESERVE')">
+        <div class="info-tile-left">
+          <div class="info-tile-icon">🏛️</div>
+          <div>
+            <div style="font-size: 13px; font-weight: 600; color: #fff;" data-i18n="doc_ledger_title">Реестр акционеров Pre-IPO</div>
+            <div style="font-size: 11px; color: var(--text-dim);" data-i18n="doc_auto">● Автофиксация в Supabase</div>
+          </div>
+        </div>
+        <span style="font-size: 11px; color: var(--primary); font-weight: 600;" data-i18n="doc_view">Открыть</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно вывода средств -->
+  <div class="modal-overlay" id="withdraw-modal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div class="modal-title" data-i18n="modal_withdraw_title">Вывод партнерских средств</div>
+        <button class="modal-close" onclick="closeWithdrawModal()">&times;</button>
+      </div>
+
+      <div style="background: rgba(16, 185, 129, 0.1); border-radius: 10px; padding: 10px; margin-bottom: 14px;">
+        <span style="font-size: 11px; color: var(--text-dim); display: block;" data-i18n="modal_available_label">ДОСТУПНО НА ПАРТНЕРСКОМ СЧЕТЕ:</span>
+        <b style="font-family: 'JetBrains Mono'; font-size: 16px; color: var(--accent-green);" id="modal-avail-balance">$0.00 USDT</b>
+      </div>
+
+      <div class="modal-input-group">
+        <label data-i18n="modal_label_wallet">Адрес кошелька (USDT TRC20 / TON):</label>
+        <input type="text" class="modal-input" id="withdraw-address" placeholder="T... или EQ..." />
+      </div>
+
+      <div class="modal-input-group">
+        <label data-i18n="modal_label_amount">Сумма вывода (USDT):</label>
+        <input type="number" class="modal-input" id="withdraw-amount" placeholder="0.00" />
+      </div>
+
+      <div style="font-size: 11px; color: var(--text-dim); line-height: 1.4; margin-bottom: 16px;" data-i18n="modal_policy_note">
+        * Вывод осуществляется исключительно с партнерского счета.
+      </div>
+
+      <button class="btn" onclick="submitWithdrawal()" data-i18n="btn_confirm_withdraw">
+        Подтвердить вывод
+      </button>
+    </div>
+  </div>
+
+  <!-- Модальное окно просмотра документов -->
+  <div class="modal-overlay" id="doc-modal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div class="modal-title" id="doc-modal-title">Документ</div>
+        <button class="modal-close" onclick="closeDocModal()">&times;</button>
+      </div>
+      <div style="font-size: 12px; color: var(--text-muted); line-height: 1.6; max-height: 260px; overflow-y: auto; margin-bottom: 16px;" id="doc-modal-content">
+        Загрузка текста...
+      </div>
+      <button class="btn" onclick="closeDocModal()" data-i18n="btn_close">Понятно</button>
+    </div>
+  </div>
+
+  <!-- Таббар -->
+  <nav class="tabbar">
+    <button class="tab-btn active" onclick="switchTab('hub', this)">
+      <svg viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path></svg>
+      <span data-i18n="tab_rounds">Раунды</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('portfolio', this)">
+      <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+      <span data-i18n="tab_portfolio">Портфель</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('referrals', this)">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+      <span data-i18n="tab_partners">Партнеры</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('activity', this)">
+      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+      <span data-i18n="tab_boost">Буст</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('profile', this)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"></circle><path d="M5.5 21a8.38 8.38 0 0 1 13 0"></path></svg>
+      <span data-i18n="tab_profile">Профиль</span>
+    </button>
+  </nav>
+
+  <script>
+    // ==========================================
+    // 1. КОНФИГУРАЦИЯ БАЗЫ ДАННЫХ
+    // ==========================================
+    const SUPABASE_URL = 'https://uufdrkjugnplqltjzirt.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_tKJTQLO7bZWH26Xi66y6Bw_vePfc132'; 
+
+    let supabaseClient = null;
+    try {
+      if (window.supabase && typeof window.supabase.createClient === 'function' && SUPABASE_ANON_KEY && !SUPABASE_ANON_KEY.includes('test')) {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      }
+    } catch (e) {
+      console.warn("Supabase init error:", e);
+    }
+
+    function safeGetStorage(key) {
+      try { return localStorage.getItem(key); } catch (e) { return null; }
+    }
+    function safeSetStorage(key, val) {
+      try { localStorage.setItem(key, val); } catch (e) {}
+    }
+
+    const tg = window.Telegram?.WebApp;
+    if (tg) {
+      try {
+        tg.ready();
+        tg.expand();
+      } catch (e) {}
+    }
+
+    const tgUser = tg?.initDataUnsafe?.user;
+    const currentTgId = tgUser?.id || 777000111;
+    const currentUsername = tgUser?.username ? `@${tgUser.username}` : '@demo_investor';
+    const currentFirstName = tgUser?.first_name || 'Инвестор';
+    const currentPhotoUrl = tgUser?.photo_url || '';
+
+    let dbUserId = null;
+    let uplineName = null;
+
+    let currentLang = 'ru';
+    let balance = 1000;
+    let partnerBalance = 0;
+    let totalSharesOwned = 0;
+    let potentialValuation = 0;
+    let refCount = 0;
+    let karmaPoints = 0;
+
+    let selectedProject = "Media Network X";
+    let selectedTicker = "$MNX";
+    let selectedShares = 20;
+    let selectedCost = 100;
+
+    const myPortfolio = [];
+    const myReferrals = [];
+
+    // ==========================================
+    // 2. СЛОВАРЬ ЛОКАЛИЗАЦИИ
+    // ==========================================
+    const i18n = {
+      ru: {
+        balance_label: "Инвест-баланс",
+        badge_locked: "🔒 Долевой пул",
+        partner_acc_label: "ПАРТНЕРСКИЙ СЧЕТ (РЕФЕРАЛ)",
+        btn_withdraw: "Вывод",
+        shares_label: "ДОЛЕЙ В ПОРТФЕЛЕ",
+        valuation_label: "ОЦЕНКА НА IPO",
+        section_rounds: "Pre-IPO Раунды",
+        stage_label: "Стадия: Seed / Round A",
+        p1_ticker: "Целевой тикер: $MNX",
+        p1_desc: "Автоматизированная экосистема детских и развлекательных видеоканалов с глобальной монетизацией.",
+        p1_ratio: "1 доля = 4 акции",
+        p2_ticker: "Целевой тикер: $CRND",
+        p2_desc: "Распределенная инфраструктура вычислительных мощностей для 3D-рендеринга и генерации видео.",
+        p2_ratio: "1 доля = 8 акций",
+        p3_ticker: "Целевой тикер: $MWMC",
+        p3_desc: "Промышленный майнинг-кластер с прямым подключением к гидрогенерации. Инвестиции в доли хешрейта без покупки оборудования.",
+        p3_ratio: "1 доля = 12 акций",
+        col_share_price: "ЦЕНА ДОЛИ",
+        col_ipo_ratio: "НОМИНАЛ IPO",
+        col_valuation: "ОЦЕНКА",
+        raised: "Собрано:",
+        btn_buy_shares: "Приобрести доли",
+        title_tiers: "Оформление пакета долей",
+        project_prefix: "Проект:",
+        tier_early: "Пакет «Ранний инвестор»",
+        tier_early_sub: "20 долей компании",
+        tier_early_conv: "Конвертация: 80 акций",
+        tier_syndicate: "Пакет «Синдикат»",
+        tier_syndicate_sub: "50 долей компании",
+        tier_syndicate_conv: "Конвертация: 200 акций",
+        tier_strategist: "Пакет «Стратег»",
+        tier_strategist_sub: "100 долей компании",
+        tier_strategist_conv: "Конвертация: 400 акций",
+        tier_disclaimer: "* Доли фиксируются в корпоративном реестре pre-IPO раунда. При IPO доли конвертируются в обыкновенные акции.",
+        btn_confirm_deal: "Подтвердить сделку",
+        btn_back: "Назад",
+        title_portfolio: "Реестр активов",
+        sub_portfolio: "Защищено реестром",
+        empty_portfolio: "У вас пока нет оформленных долей.",
+        title_partners: "Партнерская программа",
+        ref_desc: "Привлекайте соинвесторов на этапе Pre-IPO раундов и получайте 10% агентского вознаграждения в USDT сразу на ваш партнерский счет.",
+        btn_copy: "Копировать",
+        btn_share_link: "Поделиться ссылкой",
+        ref_invited_label: "ПРИГЛАШЕНО ПАРТНЕРОВ",
+        ref_earnings_label: "ДОСТУПНО К ВЫВОДУ",
+        title_boost: "Комьюнити-буст",
+        boost_desc: "Накапливайте Karma Points за активность для внеочередной аллокации.",
+        tab_rounds: "Раунды",
+        tab_portfolio: "Портфель",
+        tab_partners: "Партнеры",
+        tab_boost: "Буст",
+        tab_profile: "Профиль",
+        owner_badge: "Pre-IPO Владелец",
+        col_owned_shares: "ДОЛЕЙ",
+        col_invested: "СУММА ВХОДА",
+        col_status: "СТАТУС",
+        status_fixed: "Фиксация",
+        alert_no_balance: "Недостаточно средств на инвест-балансе.",
+        alert_deal_success: "Сделка проведена! Приобретено: ",
+        alert_ref_copied: "Реферальная ссылка скопирована!",
+        shares_unit: "шт.",
+        people_unit: "чел.",
+        modal_withdraw_title: "Вывод партнерских средств",
+        modal_available_label: "ДОСТУПНО НА ПАРТНЕРСКОМ СЧЕТЕ:",
+        modal_label_wallet: "Адрес кошелька (USDT TRC20 / TON):",
+        modal_label_amount: "Сумма вывода (USDT):",
+        modal_policy_note: "* Вывод осуществляется исключительно с партнерского счета.",
+        btn_confirm_withdraw: "Подтвердить вывод",
+        alert_invalid_withdraw_amt: "Некорректная сумма или превышен остаток.",
+        alert_empty_address: "Укажите адрес кошелька.",
+        alert_withdraw_success: "Заявка на вывод оформлена!",
+        upline_label: "Вас пригласил наставник:",
+        no_upline: "У вас нет наставника (Прямая регистрация)",
+        structure_title: "Ваша структура (1 линия)",
+        structure_empty: "У вас пока нет прямых партнеров.",
+        profile_accredited: "● Аккредитованный инвестор",
+        prof_tg_id: "Telegram ID",
+        docs_title: "Юридические документы",
+        doc_safe_title: "Инвестиционный договор Pre-IPO (SAFE)",
+        doc_agent_title: "Агентское соглашение (10% комиссия)",
+        doc_ledger_title: "Реестр акционеров Pre-IPO",
+        doc_signed: "● Подписано электронной офертой",
+        doc_auto: "● Автофиксация в реестре",
+        doc_view: "Открыть",
+        btn_close: "Закрыть"
+      },
+      en: {
+        balance_label: "Investment Balance",
+        badge_locked: "🔒 Equity Pool",
+        partner_acc_label: "PARTNER ACCOUNT (COMMISSION)",
+        btn_withdraw: "Withdraw",
+        shares_label: "PORTFOLIO SHARES",
+        valuation_label: "IPO VALUATION",
+        section_rounds: "Pre-IPO Rounds",
+        stage_label: "Stage: Seed / Round A",
+        p1_ticker: "Target Ticker: $MNX",
+        p1_desc: "Automated ecosystem of kids and entertainment media channels with global reach.",
+        p1_ratio: "1 share = 4 stock units",
+        p2_ticker: "Target Ticker: $CRND",
+        p2_desc: "Distributed compute infrastructure optimized for 3D rendering and generative AI video.",
+        p2_ratio: "1 share = 8 stock units",
+        p3_ticker: "Target Ticker: $MWMC",
+        p3_desc: "Industrial-scale mining cluster powered by hydroelectric generation. Invest in hashrate equity.",
+        p3_ratio: "1 share = 12 stock units",
+        col_share_price: "SHARE PRICE",
+        col_ipo_ratio: "IPO PARITY",
+        col_valuation: "VALUATION",
+        raised: "Raised:",
+        btn_buy_shares: "Acquire Shares",
+        title_tiers: "Share Allocation Packages",
+        project_prefix: "Project:",
+        tier_early: "Early Adopter Tier",
+        tier_early_sub: "20 company shares",
+        tier_early_conv: "Conversion: 80 stocks",
+        tier_syndicate: "Syndicate Tier",
+        tier_syndicate_sub: "50 company shares",
+        tier_syndicate_conv: "Conversion: 200 stocks",
+        tier_strategist: "Strategist Tier",
+        tier_strategist_sub: "100 company shares",
+        tier_strategist_conv: "Conversion: 400 stocks",
+        tier_disclaimer: "* Shares are registered in pre-IPO corporate registry. Converted to stock upon IPO listing.",
+        btn_confirm_deal: "Confirm Allocation",
+        btn_back: "Back",
+        title_portfolio: "Asset Registry",
+        sub_portfolio: "Secured on Ledger",
+        empty_portfolio: "No share allocations registered yet.",
+        title_partners: "Partner Program",
+        ref_desc: "Invite co-investors to Pre-IPO rounds and receive 10% agent commission directly to your withdrawable balance.",
+        btn_copy: "Copy",
+        btn_share_link: "Share Link",
+        ref_invited_label: "PARTNERS INVITED",
+        ref_earnings_label: "AVAILABLE FOR PAYOUT",
+        title_boost: "Community Boost",
+        boost_desc: "Accumulate Karma Points through daily engagement to unlock priority allocations.",
+        tab_rounds: "Rounds",
+        tab_portfolio: "Portfolio",
+        tab_partners: "Partners",
+        tab_boost: "Boost",
+        tab_profile: "Profile",
+        owner_badge: "Pre-IPO Owner",
+        col_owned_shares: "SHARES",
+        col_invested: "CAPITAL",
+        col_status: "STATUS",
+        status_fixed: "Locked",
+        alert_no_balance: "Insufficient investment balance.",
+        alert_deal_success: "Deal confirmed! Acquired: ",
+        alert_ref_copied: "Referral link copied!",
+        shares_unit: "shares",
+        people_unit: "users",
+        modal_withdraw_title: "Partner Commission Payout",
+        modal_available_label: "AVAILABLE ON PARTNER ACCOUNT:",
+        modal_label_wallet: "Wallet Address (USDT TRC20 / TON):",
+        modal_label_amount: "Withdraw Amount (USDT):",
+        modal_policy_note: "* Payouts are exclusively processed from the partner balance.",
+        btn_confirm_withdraw: "Confirm Payout",
+        alert_invalid_withdraw_amt: "Invalid amount or exceeds available partner balance.",
+        alert_empty_address: "Please enter a valid destination address.",
+        alert_withdraw_success: "Payout processed! Funds sent to your wallet.",
+        upline_label: "Invited by sponsor:",
+        no_upline: "No sponsor (Direct registration)",
+        structure_title: "Your Structure (Level 1)",
+        structure_empty: "No direct partners in your network yet.",
+        profile_accredited: "● Accredited Investor",
+        prof_tg_id: "Telegram ID",
+        docs_title: "Legal Documents",
+        doc_safe_title: "Pre-IPO Investment SAFE Agreement",
+        doc_agent_title: "Partner Agency Contract (10%)",
+        doc_ledger_title: "Corporate Shareholder Registry",
+        doc_signed: "● Executed by Electronic Offer",
+        doc_auto: "● Ledger Auto-Recorded",
+        doc_view: "View",
+        btn_close: "Close"
+      },
+      fr: {
+        balance_label: "Solde d'investissement",
+        badge_locked: "🔒 Pool Capital",
+        partner_acc_label: "COMPTE PARTENAIRE (COMMISSION)",
+        btn_withdraw: "Retrait",
+        shares_label: "PARTS EN PORTEFEUILLE",
+        valuation_label: "VALORISATION IPO",
+        section_rounds: "Tours Pre-IPO",
+        stage_label: "Phase: Seed / Round A",
+        p1_ticker: "Ticker cible: $MNX",
+        p1_desc: "Écosystème automatisé de chaînes vidéo pour enfants et divertissement.",
+        p1_ratio: "1 part = 4 actions",
+        p2_ticker: "Ticker cible: $CRND",
+        p2_desc: "Infrastructure de calcul distribué dédiée au rendu 3D et à l'IA vidéo.",
+        p2_ratio: "1 part = 8 actions",
+        p3_ticker: "Ticker cible: $MWMC",
+        p3_desc: "Cluster minier industriel alimenté par énergie hydroélectrique.",
+        p3_ratio: "1 part = 12 actions",
+        col_share_price: "PRIX / PART",
+        col_ipo_ratio: "PARITÉ IPO",
+        col_valuation: "VALORISATION",
+        raised: "Levé:",
+        btn_buy_shares: "Acquérir des parts",
+        title_tiers: "Souscription de parts",
+        project_prefix: "Projet:",
+        tier_early: "Pack «Premier Investisseur»",
+        tier_early_sub: "20 parts d'entreprise",
+        tier_early_conv: "Conversion: 80 actions",
+        tier_syndicate: "Pack «Syndicat»",
+        tier_syndicate_sub: "50 parts d'entreprise",
+        tier_syndicate_conv: "Conversion: 200 actions",
+        tier_strategist: "Pack «Stratège»",
+        tier_strategist_sub: "100 parts d'entreprise",
+        tier_strategist_conv: "Conversion: 400 actions",
+        tier_disclaimer: "* Les parts sont enregistrées au registre pré-IPO.",
+        btn_confirm_deal: "Valider l'opération",
+        btn_back: "Retour",
+        title_portfolio: "Registre des actifs",
+        sub_portfolio: "Sécurisé par registre",
+        empty_portfolio: "Aucune part enregistrée.",
+        title_partners: "Programme Partenaire",
+        ref_desc: "Recevez 10% de commission sur les souscriptions de vos filleuls.",
+        btn_copy: "Copier",
+        btn_share_link: "Partager le lien",
+        ref_invited_label: "PARTENAIRES INVITÉS",
+        ref_earnings_label: "DISPONIBLE AU RETRAIT",
+        title_boost: "Boost Communautaire",
+        boost_desc: "Gagnez des points Karma pour vos allocations.",
+        tab_rounds: "Tours",
+        tab_portfolio: "Portefeuille",
+        tab_partners: "Partenaires",
+        tab_boost: "Boost",
+        tab_profile: "Profil",
+        owner_badge: "Détenteur Pre-IPO",
+        col_owned_shares: "PARTS",
+        col_invested: "APPORT",
+        col_status: "STATUT",
+        status_fixed: "Bloqué",
+        alert_no_balance: "Solde insuffisant.",
+        alert_deal_success: "Parts acquises: ",
+        alert_ref_copied: "Lien copié!",
+        shares_unit: "parts",
+        people_unit: "pers.",
+        modal_withdraw_title: "Retrait des Commissions",
+        modal_available_label: "DISPONIBLE:",
+        modal_label_wallet: "Adresse portefeuille (USDT):",
+        modal_label_amount: "Montant (USDT):",
+        modal_policy_note: "* Seules les commissions partenaires sont retirables.",
+        btn_confirm_withdraw: "Confirmer le retrait",
+        alert_invalid_withdraw_amt: "Montant invalide.",
+        alert_empty_address: "Indiquez votre adresse.",
+        alert_withdraw_success: "Retrait enregistré!",
+        upline_label: "Parrainé par:",
+        no_upline: "Aucun parrain (Inscription directe)",
+        structure_title: "Votre équipe directe (L1)",
+        structure_empty: "Aucun partenaire direct inscrit.",
+        profile_accredited: "● Investisseur Accrédité",
+        prof_tg_id: "Identifiant Telegram",
+        docs_title: "Documents légaux",
+        doc_safe_title: "Contrat d'investissement SAFE",
+        doc_agent_title: "Convention d'apporteur d'affaires",
+        doc_ledger_title: "Registre officiel des actionnaires",
+        doc_signed: "● Signé électroniquement",
+        doc_auto: "● Enregistré au registre",
+        doc_view: "Consulter",
+        btn_close: "Fermer"
+      },
+      vi: {
+        balance_label: "Số dư đầu tư",
+        badge_locked: "🔒 Quỹ cổ phần",
+        partner_acc_label: "TÀI KHOẢN ĐỐI TÁC (HOA HỒNG)",
+        btn_withdraw: "Rút tiền",
+        shares_label: "CỔ PHẦN DANH MỤC",
+        valuation_label: "ĐỊNH GIÁ IPO",
+        section_rounds: "Các vòng Pre-IPO",
+        stage_label: "Giai đoạn: Seed / Round A",
+        p1_ticker: "Mã niêm yết: $MNX",
+        p1_desc: "Hệ sinh thái video giải trí và thiếu nhi toàn cầu.",
+        p1_ratio: "1 cổ phần = 4 cổ phiếu",
+        p2_ticker: "Mã niêm yết: $CRND",
+        p2_desc: "Hạ tầng đám mây phân tán cho 3D và AI video.",
+        p2_ratio: "1 cổ phần = 8 cổ phiếu",
+        p3_ticker: "Mã niêm yết: $MWMC",
+        p3_desc: "Cụm khai thác công nghiệp kết nối trực tiếp thủy điện.",
+        p3_ratio: "1 cổ phần = 12 cổ phiếu",
+        col_share_price: "GIÁ CỔ PHẦN",
+        col_ipo_ratio: "QUY ĐỔI IPO",
+        col_valuation: "ĐỊNH GIÁ",
+        raised: "Đã huy động:",
+        btn_buy_shares: "Mua cổ phần",
+        title_tiers: "Lựa chọn gói cổ phần",
+        project_prefix: "Dự án:",
+        tier_early: "Gói «Nhà đầu tư sớm»",
+        tier_early_sub: "20 cổ phần công ty",
+        tier_early_conv: "Quy đổi: 80 cổ phiếu",
+        tier_syndicate: "Gói «Hiệp hội»",
+        tier_syndicate_sub: "50 cổ phần công ty",
+        tier_syndicate_conv: "Quy đổi: 200 cổ phiếu",
+        tier_strategist: "Gói «Chiến lược gia»",
+        tier_strategist_sub: "100 cổ phần công ty",
+        tier_strategist_conv: "Quy đổi: 400 cổ phiếu",
+        tier_disclaimer: "* Cổ phần được ghi nhận vào sổ đăng ký Pre-IPO.",
+        btn_confirm_deal: "Xác nhận giao dịch",
+        btn_back: "Quay lại",
+        title_portfolio: "Sổ đăng ký tài sản",
+        sub_portfolio: "Bảo mật bằng sổ cái",
+        empty_portfolio: "Bạn chưa sở hữu cổ phần nào.",
+        title_partners: "Chương trình đối tác",
+        ref_desc: "Nhận 10% hoa hồng vào tài khoản có thể rút ngay lập tức.",
+        btn_copy: "Sao chép",
+        btn_share_link: "Chia sẻ liên kết",
+        ref_invited_label: "ĐỐI TÁC ĐÃ MỜI",
+        ref_earnings_label: "SẴN SÀNG ĐỂ RÚT",
+        title_boost: "Tăng tốc cộng đồng",
+        boost_desc: "Tích lũy điểm Karma để nhận phân bổ ưu tiên.",
+        tab_rounds: "Vòng gọi vốn",
+        tab_portfolio: "Danh mục",
+        tab_partners: "Đối tác",
+        tab_boost: "Tăng tốc",
+        tab_profile: "Hồ sơ",
+        owner_badge: "Chủ sở hữu Pre-IPO",
+        col_owned_shares: "CỔ PHẦN",
+        col_invested: "VỐN VÀO",
+        col_status: "TRẠNG THÁI",
+        status_fixed: "Đã chốt",
+        alert_no_balance: "Số dư đầu tư không đủ.",
+        alert_deal_success: "Giao dịch thành công! Đã mua: ",
+        alert_ref_copied: "Đã sao chép liên kết!",
+        shares_unit: "CP",
+        people_unit: "người",
+        modal_withdraw_title: "Rút tiền hoa hồng",
+        modal_available_label: "KHẢ DỤNG:",
+        modal_label_wallet: "Địa chỉ ví nhận (USDT):",
+        modal_label_amount: "Số tiền muốn rút (USDT):",
+        modal_policy_note: "* Chỉ có thể rút tiền từ tài khoản đối tác.",
+        btn_confirm_withdraw: "Xác nhận rút tiền",
+        alert_invalid_withdraw_amt: "Số tiền không hợp lệ.",
+        alert_empty_address: "Vui lòng nhập địa chỉ ví.",
+        alert_withdraw_success: "Yêu cầu rút tiền thành công!",
+        upline_label: "Người giới thiệu:",
+        no_upline: "Không có người giới thiệu (Đăng ký trực tiếp)",
+        structure_title: "Đội ngũ trực tiếp (Tầng 1)",
+        structure_empty: "Chưa có đối tác trực tiếp nào.",
+        profile_accredited: "● Nhà đầu tư đã xác minh",
+        prof_tg_id: "ID Telegram",
+        docs_title: "Hồ sơ pháp lý",
+        doc_safe_title: "Hợp đồng đầu tư SAFE Pre-IPO",
+        doc_agent_title: "Thỏa thuận hoa hồng đối tác (10%)",
+        doc_ledger_title: "Sổ đăng ký cổ đông Pre-IPO",
+        doc_signed: "● Đã ký điện tử",
+        doc_auto: "● Ghi nhận tự động",
+        doc_view: "Xem",
+        btn_close: "Đóng"
+      }
+    };
+
+    // ==========================================
+    // 3. ИНИЦИАЛИЗАЦИЯ И РАБОТА С ДАННЫМИ
+    // ==========================================
+    function getReferralParam() {
+      const startParam = tg?.initDataUnsafe?.start_param;
+      if (startParam) {
+        return startParam.replace('ref_', '').replace('ref', '');
+      }
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlRef = urlParams.get('ref') || urlParams.get('start');
+      if (urlRef) {
+        return urlRef.replace('ref_', '').replace('ref', '');
+      }
+      return null;
+    }
+
+    async function initUserSession() {
+      if (currentPhotoUrl) {
+        document.getElementById('user-header-avatar').src = currentPhotoUrl;
+        document.getElementById('profile-avatar').src = currentPhotoUrl;
+      }
+      document.getElementById('user-header-name').innerText = currentFirstName;
+      document.getElementById('profile-name').innerText = currentFirstName;
+      document.getElementById('profile-username').innerText = currentUsername;
+      document.getElementById('profile-tg-id').innerText = currentTgId;
+
+      document.getElementById('ref-link').innerText = `https://t.me/your_launchpad_bot?start=ref_${currentTgId}`;
+
+      if (supabaseClient) {
+        try {
+          let { data: user } = await supabaseClient
+            .from('users')
+            .select('*')
+            .eq('tg_id', currentTgId)
+            .maybeSingle();
+
+          if (!user) {
+            let inviterTgId = getReferralParam();
+            let resolvedReferrerId = null;
+
+            // Если пришел по реферальной ссылке — находим пригласителя
+            if (inviterTgId && String(inviterTgId) !== String(currentTgId)) {
+              let { data: inviter } = await supabaseClient
+                .from('users')
+                .select('id, first_name, username')
+                .eq('tg_id', inviterTgId)
+                .maybeSingle();
+              if (inviter) resolvedReferrerId = inviter.id;
+            }
+
+            const { data: newUser, error: regErr } = await supabaseClient
+              .from('users')
+              .insert([{
+                tg_id: currentTgId,
+                username: currentUsername,
+                first_name: currentFirstName,
+                referrer_id: resolvedReferrerId, // Если ссылки нет — остается NULL
+                lang: currentLang
+              }])
+              .select()
+              .single();
+
+            if (!regErr && newUser) {
+              user = newUser;
+              await supabaseClient
+                .from('accounts')
+                .insert([{
+                  user_id: user.id,
+                  invest_balance: 1000.00,
+                  partner_balance: 0.00,
+                  bonus_balance: 0.00
+                }]);
+            }
+          }
+
+          if (user) {
+            dbUserId = user.id;
+
+            if (user.referrer_id) {
+              let { data: uplineUser } = await supabaseClient
+                .from('users')
+                .select('first_name, username')
+                .eq('id', user.referrer_id)
+                .single();
+              if (uplineUser) {
+                uplineName = uplineUser.username ? `${uplineUser.first_name} (${uplineUser.username})` : uplineUser.first_name;
+              }
+            } else {
+              uplineName = null; // Нет пригласителя
+            }
+
+            const { data: account } = await supabaseClient
+              .from('accounts')
+              .select('*')
+              .eq('user_id', dbUserId)
+              .single();
+
+            if (account) {
+              balance = parseFloat(account.invest_balance) || 0;
+              partnerBalance = parseFloat(account.partner_balance) || 0;
+              karmaPoints = account.karma_points || 0;
+            }
+
+            const { data: shares } = await supabaseClient
+              .from('share_holdings')
+              .select('*')
+              .eq('user_id', dbUserId);
+
+            if (shares && shares.length > 0) {
+              myPortfolio.length = 0;
+              shares.forEach(s => {
+                myPortfolio.push({
+                  project: s.project_name,
+                  ticker: s.project_ticker,
+                  shares: s.shares_count,
+                  invested: parseFloat(s.invested_amount),
+                  certId: s.certificate_id,
+                  date: new Date(s.created_at).toLocaleDateString()
+                });
+              });
+              totalSharesOwned = myPortfolio.reduce((acc, curr) => acc + curr.shares, 0);
+              potentialValuation = myPortfolio.reduce((acc, curr) => acc + (curr.invested * 3.5), 0);
+            }
+
+            const { data: referrals } = await supabaseClient
+              .from('users')
+              .select('first_name, username, created_at')
+              .eq('referrer_id', dbUserId);
+
+            if (referrals) {
+              myReferrals.length = 0;
+              referrals.forEach(r => myReferrals.push(r));
+              refCount = myReferrals.length;
+            }
+          }
+        } catch (err) {
+          console.warn("Supabase load error:", err);
+        }
+      }
+
+      updateUplineUI();
+      updateUI();
+      renderPortfolio();
+      renderReferrals();
+    }
+
+    function updateUplineUI() {
+      const t = i18n[currentLang];
+      const text = uplineName ? uplineName : t.no_upline;
+      document.getElementById('upline-display').innerText = text;
+      document.getElementById('profile-upline-name').innerText = text;
+    }
+
+    // ==========================================
+    // 4. ОТОБРАЖЕНИЕ И ПЕРЕКЛЮЧЕНИЯ
+    // ==========================================
+    function detectInitialLanguage() {
+      const saved = safeGetStorage('pre_ipo_lang');
+      if (saved && i18n[saved]) return saved;
+
+      const tgLang = tg?.initDataUnsafe?.user?.language_code?.toLowerCase();
+      if (tgLang) {
+        if (tgLang.startsWith('ru')) return 'ru';
+        if (tgLang.startsWith('fr')) return 'fr';
+        if (tgLang.startsWith('vi')) return 'vi';
+        if (tgLang.startsWith('en')) return 'en';
+      }
+
+      const browserLang = (navigator.language || '').toLowerCase();
+      if (browserLang.startsWith('ru')) return 'ru';
+      if (browserLang.startsWith('fr')) return 'fr';
+      if (browserLang.startsWith('vi')) return 'vi';
+
+      return 'ru';
+    }
+
+    function setLanguage(lang) {
+      if (!i18n[lang]) return;
+      currentLang = lang;
+      safeSetStorage('pre_ipo_lang', lang);
+
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.innerText.toLowerCase() === lang);
+      });
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (i18n[lang][key]) {
+          el.innerText = i18n[lang][key];
+        }
+      });
+
+      updateUplineUI();
+      updateUI();
+      renderPortfolio();
+      renderReferrals();
+    }
+
+    function updateUI() {
+      const t = i18n[currentLang];
+      document.getElementById('user-balance').innerHTML = `$${balance.toFixed(2)} <span style="font-size: 15px; color: var(--text-dim);">USDT</span>`;
+      document.getElementById('partner-balance').innerText = `$${partnerBalance.toFixed(2)} USDT`;
+      document.getElementById('ref-earnings-display').innerText = `$${partnerBalance.toFixed(2)} USDT`;
+      document.getElementById('modal-avail-balance').innerText = `$${partnerBalance.toFixed(2)} USDT`;
+      document.getElementById('total-shares').innerText = `${totalSharesOwned} ${t.shares_unit.toUpperCase()}`;
+      document.getElementById('potential-valuation').innerText = `$${potentialValuation.toFixed(2)}`;
+      document.getElementById('ref-count').innerText = `${refCount} ${t.people_unit}`;
+    }
+
+    function switchTab(screenId, btnElement) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+      const target = document.getElementById(`screen-${screenId}`);
+      if (target) target.classList.add('active');
+
+      if (btnElement) {
+        btnElement.classList.add('active');
+      } else {
+        const matchingBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => 
+          b.getAttribute('onclick')?.includes(`'${screenId}'`)
+        );
+        if (matchingBtn) matchingBtn.classList.add('active');
+      }
+    }
+
+    function openInvestScreen(projectName, pricePerShare, ticker) {
+      selectedProject = projectName;
+      selectedTicker = ticker;
+      document.getElementById('inv-project-name').innerText = `${projectName} (${ticker})`;
+      switchTab('invest');
+    }
+
+    function selectTier(element, shares, cost) {
+      document.querySelectorAll('.tier-box').forEach(b => b.classList.remove('selected'));
+      element.classList.add('selected');
+      selectedShares = shares;
+      selectedCost = cost;
+    }
+
+    async function executeSharePurchase() {
+      const t = i18n[currentLang];
+      if (balance < selectedCost) {
+        alert(t.alert_no_balance);
+        return;
+      }
+
+      const newBalance = balance - selectedCost;
+      const certId = 'CERT-' + Math.floor(100000 + Math.random() * 900000);
+
+      if (supabaseClient && dbUserId) {
+        try {
+          await supabaseClient
+            .from('accounts')
+            .update({ invest_balance: newBalance })
+            .eq('user_id', dbUserId);
+
+          await supabaseClient
+            .from('share_holdings')
+            .insert([{
+              user_id: dbUserId,
+              project_name: selectedProject,
+              project_ticker: selectedTicker,
+              shares_count: selectedShares,
+              invested_amount: selectedCost,
+              certificate_id: certId
+            }]);
+
+          await supabaseClient
+            .from('transactions')
+            .insert([{
+              user_id: dbUserId,
+              type: 'BUY_SHARES',
+              amount: selectedCost,
+              account_type: 'INVEST',
+              details: { project: selectedProject, shares: selectedShares, certId }
+            }]);
+        } catch (e) {
+          console.warn("DB write error:", e);
+        }
+      }
+
+      balance = newBalance;
+      totalSharesOwned += selectedShares;
+      potentialValuation += selectedCost * 3.5;
+
+      myPortfolio.push({
+        project: selectedProject,
+        ticker: selectedTicker,
+        shares: selectedShares,
+        invested: selectedCost,
+        certId: certId,
+        date: new Date().toLocaleDateString()
+      });
+
+      updateUI();
+      renderPortfolio();
+
+      if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
+      alert(`${t.alert_deal_success} ${selectedShares} ${t.shares_unit} (${selectedProject}).`);
+      
+      const portfolioBtn = document.querySelectorAll('.tab-btn')[1];
+      switchTab('portfolio', portfolioBtn);
+    }
+
+    function renderPortfolio() {
+      const t = i18n[currentLang];
+      const container = document.getElementById('portfolio-list');
+      if (myPortfolio.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 40px 10px; color: var(--text-dim);">
+            <div style="font-size: 32px; margin-bottom: 8px;">📂</div>
+            <div style="font-size: 13px;">${t.empty_portfolio}</div>
+          </div>`;
+        return;
+      }
+
+      container.innerHTML = myPortfolio.map(item => `
+        <div class="project-card" style="margin-bottom: 12px;">
+          <div class="project-top">
+            <div>
+              <b style="font-size: 15px; color: #fff;">${item.project}</b>
+              <div style="font-size: 11px; color: var(--primary); font-family: 'JetBrains Mono';">${item.ticker} • ${item.certId}</div>
+            </div>
+            <span class="project-tag" style="background: rgba(16, 185, 129, 0.12); color: var(--accent-green);">${t.owner_badge}</span>
+          </div>
+
+          <div class="equity-specs" style="margin-top: 10px; margin-bottom: 0;">
+            <div class="equity-col">
+              <span>${t.col_owned_shares}</span>
+              <b>${item.shares} ${t.shares_unit}</b>
+            </div>
+            <div class="equity-col">
+              <span>${t.col_invested}</span>
+              <b>$${item.invested}</b>
+            </div>
+            <div class="equity-col">
+              <span>${t.col_status}</span>
+              <b style="color: var(--accent-gold);">${t.status_fixed}</b>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderReferrals() {
+      const t = i18n[currentLang];
+      const container = document.getElementById('referrals-list');
+      if (myReferrals.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 20px; color: var(--text-dim); font-size: 12px;">
+            ${t.structure_empty}
+          </div>`;
+        return;
+      }
+
+      container.innerHTML = myReferrals.map(ref => `
+        <div class="info-tile">
+          <div class="info-tile-left">
+            <div class="info-tile-icon">👤</div>
+            <div>
+              <div style="font-size: 13px; font-weight: 600; color: #fff;">${ref.first_name || 'Инвестор'}</div>
+              <div style="font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono';">${ref.username || 'нет username'}</div>
+            </div>
+          </div>
+          <span style="font-size: 11px; color: var(--accent-green); font-weight: 600;">1-й уровень</span>
+        </div>
+      `).join('');
+    }
+
+    function copyRefLink() {
+      const t = i18n[currentLang];
+      const link = document.getElementById('ref-link').innerText;
+      navigator.clipboard.writeText(link).then(() => {
+        if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+        alert(t.alert_ref_copied);
+      }).catch(() => {
+        alert(t.alert_ref_copied);
+      });
+    }
+
+    function tapBoost() {
+      karmaPoints += 5;
+      document.getElementById('karma-points').innerText = `Points: ${karmaPoints}`;
+      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+    }
+
+    function openWithdrawModal() {
+      updateUI();
+      document.getElementById('withdraw-modal').classList.add('active');
+    }
+    function closeWithdrawModal() {
+      document.getElementById('withdraw-modal').classList.remove('active');
+    }
+    async function submitWithdrawal() {
+      const t = i18n[currentLang];
+      const address = document.getElementById('withdraw-address').value.trim();
+      const amount = parseFloat(document.getElementById('withdraw-amount').value);
+
+      if (!address) {
+        alert(t.alert_empty_address);
+        return;
+      }
+      if (isNaN(amount) || amount <= 0 || amount > partnerBalance) {
+        alert(t.alert_invalid_withdraw_amt);
+        return;
+      }
+
+      const newPartnerBalance = partnerBalance - amount;
+
+      if (supabaseClient && dbUserId) {
+        try {
+          await supabaseClient
+            .from('accounts')
+            .update({ partner_balance: newPartnerBalance })
+            .eq('user_id', dbUserId);
+
+          await supabaseClient
+            .from('transactions')
+            .insert([{
+              user_id: dbUserId,
+              type: 'WITHDRAW',
+              amount: amount,
+              account_type: 'PARTNER',
+              status: 'PENDING',
+              details: { wallet: address }
+            }]);
+        } catch(e) {
+          console.warn("Withdrawal DB error:", e);
+        }
+      }
+
+      partnerBalance = newPartnerBalance;
+      updateUI();
+      closeWithdrawModal();
+
+      document.getElementById('withdraw-address').value = '';
+      document.getElementById('withdraw-amount').value = '';
+
+      if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
+      alert(`${t.alert_withdraw_success} Сумма: $${amount.toFixed(2)} USDT`);
+    }
+
+    function openDocModal(docType) {
+      const modal = document.getElementById('doc-modal');
+      const title = document.getElementById('doc-modal-title');
+      const content = document.getElementById('doc-modal-content');
+
+      if (docType === 'SAFE') {
+        title.innerText = "Simple Agreement for Future Equity (SAFE)";
+        content.innerHTML = `
+          <b>ПРЕДМЕТ СОГЛАШЕНИЯ:</b> Настоящее Соглашение подтверждает право инвестора на получение обыкновенных акций Компании при наступлении события Корпоративного листинга (IPO).<br><br>
+          <b>НОМИНАЛ:</b> Приобретенные доли фиксируются по цене раунда Seed/Pre-IPO. При конвертации применяется коэффициент паритета акций.<br><br>
+          <b>ЗАЩИТА ПРАВ:</b> Сделка регистрируется в корпоративном реестре с выдачей уникального идентификационного сертификата.
+        `;
+      } else if (docType === 'AGENT') {
+        title.innerText = "Агентское соглашение программы";
+        content.innerHTML = `
+          <b>УСЛОВИЯ ВОЗНАГРАЖДЕНИЯ:</b> Партнеру начисляется агентское вознаграждение в размере 10% от суммы внесенных средств приглашенными им участниками 1-й линии.<br><br>
+          <b>ВЫПЛАТЫ:</b> Начисления осуществляются на партнерский счет и доступны к выводу в цифровых активах USDT.<br><br>
+          <b>ПРАВИЛА ВЫВОДА:</b> Вывод средств осуществляется по заявке в течение регламентного срока обработки сети.
+        `;
+      } else {
+        title.innerText = "Реестр долей и активов";
+        content.innerHTML = `
+          <b>УЧЕТ АКТИВОВ:</b> Все приобретенные доли в проектах Media Network, Cloud Render и MegaWatt Mining сохраняются в распределенной облачной базе данных PostgreSQL.<br><br>
+          <b>ПРОВЕРКА ВЛАДЕНИЯ:</b> Подтверждением владения долями является сертификат вида CERT-XXXXXX, привязанный к вашему Telegram ID.
+        `;
+      }
+      modal.classList.add('active');
+    }
+
+    function closeDocModal() {
+      document.getElementById('doc-modal').classList.remove('active');
+    }
+
+    setLanguage(detectInitialLanguage());
+    initUserSession();
+  </script>
+</body>
+</html>
