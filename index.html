@@ -40,7 +40,7 @@
     body {
   background-color: var(--bg-main);
   color: var(--text-main);
-  padding-bottom: calc(95px + env(safe-area-inset-bottom, 20px));
+  padding-bottom: calc(90px + max(30px, env(safe-area-inset-bottom, 30px)));
   min-height: 100vh;
   user-select: none;
   background-image: 
@@ -575,9 +575,9 @@
   border-top: 1px solid var(--card-border);
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
   padding-top: 10px;
-  padding-bottom: calc(14px + env(safe-area-inset-bottom, 16px));
+  padding-bottom: max(30px, env(safe-area-inset-bottom, 30px));
   z-index: 1000;
 }
     .tab-btn {
@@ -619,7 +619,18 @@
 
   <div class="container">
     <div class="top-bar">
-  <img src="logo.png" alt="EquiCore" class="app-logo" />
+  <!-- Векторный логотип EquiCore (без белого фона и картинок) -->
+  <div style="display: flex; flex-direction: column; align-items: flex-start; cursor: pointer;">
+    <div style="font-size: 24px; font-weight: 800; letter-spacing: -0.5px; line-height: 1;">
+      <span style="color: #ffffff;">Equi</span><span style="color: #38bdf8;">Core</span>
+    </div>
+    <!-- Изогнутая неоновая стрелка роста -->
+    <svg width="46" height="9" viewBox="0 0 50 10" fill="none" style="margin-left: 48px; margin-top: 1px;">
+      <path d="M2 3C15 9 35 9 46 3" stroke="#38bdf8" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M40 1L47 3L43 7" stroke="#38bdf8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
   <div class="lang-switcher">
     <button class="lang-btn" onclick="setLanguage('en')">EN</button>
     <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
