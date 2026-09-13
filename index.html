@@ -58,16 +58,22 @@
     
     /* --- ЛОГОТИП --- */
 .app-logo {
-  height: 32px !important; /* Железобетонная высота */
+  height: 32px !important;
   max-height: 32px !important;
   width: auto;
-  max-width: 150px; /* Защита от раздувания в ширину на ПК */
+  max-width: 150px;
   object-fit: contain;
   display: block;
   flex-shrink: 0;
-  margin-left: -4px; /* Визуальное выравнивание по левому краю */
-  padding: 0;
-  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.4));
+
+  /* Даем 14px места вокруг для красивого свечения без обрезки */
+  box-sizing: content-box !important; 
+  padding: 14px !important; 
+  
+  /* Компенсируем отступы, чтобы логотип стоял точно по левому краю */
+  margin: -14px -14px -14px -18px !important; 
+
+  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.45));
 }
 
     /* --- ШАПКА --- */
