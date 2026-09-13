@@ -1722,6 +1722,9 @@
       document.getElementById('total-shares').innerText = `${totalSharesOwned} ${t.shares_unit.toUpperCase()}`;
       document.getElementById('potential-valuation').innerText = `$${potentialValuation.toFixed(2)}`;
       document.getElementById('ref-count').innerText = `${refCount} ${t.people_unit}`;
+      
+      // Выводим загруженную из базы карму на экран
+      document.getElementById('karma-points').innerText = `Points: ${karmaPoints}`;
     }
 
     function switchTab(screenId, btnElement) {
