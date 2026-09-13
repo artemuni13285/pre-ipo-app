@@ -7,8 +7,8 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -40,7 +40,8 @@
     body {
   background-color: var(--bg-main);
   color: var(--text-main);
-  padding-bottom: calc(90px + max(30px, env(safe-area-inset-bottom, 30px)));
+  padding-bottom: 120px;
+  padding-bottom: calc(100px + env(safe-area-inset-bottom, 20px));
   min-height: 100vh;
   user-select: none;
   background-image: 
@@ -61,12 +62,44 @@
       align-items: center;
       margin-bottom: 14px;
     }
+    .brand-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  user-select: none;
+}
+
+.brand-text {
+  font-family: 'Fredoka', 'Inter', sans-serif;
+  font-size: 27px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  line-height: 1;
+}
+
+.brand-equi {
+  color: #ffffff;
+}
     .app-logo {
   height: 48px;
   width: auto;
   object-fit: contain;
   display: block;
   margin: -10px 0 -10px -8px;
+}
+    .brand-core {
+  color: #00e5ff;
+  text-shadow: 
+    0 0 10px rgba(0, 229, 255, 0.85),
+    0 0 22px rgba(0, 229, 255, 0.5),
+    0 0 35px rgba(0, 229, 255, 0.3);
+}
+    .brand-arrow {
+  width: 58px;
+  height: 14px;
+  margin-left: 56px;
+  margin-top: -1px;
+  filter: drop-shadow(0 0 6px rgba(0, 229, 255, 0.85));
 }
     .user-mini {
       display: flex;
@@ -569,15 +602,16 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(9, 13, 22, 0.95);
+  background: rgba(9, 13, 22, 0.96);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-top: 1px solid var(--card-border);
   display: flex;
   justify-content: space-around;
-  align-items: flex-start;
+  align-items: center;
   padding-top: 10px;
-  padding-bottom: max(30px, env(safe-area-inset-bottom, 30px));
+  padding-bottom: 26px; /* Гарантированный отступ для десктопа */
+  padding-bottom: calc(22px + env(safe-area-inset-bottom, 16px)); /* Для iPhone */
   z-index: 1000;
 }
     .tab-btn {
@@ -587,17 +621,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
-  font-size: 10px;
+  gap: 4px;
+  font-size: 11px;
   font-weight: 500;
   cursor: pointer;
-  transition: color 0.2s ease;
-  width: 20%;
+  padding: 6px 12px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
 }
-    .tab-btn svg,
-    .tab-btn span {
-      pointer-events: none;
-    }
     .tab-btn svg {
   width: 22px;
   height: 22px;
@@ -608,28 +639,45 @@
   stroke-linejoin: round;
 }
     .tab-btn.active {
-      color: var(--primary);
-    }
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+}
     .tab-btn.active svg {
-      stroke: var(--primary);
-    }
+  stroke: #38bdf8;
+}
   </style>
 </head>
 <body>
 
   <div class="container">
     <div class="top-bar">
-  <!-- Векторный логотип EquiCore (без белого фона и картинок) -->
-  <div style="display: flex; flex-direction: column; align-items: flex-start; cursor: pointer;">
-    <div style="font-size: 24px; font-weight: 800; letter-spacing: -0.5px; line-height: 1;">
-      <span style="color: #ffffff;">Equi</span><span style="color: #38bdf8;">Core</span>
+  <div class="brand-badge">
+    <div class="brand-text">
+      <span class="brand-equi">Equi</span><span class="brand-core">Core</span>
     </div>
-    <!-- Изогнутая неоновая стрелка роста -->
-    <svg width="46" height="9" viewBox="0 0 50 10" fill="none" style="margin-left: 48px; margin-top: 1px;">
-      <path d="M2 3C15 9 35 9 46 3" stroke="#38bdf8" stroke-width="2.6" stroke-linecap="round"/>
-      <path d="M40 1L47 3L43 7" stroke="#38bdf8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Изогнутая неоновая стрелка роста под Core -->
+    <svg class="brand-arrow" viewBox="0 0 74 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="arrowGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.4"/>
+          <stop offset="70%" stop-color="#00e5ff"/>
+          <stop offset="100%" stop-color="#38bdf8"/>
+        </linearGradient>
+      </defs>
+      <!-- Дуга -->
+      <path d="M3 4C20 13 46 14.5 64 6" stroke="url(#arrowGlow)" stroke-width="3.2" stroke-linecap="round"/>
+      <!-- Наконечник стрелки -->
+      <polygon points="68,6.5 57,2 60.5,7.5 56,12.5" fill="#00e5ff"/>
     </svg>
   </div>
+
+  <div class="lang-switcher">
+    <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+    <button class="lang-btn" onclick="setLanguage('fr')">FR</button>
+    <button class="lang-btn" onclick="setLanguage('vi')">VI</button>
+    <button class="lang-btn active" onclick="setLanguage('ru')">RU</button>
+  </div>
+</div>
 
   <div class="lang-switcher">
     <button class="lang-btn" onclick="setLanguage('en')">EN</button>
