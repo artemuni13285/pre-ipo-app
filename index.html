@@ -1137,7 +1137,7 @@
     let uplineName = null;
 
     let currentLang = 'ru';
-    let balance = 1000;
+    let balance = 0;
     let partnerBalance = 0;
     let totalSharesOwned = 0;
     let potentialValuation = 0;
@@ -1569,13 +1569,17 @@
 
             if (!regErr && newUser) {
               user = newUser;
+              
+              // Логика приветственного бонуса: 25$, если есть наставник, иначе 0$
+              let initialBalance = resolvedReferrerId ? 25.00 : 0.00;
+
               await supabaseClient
                 .from('accounts')
                 .insert([{
                   user_id: user.id,
-                  invest_balance: 1000.00,
-                  partner_balance: 0.00,
-                  bonus_balance: 0.00
+                  invest_balance: initialBalance, // Начисляем на инвест-баланс для покупки долей
+                  partner_balance: 0.00,          // Баланс для вывода всегда 0 при старте
+                  bonus_balance: initialBalance   // Дублируем сюда, чтобы позже использовать в мини-играх
                 }]);
             }
           }
