@@ -8,7 +8,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -77,13 +77,14 @@
   line-height: 1;
 }
 
+/* --- ИДЕАЛЬНЫЙ КРУГЛЫЙ ЛОГОТИП --- */
 .brand-logo {
   display: flex;
-  align-items: flex-start;
-  font-family: 'Fredoka', 'Inter', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.4px;
+  align-items: center;
+  font-family: 'Nunito', sans-serif; /* Тот самый круглый шрифт */
+  font-size: 30px; /* Сделали чуть крупнее для солидности */
+  font-weight: 800; /* Максимально жирный */
+  letter-spacing: -0.5px;
   line-height: 1;
   user-select: none;
 }
@@ -91,29 +92,35 @@
 .brand-equi {
   color: #ffffff;
 }
+
+.brand-core-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.brand-core {
+  color: #00e5ff;
+  text-shadow: 
+    0 0 10px rgba(0, 229, 255, 0.8),
+    0 0 20px rgba(0, 229, 255, 0.4);
+}
+
+.brand-arrow {
+  position: absolute;
+  left: -2px;
+  bottom: -11px;
+  width: calc(100% + 12px); /* Стрелка автоматически подстраивается под ширину Core */
+  height: 20px;
+  pointer-events: none;
+  filter: drop-shadow(0 0 4px rgba(0, 229, 255, 0.6));
+}
     .brand-core-box {
   display: inline-flex;
   flex-direction: column;
   align-items: stretch;
   margin-left: 1px;
 }
-    .brand-core {
-  color: #00e5ff;
-  text-shadow: 
-    0 0 10px rgba(0, 229, 255, 0.85),
-    0 0 22px rgba(0, 229, 255, 0.45);
-}
-    .brand-core-wrap {
-  position: relative;
-  display: inline-block;
-}
-    .brand-arrow {
-  width: 100%;
-  height: 13px;
-  margin-top: 2px;
-  display: block;
-  filter: drop-shadow(0 0 5px rgba(0, 229, 255, 0.8));
-}
+
     .user-mini {
       display: flex;
       align-items: center;
@@ -610,7 +617,8 @@
       border-color: var(--primary);
     }
 
-   .tabbar {
+   /* --- ИСПРАВЛЕНИЕ ВЫЛЕЗАЮЩЕЙ ПАНЕЛИ --- */
+.tabbar {
   position: fixed;
   bottom: calc(14px + env(safe-area-inset-bottom, 10px));
   left: 14px;
@@ -626,12 +634,14 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 6px 8px;
-  box-shadow: 
-    0 16px 36px rgba(0, 0, 0, 0.65),
-    0 0 20px rgba(56, 189, 248, 0.08);
+  padding: 6px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65), 0 0 20px rgba(56, 189, 248, 0.08);
   z-index: 1000;
-  overflow: hidden; /* Гарантирует, что активная кнопка не вылезет за скругленный угол */
+  
+  /* Жестко отсекаем вылезание за углы (фикс для WebKit) */
+  overflow: hidden;
+  transform: translateZ(0); 
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
 }
 
 .tab-btn {
@@ -646,9 +656,12 @@
   font-size: 11px;
   font-weight: 600;
   cursor: pointer;
-  padding: 6px 4px; /* Компактные отступы для аккуратной посадки на узких экранах */
-  flex: 1;          /* Равномерное деление ширины между всеми 5 кнопками */
-  border-radius: 14px;
+  
+  /* Равномерное сжатие без выталкивания соседей */
+  flex: 1 1 0; 
+  min-width: 0;
+  padding: 6px 0; 
+  border-radius: 16px;
   transition: all 0.2s ease;
 }
 
@@ -675,22 +688,24 @@
 <body>
 
   <div class="container">
-    <div class="top-bar">
+   <div class="top-bar">
   <div class="brand-logo">
     <span class="brand-equi">Equi</span>
-    <div class="brand-core-box">
+    <span class="brand-core-wrap">
       <span class="brand-core">Core</span>
-      <svg class="brand-arrow" viewBox="0 0 65 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Новая правильная стрелка -->
+      <svg class="brand-arrow" viewBox="0 0 80 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.25"/>
-            <stop offset="100%" stop-color="#00e5ff"/>
+            <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.1"/>
+            <stop offset="40%" stop-color="#00e5ff" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#00e5ff" stop-opacity="1"/>
           </linearGradient>
         </defs>
-        <path d="M 3 5 C 16 13 36 14 50 7" stroke="url(#arrowGrad)" stroke-width="2.6" stroke-linecap="round"/>
-        <polygon points="57,5 47,1.5 49.5,9.5" fill="#00e5ff"/>
+        <path d="M 4 8 Q 35 24 72 6" stroke="url(#arrowGrad)" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M 64 0 L 76 3 L 70 14 Z" fill="#00e5ff"/>
       </svg>
-    </div>
+    </span>
   </div>
 
   <div class="lang-switcher">
