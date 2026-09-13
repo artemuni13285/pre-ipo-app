@@ -79,7 +79,7 @@
 
 .brand-logo {
   display: flex;
-  align-items: baseline;
+  align-items: flex-start;
   font-family: 'Fredoka', 'Inter', sans-serif;
   font-size: 28px;
   font-weight: 700;
@@ -90,6 +90,12 @@
 
 .brand-equi {
   color: #ffffff;
+}
+    .brand-core-box {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-left: 1px;
 }
     .brand-core {
   color: #00e5ff;
@@ -102,12 +108,10 @@
   display: inline-block;
 }
     .brand-arrow {
-  position: absolute;
-  left: 2px;
-  bottom: -9px;
   width: 100%;
-  height: 14px;
-  overflow: visible;
+  height: 13px;
+  margin-top: 2px;
+  display: block;
   filter: drop-shadow(0 0 5px rgba(0, 229, 255, 0.8));
 }
     .user-mini {
@@ -613,34 +617,37 @@
   right: 14px;
   max-width: 412px;
   margin: 0 auto;
-  background: rgba(22, 31, 52, 0.94); /* Более светлый графитово-синий фон */
+  background: rgba(22, 31, 52, 0.94);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-top: 1px solid rgba(56, 189, 248, 0.35); /* Неоновый блик сверху */
+  border-top: 1px solid rgba(56, 189, 248, 0.35);
   border-radius: 22px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 8px 6px;
+  padding: 6px 8px;
   box-shadow: 
     0 16px 36px rgba(0, 0, 0, 0.65),
-    0 0 20px rgba(56, 189, 248, 0.08); /* Мягкое свечение от меню */
+    0 0 20px rgba(56, 189, 248, 0.08);
   z-index: 1000;
+  overflow: hidden; /* Гарантирует, что активная кнопка не вылезет за скругленный угол */
 }
 
 .tab-btn {
   background: transparent;
   border: none;
-  color: #94a3b8; /* Более светлый серый для неактивных пунктов */
+  color: #94a3b8;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 4px;
   font-size: 11px;
   font-weight: 600;
   cursor: pointer;
-  padding: 6px 12px;
+  padding: 6px 4px; /* Компактные отступы для аккуратной посадки на узких экранах */
+  flex: 1;          /* Равномерное деление ширины между всеми 5 кнопками */
   border-radius: 14px;
   transition: all 0.2s ease;
 }
@@ -654,7 +661,8 @@
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-    .tab-btn.active {
+
+.tab-btn.active {
   color: #38bdf8;
   background: rgba(56, 189, 248, 0.16);
 }
@@ -670,9 +678,8 @@
     <div class="top-bar">
   <div class="brand-logo">
     <span class="brand-equi">Equi</span>
-    <span class="brand-core-wrap">
+    <div class="brand-core-box">
       <span class="brand-core">Core</span>
-      <!-- Идеальная изогнутая стрелка роста с правильным наконечником -->
       <svg class="brand-arrow" viewBox="0 0 65 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -681,9 +688,9 @@
           </linearGradient>
         </defs>
         <path d="M 3 5 C 16 13 36 14 50 7" stroke="url(#arrowGrad)" stroke-width="2.6" stroke-linecap="round"/>
-        <path d="M 57 4.5 L 47 1.5 L 49.5 10 Z" fill="#00e5ff"/>
+        <polygon points="57,5 47,1.5 49.5,9.5" fill="#00e5ff"/>
       </svg>
-    </span>
+    </div>
   </div>
 
   <div class="lang-switcher">
