@@ -1122,8 +1122,11 @@
         tg.setBackgroundColor('#090d16');
         tg.setBottomBarColor('#090d16');
         
-      } catch (e) {}
+      } catch (e) {
+        console.warn("Ошибка настройки WebApp:", e);
+      }
     }
+
     const tgUser = tg?.initDataUnsafe?.user;
     const currentTgId = tgUser?.id || 777000111;
     const currentUsername = tgUser?.username ? `@${tgUser.username}` : '@demo_investor';
