@@ -6,9 +6,9 @@
   <title>Pre-IPO Launchpad TMA</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -78,13 +78,14 @@
 }
 
 /* --- ИДЕАЛЬНЫЙ КРУГЛЫЙ ЛОГОТИП --- */
+/* --- ЛОГОТИП С ГАРАНТИРОВАННО ЗАКРУГЛЕННЫМ ШРИФТОМ --- */
 .brand-logo {
   display: flex;
   align-items: center;
-  font-family: 'Nunito', sans-serif; /* Тот самый круглый шрифт */
-  font-size: 30px; /* Сделали чуть крупнее для солидности */
-  font-weight: 800; /* Максимально жирный */
-  letter-spacing: -0.5px;
+  font-family: 'Varela Round', 'Inter', sans-serif;
+  font-size: 32px; /* Чуть увеличили, так как Varela Round компактнее */
+  font-weight: 400;
+  letter-spacing: -1px;
   line-height: 1;
   user-select: none;
 }
@@ -96,6 +97,7 @@
 .brand-core-wrap {
   position: relative;
   display: inline-block;
+  margin-left: 2px;
 }
 
 .brand-core {
@@ -109,7 +111,7 @@
   position: absolute;
   left: -2px;
   bottom: -11px;
-  width: calc(100% + 12px); /* Стрелка автоматически подстраивается под ширину Core */
+  width: calc(100% + 14px); /* Стрелка автоматически подстраивается под ширину Core */
   height: 20px;
   pointer-events: none;
   filter: drop-shadow(0 0 4px rgba(0, 229, 255, 0.6));
@@ -695,16 +697,18 @@
       <span class="brand-core">Core</span>
       <!-- Новая правильная стрелка -->
       <svg class="brand-arrow" viewBox="0 0 80 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.1"/>
-            <stop offset="40%" stop-color="#00e5ff" stop-opacity="0.8"/>
-            <stop offset="100%" stop-color="#00e5ff" stop-opacity="1"/>
-          </linearGradient>
-        </defs>
-        <path d="M 4 8 Q 35 24 72 6" stroke="url(#arrowGrad)" stroke-width="3.5" stroke-linecap="round"/>
-        <path d="M 64 0 L 76 3 L 70 14 Z" fill="#00e5ff"/>
-      </svg>
+  <defs>
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.1"/>
+      <stop offset="40%" stop-color="#00e5ff" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#00e5ff" stop-opacity="1"/>
+    </linearGradient>
+  </defs>
+  <!-- Плавная дуга -->
+  <path d="M 4 8 Q 35 24 72 6" stroke="url(#arrowGrad)" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- Наконечник стрелки -->
+  <path d="M 64 0 L 76 3 L 70 14 Z" fill="#00e5ff"/>
+</svg>
     </span>
   </div>
 
