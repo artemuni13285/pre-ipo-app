@@ -1890,10 +1890,30 @@
       });
     }
 
+    // Добавляем таймер вне функции для защиты базы данных от спама кликами
+    let karmaSaveTimeout;
+
     function tapBoost() {
       karmaPoints += 5;
       document.getElementById('karma-points').innerText = `Points: ${karmaPoints}`;
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+
+      // Отложенное сохранение в Supabase
+      if (supabaseClient && dbUserId) {
+        clearTimeout(karmaSaveTimeout); // Сбрасываем старый таймер при новом клике
+        
+        // Ждем 1 секунду после последнего клика, чтобы отправить итоговую сумму разом
+        karmaSaveTimeout = setTimeout(async () => {
+          try {
+            await supabaseClient
+              .from('accounts')
+              .update({ karma_points: karmaPoints })
+              .eq('user_id', dbUserId);
+          } catch (e) {
+            console.warn("Ошибка сохранения кармы:", e);
+          }
+        }, 1000); 
+      }
     }
 
     function openWithdrawModal() {
