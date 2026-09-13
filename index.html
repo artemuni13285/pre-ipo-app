@@ -55,6 +55,14 @@
       max-width: 440px;
       margin: 0 auto;
     }
+    
+    .app-logo {
+  height: 28px; /* Высота подгоняется под размер кнопок языка */
+  width: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.4)); /* Легкое неоновое свечение */
+}
 
     .top-bar {
       display: flex;
@@ -62,67 +70,6 @@
       align-items: center;
       margin-bottom: 14px;
     }
-    .brand-badge {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  user-select: none;
-}
-
-.brand-text {
-  font-family: 'Fredoka', 'Inter', sans-serif;
-  font-size: 27px;
-  font-weight: 700;
-  letter-spacing: -0.4px;
-  line-height: 1;
-}
-
-/* --- ИДЕАЛЬНЫЙ КРУГЛЫЙ ЛОГОТИП --- */
-/* --- ЛОГОТИП С ГАРАНТИРОВАННО ЗАКРУГЛЕННЫМ ШРИФТОМ --- */
-.brand-logo {
-  display: flex;
-  align-items: center;
-  font-family: 'Varela Round', 'Inter', sans-serif;
-  font-size: 32px; /* Чуть увеличили, так как Varela Round компактнее */
-  font-weight: 400;
-  letter-spacing: -1px;
-  line-height: 1;
-  user-select: none;
-}
-
-.brand-equi {
-  color: #ffffff;
-}
-
-.brand-core-wrap {
-  position: relative;
-  display: inline-block;
-  margin-left: 2px;
-}
-
-.brand-core {
-  color: #00e5ff;
-  text-shadow: 
-    0 0 10px rgba(0, 229, 255, 0.8),
-    0 0 20px rgba(0, 229, 255, 0.4);
-}
-
-.brand-arrow {
-  position: absolute;
-  left: -2px;
-  bottom: -11px;
-  width: calc(100% + 14px); /* Стрелка автоматически подстраивается под ширину Core */
-  height: 20px;
-  pointer-events: none;
-  filter: drop-shadow(0 0 4px rgba(0, 229, 255, 0.6));
-}
-    .brand-core-box {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: stretch;
-  margin-left: 1px;
-}
-
     .user-mini {
       display: flex;
       align-items: center;
@@ -691,26 +638,8 @@
 
   <div class="container">
    <div class="top-bar">
-  <div class="brand-logo">
-    <span class="brand-equi">Equi</span>
-    <span class="brand-core-wrap">
-      <span class="brand-core">Core</span>
-      <!-- Новая правильная стрелка -->
-      <svg class="brand-arrow" viewBox="0 0 80 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.1"/>
-      <stop offset="40%" stop-color="#00e5ff" stop-opacity="0.8"/>
-      <stop offset="100%" stop-color="#00e5ff" stop-opacity="1"/>
-    </linearGradient>
-  </defs>
-  <!-- Плавная дуга -->
-  <path d="M 4 8 Q 35 24 72 6" stroke="url(#arrowGrad)" stroke-width="3.5" stroke-linecap="round"/>
-  <!-- Наконечник стрелки -->
-  <path d="M 64 0 L 76 3 L 70 14 Z" fill="#00e5ff"/>
-</svg>
-    </span>
-  </div>
+  <!-- Ваш загруженный логотип -->
+  <img src="logo_2.png" alt="EquiCore" class="app-logo" />
 
   <div class="lang-switcher">
     <button class="lang-btn" onclick="setLanguage('en')">EN</button>
