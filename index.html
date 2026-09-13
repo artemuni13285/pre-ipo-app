@@ -56,17 +56,17 @@
       margin: 0 auto;
     }
     
-    /* --- СБАЛАНСИРОВАННЫЙ ЛОГОТИП --- */
+    /* --- СБАЛАНСИРОВАННЫЙ КРУПНЫЙ ЛОГОТИП --- */
 .app-logo {
-  height: 38px; /* Идеальная высота, на одном уровне с кнопками языков */
+  height: 44px; /* Увеличили логотип до желаемого размера */
   width: auto;
-  max-width: 180px; /* Жесткая защита от раздувания на ПК */
+  max-width: 180px; 
   object-fit: contain;
   display: block;
-  flex-shrink: 0; /* Запрещаем телефону сплющивать картинку */
-  margin: 0; /* Убираем все отступы */
-  padding: 0; /* Категорически нельзя padding для img */
-  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.45)); /* Свечение отлично работает и без padding */
+  flex-shrink: 0; 
+  margin: 0; 
+  padding: 0; 
+  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.45));
 }
 
     .top-bar {
@@ -88,23 +88,25 @@
       object-fit: cover;
       background: #1e293b;
     }
-    /* --- УВЕЛИЧЕННЫЙ БЛОК ЯЗЫКОВ --- */
+    
+    /* --- КОМПАКТНЫЙ БЛОК ЯЗЫКОВ --- */
 .lang-switcher {
   display: flex;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--card-border);
-  border-radius: 16px; /* Более округлый контейнер */
-  padding: 4px; /* Увеличили внутреннее пространство */
-  gap: 4px;
+  border-radius: 12px; /* Уменьшили скругление для большей компактности */
+  padding: 2px; /* Уменьшили внешние отступы внутри блока */
+  gap: 2px;
 }
-    .lang-btn {
+
+.lang-btn {
   background: transparent;
   border: none;
   color: var(--text-dim);
-  font-size: 13px; /* Увеличили шрифт (был 11px) */
-  font-weight: 700; /* Сделали буквы жирнее */
-  padding: 8px 12px; /* Сделали кнопки шире и выше */
-  border-radius: 12px;
+  font-size: 11px; /* Вернули аккуратный размер шрифта */
+  font-weight: 600; /* Вернули нормальную толщину */
+  padding: 6px 10px; /* Уменьшили внутренние отступы кнопок */
+  border-radius: 10px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -112,7 +114,7 @@
 .lang-btn.active {
   background: var(--primary-gradient);
   color: #030712;
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3); /* Добавили легкое свечение активной кнопке */
+  /* Убрали свечение, чтобы не отвлекало от логотипа */
 }
 
     .hero-card {
