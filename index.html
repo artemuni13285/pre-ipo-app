@@ -56,24 +56,24 @@
       margin: 0 auto;
     }
     
-    /* --- ЛОГОТИП --- */
+    /* --- КРУПНЫЙ ЛОГОТИП --- */
 .app-logo {
-  height: 32px !important;
-  max-height: 32px !important;
+  height: 46px !important; /* Увеличили высоту самой надписи */
+  max-height: 46px !important;
   width: auto;
-  max-width: 150px;
+  max-width: 200px;
   object-fit: contain;
   display: block;
   flex-shrink: 0;
 
-  /* Даем 14px места вокруг для красивого свечения без обрезки */
+  /* Сохраняем расширенный холст для свечения на телефонах */
   box-sizing: content-box !important; 
   padding: 14px !important; 
   
-  /* Компенсируем отступы, чтобы логотип стоял точно по левому краю */
-  margin: -14px -14px -14px -18px !important; 
+  /* Компенсируем отступы, чтобы логотип стоял на своем месте слева */
+  margin: -14px -14px -14px -20px !important; 
 
-  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.45));
+  filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.45));
 }
 
     /* --- ШАПКА --- */
@@ -82,7 +82,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  height: 36px; /* Жестко фиксируем общую высоту шапки */
+  min-height: 48px; /* Убрали жесткое ограничение, дали шапке высоту под крупный логотип */
 }
     .user-mini {
       display: flex;
