@@ -56,22 +56,15 @@
       margin: 0 auto;
     }
     
-    .app-logo {
-  height: 52px; /* Увеличили размер до масштабов RubUP */
+    ./* --- КРУПНЫЙ ЛОГОТИП С МЯГКИМ СВЕЧЕНИЕМ --- */
+.app-logo {
+  height: 48px; /* Существенно увеличили высоту логотипа */
   width: auto;
   object-fit: contain;
   display: block;
-  
-  /* Фикс квадратной обрезки: даем холсту 15px пространства во все стороны для мягкого света */
-  padding: 15px; 
-  
-  /* Возвращаем картинку на место и прижимаем к левому краю */
-  margin-top: -15px;
-  margin-bottom: -15px;
-  margin-left: -18px; /* Слегка уводим влево, чтобы буквы стояли ровно по левой линии контента */
-  
-  /* Усиленное мягкое свечение для интеграции в дизайн */
-  filter: drop-shadow(0 0 14px rgba(0, 229, 255, 0.45)); 
+  padding: 12px; /* Внутренний отступ, чтобы свечение не обрезалось */
+  margin: -12px -8px -12px -16px; /* Компенсируем padding, чтобы логотип стоял на месте */
+  filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.45));
 }
 
     .top-bar {
@@ -93,29 +86,32 @@
       object-fit: cover;
       background: #1e293b;
     }
-    .lang-switcher {
-      display: flex;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 2px;
-      gap: 2px;
-    }
+    /* --- УВЕЛИЧЕННЫЙ БЛОК ЯЗЫКОВ --- */
+.lang-switcher {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--card-border);
+  border-radius: 16px; /* Более округлый контейнер */
+  padding: 4px; /* Увеличили внутреннее пространство */
+  gap: 4px;
+}
     .lang-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-dim);
-      font-size: 11px;
-      font-weight: 600;
-      padding: 5px 9px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .lang-btn.active {
-      background: var(--primary-gradient);
-      color: #030712;
-    }
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 13px; /* Увеличили шрифт (был 11px) */
+  font-weight: 700; /* Сделали буквы жирнее */
+  padding: 8px 12px; /* Сделали кнопки шире и выше */
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lang-btn.active {
+  background: var(--primary-gradient);
+  color: #030712;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3); /* Добавили легкое свечение активной кнопке */
+}
 
     .hero-card {
       background: linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
