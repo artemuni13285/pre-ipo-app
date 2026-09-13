@@ -58,10 +58,10 @@
     
     /* --- ОГРОМНЫЙ ЛОГОТИП --- */
 .app-logo {
-  height: 64px !important; /* Увеличиваем высоту радикально! */
-  max-height: none !important; /* Снимаем любые потолки высоты */
+  height: 64px !important; 
+  max-height: none !important; 
   width: auto;
-  max-width: 280px !important; /* Даем свободу в ширину */
+  max-width: 280px !important; 
   object-fit: contain;
   display: block;
   flex-shrink: 0;
@@ -70,10 +70,10 @@
   box-sizing: content-box !important; 
   padding: 16px !important; 
   
-  /* Сдвигаем левее, чтобы визуально выровнять по краю баланса */
-  margin: -16px -16px -16px -24px !important; 
+  /* Идеальное выравнивание: -16px со всех сторон точно компенсируют padding в 16px */
+  margin: -16px !important; 
 
-  filter: drop-shadow(0 0 14px rgba(0, 229, 255, 0.5)); /* Чуть усилим свечение */
+  filter: drop-shadow(0 0 14px rgba(0, 229, 255, 0.5));
 }
 
     /* --- ШАПКА --- */
