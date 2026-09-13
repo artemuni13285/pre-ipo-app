@@ -1116,9 +1116,19 @@
       try {
         tg.ready();
         tg.expand();
+      const tg = window.Telegram?.WebApp;
+    if (tg) {
+      try {
+        tg.ready();
+        tg.expand();
+        
+        // Указываем Telegram перекрасить системные рамки в наш темный цвет
+        tg.setHeaderColor('#090d16'); 
+        tg.setBackgroundColor('#090d16');
+        tg.setBottomBarColor('#090d16');
+        
       } catch (e) {}
     }
-
     const tgUser = tg?.initDataUnsafe?.user;
     const currentTgId = tgUser?.id || 777000111;
     const currentUsername = tgUser?.username ? `@${tgUser.username}` : '@demo_investor';
