@@ -668,24 +668,22 @@
 
   <div class="container">
     <div class="top-bar">
-  <div class="brand-badge">
-    <div class="brand-text">
-      <span class="brand-equi">Equi</span><span class="brand-core">Core</span>
-    </div>
-    <!-- Изогнутая неоновая стрелка роста под Core -->
-    <svg class="brand-arrow" viewBox="0 0 74 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="arrowGlow" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.4"/>
-          <stop offset="70%" stop-color="#00e5ff"/>
-          <stop offset="100%" stop-color="#38bdf8"/>
-        </linearGradient>
-      </defs>
-      <!-- Дуга -->
-      <path d="M3 4C20 13 46 14.5 64 6" stroke="url(#arrowGlow)" stroke-width="3.2" stroke-linecap="round"/>
-      <!-- Наконечник стрелки -->
-      <polygon points="68,6.5 57,2 60.5,7.5 56,12.5" fill="#00e5ff"/>
-    </svg>
+  <div class="brand-logo">
+    <span class="brand-equi">Equi</span>
+    <span class="brand-core-wrap">
+      <span class="brand-core">Core</span>
+      <!-- Идеальная изогнутая стрелка роста с правильным наконечником -->
+      <svg class="brand-arrow" viewBox="0 0 65 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.25"/>
+            <stop offset="100%" stop-color="#00e5ff"/>
+          </linearGradient>
+        </defs>
+        <path d="M 3 5 C 16 13 36 14 50 7" stroke="url(#arrowGrad)" stroke-width="2.6" stroke-linecap="round"/>
+        <path d="M 57 4.5 L 47 1.5 L 49.5 10 Z" fill="#00e5ff"/>
+      </svg>
+    </span>
   </div>
 
   <div class="lang-switcher">
