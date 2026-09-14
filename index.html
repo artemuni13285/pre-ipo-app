@@ -656,6 +656,23 @@
 .tab-btn.active svg {
   stroke: #38bdf8;
 }
+    /* Выделение выбранного способа оплаты */
+.pay-method-btn {
+  background: #1C212B;
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.pay-method-btn.active {
+  background: rgba(56, 189, 248, 0.1);
+  border-color: var(--primary);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
   </style>
 </head>
 <body>
@@ -1047,7 +1064,8 @@
   
       <!-- Сетка способов оплаты -->
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
-        <div onclick="selectPayment('cryptobot')" style="background: #1C212B; border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+        <!-- Crypto Bot (по умолчанию активен) -->
+        <div id="btn-cryptobot" class="pay-method-btn active" onclick="selectPayment('cryptobot')">
           <div style="background: #2AABEE; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">C</div>
           <div>
             <div style="font-size: 13px; font-weight: 600;">Crypto Bot</div>
@@ -1055,7 +1073,8 @@
           </div>
         </div>
   
-        <div onclick="selectPayment('stars')" style="background: #1C212B; border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+        <!-- Telegram Stars -->
+        <div id="btn-stars" class="pay-method-btn" onclick="selectPayment('stars')">
           <div style="background: #FFA000; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px;">⭐</div>
           <div>
             <div style="font-size: 13px; font-weight: 600;">TG Stars</div>
@@ -1067,13 +1086,16 @@
       <!-- Ввод суммы -->
       <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--card-border);">
         <div style="display: flex; justify-content: space-between; align-items: center;">
-          <input type="number" id="deposit-amount" placeholder="0" style="background: none; border: none; font-size: 24px; font-weight: bold; color: white; width: 100%; outline: none; font-family: 'JetBrains Mono';" />
+          <input type="number" id="deposit-amount" placeholder="0" style="background: none; border: none; font-size: 24px; font-weight: bold; color: white; width: 100%; outline: none; font-family: 'JetBrains Mono';" oninput="updateStarsPreview()" />
           <span style="color: var(--text-dim); font-size: 18px; font-weight: bold;">USDT</span>
         </div>
-        <div style="font-size: 11px; color: var(--text-dim); margin-top: 5px;" data-i18n="modal_deposit_min">Мин. сумма: 10 USDT</div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 5px;">
+           <span style="font-size: 11px; color: var(--text-dim);" data-i18n="modal_deposit_min">Мин. сумма: 10 USDT</span>
+           <span id="stars-preview" style="font-size: 11px; color: var(--accent-gold); font-weight: 600; display: none;">≈ 0 ⭐</span>
+        </div>
       </div>
   
-      <button class="btn" onclick="processDeposit()" data-i18n="btn_pay">Перейти к оплате</button>
+      <button id="pay-action-btn" class="btn" onclick="processDeposit()" data-i18n="btn_pay">Перейти к оплате</button>
     </div>
   </div>
   <div class="modal-overlay" id="withdraw-modal">
@@ -2122,19 +2144,91 @@
       document.getElementById('deposit-modal').classList.remove('active');
     }
 
+   
+
+    let selectedPaymentMethod = 'cryptobot';
+
     function selectPayment(method) {
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-      // Здесь мы позже добавим визуальное выделение кнопки
+      selectedPaymentMethod = method;
+      
+      // Снимаем выделение со всех и ставим на нажатую
+      document.querySelectorAll('.pay-method-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('btn-' + method).classList.add('active');
+
+      // Показываем или скрываем предпросмотр Звезд
+      updateStarsPreview();
     }
 
-    function processDeposit() {
-      const t = i18n[currentLang]; // Подтягиваем текущий язык
+    function updateStarsPreview() {
+      const amount = parseFloat(document.getElementById('deposit-amount').value) || 0;
+      const previewEl = document.getElementById('stars-preview');
+      
+      // Курс: 1 USDT = примерно 50 Звезд (можете менять по вашей экономике)
+      if (selectedPaymentMethod === 'stars' && amount > 0) {
+        previewEl.innerText = `≈ ${Math.ceil(amount * 50)} ⭐`;
+        previewEl.style.display = 'block';
+      } else {
+        previewEl.style.display = 'none';
+      }
+    }
+
+    async function processDeposit() {
+      const t = i18n[currentLang];
       const amount = parseFloat(document.getElementById('deposit-amount').value);
       
       if (!amount || amount < 10) {
-        alert(t.alert_deposit_min); // Переведенная ошибка
+        alert(t.alert_deposit_min);
         return;
       }
+
+      const btn = document.getElementById('pay-action-btn');
+      const originalText = btn.innerText;
+      btn.innerText = "Загрузка...";
+      btn.disabled = true;
+
+      try {
+        if (selectedPaymentMethod === 'stars') {
+          const starsAmount = Math.ceil(amount * 50); // Переводим USDT в Звезды
+          
+          // 1. Запрашиваем ссылку на инвойс у нашего n8n (Вам нужно будет создать этот вебхук)
+          // Раскомментируйте код ниже, когда вебхук будет готов:
+          /*
+          const response = await fetch('URL_ВАШЕГО_N8N_ВЕБХУКА_ДЛЯ_ЗВЕЗД', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ tg_id: currentTgId, stars: starsAmount, usdt: amount })
+          });
+          const data = await response.json();
+          
+          // 2. Открываем нативное окно оплаты Telegram
+          if (data.invoice_url) {
+            tg.openInvoice(data.invoice_url, function(status) {
+              if (status === 'paid') {
+                alert("Оплата успешно завершена!");
+                // Здесь можно заново вызвать initUserSession() для обновления баланса
+                closeDepositModal();
+              } else if (status === 'failed') {
+                alert("Ошибка оплаты");
+              }
+            });
+          }
+          */
+          alert(`Будет выставлен счет на ${starsAmount} Звезд (Эквивалент ${amount} USDT). Подключите n8n вебхук!`);
+
+        } else if (selectedPaymentMethod === 'cryptobot') {
+          // Логика для Crypto Bot
+          alert(t.alert_deposit_dev.replace('{amount}', amount)); 
+        }
+
+      } catch (e) {
+        console.error(e);
+        alert("Ошибка сети при создании счета.");
+      } finally {
+        btn.innerText = originalText;
+        btn.disabled = false;
+      }
+    }
       
       // Выводим переведенное сообщение, подставляя введенную сумму вместо {amount}
       alert(t.alert_deposit_dev.replace('{amount}', amount)); 
