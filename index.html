@@ -1070,7 +1070,7 @@
           <input type="number" id="deposit-amount" placeholder="0" style="background: none; border: none; font-size: 24px; font-weight: bold; color: white; width: 100%; outline: none; font-family: 'JetBrains Mono';" />
           <span style="color: var(--text-dim); font-size: 18px; font-weight: bold;">USDT</span>
         </div>
-        <div style="font-size: 11px; color: var(--text-dim); margin-top: 5px;">Мин. сумма: 10 USDT</div>
+        <div style="font-size: 11px; color: var(--text-dim); margin-top: 5px;" data-i18n="modal_deposit_min">Мин. сумма: 10 USDT</div>
       </div>
   
       <button class="btn" onclick="processDeposit()" data-i18n="btn_pay">Перейти к оплате</button>
@@ -1300,6 +1300,14 @@
         doc_auto: "● Автофиксация в реестре",
         doc_view: "Открыть",
         btn_close: "Закрыть"
+        btn_deposit: "Пополнить",
+        modal_deposit_title: "Пополнить баланс",
+        modal_deposit_desc: "Выберите удобный способ пополнения. Зачисление происходит моментально.",
+        modal_deposit_tg: "В Telegram",
+        modal_deposit_min: "Мин. сумма: 10 USDT",
+        btn_pay: "Перейти к оплате",
+        alert_deposit_min: "Минимальная сумма пополнения 10 USDT.",
+        alert_deposit_dev: "Оплата {amount} USDT будет доступна после подключения кассы."
       },
       en: {
         balance_label: "Investment Balance",
@@ -1387,6 +1395,14 @@
         doc_auto: "● Ledger Auto-Recorded",
         doc_view: "View",
         btn_close: "Close"
+        btn_deposit: "Deposit",
+        modal_deposit_title: "Top Up Balance",
+        modal_deposit_desc: "Choose a convenient payment method. Funds are credited instantly.",
+        modal_deposit_tg: "In Telegram",
+        modal_deposit_min: "Min. amount: 10 USDT",
+        btn_pay: "Proceed to Payment",
+        alert_deposit_min: "Minimum deposit amount is 10 USDT.",
+        alert_deposit_dev: "Payment of {amount} USDT will be available after gateway integration."
       },
       fr: {
         balance_label: "Solde d'investissement",
@@ -1474,6 +1490,14 @@
         doc_auto: "● Enregistré au registre",
         doc_view: "Consulter",
         btn_close: "Fermer"
+        btn_deposit: "Dépôt",
+        modal_deposit_title: "Recharger le solde",
+        modal_deposit_desc: "Choisissez un mode de paiement. Le crédit est instantané.",
+        modal_deposit_tg: "Sur Telegram",
+        modal_deposit_min: "Montant min.: 10 USDT",
+        btn_pay: "Passer au paiement",
+        alert_deposit_min: "Le dépôt minimum est de 10 USDT.",
+        alert_deposit_dev: "Le paiement de {amount} USDT sera disponible après intégration de la passerelle."
       },
       vi: {
         balance_label: "Số dư đầu tư",
@@ -1561,6 +1585,14 @@
         doc_auto: "● Ghi nhận tự động",
         doc_view: "Xem",
         btn_close: "Đóng"
+        btn_deposit: "Nạp tiền",
+        modal_deposit_title: "Nạp tiền vào tài khoản",
+        modal_deposit_desc: "Chọn phương thức thanh toán. Tiền sẽ được cộng ngay lập tức.",
+        modal_deposit_tg: "Trong Telegram",
+        modal_deposit_min: "Tối thiểu: 10 USDT",
+        btn_pay: "Tiến hành thanh toán",
+        alert_deposit_min: "Số tiền nạp tối thiểu là 10 USDT.",
+        alert_deposit_dev: "Thanh toán {amount} USDT sẽ khả dụng sau khi tích hợp cổng thanh toán."
       }
     };
 
@@ -2096,12 +2128,16 @@
     }
 
     function processDeposit() {
+      const t = i18n[currentLang]; // Подтягиваем текущий язык
       const amount = parseFloat(document.getElementById('deposit-amount').value);
+      
       if (!amount || amount < 10) {
-        alert("Минимальная сумма пополнения 10 USDT");
+        alert(t.alert_deposit_min); // Переведенная ошибка
         return;
       }
-      alert(`Функция кассы для ${amount} USDT будет активирована при подключении платежного шлюза!`);
+      
+      // Выводим переведенное сообщение, подставляя введенную сумму вместо {amount}
+      alert(t.alert_deposit_dev.replace('{amount}', amount)); 
     }
     setLanguage(detectInitialLanguage());
     initUserSession();
