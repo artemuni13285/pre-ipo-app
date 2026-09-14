@@ -2188,42 +2188,45 @@
       btn.disabled = true;
 
       try {
-        if (selectedPaymentMethod === 'stars') {
-          const starsAmount = Math.ceil(amount * 50); // Переводим USDT в Звезды
-          
-          // 1. Запрашиваем ссылку на инвойс у нашего n8n (Вам нужно будет создать этот вебхук)
-          // Раскомментируйте код ниже, когда вебхук будет готов:
-          /*
-          const response = await fetch('URL_ВАШЕГО_N8N_ВЕБХУКА_ДЛЯ_ЗВЕЗД', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ tg_id: currentTgId, stars: starsAmount, usdt: amount })
-          });
-          const data = await response.json();
-          
-          // 2. Открываем нативное окно оплаты Telegram
-          if (data.invoice_url) {
-            tg.openInvoice(data.invoice_url, function(status) {
+        const payload = {
+          tg_id: currentTgId,
+          method: selectedPaymentMethod,
+          amount: amount,
+          stars_amount: Math.ceil(amount * 50)
+        };
+
+        // ВНИМАНИЕ: Вставьте сюда Production URL вебхука из n8n!
+        const webhookUrl = 'https://ваш-n8n-адрес/webhook/generate-invoice';
+
+        const response = await fetch(webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (data.url) {
+          if (selectedPaymentMethod === 'stars') {
+            // Открываем нативную шторку Telegram
+            tg.openInvoice(data.url, function(status) {
               if (status === 'paid') {
-                alert("Оплата успешно завершена!");
-                // Здесь можно заново вызвать initUserSession() для обновления баланса
+                alert("Оплата успешно отправлена в обработку!");
                 closeDepositModal();
-              } else if (status === 'failed') {
-                alert("Ошибка оплаты");
               }
             });
+          } else if (selectedPaymentMethod === 'cryptobot') {
+            // Открываем Crypto Bot
+            tg.openTelegramLink(data.url);
+            closeDepositModal();
           }
-          */
-          alert(`Будет выставлен счет на ${starsAmount} Звезд (Эквивалент ${amount} USDT). Подключите n8n вебхук!`);
-
-        } else if (selectedPaymentMethod === 'cryptobot') {
-          // Логика для Crypto Bot
-          alert(t.alert_deposit_dev.replace('{amount}', amount)); 
+        } else {
+          alert("Ошибка на сервере при создании счета.");
         }
 
       } catch (e) {
         console.error(e);
-        alert("Ошибка сети при создании счета.");
+        alert("Ошибка сети. Попробуйте позже.");
       } finally {
         btn.innerText = originalText;
         btn.disabled = false;
