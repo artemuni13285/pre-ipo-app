@@ -1789,11 +1789,11 @@
       return null;
     }
 
-    async function initUserSession() {
+   async function initUserSession() {
       if (currentPhotoUrl) {
-  const profAvatar = document.getElementById('profile-avatar');
-  if (profAvatar) profAvatar.src = currentPhotoUrl;
-}
+        const profAvatar = document.getElementById('profile-avatar');
+        if (profAvatar) profAvatar.src = currentPhotoUrl;
+      }
       document.getElementById('profile-name').innerText = currentFirstName;
       document.getElementById('profile-username').innerText = currentUsername;
       document.getElementById('profile-tg-id').innerText = currentTgId;
@@ -1811,15 +1811,7 @@
           if (!user) {
             let inviterTgId = getReferralParam();
             let resolvedReferrerId = null;
-if (account) {
-              balance = parseFloat(account.invest_balance) || 0;
-              partnerBalance = parseFloat(account.partner_balance) || 0;
-              karmaPoints = account.karma_points || 0;
-              // === ДОБАВЛЯЕМ ЭТУ СТРОКУ ===
-              // Загружаем реальные нафармленные PTS из базы:
-              window.totalPts = parseFloat(account.bonus_balance) || 0;
-            }
-            // Если пришел по реферальной ссылке — находим пригласителя
+
             if (inviterTgId && String(inviterTgId) !== String(currentTgId)) {
               let { data: inviter } = await supabaseClient
                 .from('users')
@@ -1835,7 +1827,7 @@ if (account) {
                 tg_id: currentTgId,
                 username: currentUsername,
                 first_name: currentFirstName,
-                referrer_id: resolvedReferrerId, // Если ссылки нет — остается NULL
+                referrer_id: resolvedReferrerId,
                 lang: currentLang
               }])
               .select()
@@ -1843,17 +1835,15 @@ if (account) {
 
             if (!regErr && newUser) {
               user = newUser;
-              
-              // Логика приветственного бонуса: 25$, если есть наставник, иначе 0$
               let initialBalance = resolvedReferrerId ? 25.00 : 0.00;
 
               await supabaseClient
                 .from('accounts')
                 .insert([{
                   user_id: user.id,
-                  invest_balance: initialBalance, // Начисляем на инвест-баланс для покупки долей
-                  partner_balance: 0.00,          // Баланс для вывода всегда 0 при старте
-                  bonus_balance: initialBalance   // Дублируем сюда, чтобы позже использовать в мини-играх
+                  invest_balance: initialBalance,
+                  partner_balance: 0.00,
+                  bonus_balance: initialBalance
                 }]);
             }
           }
@@ -1871,7 +1861,7 @@ if (account) {
                 uplineName = uplineUser.username ? `${uplineUser.first_name} (${uplineUser.username})` : uplineUser.first_name;
               }
             } else {
-              uplineName = null; // Нет пригласителя
+              uplineName = null;
             }
 
             const { data: account } = await supabaseClient
@@ -1884,6 +1874,8 @@ if (account) {
               balance = parseFloat(account.invest_balance) || 0;
               partnerBalance = parseFloat(account.partner_balance) || 0;
               karmaPoints = account.karma_points || 0;
+              // === ПРАВИЛЬНОЕ МЕСТО ЗАГРУЗКИ PTS ===
+              window.totalPts = parseFloat(account.bonus_balance) || 0;
             }
 
             const { data: shares } = await supabaseClient
@@ -1997,19 +1989,7 @@ if (account) {
       });
       document.getElementById('total-farm-rate').innerText = `+${hourlyRate} PTS/ч`;
 
-      // Генерируем базовую сумму нафармленного для визуализации
-      if (!window.totalPts) {
-        window.totalPts = Math.floor(hourlyRate * 24 * 7); // Стартовое значение
-      }
-
-      // Считаем скорость добычи (PTS в час) на основе вложенных USDT
-      let hourlyRate = 0;
-      myPortfolio.forEach(item => {
-        hourlyRate += Math.floor(item.invested * 0.8);
-      });
-      document.getElementById('total-farm-rate').innerText = `+${hourlyRate} PTS/ч`;
-
-      // Убираем фейковую генерацию. Если баланс пуст - начинаем с нуля.
+      // Если баланс пуст - начинаем с нуля.
       if (window.totalPts === undefined) window.totalPts = 0;
 
       const ptsElement = document.getElementById('total-farmed-pts');
@@ -2037,22 +2017,8 @@ if (account) {
           }
         }, 10000);
       }
-      const ptsElement = document.getElementById('total-farmed-pts');
-      ptsElement.innerText = Math.floor(window.totalPts).toLocaleString();
-
-      // ЖИВОЙ МАЙНИНГ: Анимация прибавления PTS каждую секунду
-      if (window.miningInterval) clearInterval(window.miningInterval);
-      
-      if (hourlyRate > 0) {
-        // Сколько PTS прибавляется за 1 секунду
-        const ptsPerSecond = hourlyRate / 3600; 
-        
-        window.miningInterval = setInterval(() => {
-          window.totalPts += ptsPerSecond;
-          ptsElement.innerText = Math.floor(window.totalPts).toLocaleString();
-        }, 1000);
-      }
     }
+    
 // === ВОССТАНОВЛЕННАЯ ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ ВКЛАДОК ===
     function switchTab(screenId, btnElement) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -2132,19 +2098,6 @@ if (account) {
           if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('error');
           alert(`Сгорело! Карточка взорвалась.`);
         }
-if (randomRoll <= gameChance) {
-          // Победа
-          const winAmount = Math.floor(gameBet * gameMultiplier);
-          window.totalPts += winAmount;
-          screen.innerText = "🎉";
-          if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
-          alert(`Успех! Вы выиграли ${winAmount} PTS!`);
-        } else {
-          // Проигрыш
-          screen.innerText = "💥";
-          if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('error');
-          alert(`Сгорело! Карточка взорвалась.`);
-        }
 
         // Обновляем текст на экране
         document.getElementById('total-farmed-pts').innerText = Math.floor(window.totalPts).toLocaleString();
@@ -2160,12 +2113,7 @@ if (randomRoll <= gameChance) {
         playBtn.style.opacity = '1';
       }, 1200);
     }
-        // Обновляем баланс и разблокируем кнопку
-        document.getElementById('total-farmed-pts').innerText = Math.floor(window.totalPts).toLocaleString();
-        playBtn.disabled = false;
-        playBtn.style.opacity = '1';
-      }, 1200);
-    }
+    
     function openInvestScreen(projectName, pricePerShare, ticker) {
       selectedProject = projectName;
       selectedTicker = ticker;
