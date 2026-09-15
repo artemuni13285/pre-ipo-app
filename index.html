@@ -2065,8 +2065,9 @@
       if (myPortfolio.length === 0) {
         container.innerHTML = `
           <div style="text-align: center; padding: 40px 10px; color: var(--text-dim);">
-            <div style="font-size: 32px; margin-bottom: 8px;">📂</div>
-            <div style="font-size: 13px;">${t.empty_portfolio}</div>
+            <div style="font-size: 38px; margin-bottom: 12px; opacity: 0.5;">🎒</div>
+            <div style="font-size: 14px; font-weight: 500;">${t.empty_portfolio}</div>
+            <div style="font-size: 12px; margin-top: 8px;">Купите первую карточку на Маркете, чтобы начать добычу PTS.</div>
           </div>`;
         return;
       }
@@ -2085,32 +2086,48 @@
       });
       const finalPortfolio = Object.values(groupedPortfolio);
 
-      container.innerHTML = finalPortfolio.map(item => `
-        <div class="project-card" style="margin-bottom: 12px;">
-          <div class="project-top">
+      container.innerHTML = finalPortfolio.map(item => {
+        // Игровая логика: Вычисляем мощность майнинга (Например, 0.8 PTS/час за каждый вложенный USDT)
+        const farmRate = Math.floor(item.invested * 0.8);
+        // Вычисляем условный уровень карточки (за каждые 100 USDT даем уровень)
+        const level = Math.floor(item.invested / 100) || 1;
+
+        return `
+        <div class="project-card" style="margin-bottom: 14px; border-color: rgba(56, 189, 248, 0.25); background: linear-gradient(160deg, rgba(30,41,59,0.6) 0%, rgba(15,23,42,0.9) 100%);">
+          
+          <div class="project-top" style="align-items: center;">
             <div>
-              <b style="font-size: 15px; color: #fff;">${item.project}</b>
-              <div style="font-size: 11px; color: var(--primary); font-family: 'JetBrains Mono';">${item.ticker} • ${item.certId}</div>
+              <b style="font-size: 16px; color: #fff; display: flex; align-items: center; gap: 6px;">
+                ${item.project} 
+                <span style="background: rgba(56, 189, 248, 0.15); color: var(--primary); font-size: 10px; padding: 2px 6px; border-radius: 6px;">LVL ${level}</span>
+              </b>
+              <div style="font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono'; margin-top: 4px;">NFT ID: ${item.certId}</div>
             </div>
-            <span class="project-tag" style="background: rgba(16, 185, 129, 0.12); color: var(--accent-green);">${t.owner_badge}</span>
+            
+            <div style="display: flex; flex-direction: column; align-items: flex-end;">
+              <span class="project-tag" style="background: rgba(16, 185, 129, 0.12); color: var(--accent-green); box-shadow: 0 0 10px rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3);">
+                ACTIVE
+              </span>
+            </div>
           </div>
 
-          <div class="equity-specs" style="margin-top: 10px; margin-bottom: 0;">
+          <div class="equity-specs" style="margin-top: 14px; margin-bottom: 0; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255,255,255,0.02);">
             <div class="equity-col">
-              <span>${t.col_owned_shares}</span>
-              <b>${item.shares} ${t.shares_unit}</b>
+              <span>ПОТРАЧЕНО</span>
+              <b style="color: #fff;">${item.invested} USDT</b>
             </div>
             <div class="equity-col">
-              <span>${t.col_invested}</span>
-              <b>$${item.invested.toFixed(2)}</b>
+              <span>СКОРОСТЬ ДОБЫЧИ</span>
+              <b style="color: var(--primary); text-shadow: 0 0 8px rgba(56, 189, 248, 0.4);">+${farmRate} PTS/ч</b>
             </div>
             <div class="equity-col">
-              <span>${t.col_status}</span>
-              <b style="color: var(--accent-gold);">${t.status_fixed}</b>
+              <span>СТАТУС</span>
+              <b style="color: var(--accent-gold); display: flex; align-items: center; gap: 4px;">Фарминг <span style="font-size: 10px;">⚡</span></b>
             </div>
           </div>
+          
         </div>
-      `).join('');
+      `}).join('');
     }
 
     function renderReferrals() {
