@@ -213,7 +213,10 @@
       color: #ffffff;
       font-family: 'JetBrains Mono', monospace;
       letter-spacing: -0.5px;
-      white-space: nowrap; /* Строгий запрет на перенос USDT на новую строку */
+      display: flex;
+      align-items: baseline;
+      gap: 6px; /* Жестко фиксируем расстояние между цифрой и USDT */
+      white-space: nowrap;
     }
     .hero-stats {
       display: grid;
