@@ -1527,24 +1527,15 @@
       console.warn("Supabase init error:", e);
     }
 
-    function safeGetStorage(key) {
-      try { return localStorage.getItem(key); } catch (e) { return null; }
-    }
-    function safeSetStorage(key, val) {
-      try { localStorage.setItem(key, val); } catch (e) {}
-    }
+    function safeGetStorage(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
+    function safeSetStorage(key, val) { try { localStorage.setItem(key, val); } catch (e) {} }
 
     const tg = window.Telegram?.WebApp;
     if (tg) {
       try {
-        tg.ready();
-        tg.expand();
-        tg.setHeaderColor('#090d16'); 
-        tg.setBackgroundColor('#090d16');
-        tg.setBottomBarColor('#090d16');
-      } catch (e) {
-        console.warn("Ошибка настройки WebApp:", e);
-      }
+        tg.ready(); tg.expand();
+        tg.setHeaderColor('#090d16'); tg.setBackgroundColor('#090d16'); tg.setBottomBarColor('#090d16');
+      } catch (e) { console.warn("Ошибка настройки WebApp:", e); }
     }
 
     const tgUser = tg?.initDataUnsafe?.user;
@@ -1555,14 +1546,12 @@
 
     let dbUserId = null;
     let uplineName = null;
-
     let currentLang = 'ru';
     let balance = 0;
     let partnerBalance = 0;
     let totalSharesOwned = 0;
     let potentialValuation = 0;
     let refCount = 0;
-    let karmaPoints = 0;
 
     let selectedProject = "Media Network X";
     let selectedTicker = "$MNX";
@@ -1573,420 +1562,14 @@
     const myReferrals = [];
 
     // ==========================================
-    // 2. СЛОВАРЬ ЛОКАЛИЗАЦИИ
-    // ==========================================
-    const i18n = {
-      ru: {
-        support_menu: "Поддержка",
-        support_chat: "Служба поддержки",
-        support_terms: "Условия",
-        support_privacy: "Конфиденциальность",
-        balance_label: "Баланс",
-        badge_locked: "💎 Пул Airdrop",
-        partner_acc_label: "ПАРТНЕРСКИЙ СЧЕТ (РЕФЕРАЛ)",
-        btn_withdraw: "Вывод",
-        shares_label: "СКОРОСТЬ ДОБЫЧИ",
-        valuation_label: "НАФАРМЛЕНО (PTS)",
-        section_rounds: "Сезоны Фарминга",
-        stage_label: "Стадия: Набор аудитории",
-        p1_ticker: "Игровой актив: $MNX",
-        p1_desc: "Автоматизированная экосистема детских и развлекательных видеоканалов с глобальной монетизацией.",
-        p1_ratio: "1 апгрейд = 4 PTS/час",
-        p2_ticker: "Игровой актив: $CRND",
-        p2_desc: "Распределенная инфраструктура вычислительных мощностей для 3D-рендеринга и генерации видео.",
-        p2_ratio: "1 апгрейд = 8 PTS/час",
-        p3_ticker: "Игровой актив: $MWMC",
-        p3_desc: "Промышленный майнинг-кластер. Прокачивайте виртуальный хешрейт без покупки оборудования.",
-        p3_ratio: "1 апгрейд = 12 PTS/час",
-        col_share_price: "СТОИМОСТЬ",
-        col_ipo_ratio: "ФАРМ РЕЙТ",
-        col_valuation: "ПУЛ НАГРАД",
-        raised: "Куплено:",
-        btn_buy_shares: "Сделать Upgrade",
-        title_tiers: "Магазин улучшений",
-        project_prefix: "Карточка:",
-        tier_early: "Пакет «Новичок»",
-        tier_early_sub: "Уровень 1",
-        tier_early_conv: "Добыча: +80 Points",
-        tier_syndicate: "Пакет «Продвинутый»",
-        tier_syndicate_sub: "Уровень 2",
-        tier_syndicate_conv: "Добыча: +200 Points",
-        tier_strategist: "Пакет «Кит»",
-        tier_strategist_sub: "Уровень 3",
-        tier_strategist_conv: "Добыча: +400 Points",
-        tier_disclaimer: "* Покупка виртуальных улучшений ускоряет добычу внутриигровых очков, которые могут быть конвертированы в токены при будущем TGE (Airdrop).",
-        btn_confirm_deal: "Подтвердить покупку",
-        btn_back: "Назад",
-        title_portfolio: "Мой инвентарь",
-        sub_portfolio: "Синхронизировано с сервером",
-        empty_portfolio: "Ваш инвентарь пока пуст.",
-        title_partners: "Партнерская программа",
-        ref_desc: "Приглашайте друзей в приложение и получайте 10% агентского вознаграждения в USDT сразу на ваш баланс.",
-        btn_copy: "Копировать",
-        btn_share_link: "Поделиться ссылкой",
-        ref_invited_label: "ПРИГЛАШЕНО ДРУЗЕЙ",
-        ref_earnings_label: "ДОСТУПНО К ВЫВОДУ",
-        title_boost: "Комьюнити-буст",
-        boost_desc: "Накапливайте Karma Points за активность для внеочередной раздачи дропа.",
-        tab_rounds: "Маркет",
-        tab_portfolio: "Инвентарь",
-        tab_partners: "Друзья",
-        tab_games: "Игры",
-        tab_profile: "Профиль",
-        owner_badge: "Airdrop Участник",
-        col_owned_shares: "УЛУЧШЕНИЙ",
-        col_invested: "ПОТРАЧЕНО",
-        col_status: "СТАТУС",
-        status_fixed: "Активно",
-        alert_no_balance: "Недостаточно средств на балансе.",
-        alert_deal_success: "Улучшение успешно куплено! Инвентарь пополнен: ",
-        alert_ref_copied: "Реферальная ссылка скопирована!",
-        shares_unit: "шт.",
-        people_unit: "чел.",
-        modal_withdraw_title: "Вывод партнерских средств",
-        modal_available_label: "ДОСТУПНО НА ПАРТНЕРСКОМ СЧЕТЕ:",
-        modal_label_wallet: "Адрес кошелька (USDT TRC20 / TON):",
-        modal_label_amount: "Сумма вывода (USDT):",
-        modal_policy_note: "* Вывод осуществляется исключительно с партнерского счета.",
-        btn_confirm_withdraw: "Подтвердить вывод",
-        alert_invalid_withdraw_amt: "Некорректная сумма или превышен остаток.",
-        alert_empty_address: "Укажите адрес кошелька.",
-        alert_withdraw_success: "Заявка на вывод оформлена!",
-        upline_label: "Вас пригласил:",
-        no_upline: "Пришел сам",
-        structure_title: "Ваша структура (1 линия)",
-        structure_empty: "У вас пока нет приглашенных друзей.",
-        profile_accredited: "● Web3 Энтузиаст",
-        prof_tg_id: "Telegram ID",
-        docs_title: "Правила платформы",
-        doc_safe_title: "Лицензионное соглашение (EULA)",
-        doc_agent_title: "Условия реферальной программы",
-        doc_ledger_title: "Игровая механика и Airdrop",
-        doc_signed: "● Принято при входе",
-        doc_auto: "● Правила начисления",
-        doc_view: "Читать",
-        btn_close: "Закрыть",
-        btn_deposit: "Пополнить",
-        modal_deposit_title: "Пополнить баланс",
-        modal_deposit_desc: "Выберите удобный способ пополнения для покупки виртуальных активов.",
-        modal_deposit_tg: "В Telegram",
-        modal_deposit_min: "Мин. сумма: 10 USDT",
-        btn_pay: "Перейти к оплате",
-        alert_deposit_min: "Минимальная сумма пополнения 10 USDT.",
-        alert_deposit_dev: "Оплата {amount} USDT будет доступна после подключения кассы."
-      },
-      en: {
-        support_menu: "Support",
-        support_chat: "Support Chat",
-        support_terms: "Terms of Service",
-        support_privacy: "Privacy Policy",
-        balance_label: "Investment Balance",
-        badge_locked: "🔒 Equity Pool",
-        partner_acc_label: "PARTNER ACCOUNT (COMMISSION)",
-        btn_withdraw: "Withdraw",
-        shares_label: "PORTFOLIO SHARES",
-        valuation_label: "IPO VALUATION",
-        section_rounds: "Pre-IPO Rounds",
-        stage_label: "Stage: Seed / Round A",
-        p1_ticker: "Target Ticker: $MNX",
-        p1_desc: "Automated ecosystem of kids and entertainment media channels with global reach.",
-        p1_ratio: "1 share = 4 stock units",
-        p2_ticker: "Target Ticker: $CRND",
-        p2_desc: "Distributed compute infrastructure optimized for 3D rendering and generative AI video.",
-        p2_ratio: "1 share = 8 stock units",
-        p3_ticker: "Target Ticker: $MWMC",
-        p3_desc: "Industrial-scale mining cluster powered by hydroelectric generation. Invest in hashrate equity.",
-        p3_ratio: "1 share = 12 stock units",
-        col_share_price: "SHARE PRICE",
-        col_ipo_ratio: "IPO PARITY",
-        col_valuation: "VALUATION",
-        raised: "Raised:",
-        btn_buy_shares: "Acquire Shares",
-        title_tiers: "Share Allocation Packages",
-        project_prefix: "Project:",
-        tier_early: "Early Adopter Tier",
-        tier_early_sub: "20 company shares",
-        tier_early_conv: "Conversion: 80 stocks",
-        tier_syndicate: "Syndicate Tier",
-        tier_syndicate_sub: "50 company shares",
-        tier_syndicate_conv: "Conversion: 200 stocks",
-        tier_strategist: "Strategist Tier",
-        tier_strategist_sub: "100 company shares",
-        tier_strategist_conv: "Conversion: 400 stocks",
-        tier_disclaimer: "* Shares are registered in pre-IPO corporate registry. Converted to stock upon IPO listing.",
-        btn_confirm_deal: "Confirm Allocation",
-        btn_back: "Back",
-        title_portfolio: "Asset Registry",
-        sub_portfolio: "Secured on Ledger",
-        empty_portfolio: "No share allocations registered yet.",
-        title_partners: "Partner Program",
-        ref_desc: "Invite co-investors to Pre-IPO rounds and receive 10% agent commission directly to your withdrawable balance.",
-        btn_copy: "Copy",
-        btn_share_link: "Share Link",
-        ref_invited_label: "PARTNERS INVITED",
-        ref_earnings_label: "AVAILABLE FOR PAYOUT",
-        title_boost: "Community Boost",
-        boost_desc: "Accumulate Karma Points through daily engagement to unlock priority allocations.",
-        tab_rounds: "Rounds",
-        tab_portfolio: "Portfolio",
-        tab_partners: "Partners",
-        tab_boost: "Boost",
-        tab_profile: "Profile",
-        owner_badge: "Pre-IPO Owner",
-        col_owned_shares: "SHARES",
-        col_invested: "CAPITAL",
-        col_status: "STATUS",
-        status_fixed: "Locked",
-        alert_no_balance: "Insufficient investment balance.",
-        alert_deal_success: "Deal confirmed! Acquired: ",
-        alert_ref_copied: "Referral link copied!",
-        shares_unit: "shares",
-        people_unit: "users",
-        modal_withdraw_title: "Partner Commission Payout",
-        modal_available_label: "AVAILABLE ON PARTNER ACCOUNT:",
-        modal_label_wallet: "Wallet Address (USDT TRC20 / TON):",
-        modal_label_amount: "Withdraw Amount (USDT):",
-        modal_policy_note: "* Payouts are exclusively processed from the partner balance.",
-        btn_confirm_withdraw: "Confirm Payout",
-        alert_invalid_withdraw_amt: "Invalid amount or exceeds available partner balance.",
-        alert_empty_address: "Please enter a valid destination address.",
-        alert_withdraw_success: "Payout processed! Funds sent to your wallet.",
-        upline_label: "Invited by sponsor:",
-        no_upline: "No sponsor (Direct registration)",
-        structure_title: "Your Structure (Level 1)",
-        structure_empty: "No direct partners in your network yet.",
-        profile_accredited: "● Accredited Investor",
-        prof_tg_id: "Telegram ID",
-        docs_title: "Legal Documents",
-        doc_safe_title: "Pre-IPO Investment SAFE Agreement",
-        doc_agent_title: "Partner Agency Contract (10%)",
-        doc_ledger_title: "Corporate Shareholder Registry",
-        doc_signed: "● Executed by Electronic Offer",
-        doc_auto: "● Ledger Auto-Recorded",
-        doc_view: "View",
-        btn_close: "Close",
-        btn_deposit: "Deposit",
-        modal_deposit_title: "Top Up Balance",
-        modal_deposit_desc: "Choose a convenient payment method. Funds are credited instantly.",
-        modal_deposit_tg: "In Telegram",
-        modal_deposit_min: "Min. amount: 10 USDT",
-        btn_pay: "Proceed to Payment",
-        alert_deposit_min: "Minimum deposit amount is 10 USDT.",
-        alert_deposit_dev: "Payment of {amount} USDT will be available after gateway integration."
-      },
-      fr: {
-        support_menu: "Assistance",
-        support_chat: "Chat d'assistance",
-        support_terms: "Conditions d'utilisation",
-        support_privacy: "Confidentialité",
-        balance_label: "Solde d'investissement",
-        badge_locked: "🔒 Pool Capital",
-        partner_acc_label: "COMPTE PARTENAIRE (COMMISSION)",
-        btn_withdraw: "Retrait",
-        shares_label: "PARTS EN PORTEFEUILLE",
-        valuation_label: "VALORISATION IPO",
-        section_rounds: "Tours Pre-IPO",
-        stage_label: "Phase: Seed / Round A",
-        p1_ticker: "Ticker cible: $MNX",
-        p1_desc: "Écosystème automatisé de chaînes vidéo pour enfants et divertissement.",
-        p1_ratio: "1 part = 4 actions",
-        p2_ticker: "Ticker cible: $CRND",
-        p2_desc: "Infrastructure de calcul distribué dédiée au rendu 3D et à l'IA vidéo.",
-        p2_ratio: "1 part = 8 actions",
-        p3_ticker: "Ticker cible: $MWMC",
-        p3_desc: "Cluster minier industriel alimenté par énergie hydroélectrique.",
-        p3_ratio: "1 part = 12 actions",
-        col_share_price: "PRIX / PART",
-        col_ipo_ratio: "PARITÉ IPO",
-        col_valuation: "VALORISATION",
-        raised: "Levé:",
-        btn_buy_shares: "Acquérir des parts",
-        title_tiers: "Souscription de parts",
-        project_prefix: "Projet:",
-        tier_early: "Pack «Premier Investisseur»",
-        tier_early_sub: "20 parts d'entreprise",
-        tier_early_conv: "Conversion: 80 actions",
-        tier_syndicate: "Pack «Syndicat»",
-        tier_syndicate_sub: "50 parts d'entreprise",
-        tier_syndicate_conv: "Conversion: 200 actions",
-        tier_strategist: "Pack «Stratège»",
-        tier_strategist_sub: "100 parts d'entreprise",
-        tier_strategist_conv: "Conversion: 400 actions",
-        tier_disclaimer: "* Les parts sont enregistrées au registre pré-IPO.",
-        btn_confirm_deal: "Valider l'opération",
-        btn_back: "Retour",
-        title_portfolio: "Registre des actifs",
-        sub_portfolio: "Sécurisé par registre",
-        empty_portfolio: "Aucune part enregistrée.",
-        title_partners: "Programme Partenaire",
-        ref_desc: "Recevez 10% de commission sur les souscriptions de vos filleuls.",
-        btn_copy: "Copier",
-        btn_share_link: "Partager le lien",
-        ref_invited_label: "PARTENAIRES INVITÉS",
-        ref_earnings_label: "DISPONIBLE AU RETRAIT",
-        title_boost: "Boost Communautaire",
-        boost_desc: "Gagnez des points Karma pour vos allocations.",
-        tab_rounds: "Tours",
-        tab_portfolio: "Portefeuille",
-        tab_partners: "Partenaires",
-        tab_boost: "Boost",
-        tab_profile: "Profil",
-        owner_badge: "Détenteur Pre-IPO",
-        col_owned_shares: "PARTS",
-        col_invested: "APPORT",
-        col_status: "STATUT",
-        status_fixed: "Bloqué",
-        alert_no_balance: "Solde insuffisant.",
-        alert_deal_success: "Parts acquises: ",
-        alert_ref_copied: "Lien copié!",
-        shares_unit: "parts",
-        people_unit: "pers.",
-        modal_withdraw_title: "Retrait des Commissions",
-        modal_available_label: "DISPONIBLE:",
-        modal_label_wallet: "Adresse portefeuille (USDT):",
-        modal_label_amount: "Montant (USDT):",
-        modal_policy_note: "* Seules les commissions partenaires sont retirables.",
-        btn_confirm_withdraw: "Confirmer le retrait",
-        alert_invalid_withdraw_amt: "Montant invalide.",
-        alert_empty_address: "Indiquez votre adresse.",
-        alert_withdraw_success: "Retrait enregistré!",
-        upline_label: "Parrainé par:",
-        no_upline: "Aucun parrain (Inscription directe)",
-        structure_title: "Votre équipe directe (L1)",
-        structure_empty: "Aucun partenaire direct inscrit.",
-        profile_accredited: "● Investisseur Accrédité",
-        prof_tg_id: "Identifiant Telegram",
-        docs_title: "Documents légaux",
-        doc_safe_title: "Contrat d'investissement SAFE",
-        doc_agent_title: "Convention d'apporteur d'affaires",
-        doc_ledger_title: "Registre officiel des actionnaires",
-        doc_signed: "● Signé électroniquement",
-        doc_auto: "● Enregistré au registre",
-        doc_view: "Consulter",
-        btn_close: "Fermer",
-        btn_deposit: "Dépôt",
-        modal_deposit_title: "Recharger le solde",
-        modal_deposit_desc: "Choisissez un mode de paiement. Le crédit est instantané.",
-        modal_deposit_tg: "Sur Telegram",
-        modal_deposit_min: "Montant min.: 10 USDT",
-        btn_pay: "Passer au paiement",
-        alert_deposit_min: "Le dépôt minimum est de 10 USDT.",
-        alert_deposit_dev: "Le paiement de {amount} USDT sera disponible après intégration de la passerelle."
-      },
-      vi: {
-        support_menu: "Hỗ trợ",
-        support_chat: "Trò chuyện hỗ trợ",
-        support_terms: "Điều khoản",
-        support_privacy: "Quyền riêng tư",
-        balance_label: "Số dư đầu tư",
-        badge_locked: "🔒 Quỹ cổ phần",
-        partner_acc_label: "TÀI KHOẢN ĐỐI TÁC (HOA HỒNG)",
-        btn_withdraw: "Rút tiền",
-        shares_label: "CỔ PHẦN DANH MỤC",
-        valuation_label: "ĐỊNH GIÁ IPO",
-        section_rounds: "Các vòng Pre-IPO",
-        stage_label: "Giai đoạn: Seed / Round A",
-        p1_ticker: "Mã niêm yết: $MNX",
-        p1_desc: "Hệ sinh thái video giải trí và thiếu nhi toàn cầu.",
-        p1_ratio: "1 cổ phần = 4 cổ phiếu",
-        p2_ticker: "Mã niêm yết: $CRND",
-        p2_desc: "Hạ tầng đám mây phân tán cho 3D và AI video.",
-        p2_ratio: "1 cổ phần = 8 cổ phiếu",
-        p3_ticker: "Mã niêm yết: $MWMC",
-        p3_desc: "Cụm khai thác công nghiệp kết nối trực tiếp thủy điện.",
-        p3_ratio: "1 cổ phần = 12 cổ phiếu",
-        col_share_price: "GIÁ CỔ PHẦN",
-        col_ipo_ratio: "QUY ĐỔI IPO",
-        col_valuation: "ĐỊNH GIÁ",
-        raised: "Đã huy động:",
-        btn_buy_shares: "Mua cổ phần",
-        title_tiers: "Lựa chọn gói cổ phần",
-        project_prefix: "Dự án:",
-        tier_early: "Gói «Nhà đầu tư sớm»",
-        tier_early_sub: "20 cổ phần công ty",
-        tier_early_conv: "Quy đổi: 80 cổ phiếu",
-        tier_syndicate: "Gói «Hiệp hội»",
-        tier_syndicate_sub: "50 cổ phần công ty",
-        tier_syndicate_conv: "Quy đổi: 200 cổ phiếu",
-        tier_strategist: "Gói «Chiến lược gia»",
-        tier_strategist_sub: "100 cổ phần công ty",
-        tier_strategist_conv: "Quy đổi: 400 cổ phiếu",
-        tier_disclaimer: "* Cổ phần được ghi nhận vào sổ đăng ký Pre-IPO.",
-        btn_confirm_deal: "Xác nhận giao dịch",
-        btn_back: "Quay lại",
-        title_portfolio: "Sổ đăng ký tài sản",
-        sub_portfolio: "Bảo mật bằng sổ cái",
-        empty_portfolio: "Bạn chưa sở hữu cổ phần nào.",
-        title_partners: "Chương trình đối tác",
-        ref_desc: "Nhận 10% hoa hồng vào tài khoản có thể rút ngay lập tức.",
-        btn_copy: "Sao chép",
-        btn_share_link: "Chia sẻ liên kết",
-        ref_invited_label: "ĐỐI TÁC ĐÃ MỜI",
-        ref_earnings_label: "SẴN SÀNG ĐỂ RÚT",
-        title_boost: "Tăng tốc cộng đồng",
-        boost_desc: "Tích lũy điểm Karma để nhận phân bổ ưu tiên.",
-        tab_rounds: "Vòng gọi vốn",
-        tab_portfolio: "Danh mục",
-        tab_partners: "Đối tác",
-        tab_boost: "Tăng tốc",
-        tab_profile: "Hồ sơ",
-        owner_badge: "Chủ sở hữu Pre-IPO",
-        col_owned_shares: "CỔ PHẦN",
-        col_invested: "VỐN VÀO",
-        col_status: "TRẠNG THÁI",
-        status_fixed: "Đã chốt",
-        alert_no_balance: "Số dư đầu tư không đủ.",
-        alert_deal_success: "Giao dịch thành công! Đã mua: ",
-        alert_ref_copied: "Đã sao chép liên kết!",
-        shares_unit: "CP",
-        people_unit: "người",
-        modal_withdraw_title: "Rút tiền hoa hồng",
-        modal_available_label: "KHẢ DỤNG:",
-        modal_label_wallet: "Địa chỉ ví nhận (USDT):",
-        modal_label_amount: "Số tiền muốn rút (USDT):",
-        modal_policy_note: "* Chỉ có thể rút tiền từ tài khoản đối tác.",
-        btn_confirm_withdraw: "Xác nhận rút tiền",
-        alert_invalid_withdraw_amt: "Số tiền không hợp lệ.",
-        alert_empty_address: "Vui lòng nhập địa chỉ ví.",
-        alert_withdraw_success: "Yêu cầu rút tiền thành công!",
-        upline_label: "Người giới thiệu:",
-        no_upline: "Không có người giới thiệu (Đăng ký trực tiếp)",
-        structure_title: "Đội ngũ trực tiếp (Tầng 1)",
-        structure_empty: "Chưa có đối tác trực tiếp nào.",
-        profile_accredited: "● Nhà đầu tư đã xác minh",
-        prof_tg_id: "ID Telegram",
-        docs_title: "Hồ sơ pháp lý",
-        doc_safe_title: "Hợp đồng đầu tư SAFE Pre-IPO",
-        doc_agent_title: "Thỏa thuận hoa hồng đối tác (10%)",
-        doc_ledger_title: "Sổ đăng ký cổ đông Pre-IPO",
-        doc_signed: "● Đã ký điện tử",
-        doc_auto: "● Ghi nhận tự động",
-        doc_view: "Xem",
-        btn_close: "Đóng",
-        btn_deposit: "Nạp tiền",
-        modal_deposit_title: "Nạp tiền vào tài khoản",
-        modal_deposit_desc: "Chọn phương thức thanh toán. Tiền sẽ được cộng ngay lập tức.",
-        modal_deposit_tg: "Trong Telegram",
-        modal_deposit_min: "Tối thiểu: 10 USDT",
-        btn_pay: "Tiến hành thanh toán",
-        alert_deposit_min: "Số tiền nạp tối thiểu là 10 USDT.",
-        alert_deposit_dev: "Thanh toán {amount} USDT sẽ khả dụng sau khi tích hợp cổng thanh toán."
-      }
-    };
-
-    // ==========================================
-    // 3. ИНИЦИАЛИЗАЦИЯ И РАБОТА С ДАННЫМИ
+    // 2. ИНИЦИАЛИЗАЦИЯ ПОЛЬЗОВАТЕЛЯ
     // ==========================================
     function getReferralParam() {
       const startParam = tg?.initDataUnsafe?.start_param;
-      if (startParam) {
-        return startParam.replace('ref_', '').replace('ref', '');
-      }
+      if (startParam) return startParam.replace('ref_', '').replace('ref', '');
       const urlParams = new URLSearchParams(window.location.search);
       const urlRef = urlParams.get('ref') || urlParams.get('start');
-      if (urlRef) {
-        return urlRef.replace('ref_', '').replace('ref', '');
-      }
+      if (urlRef) return urlRef.replace('ref_', '').replace('ref', '');
       return null;
     }
 
@@ -1998,54 +1581,32 @@
       document.getElementById('profile-name').innerText = currentFirstName;
       document.getElementById('profile-username').innerText = currentUsername;
       document.getElementById('profile-tg-id').innerText = currentTgId;
-
       document.getElementById('ref-link').innerText = `https://t.me/EquiCoreBot/launchpad?startapp=ref_${currentTgId}`;
 
       if (supabaseClient) {
         try {
-          let { data: user } = await supabaseClient
-            .from('users')
-            .select('*')
-            .eq('tg_id', currentTgId)
-            .maybeSingle();
+          let { data: user } = await supabaseClient.from('users').select('*').eq('tg_id', currentTgId).maybeSingle();
 
           if (!user) {
             let inviterTgId = getReferralParam();
             let resolvedReferrerId = null;
 
             if (inviterTgId && String(inviterTgId) !== String(currentTgId)) {
-              let { data: inviter } = await supabaseClient
-                .from('users')
-                .select('id, first_name, username')
-                .eq('tg_id', inviterTgId)
-                .maybeSingle();
+              let { data: inviter } = await supabaseClient.from('users').select('id, first_name, username').eq('tg_id', inviterTgId).maybeSingle();
               if (inviter) resolvedReferrerId = inviter.id;
             }
 
-            const { data: newUser, error: regErr } = await supabaseClient
-              .from('users')
-              .insert([{
-                tg_id: currentTgId,
-                username: currentUsername,
-                first_name: currentFirstName,
-                referrer_id: resolvedReferrerId,
-                lang: currentLang
-              }])
-              .select()
-              .single();
+            const { data: newUser, error: regErr } = await supabaseClient.from('users').insert([{
+              tg_id: currentTgId, username: currentUsername, first_name: currentFirstName,
+              referrer_id: resolvedReferrerId, lang: currentLang
+            }]).select().single();
 
             if (!regErr && newUser) {
               user = newUser;
               let initialBalance = resolvedReferrerId ? 25.00 : 0.00;
-
-              await supabaseClient
-                .from('accounts')
-                .insert([{
-                  user_id: user.id,
-                  invest_balance: initialBalance,
-                  partner_balance: 0.00,
-                  bonus_balance: initialBalance
-                }]);
+              await supabaseClient.from('accounts').insert([{
+                user_id: user.id, invest_balance: initialBalance, partner_balance: 0.00, bonus_balance: initialBalance
+              }]);
             }
           }
 
@@ -2053,65 +1614,36 @@
             dbUserId = user.id;
 
             if (user.referrer_id) {
-              let { data: uplineUser } = await supabaseClient
-                .from('users')
-                .select('first_name, username')
-                .eq('id', user.referrer_id)
-                .single();
-              if (uplineUser) {
-                uplineName = uplineUser.username ? `${uplineUser.first_name} (${uplineUser.username})` : uplineUser.first_name;
-              }
-            } else {
-              uplineName = null;
-            }
+              let { data: uplineUser } = await supabaseClient.from('users').select('first_name, username').eq('id', user.referrer_id).single();
+              if (uplineUser) uplineName = uplineUser.username ? `${uplineUser.first_name} (${uplineUser.username})` : uplineUser.first_name;
+            } else { uplineName = null; }
 
-            const { data: account } = await supabaseClient
-              .from('accounts')
-              .select('*')
-              .eq('user_id', dbUserId)
-              .single();
-
+            const { data: account } = await supabaseClient.from('accounts').select('*').eq('user_id', dbUserId).single();
             if (account) {
               balance = parseFloat(account.invest_balance) || 0;
               partnerBalance = parseFloat(account.partner_balance) || 0;
-              window.totalPts = parseFloat(account.bonus_balance) || 0;
+              window.totalPts = parseFloat(account.bonus_balance) || 0; // ЗАГРУЗКА PTS ИЗ БАЗЫ
             }
 
-            const { data: shares } = await supabaseClient
-              .from('share_holdings')
-              .select('*')
-              .eq('user_id', dbUserId);
-
+            const { data: shares } = await supabaseClient.from('share_holdings').select('*').eq('user_id', dbUserId);
             if (shares && shares.length > 0) {
               myPortfolio.length = 0;
               shares.forEach(s => {
                 myPortfolio.push({
-                  project: s.project_name,
-                  ticker: s.project_ticker,
-                  shares: s.shares_count,
-                  invested: parseFloat(s.invested_amount),
-                  certId: s.certificate_id,
-                  date: new Date(s.created_at).toLocaleDateString()
+                  project: s.project_name, ticker: s.project_ticker, shares: s.shares_count,
+                  invested: parseFloat(s.invested_amount), certId: s.certificate_id, date: new Date(s.created_at).toLocaleDateString()
                 });
               });
-              totalSharesOwned = myPortfolio.reduce((acc, curr) => acc + curr.shares, 0);
-              potentialValuation = myPortfolio.reduce((acc, curr) => acc + (curr.invested * 3.5), 0);
             }
 
-            const { data: referrals } = await supabaseClient
-              .from('users')
-              .select('first_name, username, created_at')
-              .eq('referrer_id', dbUserId);
-
+            const { data: referrals } = await supabaseClient.from('users').select('first_name, username, created_at').eq('referrer_id', dbUserId);
             if (referrals) {
               myReferrals.length = 0;
               referrals.forEach(r => myReferrals.push(r));
               refCount = myReferrals.length;
             }
           }
-        } catch (err) {
-          console.warn("Supabase load error:", err);
-        }
+        } catch (err) { console.warn("Supabase load error:", err); }
       }
 
       updateUplineUI();
@@ -2121,73 +1653,26 @@
     }
 
     function updateUplineUI() {
-      const t = i18n[currentLang];
-      const text = uplineName ? uplineName : t.no_upline;
+      const text = uplineName ? uplineName : "Пришел сам";
       document.getElementById('upline-display').innerText = text;
       document.getElementById('profile-upline-name').innerText = text;
     }
 
     // ==========================================
-    // 4. ОТОБРАЖЕНИЕ И ПЕРЕКЛЮЧЕНИЯ
+    // 3. UI И МАЙНИНГ
     // ==========================================
-    function detectInitialLanguage() {
-      const saved = safeGetStorage('pre_ipo_lang');
-      if (saved && i18n[saved]) return saved;
-
-      const tgLang = tg?.initDataUnsafe?.user?.language_code?.toLowerCase();
-      if (tgLang) {
-        if (tgLang.startsWith('ru')) return 'ru';
-        if (tgLang.startsWith('fr')) return 'fr';
-        if (tgLang.startsWith('vi')) return 'vi';
-        if (tgLang.startsWith('en')) return 'en';
-      }
-
-      const browserLang = (navigator.language || '').toLowerCase();
-      if (browserLang.startsWith('ru')) return 'ru';
-      if (browserLang.startsWith('fr')) return 'fr';
-      if (browserLang.startsWith('vi')) return 'vi';
-
-      return 'ru';
-    }
-
-    function setLanguage(lang) {
-      if (!i18n[lang]) return;
-      currentLang = lang;
-      safeSetStorage('pre_ipo_lang', lang);
-
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.innerText.toLowerCase() === lang);
-      });
-
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (i18n[lang][key]) {
-          el.innerText = i18n[lang][key];
-        }
-      });
-
-      updateUplineUI();
-      updateUI();
-      renderPortfolio();
-      renderReferrals();
-    }
-
     function updateUI() {
-      const t = i18n[currentLang];
       document.getElementById('user-balance').innerHTML = `$${balance.toFixed(2)} <span style="font-size: 15px; color: var(--text-dim);">USDT</span>`;
       document.getElementById('partner-balance').innerText = `$${partnerBalance.toFixed(2)} USDT`;
       document.getElementById('ref-earnings-display').innerText = `$${partnerBalance.toFixed(2)} USDT`;
       document.getElementById('modal-avail-balance').innerText = `$${partnerBalance.toFixed(2)} USDT`;
-      document.getElementById('ref-count').innerText = `${refCount} ${t.people_unit}`;
+      document.getElementById('ref-count').innerText = `${refCount} чел.`;
 
       let hourlyRate = 0;
-      myPortfolio.forEach(item => {
-        hourlyRate += Math.floor(item.invested * 0.8);
-      });
+      myPortfolio.forEach(item => { hourlyRate += Math.floor(item.invested * 0.8); });
       document.getElementById('total-farm-rate').innerText = `+${hourlyRate} PTS/ч`;
 
       if (window.totalPts === undefined) window.totalPts = 0;
-
       const ptsElement = document.getElementById('total-farmed-pts');
       ptsElement.innerText = Math.floor(window.totalPts).toLocaleString();
 
@@ -2196,7 +1681,6 @@
       
       if (hourlyRate > 0) {
         const ptsPerSecond = hourlyRate / 3600; 
-        
         window.miningInterval = setInterval(() => {
           window.totalPts += ptsPerSecond;
           ptsElement.innerText = Math.floor(window.totalPts).toLocaleString();
@@ -2204,9 +1688,7 @@
 
         window.saveInterval = setInterval(() => {
           if (supabaseClient && dbUserId) {
-            supabaseClient.from('accounts')
-              .update({ bonus_balance: window.totalPts })
-              .eq('user_id', dbUserId).then();
+            supabaseClient.from('accounts').update({ bonus_balance: window.totalPts }).eq('user_id', dbUserId).then();
           }
         }, 10000);
       }
@@ -2215,31 +1697,27 @@
     function switchTab(screenId, btnElement) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-
       const target = document.getElementById(`screen-${screenId}`);
       if (target) target.classList.add('active');
-
-      if (btnElement) {
-        btnElement.classList.add('active');
-      } else {
-        const matchingBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => 
-          b.getAttribute('onclick')?.includes(`'${screenId}'`)
-        );
+      if (btnElement) { btnElement.classList.add('active'); } 
+      else {
+        const matchingBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick')?.includes(`'${screenId}'`));
         if (matchingBtn) matchingBtn.classList.add('active');
       }
     }
 
-    // === НАВИГАЦИЯ ВНУТРИ ХАБА ИГР ===
+    // ==========================================
+    // 4. МИНИ-ИГРЫ (ХАБ, АПГРЕЙД, МИНЫ)
+    // ==========================================
     function openInnerGame(gameId) {
       document.getElementById('games-hub-view').style.display = 'none';
-      
-      // Скрываем все внутренние экраны игр
       document.querySelectorAll('.inner-game-view').forEach(el => el.style.display = 'none');
       
       const targetGame = document.getElementById(`game-view-${gameId}`);
       if (targetGame) {
         targetGame.style.display = 'block';
-        document.getElementById(`game-inner-pts-${gameId}`).innerText = Math.floor(window.totalPts || 0).toLocaleString();
+        const innerBalance = document.getElementById(`game-inner-pts-${gameId}`);
+        if(innerBalance) innerBalance.innerText = Math.floor(window.totalPts || 0).toLocaleString();
       } else {
         alert("Эта игра находится в разработке! Пока доступен только «Апгрейд» и «Мины».");
         closeInnerGame();
@@ -2252,56 +1730,40 @@
       updateUI();
     }
 
-    // === ЛОГИКА МИНИ-ИГРЫ "АПГРЕЙД" ===
+    // --- ИГРА: АПГРЕЙД ---
     let gameChance = 20;
     let gameMultiplier = 5.0;
-    let upgradeBet = 100; // Изменили имя переменной чтобы не было конфликтов
+    let upgradeBet = 100;
 
     function setChance(chance, multiplier) {
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-      gameChance = chance;
-      gameMultiplier = multiplier;
-      
-      document.querySelectorAll('.game-btn').forEach(btn => {
-        btn.style.background = '#334155';
-      });
+      gameChance = chance; gameMultiplier = multiplier;
+      document.querySelectorAll('.game-btn').forEach(btn => { btn.style.background = '#334155'; });
       document.getElementById(`btn-chance-${chance}`).style.background = 'var(--primary)';
     }
 
     function playUpgrade() {
-      if (!window.totalPts || window.totalPts < upgradeBet) {
-        alert("Недостаточно PTS для ставки! Фармите больше.");
-        return;
-      }
-
+      if (!window.totalPts || window.totalPts < upgradeBet) { alert("Недостаточно PTS для ставки! Фармите больше."); return; }
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
 
       const screen = document.getElementById('game-screen');
       const playBtn = document.getElementById('play-btn');
 
-      playBtn.disabled = true;
-      playBtn.style.opacity = '0.5';
+      playBtn.disabled = true; playBtn.style.opacity = '0.5';
       window.totalPts -= upgradeBet;
       document.getElementById('total-farmed-pts').innerText = Math.floor(window.totalPts).toLocaleString();
       document.getElementById('game-inner-pts-upgrade').innerText = Math.floor(window.totalPts).toLocaleString();
 
-      let rolls = 0;
-      screen.innerText = "🔄";
-      const rollInterval = setInterval(() => {
-        screen.style.transform = `rotate(${rolls * 45}deg)`;
-        rolls++;
-      }, 100);
+      let rolls = 0; screen.innerText = "🔄";
+      const rollInterval = setInterval(() => { screen.style.transform = `rotate(${rolls * 45}deg)`; rolls++; }, 100);
 
       setTimeout(() => {
-        clearInterval(rollInterval);
-        screen.style.transform = 'none';
-
+        clearInterval(rollInterval); screen.style.transform = 'none';
         const randomRoll = Math.random() * 100;
 
         if (randomRoll <= gameChance) {
           const winAmount = Math.floor(upgradeBet * gameMultiplier);
-          window.totalPts += winAmount;
-          screen.innerText = "🎉";
+          window.totalPts += winAmount; screen.innerText = "🎉";
           if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
           alert(`Успех! Вы выиграли ${winAmount} PTS!`);
         } else {
@@ -2313,65 +1775,45 @@
         document.getElementById('total-farmed-pts').innerText = Math.floor(window.totalPts).toLocaleString();
         document.getElementById('game-inner-pts-upgrade').innerText = Math.floor(window.totalPts).toLocaleString();
         
-        if (supabaseClient && dbUserId) {
-          supabaseClient.from('accounts')
-            .update({ bonus_balance: window.totalPts })
-            .eq('user_id', dbUserId).then();
-        }
-
-        playBtn.disabled = false;
-        playBtn.style.opacity = '1';
+        if (supabaseClient && dbUserId) supabaseClient.from('accounts').update({ bonus_balance: window.totalPts }).eq('user_id', dbUserId).then();
+        playBtn.disabled = false; playBtn.style.opacity = '1';
       }, 1200);
     }
-    
-    // === ЛОГИКА МИНИ-ИГРЫ "МИНЫ" ===
+
+    // --- ИГРА: МИНЫ ---
     let minesActive = false;
     let minesBet = 100;
     let minesMultiplier = 1.0;
-    let minesGrid = []; // 0 = пусто, 1 = мина
+    let minesGrid = [];
     let safeCellsOpened = 0;
     const TOTAL_CELLS = 9;
     const MINES_COUNT = 3;
 
     function startMinesGame() {
       if (minesActive) return;
-      
-      if (!window.totalPts || window.totalPts < minesBet) {
-        alert("Недостаточно PTS для ставки!");
-        return;
-      }
-      
+      if (!window.totalPts || window.totalPts < minesBet) { alert("Недостаточно PTS для ставки!"); return; }
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
 
-      // Списываем ставку
       window.totalPts -= minesBet;
       updateMinesBalanceUI();
       
-      minesActive = true;
-      minesMultiplier = 1.0;
-      safeCellsOpened = 0;
+      minesActive = true; minesMultiplier = 1.0; safeCellsOpened = 0;
       updateMinesMultiplierUI();
       
       document.getElementById('mines-start-btn').style.display = 'none';
       document.getElementById('mines-cashout-btn').style.display = 'block';
-      document.getElementById('mines-cashout-btn').disabled = true; // Нельзя забрать пока не открыл хотя бы 1
+      document.getElementById('mines-cashout-btn').disabled = true; 
       document.getElementById('mines-cashout-btn').style.opacity = '0.5';
 
-      // Генерируем поле
       minesGrid = Array(TOTAL_CELLS).fill(0);
       let minesPlaced = 0;
       while (minesPlaced < MINES_COUNT) {
         const randIndex = Math.floor(Math.random() * TOTAL_CELLS);
-        if (minesGrid[randIndex] === 0) {
-          minesGrid[randIndex] = 1;
-          minesPlaced++;
-        }
+        if (minesGrid[randIndex] === 0) { minesGrid[randIndex] = 1; minesPlaced++; }
       }
 
-      // Отрисовываем сетку
       const gridContainer = document.getElementById('mines-play-grid');
       gridContainer.innerHTML = '';
-      
       for (let i = 0; i < TOTAL_CELLS; i++) {
         const cell = document.createElement('div');
         cell.className = 'mines-cell';
@@ -2382,34 +1824,23 @@
 
     function clickMineCell(index, cellElement) {
       if (!minesActive || cellElement.classList.contains('opened')) return;
-      
       cellElement.classList.add('opened');
       
       if (minesGrid[index] === 1) {
-        // ПОДОРВАЛСЯ
         if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('error');
-        cellElement.classList.add('mine');
-        cellElement.innerHTML = '💣';
-        revealAllMines();
-        endMinesGame(false);
+        cellElement.classList.add('mine'); cellElement.innerHTML = '💣';
+        revealAllMines(); endMinesGame(false);
       } else {
-        // БЕЗОПАСНО
         if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-        cellElement.classList.add('safe');
-        cellElement.innerHTML = '💎';
+        cellElement.classList.add('safe'); cellElement.innerHTML = '💎';
         safeCellsOpened++;
-        
-        // Увеличиваем множитель (базовая математика для примера)
         minesMultiplier += 0.35; 
         updateMinesMultiplierUI();
         
         document.getElementById('mines-cashout-btn').disabled = false;
         document.getElementById('mines-cashout-btn').style.opacity = '1';
         
-        // Если открыл все безопасные (9 - 3 = 6)
-        if (safeCellsOpened === (TOTAL_CELLS - MINES_COUNT)) {
-          endMinesGame(true);
-        }
+        if (safeCellsOpened === (TOTAL_CELLS - MINES_COUNT)) endMinesGame(true);
       }
     }
 
@@ -2420,9 +1851,7 @@
     }
 
     function endMinesGame(win) {
-      minesActive = false;
-      revealAllMines();
-      
+      minesActive = false; revealAllMines();
       document.getElementById('mines-start-btn').style.display = 'block';
       document.getElementById('mines-cashout-btn').style.display = 'none';
 
@@ -2435,12 +1864,7 @@
       }
 
       updateMinesBalanceUI();
-
-      if (supabaseClient && dbUserId) {
-        supabaseClient.from('accounts')
-          .update({ bonus_balance: window.totalPts })
-          .eq('user_id', dbUserId).then();
-      }
+      if (supabaseClient && dbUserId) supabaseClient.from('accounts').update({ bonus_balance: window.totalPts }).eq('user_id', dbUserId).then();
     }
 
     function revealAllMines() {
@@ -2448,26 +1872,22 @@
       for (let i = 0; i < TOTAL_CELLS; i++) {
         if (!cells[i].classList.contains('opened')) {
           cells[i].classList.add('opened');
-          if (minesGrid[i] === 1) {
-            cells[i].innerHTML = '💣';
-            cells[i].style.opacity = '0.5';
-          }
+          if (minesGrid[i] === 1) { cells[i].innerHTML = '💣'; cells[i].style.opacity = '0.5'; }
         }
       }
     }
 
-    function updateMinesMultiplierUI() {
-      document.getElementById('mines-current-mult').innerText = `${minesMultiplier.toFixed(2)}x`;
-    }
-
+    function updateMinesMultiplierUI() { document.getElementById('mines-current-mult').innerText = `${minesMultiplier.toFixed(2)}x`; }
     function updateMinesBalanceUI() {
       document.getElementById('total-farmed-pts').innerText = Math.floor(window.totalPts).toLocaleString();
       document.getElementById('game-inner-pts-mines').innerText = Math.floor(window.totalPts).toLocaleString();
     }
 
+    // ==========================================
+    // 5. ИНВЕСТИЦИИ И РЕФЕРАЛЫ
+    // ==========================================
     function openInvestScreen(projectName, pricePerShare, ticker) {
-      selectedProject = projectName;
-      selectedTicker = ticker;
+      selectedProject = projectName; selectedTicker = ticker;
       document.getElementById('inv-project-name').innerText = `${projectName} (${ticker})`;
       switchTab('invest');
     }
@@ -2475,234 +1895,81 @@
     function selectTier(element, shares, cost) {
       document.querySelectorAll('.tier-box').forEach(b => b.classList.remove('selected'));
       element.classList.add('selected');
-      selectedShares = shares;
-      selectedCost = cost;
+      selectedShares = shares; selectedCost = cost;
     }
 
     async function executeSharePurchase() {
-      const t = i18n[currentLang];
-      if (balance < selectedCost) {
-        alert(t.alert_no_balance);
-        return;
-      }
-
+      if (balance < selectedCost) { alert("Недостаточно средств"); return; }
       const newBalance = balance - selectedCost;
       const certId = 'CERT-' + Math.floor(100000 + Math.random() * 900000);
 
       if (supabaseClient && dbUserId) {
         try {
-          await supabaseClient
-            .from('accounts')
-            .update({ invest_balance: newBalance })
-            .eq('user_id', dbUserId);
-
-          await supabaseClient
-            .from('share_holdings')
-            .insert([{
-              user_id: dbUserId,
-              project_name: selectedProject,
-              project_ticker: selectedTicker,
-              shares_count: selectedShares,
-              invested_amount: selectedCost,
-              certificate_id: certId
-            }]);
-
-          await supabaseClient
-            .from('transactions')
-            .insert([{
-              user_id: dbUserId,
-              type: 'BUY_SHARES',
-              amount: selectedCost,
-              account_type: 'INVEST',
-              details: { project: selectedProject, shares: selectedShares, certId }
-            }]);
-        } catch (e) {
-          console.warn("DB write error:", e);
-        }
+          await supabaseClient.from('accounts').update({ invest_balance: newBalance }).eq('user_id', dbUserId);
+          await supabaseClient.from('share_holdings').insert([{ user_id: dbUserId, project_name: selectedProject, project_ticker: selectedTicker, shares_count: selectedShares, invested_amount: selectedCost, certificate_id: certId }]);
+          await supabaseClient.from('transactions').insert([{ user_id: dbUserId, type: 'BUY_SHARES', amount: selectedCost, account_type: 'INVEST', details: { project: selectedProject, shares: selectedShares, certId } }]);
+        } catch (e) { console.warn("DB write error:", e); }
       }
 
       balance = newBalance;
-      totalSharesOwned += selectedShares;
-      potentialValuation += selectedCost * 3.5;
-
-      myPortfolio.push({
-        project: selectedProject,
-        ticker: selectedTicker,
-        shares: selectedShares,
-        invested: selectedCost,
-        certId: certId,
-        date: new Date().toLocaleDateString()
-      });
-
-      updateUI();
-      renderPortfolio();
-
+      myPortfolio.push({ project: selectedProject, ticker: selectedTicker, shares: selectedShares, invested: selectedCost, certId: certId, date: new Date().toLocaleDateString() });
+      updateUI(); renderPortfolio();
       if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
-      alert(`${t.alert_deal_success} ${selectedShares} ${t.shares_unit} (${selectedProject}).`);
-      
-      const portfolioBtn = document.querySelectorAll('.tab-btn')[1];
-      switchTab('portfolio', portfolioBtn);
+      alert(`Успешно куплено!`);
+      switchTab('portfolio', document.querySelectorAll('.tab-btn')[1]);
     }
 
     function renderPortfolio() {
-      const t = i18n[currentLang];
       const container = document.getElementById('portfolio-list');
-      
-      if (myPortfolio.length === 0) {
-        container.innerHTML = `
-          <div style="text-align: center; padding: 40px 10px; color: var(--text-dim);">
-            <div style="font-size: 38px; margin-bottom: 12px; opacity: 0.5;">🎒</div>
-            <div style="font-size: 14px; font-weight: 500;">${t.empty_portfolio}</div>
-            <div style="font-size: 12px; margin-top: 8px;">Купите первую карточку на Маркете, чтобы начать добычу PTS.</div>
-          </div>`;
-        return;
-      }
+      if (myPortfolio.length === 0) { container.innerHTML = `<div style="text-align: center; padding: 40px 10px; color: var(--text-dim);">Пусто</div>`; return; }
 
       const groupedPortfolio = {};
       myPortfolio.forEach(asset => {
-        const key = asset.ticker;
-        if (groupedPortfolio[key]) {
-          groupedPortfolio[key].shares += asset.shares;
-          groupedPortfolio[key].invested += asset.invested;
-        } else {
-          groupedPortfolio[key] = { ...asset };
-        }
+        if (groupedPortfolio[asset.ticker]) { groupedPortfolio[asset.ticker].shares += asset.shares; groupedPortfolio[asset.ticker].invested += asset.invested; } 
+        else { groupedPortfolio[asset.ticker] = { ...asset }; }
       });
-      const finalPortfolio = Object.values(groupedPortfolio);
-
-      container.innerHTML = finalPortfolio.map(item => {
+      
+      container.innerHTML = Object.values(groupedPortfolio).map(item => {
         const farmRate = Math.floor(item.invested * 0.8);
         const level = Math.floor(item.invested / 100) || 1;
-
         return `
         <div class="project-card" style="margin-bottom: 14px; border-color: rgba(56, 189, 248, 0.25); background: linear-gradient(160deg, rgba(30,41,59,0.6) 0%, rgba(15,23,42,0.9) 100%);">
-          
           <div class="project-top" style="align-items: center;">
-            <div>
-              <b style="font-size: 16px; color: #fff; display: flex; align-items: center; gap: 6px;">
-                ${item.project} 
-                <span style="background: rgba(56, 189, 248, 0.15); color: var(--primary); font-size: 10px; padding: 2px 6px; border-radius: 6px;">LVL ${level}</span>
-              </b>
-              <div style="font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono'; margin-top: 4px;">NFT ID: ${item.certId}</div>
-            </div>
-            
-            <div style="display: flex; flex-direction: column; align-items: flex-end;">
-              <span class="project-tag" style="background: rgba(16, 185, 129, 0.12); color: var(--accent-green); box-shadow: 0 0 10px rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3);">
-                ACTIVE
-              </span>
-            </div>
+            <div><b style="font-size: 16px; color: #fff; display: flex; align-items: center; gap: 6px;">${item.project} <span style="background: rgba(56, 189, 248, 0.15); color: var(--primary); font-size: 10px; padding: 2px 6px; border-radius: 6px;">LVL ${level}</span></b>
+            <div style="font-size: 11px; color: var(--text-dim); margin-top: 4px;">NFT ID: ${item.certId}</div></div>
+            <div><span class="project-tag" style="background: rgba(16, 185, 129, 0.12); color: var(--accent-green); border: 1px solid rgba(16,185,129,0.3);">ACTIVE</span></div>
           </div>
-
-          <div class="equity-specs" style="margin-top: 14px; margin-bottom: 0; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255,255,255,0.02);">
-            <div class="equity-col">
-              <span>ПОТРАЧЕНО</span>
-              <b style="color: #fff;">${item.invested} USDT</b>
-            </div>
-            <div class="equity-col">
-              <span>СКОРОСТЬ ДОБЫЧИ</span>
-              <b style="color: var(--primary); text-shadow: 0 0 8px rgba(56, 189, 248, 0.4);">+${farmRate} PTS/ч</b>
-            </div>
-            <div class="equity-col">
-              <span>СТАТУС</span>
-              <b style="color: var(--accent-gold); display: flex; align-items: center; gap: 4px;">Фарминг <span style="font-size: 10px;">⚡</span></b>
-            </div>
+          <div class="equity-specs" style="margin-top: 14px; margin-bottom: 0; background: rgba(0, 0, 0, 0.4);">
+            <div class="equity-col"><span>ПОТРАЧЕНО</span><b style="color: #fff;">${item.invested} USDT</b></div>
+            <div class="equity-col"><span>СКОРОСТЬ ДОБЫЧИ</span><b style="color: var(--primary);">+${farmRate} PTS/ч</b></div>
+            <div class="equity-col"><span>СТАТУС</span><b style="color: var(--accent-gold);">Фарминг ⚡</b></div>
           </div>
-          
-        </div>
-      `}).join('');
+        </div>`}).join('');
     }
 
     function renderReferrals() {
-      const t = i18n[currentLang];
       const container = document.getElementById('referrals-list');
-      if (myReferrals.length === 0) {
-        container.innerHTML = `
-          <div style="text-align: center; padding: 20px; color: var(--text-dim); font-size: 12px;">
-            ${t.structure_empty}
-          </div>`;
-        return;
-      }
-
+      if (myReferrals.length === 0) { container.innerHTML = `<div style="text-align: center; padding: 20px; color: var(--text-dim); font-size: 12px;">Пусто</div>`; return; }
       container.innerHTML = myReferrals.map(ref => `
         <div class="info-tile">
-          <div class="info-tile-left">
-            <div class="info-tile-icon">👤</div>
-            <div>
-              <div style="font-size: 13px; font-weight: 600; color: #fff;">${ref.first_name || 'Инвестор'}</div>
-              <div style="font-size: 11px; color: var(--text-dim); font-family: 'JetBrains Mono';">${ref.username || 'нет username'}</div>
-            </div>
-          </div>
+          <div class="info-tile-left"><div class="info-tile-icon">👤</div><div><div style="font-size: 13px; font-weight: 600; color: #fff;">${ref.first_name || 'Инвестор'}</div><div style="font-size: 11px; color: var(--text-dim);">${ref.username || 'нет username'}</div></div></div>
           <span style="font-size: 11px; color: var(--accent-green); font-weight: 600;">1-й уровень</span>
-        </div>
-      `).join('');
+        </div>`).join('');
     }
 
     function copyRefLink() {
-      const t = i18n[currentLang];
       const link = document.getElementById('ref-link').innerText;
       navigator.clipboard.writeText(link).then(() => {
-        if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
-        alert(t.alert_ref_copied);
-      }).catch(() => {
-        alert(t.alert_ref_copied);
-      });
+        if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium'); alert("Ссылка скопирована!");
+      }).catch(() => { alert("Ошибка копирования"); });
     }
 
-    function openWithdrawModal() {
-      updateUI();
-      document.getElementById('withdraw-modal').classList.add('active');
-    }
-    function closeWithdrawModal() {
-      document.getElementById('withdraw-modal').classList.remove('active');
-    }
-    async function submitWithdrawal() {
-      const t = i18n[currentLang];
-      const address = document.getElementById('withdraw-address').value.trim();
-      const amount = parseFloat(document.getElementById('withdraw-amount').value);
-
-      if (!address) {
-        alert(t.alert_empty_address);
-        return;
-      }
-      if (isNaN(amount) || amount <= 0 || amount > partnerBalance) {
-        alert(t.alert_invalid_withdraw_amt);
-        return;
-      }
-
-      const newPartnerBalance = partnerBalance - amount;
-
-      if (supabaseClient && dbUserId) {
-        try {
-          await supabaseClient
-            .from('accounts')
-            .update({ partner_balance: newPartnerBalance })
-            .eq('user_id', dbUserId);
-
-          await supabaseClient
-            .from('transactions')
-            .insert([{
-              user_id: dbUserId,
-              type: 'WITHDRAW',
-              amount: amount,
-              account_type: 'PARTNER',
-              status: 'PENDING',
-              details: { wallet: address }
-            }]);
-        } catch(e) {
-          console.warn("Withdrawal DB error:", e);
-        }
-      }
-
-      partnerBalance = newPartnerBalance;
-      updateUI();
-      closeWithdrawModal();
-
-      document.getElementById('withdraw-address').value = '';
-      document.getElementById('withdraw-amount').value = '';
-
-      if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
-      alert(`${t.alert_withdraw_success} Сумма: $${amount.toFixed(2)} USDT`);
-    }
+    // ==========================================
+    // 6. ДОКУМЕНТЫ И МОДАЛКИ ОПЛАТЫ
+    // ==========================================
+    function openSupportMenu() { document.getElementById('support-menu-modal').classList.add('active'); }
+    function closeSupportMenu() { document.getElementById('support-menu-modal').classList.remove('active'); }
+    function openSupportTg() { closeSupportMenu(); if (tg && tg.openTelegramLink) { tg.openTelegramLink('https://t.me/EquiCoreSupport_bot'); } else { window.open('https://t.me/EquiCoreSupport_bot', '_blank'); } }
 
     function openDocModal(docType) {
       const modal = document.getElementById('doc-modal');
@@ -2711,145 +1978,76 @@
 
       if (docType === 'SAFE') {
         title.innerText = "Лицензионное соглашение (EULA)";
-        content.innerHTML = `<b>ПРЕДМЕТ СОГЛАШЕНИЯ:</b> Настоящее Соглашение устанавливает правила использования развлекательного сервиса EquiCore. Пользователь приобретает право на использование виртуальных внутриигровых активов (карточек, улучшений, бустов).<br><br><b>СТАТУС ИМУЩЕСТВА:</b> Виртуальные активы не являются ценными бумагами, инвестициями или электронными деньгами. Покупка активов является платой за доступ к расширенному функционалу бота.<br><br><b>ОГРАНИЧЕНИЕ ОТВЕТСТВЕННОСТИ:</b> Сервис не гарантирует возврат потраченных средств или получение финансовой прибыли.`;
+        content.innerHTML = `
+          <b>ПРЕДМЕТ СОГЛАШЕНИЯ:</b> Настоящее Соглашение устанавливает правила использования развлекательного сервиса EquiCore. Пользователь приобретает право на использование виртуальных внутриигровых активов (карточек, улучшений, бустов).<br><br>
+          <b>СТАТУС ИМУЩЕСТВА:</b> Виртуальные активы не являются ценными бумагами, инвестициями или электронными деньгами. Покупка активов является платой за доступ к расширенному функционалу бота.<br><br>
+          <b>ОГРАНИЧЕНИЕ ОТВЕТСТВЕННОСТИ:</b> Сервис не гарантирует возврат потраченных средств или получение финансовой прибыли. 
+          <br><br><b>ПОЛНАЯ ВЕРСИЯ:</b> Юридически обязывающая полная версия документа доступна по запросу в официальной службе поддержки бота.`;
       } else if (docType === 'AGENT') {
         title.innerText = "Условия реферальной программы";
-        content.innerHTML = `<b>УСЛОВИЯ ВОЗНАГРАЖДЕНИЯ:</b> Сервис поощряет пользователей за развитие комьюнити. За каждого приглашенного активного пользователя начисляется бонус в размере 10% от потраченных им средств.<br><br><b>ВЫПЛАТЫ:</b> Начисления осуществляются на бонусный счет и доступны к выводу в цифровых активах USDT.<br><br><b>ЗАПРЕТ ФРОДА:</b> Использование ботов, самореферальных схем (создание цепочек аккаунтов одним лицом) строго запрещено и ведет к аннулированию баланса.`;
+        content.innerHTML = `
+          <b>УСЛОВИЯ ВОЗНАГРАЖДЕНИЯ:</b> Сервис поощряет пользователей за развитие комьюнити. За каждого приглашенного активного пользователя начисляется бонус в размере 10% от потраченных им средств.<br><br>
+          <b>ВЫПЛАТЫ:</b> Начисления осуществляются на бонусный счет и доступны к выводу в цифровых активах USDT.<br><br>
+          <b>ЗАПРЕТ ФРОДА:</b> Использование ботов, самореферальных схем (создание цепочек аккаунтов одним лицом) строго запрещено и ведет к аннулированию баланса.`;
       } else {
         title.innerText = "Игровая механика и Airdrop";
-        content.innerHTML = `<b>СУТЬ МЕХАНИКИ:</b> Пользователи накапливают виртуальные пойнты (PTS) путем покупки внутриигровых карточек и проявления активности в приложении.<br><br><b>БУДУЩИЙ AIRDROP:</b> Разработчики оставляют за собой право в будущем провести Token Generation Event (TGE) на блокчейне TON. В случае проведения TGE, накопленные игровые активы будут конвертированы в криптотокены проекта.<br><br><b>БЕЗ ГАРАНТИЙ:</b> Сроки TGE и финальный курс конвертации определяются разработчиками в одностороннем порядке в зависимости от рыночной ситуации.`;
+        content.innerHTML = `
+          <b>СУТЬ МЕХАНИКИ:</b> Пользователи накапливают виртуальные пойнты (PTS) путем покупки внутриигровых карточек и проявления активности в приложении.<br><br>
+          <b>БУДУЩИЙ AIRDROP:</b> Разработчики оставляют за собой право в будущем провести Token Generation Event (TGE) на блокчейне TON. В случае проведения TGE, накопленные игровые активы будут конвертированы в криптотокены проекта.<br><br>
+          <b>БЕЗ ГАРАНТИЙ:</b> Сроки TGE и финальный курс конвертации определяются разработчиками в одностороннем порядке в зависимости от рыночной ситуации.`;
       }
       modal.classList.add('active');
     }
-
-    function closeDocModal() {
-      document.getElementById('doc-modal').classList.remove('active');
-    }
-
-    function openDepositModal() {
-      document.getElementById('deposit-modal').classList.add('active');
-      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
-    }
-
-    function closeDepositModal() {
-      document.getElementById('deposit-modal').classList.remove('active');
-    }
-
-    let selectedPaymentMethod = 'cryptobot';
-
-    function selectPayment(method) {
-      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-      selectedPaymentMethod = method;
-      document.querySelectorAll('.pay-method-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById('btn-' + method).classList.add('active');
-      updateStarsPreview();
-    }
-
-    function updateStarsPreview() {
-      const amount = parseFloat(document.getElementById('deposit-amount').value) || 0;
-      const previewEl = document.getElementById('stars-preview');
-      if (selectedPaymentMethod === 'stars' && amount > 0) {
-        previewEl.innerText = `≈ ${Math.ceil(amount * 50)} ⭐`;
-        previewEl.style.display = 'block';
-      } else {
-        previewEl.style.display = 'none';
-      }
-    }
-
-    async function processDeposit() {
-      const t = i18n[currentLang];
-      const amount = parseFloat(document.getElementById('deposit-amount').value);
-      
-      if (!amount || amount < 10) {
-        alert(t.alert_deposit_min);
-        return;
-      }
-
-      const btn = document.getElementById('pay-action-btn');
-      const originalText = btn.innerText;
-      btn.innerText = "Загрузка...";
-      btn.disabled = true;
-
-      try {
-        const payload = {
-          tg_id: currentTgId,
-          method: selectedPaymentMethod,
-          amount: amount,
-          stars_amount: Math.ceil(amount * 50)
-        };
-
-        const webhookUrl = 'https://vps-08612b66.vps.ovh.net/webhook/generate-invoice';
-
-        const response = await fetch(webhookUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
-        const data = await response.json();
-
-        if (data.url) {
-          if (selectedPaymentMethod === 'stars') {
-            tg.openInvoice(data.url, function(status) {
-              if (status === 'paid') {
-                alert("Оплата успешно отправлена в обработку!");
-                closeDepositModal();
-              }
-            });
-          } else if (selectedPaymentMethod === 'cryptobot') {
-            tg.openTelegramLink(data.url);
-            closeDepositModal();
-          }
-        } else {
-          alert("Ошибка на сервере при создании счета.");
-        }
-
-      } catch (e) {
-        console.error(e);
-        alert("Ошибка сети. Попробуйте позже.");
-      } finally {
-        btn.innerText = originalText;
-        btn.disabled = false;
-      }
-    }
-
-    setLanguage(detectInitialLanguage());
-    initUserSession();
-
-    function openSupportMenu() {
-      document.getElementById('support-menu-modal').classList.add('active');
-    }
-
-    function closeSupportMenu() {
-      document.getElementById('support-menu-modal').classList.remove('active');
-    }
-
-    function openSupportTg() {
-      closeSupportMenu();
-      if (tg && tg.openTelegramLink) {
-        tg.openTelegramLink('https://t.me/EquiCoreSupport_bot'); 
-      } else {
-        window.open('https://t.me/EquiCoreSupport_bot', '_blank');
-      }
-    }
-
-    function openTerms() {
-      closeSupportMenu();
-      const title = document.getElementById('doc-modal-title');
-      const content = document.getElementById('doc-modal-content');
-      title.innerText = "Условия сервиса";
-      content.innerHTML = "<b>Полные условия</b> доступны в официальном боте поддержки.";
-      document.getElementById('doc-modal').classList.add('active');
-    }
-
+    
+    function openTerms() { closeSupportMenu(); openDocModal('SAFE'); }
     function openPrivacy() {
       closeSupportMenu();
       const title = document.getElementById('doc-modal-title');
       const content = document.getElementById('doc-modal-content');
       title.innerText = "Политика конфиденциальности";
-      content.innerHTML = "<b>Конфиденциальность:</b> Ваши данные надежно защищены и не передаются третьим лицам.";
+      content.innerHTML = `<b>СБОР ДАННЫХ:</b> Мы собираем только публичный Telegram ID и имя пользователя для создания профиля. <b>Мы не запрашиваем номер телефона.</b><br><br><b>БЕЗОПАСНОСТЬ:</b> Все данные хранятся в зашифрованном виде. Мы не передаем данные третьим лицам.`;
       document.getElementById('doc-modal').classList.add('active');
     }
+    
+    function closeDocModal() { document.getElementById('doc-modal').classList.remove('active'); }
+
+    function openDepositModal() { document.getElementById('deposit-modal').classList.add('active'); }
+    function closeDepositModal() { document.getElementById('deposit-modal').classList.remove('active'); }
+    function openWithdrawModal() { document.getElementById('withdraw-modal').classList.add('active'); }
+    function closeWithdrawModal() { document.getElementById('withdraw-modal').classList.remove('active'); }
+
+    let selectedPaymentMethod = 'cryptobot';
+    function selectPayment(method) {
+      selectedPaymentMethod = method;
+      document.querySelectorAll('.pay-method-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('btn-' + method).classList.add('active');
+      const amount = parseFloat(document.getElementById('deposit-amount').value) || 0;
+      const previewEl = document.getElementById('stars-preview');
+      if (method === 'stars' && amount > 0) { previewEl.innerText = \`≈ \${Math.ceil(amount * 50)} ⭐\`; previewEl.style.display = 'block'; } 
+      else { previewEl.style.display = 'none'; }
+    }
+
+    async function processDeposit() {
+      const amount = parseFloat(document.getElementById('deposit-amount').value);
+      if (!amount || amount < 10) { alert("Мин. сумма 10 USDT"); return; }
+      const btn = document.getElementById('pay-action-btn');
+      btn.innerText = "Загрузка..."; btn.disabled = true;
+
+      try {
+        const response = await fetch('https://vps-08612b66.vps.ovh.net/webhook/generate-invoice', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ tg_id: currentTgId, method: selectedPaymentMethod, amount: amount, stars_amount: Math.ceil(amount * 50) })
+        });
+        const data = await response.json();
+        if (data.url) {
+          if (selectedPaymentMethod === 'stars') tg.openInvoice(data.url, (status) => { if(status==='paid') closeDepositModal(); });
+          else { tg.openTelegramLink(data.url); closeDepositModal(); }
+        } else alert("Ошибка создания счета");
+      } catch (e) { alert("Ошибка сети"); } 
+      finally { btn.innerText = "Перейти к оплате"; btn.disabled = false; }
+    }
+
+    initUserSession();
   </script>
 </body>
 </html>
