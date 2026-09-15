@@ -714,21 +714,24 @@
 </div>
 
     <!-- Верхняя панель балансов -->
-    <!-- Верхняя панель балансов -->
     <div class="hero-card">
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
-        <div>
+      <<div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+        
+        <!-- Левый блок: даем гибкость, но ставим защитный отступ справа 16px -->
+        <div style="flex: 1; min-width: 0; padding-right: 16px;">
           <div class="hero-label" style="margin-bottom: 5px;" data-i18n="balance_label">Инвест-баланс</div>
           <div class="hero-balance" id="user-balance">$0.00 <span style="font-size: 15px; color: var(--text-dim);">USDT</span></div>
         </div>
         
-        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
+        <!-- Правый блок: запрещаем сжиматься (flex-shrink: 0) -->
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0;">
           <span class="hero-badge" data-i18n="badge_locked">🔒 Долевой пул</span>
           <button onclick="openDepositModal()" style="background: rgba(0, 229, 255, 0.15); color: #00E5FF; border: 1px solid rgba(0, 229, 255, 0.3); padding: 6px 12px; border-radius: 10px; font-weight: 600; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 6px;">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
             <span data-i18n="btn_deposit">Пополнить</span>
           </button>
         </div>
+        
       </div>
       
       <div class="partner-account-box">
