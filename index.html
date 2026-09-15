@@ -1086,20 +1086,39 @@
         
         <!-- Crypto Bot -->
         <div id="btn-cryptobot" class="pay-method-btn active" onclick="selectPayment('cryptobot')">
-          <!-- Иконка с ленточкой V -->
+          <!-- Официальная иконка Crypto Bot -->
           <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
-            <rect width="32" height="32" rx="8" fill="#2AABEE"/>
-            <polygon points="10,13 15,22 20,17 14,12" fill="#8ACEFF"/>
-            <polygon points="23,10 14,22 18,22 26,10" fill="#FFFFFF"/>
+            <rect width="32" height="32" rx="9" fill="#2AABEE"/>
+            <g transform="translate(0, -1)">
+              <!-- Левая светло-голубая часть -->
+              <path d="M17.15 21.09L10.36 10.6H6.18L15.06 24.32H19.24L17.15 21.09Z" fill="#99D5FF"/>
+              <!-- Правая белая часть -->
+              <path d="M26.4 10.6H22.22L15.43 21.09L17.52 24.32H21.7L26.4 10.6Z" fill="#FFFFFF"/>
+            </g>
           </svg>
           <span class="pay-method-name">Crypto Bot</span>
         </div>
   
         <!-- Telegram Stars -->
         <div id="btn-stars" class="pay-method-btn" onclick="selectPayment('stars')">
-          <!-- Желтая звезда -->
+          <!-- Та самая объемная светящаяся звезда -->
           <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
-            <path d="M16 2.5C16.4 2.5 16.8 2.8 17 3.1L20.1 9.8L27.2 10.6C27.7 10.7 27.9 11.2 27.5 11.6L22.2 16.3L23.7 23.3C23.8 23.8 23.3 24.2 22.9 23.9L16 20.1L9.1 23.9C8.7 24.2 8.2 23.8 8.3 23.3L9.8 16.3L4.5 11.6C4.1 11.2 4.3 10.7 4.8 10.6L11.9 9.8L15 3.1C15.2 2.8 15.6 2.5 16 2.5Z" fill="#FFB02A" stroke="#FFB02A" stroke-width="1.5" stroke-linejoin="round"/>
+            <g filter="url(#starDrop)">
+              <path d="M16 2.5C16.4 2.5 16.8 2.8 17 3.1L20.1 9.8L27.2 10.6C27.7 10.7 27.9 11.2 27.5 11.6L22.2 16.3L23.7 23.3C23.8 23.8 23.3 24.2 22.9 23.9L16 20.1L9.1 23.9C8.7 24.2 8.2 23.8 8.3 23.3L9.8 16.3L4.5 11.6C4.1 11.2 4.3 10.7 4.8 10.6L11.9 9.8L15 3.1C15.2 2.8 15.6 2.5 16 2.5Z" fill="url(#starGrad)" stroke="url(#starStroke)" stroke-width="1.5" stroke-linejoin="round"/>
+            </g>
+            <defs>
+              <linearGradient id="starGrad" x1="16" y1="2" x2="16" y2="24" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FFD951"/>
+                <stop offset="1" stop-color="#FF9900"/>
+              </linearGradient>
+              <linearGradient id="starStroke" x1="16" y1="2" x2="16" y2="24" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FFFFFF"/>
+                <stop offset="1" stop-color="#FFB340"/>
+              </linearGradient>
+              <filter id="starDrop" x="0" y="0" width="32" height="34" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#E58B00" flood-opacity="0.5"/>
+              </filter>
+            </defs>
           </svg>
           <span class="pay-method-name">Telegram Stars</span>
         </div>
