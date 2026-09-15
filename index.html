@@ -1812,6 +1812,7 @@
             let inviterTgId = getReferralParam();
             let resolvedReferrerId = null;
 
+            // Если пришел по реферальной ссылке — находим пригласителя
             if (inviterTgId && String(inviterTgId) !== String(currentTgId)) {
               let { data: inviter } = await supabaseClient
                 .from('users')
@@ -1835,6 +1836,8 @@
 
             if (!regErr && newUser) {
               user = newUser;
+              
+              // Логика приветственного бонуса: 25$, если есть наставник, иначе 0$
               let initialBalance = resolvedReferrerId ? 25.00 : 0.00;
 
               await supabaseClient
@@ -1843,7 +1846,7 @@
                   user_id: user.id,
                   invest_balance: initialBalance,
                   partner_balance: 0.00,
-                  bonus_balance: initialBalance
+                  bonus_balance: initialBalance 
                 }]);
             }
           }
@@ -1874,7 +1877,7 @@
               balance = parseFloat(account.invest_balance) || 0;
               partnerBalance = parseFloat(account.partner_balance) || 0;
               karmaPoints = account.karma_points || 0;
-              // === ПРАВИЛЬНОЕ МЕСТО ЗАГРУЗКИ PTS ===
+              // === ПРАВИЛЬНОЕ МЕСТО ЗАГРУЗКИ PTS ИЗ БАЗЫ ===
               window.totalPts = parseFloat(account.bonus_balance) || 0;
             }
 
