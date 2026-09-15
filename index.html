@@ -1985,7 +1985,92 @@
         }, 1000);
       }
     }
+// === ВОССТАНОВЛЕННАЯ ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ ВКЛАДОК ===
+    function switchTab(screenId, btnElement) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
 
+      const target = document.getElementById(`screen-${screenId}`);
+      if (target) target.classList.add('active');
+
+      if (btnElement) {
+        btnElement.classList.add('active');
+      } else {
+        const matchingBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => 
+          b.getAttribute('onclick')?.includes(`'${screenId}'`)
+        );
+        if (matchingBtn) matchingBtn.classList.add('active');
+      }
+    }
+
+    // === ЛОГИКА МИНИ-ИГРЫ "АПГРЕЙД" ===
+    let gameChance = 20;
+    let gameMultiplier = 5.0;
+    const gameBet = 100; // Ставка в PTS
+
+    function setChance(chance, multiplier) {
+      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+      gameChance = chance;
+      gameMultiplier = multiplier;
+      
+      document.querySelectorAll('.game-btn').forEach(btn => {
+        btn.style.background = '#334155'; // Сбрасываем цвета кнопок
+      });
+      document.getElementById(`btn-chance-${chance}`).style.background = 'var(--primary)';
+    }
+
+    function playUpgrade() {
+      if (!window.totalPts || window.totalPts < gameBet) {
+        alert("Недостаточно PTS для ставки! Фармите больше.");
+        return;
+      }
+
+      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+
+      const screen = document.getElementById('game-screen');
+      const playBtn = document.getElementById('play-btn');
+
+      // Блокируем кнопку и списываем ставку
+      playBtn.disabled = true;
+      playBtn.style.opacity = '0.5';
+      window.totalPts -= gameBet;
+      document.getElementById('total-farmed-pts').innerText = Math.floor(window.totalPts).toLocaleString();
+
+      // Анимация рулетки
+      let rolls = 0;
+      screen.innerText = "🔄";
+      const rollInterval = setInterval(() => {
+        screen.style.transform = `rotate(${rolls * 45}deg)`;
+        rolls++;
+      }, 100);
+
+      // Результат через 1.2 секунды
+      setTimeout(() => {
+        clearInterval(rollInterval);
+        screen.style.transform = 'none';
+
+        const randomRoll = Math.random() * 100;
+
+        if (randomRoll <= gameChance) {
+          // Победа
+          const winAmount = Math.floor(gameBet * gameMultiplier);
+          window.totalPts += winAmount;
+          screen.innerText = "🎉";
+          if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
+          alert(`Успех! Вы выиграли ${winAmount} PTS!`);
+        } else {
+          // Проигрыш
+          screen.innerText = "💥";
+          if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('error');
+          alert(`Сгорело! Карточка взорвалась.`);
+        }
+
+        // Обновляем баланс и разблокируем кнопку
+        document.getElementById('total-farmed-pts').innerText = Math.floor(window.totalPts).toLocaleString();
+        playBtn.disabled = false;
+        playBtn.style.opacity = '1';
+      }, 1200);
+    }
     function openInvestScreen(projectName, pricePerShare, ticker) {
       selectedProject = projectName;
       selectedTicker = ticker;
