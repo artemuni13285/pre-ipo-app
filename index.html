@@ -1983,7 +1983,8 @@
       document.getElementById('ref-earnings-display').innerText = `$${partnerBalance.toFixed(2)} USDT`;
       document.getElementById('modal-avail-balance').innerText = `$${partnerBalance.toFixed(2)} USDT`;
       document.getElementById('ref-count').innerText = `${refCount} ${t.people_unit}`;
-      document.getElementById('karma-points').innerText = `Points: ${karmaPoints}`;
+      
+      // СТРОКУ С karma-points МЫ УДАЛИЛИ ОТСЮДА!
 
       // Считаем скорость добычи (PTS в час) на основе вложенных USDT
       let hourlyRate = 0;
