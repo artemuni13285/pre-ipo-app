@@ -1019,24 +1019,43 @@
       </div>
     </div>
 
-    <!-- 5. Экран: Буст -->
-    <div id="screen-activity" class="screen">
+    <!-- 5. Экран: Мини-Игры (вместо Буста) -->
+    <div id="screen-games" class="screen">
       <div class="section-title">
-        <span data-i18n="title_boost">Комьюнити-буст</span>
+        <span>Мини-игры</span>
       </div>
-      <div class="boost-zone">
-        <div class="boost-token" onclick="tapBoost()">
-          <svg viewBox="0 0 24 24">
-            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-          </svg>
+      <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 24px;">
+        Рискуйте нафармленными PTS, чтобы умножить баланс. Ставки принимаются только в виртуальных очках.
+      </p>
+
+      <div style="background: linear-gradient(145deg, rgba(30,41,59,0.8), rgba(15,23,42,0.9)); border: 1px solid rgba(56,189,248,0.2); border-radius: 16px; padding: 24px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <h3 style="color: #fff; margin-bottom: 4px;">Апгрейд</h3>
+        <div style="color: var(--text-dim); font-size: 12px; margin-bottom: 20px;">Умножьте ставку за 1 клик</div>
+
+        <div id="game-screen" style="font-size: 54px; margin: 20px 0; height: 80px; display: flex; align-items: center; justify-content: center; text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);">🎰</div>
+
+        <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 24px;">
+          <button id="btn-chance-20" class="game-btn active-chance" onclick="setChance(20, 5.0)" style="flex: 1; background: var(--primary); color: #fff; border: none; padding: 10px; border-radius: 8px; font-weight: bold;">
+            20%<br><span style="font-size: 11px; opacity: 0.7;">x5.0</span>
+          </button>
+          <button id="btn-chance-50" class="game-btn" onclick="setChance(50, 2.0)" style="flex: 1; background: #334155; color: #fff; border: none; padding: 10px; border-radius: 8px; font-weight: bold;">
+            50%<br><span style="font-size: 11px; opacity: 0.7;">x2.0</span>
+          </button>
+          <button id="btn-chance-80" class="game-btn" onclick="setChance(80, 1.2)" style="flex: 1; background: #334155; color: #fff; border: none; padding: 10px; border-radius: 8px; font-weight: bold;">
+            80%<br><span style="font-size: 11px; opacity: 0.7;">x1.2</span>
+          </button>
         </div>
-        <p style="font-size: 13px; color: var(--text-muted); max-width: 280px; margin: 0 auto;" data-i18n="boost_desc">
-          Накапливайте Karma Points за активность для внеочередной аллокации.
-        </p>
-        <div style="font-size: 20px; font-weight: 700; margin-top: 14px; font-family: 'JetBrains Mono';" id="karma-points">
-          Points: 0
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; background: rgba(0,0,0,0.3); padding: 12px; border-radius: 8px;">
+          <span style="color: var(--text-dim); font-size: 13px;">Ставка:</span>
+          <b style="color: var(--accent-gold); font-size: 16px;">100 PTS</b>
         </div>
+
+        <button onclick="playUpgrade()" id="play-btn" style="width: 100%; background: var(--accent-green); color: #fff; font-weight: bold; border: none; padding: 16px; border-radius: 12px; font-size: 16px; cursor: pointer; text-transform: uppercase;">
+          Испытать удачу
+        </button>
       </div>
+    </div>
     </div>
 
     <!-- 6. Экран: Профиль пользователя -->
@@ -1271,9 +1290,16 @@
       <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
       <span data-i18n="tab_partners">Партнеры</span>
     </button>
-    <button class="tab-btn" onclick="switchTab('activity', this)">
-      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-      <span data-i18n="tab_boost">Буст</span>
+    <!-- Замените старую кнопку Буст на эту кнопку Игры -->
+    <button class="tab-btn" onclick="switchTab('games', this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="6" width="20" height="12" rx="2" ry="2"></rect>
+        <path d="M6 12h4"></path>
+        <path d="M8 10v4"></path>
+        <circle cx="15" cy="13" r="1"></circle>
+        <circle cx="18" cy="11" r="1"></circle>
+      </svg>
+      <span data-i18n="tab_games">Игры</span>
     </button>
     <button class="tab-btn" onclick="switchTab('profile', this)">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"></circle><path d="M5.5 21a8.38 8.38 0 0 1 13 0"></path></svg>
@@ -1404,7 +1430,7 @@
         tab_rounds: "Маркет",
         tab_portfolio: "Инвентарь",
         tab_partners: "Друзья",
-        tab_boost: "Буст",
+        tab_games: "Игры",
         tab_profile: "Профиль",
         owner_badge: "Airdrop Участник",
         col_owned_shares: "УЛУЧШЕНИЙ",
