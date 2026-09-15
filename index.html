@@ -718,6 +718,115 @@
       stroke-linecap: round;
       stroke-linejoin: round;
     }
+
+    /* --- СТИЛИ ДЛЯ ВИТРИНЫ ИГР --- */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .g-card {
+      position: relative;
+      border-radius: 20px;
+      padding: 16px;
+      min-height: 140px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.1s ease;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    }
+    .g-card:active {
+      transform: scale(0.96);
+    }
+    .g-card.wide {
+      grid-column: span 2;
+      min-height: 120px;
+    }
+    
+    .g-title {
+      position: absolute;
+      bottom: 12px;
+      left: 14px;
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      z-index: 5;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+      font-family: 'Inter', sans-serif;
+    }
+    .g-online {
+      position: absolute;
+      bottom: 16px;
+      right: 14px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 5;
+    }
+    .g-online .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+    }
+
+    /* Фоны карточек как в RubUP */
+    .gc-gifts { background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%); border: 1px solid #e11d48; }
+    .gc-rocket { background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); border: 1px solid #3b82f6; }
+    .gc-roulette { background: linear-gradient(135deg, #422006 0%, #0f172a 100%); border: 1px solid #eab308; }
+    .gc-upgrade { background: linear-gradient(135deg, #431407 0%, #0f172a 100%); border: 1px solid #f97316; }
+    .gc-mines { background: linear-gradient(135deg, #4c0519 0%, #0f172a 100%); border: 1px solid #be123c; }
+
+    /* Декорации внутри карточек */
+    .g-deco-mults {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex; gap: 4px;
+      opacity: 0.8;
+    }
+    .g-mult-badge {
+      background: rgba(0,0,0,0.5);
+      border: 1px solid currentColor;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-size: 9px;
+      font-weight: 800;
+    }
+    .mines-preview-grid {
+      position: absolute;
+      top: 40%; left: 50%;
+      transform: translate(-50%, -50%);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      opacity: 0.9;
+    }
+    .mines-preview-grid div {
+      width: 22px; height: 22px;
+      background: #0f172a;
+      border-radius: 4px;
+    }
+    .mines-preview-grid div.active {
+      background: #10b981;
+      box-shadow: 0 0 10px rgba(16,185,129,0.5);
+    }
+    
+    /* Шапка внутри самой игры */
+    .inner-game-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--card-border);
+    }
+    .btn-back-game {
+      background: rgba(255,255,255,0.1); border: none; color: #fff;
+      padding: 8px 14px; border-radius: 12px; font-weight: 600; cursor: pointer;
+    }
+    
   </style>
 </head>
 <body>
@@ -1019,44 +1128,111 @@
       </div>
     </div>
 
-    <!-- 5. Экран: Мини-Игры (вместо Буста) -->
+   <!-- 5. Экран: Хаб Мини-Игр -->
     <div id="screen-games" class="screen">
-      <div class="section-title">
-        <span>Мини-игры</span>
+      
+      <!-- ГЛАВНОЕ МЕНЮ ИГР (ВИТРИНА) -->
+      <div id="games-hub-view">
+        <div class="section-title">
+          <span>Мини-игры</span>
+        </div>
+        <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 10px;">
+          Рискуйте нафармленными PTS, чтобы умножить баланс.
+        </p>
+
+        <div class="games-grid">
+          
+          <!-- ПУТЬ ПОДАРКОВ (Широкая) -->
+          <div class="g-card wide gc-gifts" onclick="openInnerGame('gifts')">
+            <div class="g-title">Путь подарков</div>
+            <div class="g-online"><span class="dot"></span> 42</div>
+            <div style="position: absolute; top: 15px; left: 15px; display: flex; gap: 10px;">
+              <span style="font-size: 24px;">🐄</span>
+              <span style="font-size: 24px;">🎁</span>
+            </div>
+            <div style="position: absolute; bottom: 40px; left: 15px; color: #38bdf8; font-weight: 800; font-size: 12px;">1.84x</div>
+          </div>
+
+          <!-- РАКЕТКА -->
+          <div class="g-card gc-rocket" onclick="openInnerGame('rocket')">
+            <div class="g-title">Ракетка</div>
+            <div class="g-online"><span class="dot"></span> 18</div>
+            <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); font-size: 24px; color: #fff; font-weight: 800; text-shadow: 0 0 10px #3b82f6;">3.41x</div>
+            <div class="g-deco-mults" style="top: 65%;">
+              <div class="g-mult-badge" style="color: #38bdf8;">2.33x</div>
+              <div class="g-mult-badge" style="color: #facc15;">14.8x</div>
+            </div>
+          </div>
+
+          <!-- РУЛЕТКА -->
+          <div class="g-card gc-roulette" onclick="openInnerGame('roulette')">
+            <div class="g-title">Рулетка</div>
+            <div class="g-online"><span class="dot"></span> 54</div>
+            <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); font-size: 38px; filter: drop-shadow(0 0 10px rgba(234, 179, 8, 0.4));">🧢</div>
+          </div>
+
+          <!-- АПГРЕЙД -->
+          <div class="g-card gc-upgrade" onclick="openInnerGame('upgrade')">
+            <div class="g-title">Апгрейд</div>
+            <div class="g-online"><span class="dot"></span> 3</div>
+            <!-- Визуальное кольцо -->
+            <div style="position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); width: 70px; height: 70px; border-radius: 50%; border: 6px solid rgba(255,255,255,0.1); border-top-color: #f97316;"></div>
+          </div>
+
+          <!-- МИНЫ (ВМЕСТО АРЕНЫ) -->
+          <div class="g-card gc-mines" onclick="openInnerGame('mines')">
+            <div class="g-title">Мины</div>
+            <div class="g-online"><span class="dot"></span> 12</div>
+            <div class="mines-preview-grid">
+              <div class="active"></div><div></div><div></div>
+              <div></div><div></div><div></div>
+              <div></div><div></div><div></div>
+            </div>
+          </div>
+
+        </div>
       </div>
-      <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 24px;">
-        Рискуйте нафармленными PTS, чтобы умножить баланс. Ставки принимаются только в виртуальных очках.
-      </p>
 
-      <div style="background: linear-gradient(145deg, rgba(30,41,59,0.8), rgba(15,23,42,0.9)); border: 1px solid rgba(56,189,248,0.2); border-radius: 16px; padding: 24px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-        <h3 style="color: #fff; margin-bottom: 4px;">Апгрейд</h3>
-        <div style="color: var(--text-dim); font-size: 12px; margin-bottom: 20px;">Умножьте ставку за 1 клик</div>
-
-        <div id="game-screen" style="font-size: 54px; margin: 20px 0; height: 80px; display: flex; align-items: center; justify-content: center; text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);">🎰</div>
-
-        <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 24px;">
-          <button id="btn-chance-20" class="game-btn active-chance" onclick="setChance(20, 5.0)" style="flex: 1; background: var(--primary); color: #fff; border: none; padding: 10px; border-radius: 8px; font-weight: bold;">
-            20%<br><span style="font-size: 11px; opacity: 0.7;">x5.0</span>
-          </button>
-          <button id="btn-chance-50" class="game-btn" onclick="setChance(50, 2.0)" style="flex: 1; background: #334155; color: #fff; border: none; padding: 10px; border-radius: 8px; font-weight: bold;">
-            50%<br><span style="font-size: 11px; opacity: 0.7;">x2.0</span>
-          </button>
-          <button id="btn-chance-80" class="game-btn" onclick="setChance(80, 1.2)" style="flex: 1; background: #334155; color: #fff; border: none; padding: 10px; border-radius: 8px; font-weight: bold;">
-            80%<br><span style="font-size: 11px; opacity: 0.7;">x1.2</span>
-          </button>
+      <!-- ВНУТРЕННИЙ ЭКРАН ИГРЫ (АПГРЕЙД) -->
+      <div id="game-view-upgrade" style="display: none;">
+        <div class="inner-game-header">
+          <button class="btn-back-game" onclick="closeInnerGame()">← Назад</button>
+          <div style="background: rgba(0,0,0,0.3); padding: 6px 12px; border-radius: 10px; border: 1px solid var(--card-border);">
+            <span style="color: var(--text-dim); font-size: 11px;">Баланс:</span>
+            <b id="game-inner-pts" style="color: var(--accent-gold); font-family: 'JetBrains Mono';">0</b>
+          </div>
         </div>
 
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; background: rgba(0,0,0,0.3); padding: 12px; border-radius: 8px;">
-          <span style="color: var(--text-dim); font-size: 13px;">Ставка:</span>
-          <b style="color: var(--accent-gold); font-size: 16px;">100 PTS</b>
-        </div>
+        <div style="background: linear-gradient(145deg, rgba(30,41,59,0.8), rgba(15,23,42,0.9)); border: 1px solid rgba(56,189,248,0.2); border-radius: 16px; padding: 24px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+          <h3 style="color: #fff; margin-bottom: 4px;">Апгрейд</h3>
+          <div style="color: var(--text-dim); font-size: 12px; margin-bottom: 20px;">Умножьте ставку за 1 клик</div>
 
-        <button onclick="playUpgrade()" id="play-btn" style="width: 100%; background: var(--accent-green); color: #fff; font-weight: bold; border: none; padding: 16px; border-radius: 12px; font-size: 16px; cursor: pointer; text-transform: uppercase;">
-          Испытать удачу
-        </button>
+          <div id="game-screen" style="font-size: 54px; margin: 20px 0; height: 80px; display: flex; align-items: center; justify-content: center; text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);">🎰</div>
+
+          <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 24px;">
+            <button id="btn-chance-20" class="game-btn active-chance" onclick="setChance(20, 5.0)" style="flex: 1; background: var(--primary); color: #fff; border: none; padding: 10px; border-radius: 8px; font-weight: bold;">
+              20%<br><span style="font-size: 11px; opacity: 0.7;">x5.0</span>
+            </button>
+            <button id="btn-chance-50" class="game-btn" onclick="setChance(50, 2.0)" style="flex: 1; background: #334155; color: #fff; border: none; padding: 10px; border-radius: 8px; font-weight: bold;">
+              50%<br><span style="font-size: 11px; opacity: 0.7;">x2.0</span>
+            </button>
+            <button id="btn-chance-80" class="game-btn" onclick="setChance(80, 1.2)" style="flex: 1; background: #334155; color: #fff; border: none; padding: 10px; border-radius: 8px; font-weight: bold;">
+              80%<br><span style="font-size: 11px; opacity: 0.7;">x1.2</span>
+            </button>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; background: rgba(0,0,0,0.3); padding: 12px; border-radius: 8px;">
+            <span style="color: var(--text-dim); font-size: 13px;">Ставка:</span>
+            <b style="color: var(--accent-gold); font-size: 16px;">100 PTS</b>
+          </div>
+
+          <button onclick="playUpgrade()" id="play-btn" style="width: 100%; background: var(--accent-green); color: #fff; font-weight: bold; border: none; padding: 16px; border-radius: 12px; font-size: 16px; cursor: pointer; text-transform: uppercase;">
+            Испытать удачу
+          </button>
+        </div>
       </div>
+      
     </div>
-
 
     <!-- 6. Экран: Профиль пользователя -->
     <div id="screen-profile" class="screen">
@@ -2041,6 +2217,26 @@
       }
     }
 
+// === НАВИГАЦИЯ ВНУТРИ ХАБА ИГР ===
+    function openInnerGame(gameId) {
+      if (gameId !== 'upgrade') {
+        alert("Эта игра находится в разработке! Пока доступен только «Апгрейд».");
+        return;
+      }
+      // Скрываем витрину, показываем игру
+      document.getElementById('games-hub-view').style.display = 'none';
+      document.getElementById('game-view-upgrade').style.display = 'block';
+      // Обновляем баланс в шапке игры
+      document.getElementById('game-inner-pts').innerText = Math.floor(window.totalPts || 0).toLocaleString();
+    }
+
+    function closeInnerGame() {
+      // Возвращаемся в витрину
+      document.getElementById('game-view-upgrade').style.display = 'none';
+      document.getElementById('games-hub-view').style.display = 'block';
+      updateUI(); // Обновляем баланс на главной
+    }
+    
     // === ЛОГИКА МИНИ-ИГРЫ "АПГРЕЙД" ===
     let gameChance = 20;
     let gameMultiplier = 5.0;
@@ -2105,6 +2301,10 @@
 
         // Обновляем текст на экране
         document.getElementById('total-farmed-pts').innerText = Math.floor(window.totalPts).toLocaleString();
+
+        // Обновляем текст на экране (в двух местах)
+        document.getElementById('total-farmed-pts').innerText = Math.floor(window.totalPts).toLocaleString();
+        document.getElementById('game-inner-pts').innerText = Math.floor(window.totalPts).toLocaleString();
         
         // === МГНОВЕННО СОХРАНЯЕМ РЕЗУЛЬТАТ В БАЗУ ===
         if (supabaseClient && dbUserId) {
