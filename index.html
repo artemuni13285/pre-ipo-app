@@ -1056,7 +1056,7 @@
         </button>
       </div>
     </div>
-    </div>
+
 
     <!-- 6. Экран: Профиль пользователя -->
     <div id="screen-profile" class="screen">
@@ -1811,7 +1811,14 @@
           if (!user) {
             let inviterTgId = getReferralParam();
             let resolvedReferrerId = null;
-
+if (account) {
+              balance = parseFloat(account.invest_balance) || 0;
+              partnerBalance = parseFloat(account.partner_balance) || 0;
+              karmaPoints = account.karma_points || 0;
+              // === ДОБАВЛЯЕМ ЭТУ СТРОКУ ===
+              // Загружаем реальные нафармленные PTS из базы:
+              window.totalPts = parseFloat(account.bonus_balance) || 0;
+            }
             // Если пришел по реферальной ссылке — находим пригласителя
             if (inviterTgId && String(inviterTgId) !== String(currentTgId)) {
               let { data: inviter } = await supabaseClient
@@ -1995,6 +2002,41 @@
         window.totalPts = Math.floor(hourlyRate * 24 * 7); // Стартовое значение
       }
 
+      // Считаем скорость добычи (PTS в час) на основе вложенных USDT
+      let hourlyRate = 0;
+      myPortfolio.forEach(item => {
+        hourlyRate += Math.floor(item.invested * 0.8);
+      });
+      document.getElementById('total-farm-rate').innerText = `+${hourlyRate} PTS/ч`;
+
+      // Убираем фейковую генерацию. Если баланс пуст - начинаем с нуля.
+      if (window.totalPts === undefined) window.totalPts = 0;
+
+      const ptsElement = document.getElementById('total-farmed-pts');
+      ptsElement.innerText = Math.floor(window.totalPts).toLocaleString();
+
+      // ЖИВОЙ МАЙНИНГ И АВТОСОХРАНЕНИЕ
+      if (window.miningInterval) clearInterval(window.miningInterval);
+      if (window.saveInterval) clearInterval(window.saveInterval);
+      
+      if (hourlyRate > 0) {
+        const ptsPerSecond = hourlyRate / 3600; 
+        
+        // Визуально тикаем каждую секунду на экране
+        window.miningInterval = setInterval(() => {
+          window.totalPts += ptsPerSecond;
+          ptsElement.innerText = Math.floor(window.totalPts).toLocaleString();
+        }, 1000);
+
+        // ТИХО СОХРАНЯЕМ В SUPABASE КАЖДЫЕ 10 СЕКУНД
+        window.saveInterval = setInterval(() => {
+          if (supabaseClient && dbUserId) {
+            supabaseClient.from('accounts')
+              .update({ bonus_balance: window.totalPts })
+              .eq('user_id', dbUserId).then();
+          }
+        }, 10000);
+      }
       const ptsElement = document.getElementById('total-farmed-pts');
       ptsElement.innerText = Math.floor(window.totalPts).toLocaleString();
 
@@ -2090,7 +2132,34 @@
           if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('error');
           alert(`Сгорело! Карточка взорвалась.`);
         }
+if (randomRoll <= gameChance) {
+          // Победа
+          const winAmount = Math.floor(gameBet * gameMultiplier);
+          window.totalPts += winAmount;
+          screen.innerText = "🎉";
+          if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
+          alert(`Успех! Вы выиграли ${winAmount} PTS!`);
+        } else {
+          // Проигрыш
+          screen.innerText = "💥";
+          if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('error');
+          alert(`Сгорело! Карточка взорвалась.`);
+        }
 
+        // Обновляем текст на экране
+        document.getElementById('total-farmed-pts').innerText = Math.floor(window.totalPts).toLocaleString();
+        
+        // === МГНОВЕННО СОХРАНЯЕМ РЕЗУЛЬТАТ В БАЗУ ===
+        if (supabaseClient && dbUserId) {
+          supabaseClient.from('accounts')
+            .update({ bonus_balance: window.totalPts })
+            .eq('user_id', dbUserId).then();
+        }
+
+        playBtn.disabled = false;
+        playBtn.style.opacity = '1';
+      }, 1200);
+    }
         // Обновляем баланс и разблокируем кнопку
         document.getElementById('total-farmed-pts').innerText = Math.floor(window.totalPts).toLocaleString();
         playBtn.disabled = false;
