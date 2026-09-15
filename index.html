@@ -1214,7 +1214,9 @@
       </div>
       <button class="btn" onclick="closeDocModal()" data-i18n="btn_close">Понятно</button>
     </div>
-    <!-- Модальное окно меню поддержки -->
+  </div> <!-- ВАЖНО: Вот этот закрывающий тег должен быть ЗДЕСЬ! -->
+
+  <!-- Модальное окно меню поддержки -->
   <div class="modal-overlay" id="support-menu-modal">
     <div class="modal-window">
       <div class="modal-header">
@@ -1349,6 +1351,10 @@
     // ==========================================
     const i18n = {
       ru: {
+        support_menu: "Поддержка",
+        support_chat: "Служба поддержки",
+        support_terms: "Условия",
+        support_privacy: "Конфиденциальность"
         balance_label: "Инвест-баланс",
         badge_locked: "🔒 Долевой пул",
         partner_acc_label: "ПАРТНЕРСКИЙ СЧЕТ (РЕФЕРАЛ)",
@@ -1444,6 +1450,10 @@
         alert_deposit_dev: "Оплата {amount} USDT будет доступна после подключения кассы."
       },
       en: {
+        support_menu: "Support",
+        support_chat: "Support Chat",
+        support_terms: "Terms of Service",
+        support_privacy: "Privacy Policy"
         balance_label: "Investment Balance",
         badge_locked: "🔒 Equity Pool",
         partner_acc_label: "PARTNER ACCOUNT (COMMISSION)",
@@ -1539,6 +1549,10 @@
         alert_deposit_dev: "Payment of {amount} USDT will be available after gateway integration."
       },
       fr: {
+        support_menu: "Assistance",
+        support_chat: "Chat d'assistance",
+        support_terms: "Conditions d'utilisation",
+        support_privacy: "Confidentialité"
         balance_label: "Solde d'investissement",
         badge_locked: "🔒 Pool Capital",
         partner_acc_label: "COMPTE PARTENAIRE (COMMISSION)",
@@ -1634,6 +1648,10 @@
         alert_deposit_dev: "Le paiement de {amount} USDT sera disponible après intégration de la passerelle."
       },
       vi: {
+        support_menu: "Hỗ trợ",
+        support_chat: "Trò chuyện hỗ trợ",
+        support_terms: "Điều khoản",
+        support_privacy: "Quyền riêng tư"
         balance_label: "Số dư đầu tư",
         badge_locked: "🔒 Quỹ cổ phần",
         partner_acc_label: "TÀI KHOẢN ĐỐI TÁC (HOA HỒNG)",
