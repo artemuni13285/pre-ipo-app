@@ -656,23 +656,32 @@
 .tab-btn.active svg {
   stroke: #38bdf8;
 }
-    /* Выделение выбранного способа оплаты */
-.pay-method-btn {
-  background: #1C212B;
-  border: 1px solid rgba(255,255,255,0.05);
-  border-radius: 12px;
-  padding: 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.pay-method-btn.active {
-  background: rgba(56, 189, 248, 0.1);
-  border-color: var(--primary);
-  box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
-}
+    /* Выделение выбранного способа оплаты (Стиль RubUP) */
+    .pay-method-btn {
+      background: #1e2430; /* Плотный темный фон */
+      border: 1.5px solid transparent; 
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      height: 56px; /* Одинаковая высота кнопок */
+    }
+
+    .pay-method-btn.active {
+      background: rgba(16, 185, 129, 0.08); /* Легкий зеленый оттенок */
+      border-color: #10b981; /* Зеленая рамка как в RubUP */
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+    }
+
+    .pay-method-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.2px;
+    }
   </style>
 </head>
 <body>
@@ -1064,22 +1073,30 @@
   
       <!-- Сетка способов оплаты -->
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
-        <!-- Crypto Bot (по умолчанию активен) -->
+        
+        <!-- Crypto Bot -->
         <div id="btn-cryptobot" class="pay-method-btn active" onclick="selectPayment('cryptobot')">
-          <div style="background: #2AABEE; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">C</div>
-          <div>
-            <div style="font-size: 13px; font-weight: 600;">Crypto Bot</div>
-            <div style="font-size: 11px; color: var(--text-dim);">USDT, TON</div>
-          </div>
+          <!-- Красивая векторная иконка -->
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+            <circle cx="16" cy="16" r="16" fill="#2AABEE"/>
+            <path d="M21.5 10.5L13.5 20.5L9.5 16.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="pay-method-name">Crypto Bot</span>
         </div>
   
         <!-- Telegram Stars -->
         <div id="btn-stars" class="pay-method-btn" onclick="selectPayment('stars')">
-          <div style="background: #FFA000; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px;">⭐</div>
-          <div>
-            <div style="font-size: 13px; font-weight: 600;">TG Stars</div>
-            <div style="font-size: 11px; color: var(--text-dim);" data-i18n="modal_deposit_tg">В Telegram</div>
-          </div>
+          <!-- Градиентная Звезда -->
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+            <path d="M16 2L19.8 10.8L30 11.6L22.2 18.2L24.6 28L16 22.8L7.4 28L9.8 18.2L2 11.6L12.2 10.8L16 2Z" fill="url(#starGradient)" stroke="#D97706" stroke-width="0.5" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="starGradient" x1="16" y1="2" x2="16" y2="28" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FDE047"/>
+                <stop offset="1" stop-color="#F59E0B"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="pay-method-name">TG Stars</span>
         </div>
       </div>
   
