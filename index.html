@@ -769,12 +769,12 @@
 
       <div class="hero-stats">
         <div class="stat-item">
-          <span data-i18n="shares_label">ДОЛЕЙ В ПОРТФЕЛЕ</span>
-          <b id="total-shares">0 SHARES</b>
+          <span data-i18n="shares_label">СКОРОСТЬ ДОБЫЧИ</span>
+          <b id="total-farm-rate" style="color: var(--primary);">+0 PTS/ч</b>
         </div>
         <div class="stat-item">
-          <span data-i18n="valuation_label">ОЦЕНКА НА IPO</span>
-          <b id="potential-valuation" style="color: var(--accent-green);">$0.00</b>
+          <span data-i18n="valuation_label">НАФАРМЛЕНО (PTS)</span>
+          <b id="total-farmed-pts" style="color: var(--accent-gold); font-size: 16px; text-shadow: 0 0 10px rgba(245, 158, 11, 0.4);">0</b>
         </div>
       </div>
     </div>
@@ -1958,33 +1958,31 @@
       document.getElementById('karma-points').innerText = `Points: ${karmaPoints}`;
 
       // Считаем скорость добычи (PTS в час) на основе вложенных USDT
-      // Допустим, каждый вложенный 1 USDT дает 0.8 PTS в час
       let hourlyRate = 0;
       myPortfolio.forEach(item => {
         hourlyRate += Math.floor(item.invested * 0.8);
       });
       document.getElementById('total-farm-rate').innerText = `+${hourlyRate} PTS/ч`;
 
-      // Считаем общее количество нафармленных пойнтов (базовая симуляция для визуала)
-      // В реальности это должно приходить из базы данных
-      let totalPts = Math.floor(hourlyRate * 24 * 7); // Типа нафармило за неделю
-      document.getElementById('total-farmed-pts').innerText = totalPts.toLocaleString();
-    }
+      // Генерируем базовую сумму нафармленного для визуализации
+      if (!window.totalPts) {
+        window.totalPts = Math.floor(hourlyRate * 24 * 7); // Стартовое значение
+      }
 
-    function switchTab(screenId, btnElement) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      const ptsElement = document.getElementById('total-farmed-pts');
+      ptsElement.innerText = Math.floor(window.totalPts).toLocaleString();
 
-      const target = document.getElementById(`screen-${screenId}`);
-      if (target) target.classList.add('active');
-
-      if (btnElement) {
-        btnElement.classList.add('active');
-      } else {
-        const matchingBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => 
-          b.getAttribute('onclick')?.includes(`'${screenId}'`)
-        );
-        if (matchingBtn) matchingBtn.classList.add('active');
+      // ЖИВОЙ МАЙНИНГ: Анимация прибавления PTS каждую секунду
+      if (window.miningInterval) clearInterval(window.miningInterval);
+      
+      if (hourlyRate > 0) {
+        // Сколько PTS прибавляется за 1 секунду
+        const ptsPerSecond = hourlyRate / 3600; 
+        
+        window.miningInterval = setInterval(() => {
+          window.totalPts += ptsPerSecond;
+          ptsElement.innerText = Math.floor(window.totalPts).toLocaleString();
+        }, 1000);
       }
     }
 
