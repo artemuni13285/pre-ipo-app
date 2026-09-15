@@ -1354,12 +1354,12 @@
         support_chat: "Служба поддержки",
         support_terms: "Условия",
         support_privacy: "Конфиденциальность",
-        balance_label: "Игровой баланс",
+        balance_label: "Баланс",
         badge_locked: "💎 Пул Airdrop",
         partner_acc_label: "ПАРТНЕРСКИЙ СЧЕТ (РЕФЕРАЛ)",
         btn_withdraw: "Вывод",
-        shares_label: "АКТИВОВ В ИНВЕНТАРЕ",
-        valuation_label: "ПОТЕНЦИАЛ НА TGE",
+        shares_label: "СКОРОСТЬ ДОБЫЧИ",
+        valuation_label: "НАФАРМЛЕНО (PTS)",
         section_rounds: "Сезоны Фарминга",
         stage_label: "Стадия: Набор аудитории",
         p1_ticker: "Игровой актив: $MNX",
@@ -1954,12 +1954,21 @@
       document.getElementById('partner-balance').innerText = `$${partnerBalance.toFixed(2)} USDT`;
       document.getElementById('ref-earnings-display').innerText = `$${partnerBalance.toFixed(2)} USDT`;
       document.getElementById('modal-avail-balance').innerText = `$${partnerBalance.toFixed(2)} USDT`;
-      document.getElementById('total-shares').innerText = `${totalSharesOwned} ${t.shares_unit.toUpperCase()}`;
-      document.getElementById('potential-valuation').innerText = `$${potentialValuation.toFixed(2)}`;
       document.getElementById('ref-count').innerText = `${refCount} ${t.people_unit}`;
-      
-      // Выводим загруженную из базы карму на экран
       document.getElementById('karma-points').innerText = `Points: ${karmaPoints}`;
+
+      // Считаем скорость добычи (PTS в час) на основе вложенных USDT
+      // Допустим, каждый вложенный 1 USDT дает 0.8 PTS в час
+      let hourlyRate = 0;
+      myPortfolio.forEach(item => {
+        hourlyRate += Math.floor(item.invested * 0.8);
+      });
+      document.getElementById('total-farm-rate').innerText = `+${hourlyRate} PTS/ч`;
+
+      // Считаем общее количество нафармленных пойнтов (базовая симуляция для визуала)
+      // В реальности это должно приходить из базы данных
+      let totalPts = Math.floor(hourlyRate * 24 * 7); // Типа нафармило за неделю
+      document.getElementById('total-farmed-pts').innerText = totalPts.toLocaleString();
     }
 
     function switchTab(screenId, btnElement) {
