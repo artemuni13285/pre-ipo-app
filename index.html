@@ -2382,59 +2382,179 @@
       }
     }
 
-    // 2. Пользовательское соглашение
+    // 2. Пользовательское соглашение (Мультиязычное)
     function openTerms() {
       closeSupportMenu();
       const title = document.getElementById('doc-modal-title');
       const content = document.getElementById('doc-modal-content');
-      title.innerText = "Пользовательское соглашение";
-      content.innerHTML = `
-        <b>Редакция от 15 сентября 2026 года</b><br><br>
-        <b>1. О Сервисе</b><br>
-        Сервис «EquiCore» (далее — Сервис) работает в виде бота и мини-приложения Telegram. Связаться по любому вопросу можно через @EquiCoreSupport_bot.<br><br>
-        <b>1.1. Отношение к Telegram</b><br>
-        Сервис не является продуктом Telegram, не связан с Telegram FZ-LLC и её аффилированными лицами. Telegram предоставляет только платформу для запуска мини-приложения и бота.<br><br>
-        <b>2. Термины</b><br>
-        Пользователь — лицо, запустившее бота или мини-приложение.<br>
-        Аккаунт — учётная запись, привязанная к идентификатору Telegram.<br>
-        Баланс — учётный показатель внутри Сервиса.<br><br>
-        <b>3. Принятие соглашения</b><br>
-        Запуск бота или мини-приложения означает согласие с этим Соглашением и с Политикой конфиденциальности. Не согласны — не пользуйтесь Сервисом. Сервис доступен лицам старше 18 лет.<br><br>
-        <b>4. Что делает Сервис</b><br>
-        Сервис даёт доступ к списку заданий партнёров и начисляет вознаграждение за их выполнение, а также содержит внутренние игровые разделы. Сервис не является работодателем, банком, брокером или обменником криптовалюты.<br><br>
-        <b>5. Средства на балансе</b><br>
-        Баланс — это учёт обязательств Сервиса перед Пользователем, а не банковский счёт. На баланс не начисляются проценты.<br><br>
-        <b>9. Криптовалюта</b><br>
-        Сервис принимает и выплачивает криптовалюту в сети TON. Обмена криптовалюты на деньги Сервис не производит: платёж пересчитывается в рубли/USDT баланса, а выплата — из баланса в криптовалюту.<br><br>
-        <b>12. Что запрещено</b><br>
-        Мультиаккаунтинг, схемы и абуз запрещены полностью. Один человек — один аккаунт.<br><br>
-        <i>* Полная версия соглашения доступна по запросу в службу поддержки.</i>
-      `;
+
+      if (currentLang === 'en') {
+        title.innerText = "Terms of Service";
+        content.innerHTML = `
+          <b>Revision of September 15, 2026</b><br><br>
+          <b>1. About the Service</b><br>
+          The "EquiCore" service operates as a Telegram bot and mini-app. Contact: @EquiCoreSupport_bot.<br><br>
+          <b>1.1. Relationship with Telegram</b><br>
+          The Service is not a Telegram product and is not affiliated with Telegram FZ-LLC.<br><br>
+          <b>2. Terms</b><br>
+          User — a person who launched the app.<br>
+          Account — linked to a Telegram ID.<br>
+          Balance — an internal accounting metric.<br><br>
+          <b>3. Acceptance</b><br>
+          Available only to users 18+. Using the app implies agreement with these terms.<br><br>
+          <b>9. Cryptocurrency</b><br>
+          The Service processes crypto in the TON network.<br><br>
+          <b>12. Prohibitions</b><br>
+          Multi-accounting and abuse are strictly prohibited. One person — one account.<br><br>
+          <i>* The full version is available upon request to support.</i>
+        `;
+      } else if (currentLang === 'fr') {
+        title.innerText = "Conditions d'utilisation";
+        content.innerHTML = `
+          <b>Révision du 15 Septembre 2026</b><br><br>
+          <b>1. À propos du Service</b><br>
+          Le service «EquiCore» fonctionne comme une mini-application Telegram. Contact : @EquiCoreSupport_bot.<br><br>
+          <b>1.1. Relation avec Telegram</b><br>
+          Le Service n'est pas un produit Telegram et n'est pas affilié à Telegram FZ-LLC.<br><br>
+          <b>2. Termes</b><br>
+          Utilisateur — personne ayant lancé l'application.<br>
+          Compte — lié à un ID Telegram.<br>
+          Solde — métrique comptable interne.<br><br>
+          <b>3. Acceptation</b><br>
+          Réservé aux 18+. L'utilisation implique l'acceptation des conditions.<br><br>
+          <b>9. Crypto-monnaie</b><br>
+          Le Service traite les transactions sur le réseau TON.<br><br>
+          <b>12. Interdictions</b><br>
+          Le multi-compte et les abus sont strictement interdits.<br><br>
+          <i>* Version complète disponible sur demande.</i>
+        `;
+      } else if (currentLang === 'vi') {
+        title.innerText = "Điều khoản Dịch vụ";
+        content.innerHTML = `
+          <b>Bản sửa đổi ngày 15 tháng 9 năm 2026</b><br><br>
+          <b>1. Về Dịch vụ</b><br>
+          Dịch vụ "EquiCore" hoạt động dưới dạng mini-app Telegram. Liên hệ: @EquiCoreSupport_bot.<br><br>
+          <b>1.1. Mối quan hệ với Telegram</b><br>
+          Dịch vụ không liên kết với Telegram FZ-LLC.<br><br>
+          <b>2. Thuật ngữ</b><br>
+          Người dùng — người đã mở ứng dụng.<br>
+          Tài khoản — được liên kết với ID Telegram.<br>
+          Số dư — chỉ số kế toán nội bộ.<br><br>
+          <b>3. Chấp thuận</b><br>
+          Chỉ dành cho người 18+. Việc sử dụng đồng nghĩa với việc chấp nhận các điều khoản.<br><br>
+          <b>9. Tiền điện tử</b><br>
+          Dịch vụ xử lý giao dịch trên mạng TON.<br><br>
+          <b>12. Nghiêm cấm</b><br>
+          Nghiêm cấm lạm dụng và tạo nhiều tài khoản.<br><br>
+          <i>* Phiên bản đầy đủ có sẵn khi yêu cầu hỗ trợ.</i>
+        `;
+      } else {
+        // По умолчанию (Русский)
+        title.innerText = "Пользовательское соглашение";
+        content.innerHTML = `
+          <b>Редакция от 15 сентября 2026 года</b><br><br>
+          <b>1. О Сервисе</b><br>
+          Сервис «EquiCore» (далее — Сервис) работает в виде бота и мини-приложения Telegram. Связаться по любому вопросу можно через @EquiCoreSupport_bot.<br><br>
+          <b>1.1. Отношение к Telegram</b><br>
+          Сервис не является продуктом Telegram, не связан с Telegram FZ-LLC и её аффилированными лицами.<br><br>
+          <b>2. Термины</b><br>
+          Пользователь — лицо, запустившее бота или мини-приложение.<br>
+          Аккаунт — учётная запись, привязанная к идентификатору Telegram.<br>
+          Баланс — учётный показатель внутри Сервиса.<br><br>
+          <b>3. Принятие соглашения</b><br>
+          Запуск бота означает согласие с этим Соглашением. Не согласны — не пользуйтесь Сервисом. Сервис доступен лицам старше 18 лет.<br><br>
+          <b>9. Криптовалюта</b><br>
+          Сервис принимает и выплачивает криптовалюту в сети TON.<br><br>
+          <b>12. Что запрещено</b><br>
+          Мультиаккаунтинг, схемы и абуз запрещены полностью. Один человек — один аккаунт.<br><br>
+          <i>* Полная версия соглашения доступна по запросу в службу поддержки.</i>
+        `;
+      }
+
       document.getElementById('doc-modal').classList.add('active');
     }
 
-    // 3. Политика конфиденциальности
+    // 3. Политика конфиденциальности (Мультиязычная)
     function openPrivacy() {
       closeSupportMenu();
       const title = document.getElementById('doc-modal-title');
       const content = document.getElementById('doc-modal-content');
-      title.innerText = "Политика конфиденциальности";
-      content.innerHTML = `
-        <b>Редакция от 15 сентября 2026 года</b><br><br>
-        <b>1. К кому обращаться</b><br>
-        Данные обрабатываются в связи с работой Сервиса «EquiCore». Вопросы об обработке данных и требования об их удалении принимаются через @EquiCoreSupport_bot.<br><br>
-        <b>2. Какие данные мы получаем от игрока</b><br>
-        Из Telegram, при запуске мини-приложения: числовой идентификатор аккаунта, имя, имя пользователя (@username), ссылку на фотографию профиля и язык интерфейса. <b>Номер телефона мы не запрашиваем и не получаем.</b><br><br>
-        При выводе средств в криптовалюте реквизит не вводится — адрес берётся из подключённого кошелька. Мы сохраняем его публичный адрес. Секретную фразу и приватные ключи мы не получаем, не запрашиваем и не храним.<br><br>
-        Технические данные: IP-адрес и время обращения в журналах сервера, сохранённые адреса входов, строка браузера и технический отпечаток устройства. Всё это нужно ровно для одного: находить сети из нескольких аккаунтов одного лица.<br><br>
-        <b>4. Зачем мы их обрабатываем</b><br>
-        Чтобы вести аккаунт, показывать баланс, начислять вознаграждение и выявлять мультиаккаунтинг, схемы и абуз.<br><br>
-        <b>6. Кому передаются данные</b><br>
-        В сеть TON — при переводе в блокчейн попадают адрес отправителя, адрес получателя, сумма и метка платежа. Эти сведения публичны и остаются в сети навсегда. Имя, ник и иные сведения о Пользователе в перевод не попадают.<br><br>
-        <b>8. Права Пользователя</b><br>
-        Узнать, какие данные о нём обрабатываются, потребовать исправить неточные данные, отозвать согласие и потребовать удаления аккаунта. Запрос отправляется в поддержку с того же аккаунта Telegram.<br><br>
-        <i>* Полная версия политики доступна по запросу в службу поддержки.</i>
-      `;
+
+      if (currentLang === 'en') {
+        title.innerText = "Privacy Policy";
+        content.innerHTML = `
+          <b>Revision of September 15, 2026</b><br><br>
+          <b>1. Who to contact</b><br>
+          Questions about data processing: @EquiCoreSupport_bot.<br><br>
+          <b>2. What data we receive</b><br>
+          Telegram: ID, name, @username, language. <b>We do not collect phone numbers.</b><br>
+          Crypto: Public wallet address. We do not store private keys.<br>
+          Technical: IP address, device footprint (to prevent fraud).<br><br>
+          <b>4. Why we process it</b><br>
+          To maintain accounts and detect abuse.<br><br>
+          <b>6. Data sharing</b><br>
+          TON Network: Crypto transactions are public on the blockchain.<br><br>
+          <b>8. User Rights</b><br>
+          You can request account deletion via support.<br><br>
+          <i>* The full version is available upon request.</i>
+        `;
+      } else if (currentLang === 'fr') {
+        title.innerText = "Confidentialité";
+        content.innerHTML = `
+          <b>Révision du 15 Septembre 2026</b><br><br>
+          <b>1. Qui contacter</b><br>
+          Questions sur les données : @EquiCoreSupport_bot.<br><br>
+          <b>2. Données collectées</b><br>
+          Telegram : ID, nom, @username, langue. <b>Pas de numéro de téléphone.</b><br>
+          Crypto : Adresse publique. Pas de clés privées.<br>
+          Technique : IP, empreinte de l'appareil (lutte contre la fraude).<br><br>
+          <b>4. Pourquoi les traiter</b><br>
+          Pour gérer les comptes et prévenir les abus.<br><br>
+          <b>6. Partage des données</b><br>
+          Réseau TON : Les transactions sont publiques.<br><br>
+          <b>8. Droits</b><br>
+          Demande de suppression via l'assistance.<br><br>
+          <i>* Version complète sur demande.</i>
+        `;
+      } else if (currentLang === 'vi') {
+        title.innerText = "Chính sách Bảo mật";
+        content.innerHTML = `
+          <b>Bản sửa đổi ngày 15 tháng 9 năm 2026</b><br><br>
+          <b>1. Liên hệ</b><br>
+          Hỗ trợ về dữ liệu: @EquiCoreSupport_bot.<br><br>
+          <b>2. Dữ liệu thu thập</b><br>
+          Telegram: ID, tên, @username, ngôn ngữ. <b>Không thu thập số điện thoại.</b><br>
+          Crypto: Địa chỉ ví công khai. Không lưu khóa bảo mật.<br>
+          Kỹ thuật: IP, dấu vân tay thiết bị (chống gian lận).<br><br>
+          <b>4. Mục đích xử lý</b><br>
+          Để duy trì tài khoản và ngăn chặn lạm dụng.<br><br>
+          <b>6. Chia sẻ dữ liệu</b><br>
+          Mạng TON: Giao dịch được công khai trên blockchain.<br><br>
+          <b>8. Quyền của người dùng</b><br>
+          Yêu cầu xóa tài khoản qua bộ phận hỗ trợ.<br><br>
+          <i>* Phiên bản đầy đủ có sẵn khi yêu cầu.</i>
+        `;
+      } else {
+        // По умолчанию (Русский)
+        title.innerText = "Политика конфиденциальности";
+        content.innerHTML = `
+          <b>Редакция от 15 сентября 2026 года</b><br><br>
+          <b>1. К кому обращаться</b><br>
+          Данные обрабатываются в связи с работой Сервиса «EquiCore». Вопросы: @EquiCoreSupport_bot.<br><br>
+          <b>2. Какие данные мы получаем от игрока</b><br>
+          Из Telegram: идентификатор, имя, @username, язык. <b>Номер телефона мы не запрашиваем и не получаем.</b><br>
+          Криптовалюта: только публичный адрес. Секретные фразы мы не храним.<br>
+          Технические: IP-адрес и отпечаток устройства для поиска мультиаккаунтов.<br><br>
+          <b>4. Зачем мы их обрабатываем</b><br>
+          Чтобы вести аккаунт и выявлять схемы и абуз.<br><br>
+          <b>6. Кому передаются данные</b><br>
+          В сеть TON — эти сведения публичны и остаются в сети навсегда.<br><br>
+          <b>8. Права Пользователя</b><br>
+          Потребовать удаления аккаунта можно через поддержку.<br><br>
+          <i>* Полная версия политики доступна по запросу в службу поддержки.</i>
+        `;
+      }
+
       document.getElementById('doc-modal').classList.add('active');
     }
   </script>
