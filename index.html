@@ -1636,7 +1636,12 @@
         tab_portfolio: "Активы",
         tab_partners: "Партнеры",
         tab_games: "Игры",
-        tab_profile: "Профиль"
+        tab_profile: "Профиль",
+        upline_direct: "Прямая регистрация",
+        col_spent: "ПОТРАЧЕНО",
+        col_status: "СТАТУС",
+        status_farming: "Фарминг ⚡",
+        empty_portfolio: "Пусто",
       },
       en: {
         balance_label: "USDT Balance",
@@ -1716,7 +1721,12 @@
         tab_portfolio: "Assets",
         tab_partners: "Partners",
         tab_games: "Games",
-        tab_profile: "Profile"
+        tab_profile: "Profile",
+        upline_direct: "Direct registration",
+        col_spent: "SPENT",
+        col_status: "STATUS",
+        status_farming: "Farming ⚡",
+        empty_portfolio: "Empty",
       },
       fr: {
         balance_label: "Solde USDT",
@@ -1796,7 +1806,12 @@
         tab_portfolio: "Actifs",
         tab_partners: "Partenaires",
         tab_games: "Jeux",
-        tab_profile: "Profil"
+        tab_profile: "Profil",
+        upline_direct: "Inscription directe",
+        col_spent: "DÉPENSÉ",
+        col_status: "STATUT",
+        status_farming: "Farming ⚡",
+        empty_portfolio: "Vide",
       },
       vi: {
         balance_label: "Số dư USDT",
@@ -1876,7 +1891,286 @@
         tab_portfolio: "Tài sản",
         tab_partners: "Đối tác",
         tab_games: "Trò chơi",
-        tab_profile: "Hồ sơ"
+        tab_profile: "Hồ sơ",
+        upline_direct: "Đăng ký trực tiếp",
+        col_spent: "ĐÃ CHI",
+        col_status: "TRẠNG THÁI",
+        status_farming: "Đang đào ⚡",
+        empty_portfolio: "Trống",
+      }
+    };
+
+        // ==========================================
+    // 2. ОБЪЕКТ ДОКУМЕНТОВ И СОГЛАШЕНИЙ (DOCS_DATA)
+    // ==========================================
+    const DOCS_DATA = {
+      SAFE: {
+        ru: {
+          title: "Пользовательское соглашение",
+          content: `<b>СТАТЬЯ 1. ПРЕДМЕТ СОГЛАШЕНИЯ И ПОРЯДОК АКЦЕПТА</b><br><br>
+1.1. Настоящее Пользовательское соглашение (далее — «Соглашение») представляет собой юридически обязывающую публичную оферту между разработчиками и администрацией экосистемы EquiCore (далее — «Сервис») и любым физическим лицом, использующим Telegram WebApp бота (далее — «Пользователь»).<br><br>
+1.2. Запуск приложения, авторизация через Telegram WebApp SDK, а равно совершение любых финансовых или игровых действий внутри интерфейса признается полным и безоговорочным акцептом условий настоящего Соглашения в порядке ст. 438 ГК РФ и международного торгового права.<br><br>
+<b>СТАТЬЯ 2. СТАТУС ВНУТРИИГРОВЫХ АКТИВОВ И ПОЙНТОВ (PTS)</b><br><br>
+2.1. Все объекты, отображаемые в приложении — баланс PTS, уровни проектов, сертификаты активов, карточки и внутриигровые бусты — представляют собой нематериальные цифровые права на использование функционала развлекательного программного обеспечения.<br><br>
+2.2. Начисляемые очки PTS и приобретаемые уровни мощности не являются:<br>
+• ценными бумагами, акциями, облигациями или производными финансовыми инструментами (деривативами);<br>
+• долями в уставном капитале каких-либо юридических лиц;<br>
+• валютными ценностями, банковскими вкладами или объектами доверительного управления.<br><br>
+2.3. Приобретение уровней и бустов является добровольной невозвратной платой за расширение игровых привилегий внутри платформы.<br><br>
+<b>СТАТЬЯ 3. ОТКАЗ ОТ ИНВЕСТИЦИОННЫХ ГАРАНТИЙ (DISCLAIMER)</b><br><br>
+3.1. Сервис не осуществляет брокерскую, дилерскую, инвестиционную или банковскую деятельность. Любые числовые показатели доходности и скорости майнинга отражают исключительно параметры игрового алгоритма.<br><br>
+3.2. Администрация сервиса не дает гарантий получения прибыли, возврата внесенных средств или достижения определенной рыночной стоимости активов при будущем листинге. Пользователь осознает все риски волатильности крипторынка и принимает их в полном объеме.<br><br>
+<b>СТАТЬЯ 4. ОТВЕТСТВЕННОСТЬ СТОРОН И ФОРС-МАЖОР</b><br><br>
+4.1. Сервис предоставляется по принципу «как есть» (AS IS). Администрация не несет ответственности за перебои в работе серверов Telegram, сбои транзакций в блокчейнах TON/TRON, а также задержки платежных провайдеров Crypto Bot и Telegram Stars.<br><br>
+4.2. Администрация вправе в одностороннем порядке вносить изменения в игровой баланс, экономику очков и интерфейс для оптимизации работы экосистемы.`
+        },
+        en: {
+          title: "User Agreement",
+          content: `<b>ARTICLE 1. SUBJECT OF AGREEMENT AND ACCEPTANCE PROCEDURE</b><br><br>
+1.1. This User Agreement (hereinafter — "Agreement") constitutes a legally binding public offer between the developers and administration of the EquiCore ecosystem (hereinafter — "Service") and any individual using the Telegram WebApp bot (hereinafter — "User").<br><br>
+1.2. Launching the application, authorizing via Telegram WebApp SDK, as well as performing any financial or gameplay actions within the interface signifies full and unconditional acceptance of the terms of this Agreement in accordance with applicable international commercial law.<br><br>
+<b>ARTICLE 2. STATUS OF IN-GAME ASSETS AND POINTS (PTS)</b><br><br>
+2.1. All items displayed in the app — PTS balance, project levels, asset certificates, cards, and in-game boosts — represent intangible digital rights to use the functionality of entertainment software.<br><br>
+2.2. Accrued PTS points and acquired power levels are not:<br>
+• securities, shares, bonds, or derivative financial instruments;<br>
+• equity stakes in any legal entities;<br>
+• currency values, bank deposits, or trust management objects.<br><br>
+2.3. Purchasing levels and boosts is a voluntary, non-refundable fee for expanding gameplay privileges within the platform.<br><br>
+<b>ARTICLE 3. DISCLAIMER OF INVESTMENT GUARANTEES</b><br><br>
+3.1. The Service does not provide brokerage, dealer, investment, or banking activities. Any numerical indicators of mining speed or yield reflect exclusively gameplay algorithm parameters.<br><br>
+3.2. The Service administration gives no guarantees of profit, return of invested funds, or achievement of specific market value upon future listing. The User acknowledges all volatility risks of the crypto market and accepts them in full.<br><br>
+<b>ARTICLE 4. LIABILITY OF THE PARTIES AND FORCE MAJEURE</b><br><br>
+4.1. The Service is provided on an "AS IS" basis. The administration is not liable for interruptions in Telegram servers, transaction failures on TON/TRON blockchains, or delays by Crypto Bot and Telegram Stars payment providers.<br><br>
+4.2. The administration reserves the right to unilaterally modify game balance, points economy, and interface to optimize ecosystem performance.`
+        },
+        fr: {
+          title: "Conditions d'utilisation",
+          content: `<b>ARTICLE 1. OBJET DU CONTRAT ET PROCÉDURE D'ACCEPTATION</b><br><br>
+1.1. Les présentes Conditions d'utilisation (ci-après — « Contrat ») constituent une offre publique juridiquement contraignante entre les développeurs et l'administration de l'écosystème EquiCore (ci-après — « Service ») et toute personne physique utilisant le bot Telegram WebApp (ci-après — « Utilisateur »).<br><br>
+1.2. Le lancement de l'application, l'autorisation via le SDK Telegram WebApp, ainsi que toute action financière ou ludique dans l'interface constituent une acceptation pleine et entière des présentes conditions conformément au droit commercial international.<br><br>
+<b>ARTICLE 2. STATUT DES ACTIFS ET DES POINTS EN JEU (PTS)</b><br><br>
+2.1. Tous les éléments affichés dans l'application — solde de PTS, niveaux de projet, certificats d'actifs, cartes et boosts de jeu — représentent des droits numériques incorporels d'utilisation d'un logiciel de divertissement.<br><br>
+2.2. Les points PTS accumulés et les niveaux de puissance acquis ne sont pas :<br>
+• des valeurs mobilières, actions, obligations ou instruments financiers dérivés ;<br>
+• des parts sociales dans des entités juridiques ;<br>
+• des devises, dépôts bancaires ou objets de gestion fiduciaire.<br><br>
+2.3. L'acquisition de niveaux et de boosts constitue un paiement volontaire et non remboursable pour étendre les privilèges de jeu au sein de la plateforme.<br><br>
+<b>ARTICLE 3. EXCLUSION DE GARANTIE D'INVESTISSEMENT (DISCLAIMER)</b><br><br>
+3.1. Le Service n'exerce aucune activité de courtage, d'investissement ou bancaire. Les indicateurs de vitesse de minage reflètent uniquement des paramètres d'algorithme de jeu.<br><br>
+3.2. L'administration ne garantit aucun profit, remboursement de fonds ou valorisation marchande lors d'un futur listing. L'Utilisateur assume pleinement les risques de volatilité du marché crypto.<br><br>
+<b>ARTICLE 4. RESPONSABILITÉ ET FORCE MAJEURE</b><br><br>
+4.1. Le Service est fourni « EN L'ÉTAT » (AS IS). L'administration décline toute responsabilité pour les interruptions de Telegram, les pannes de blockchain TON/TRON ou les retards des prestataires Crypto Bot et Telegram Stars.<br><br>
+4.2. L'administration se réserve le droit de modifier unilatéralement l'économie des points et l'interface pour optimiser l'écosystème.`
+        },
+        vi: {
+          title: "Điều khoản sử dụng",
+          content: `<b>ĐIỀU 1. ĐỐI TƯỢNG THỎA THUẬN VÀ QUY TRÌNH CHẤP THUẬN</b><br><br>
+1.1. Thỏa thuận người dùng này (sau đây gọi là — "Thỏa thuận") là đề nghị công khai có tính ràng buộc pháp lý giữa nhà phát triển và ban quản trị hệ sinh thái EquiCore (sau đây gọi là — "Dịch vụ") với bất kỳ cá nhân nào sử dụng bot Telegram WebApp (sau đây gọi là — "Người dùng").<br><br>
+1.2. Việc khởi chạy ứng dụng, ủy quyền qua Telegram WebApp SDK cũng như thực hiện bất kỳ hành động tài chính hoặc tương tác nào trong giao diện được coi là sự chấp thuận đầy đủ và vô điều kiện đối với các điều khoản của Thỏa thuận này theo luật thương mại quốc tế.<br><br>
+<b>ĐIỀU 2. BẢN CHẤT CỦA TÀI SẢN TRONG ỨNG DỤNG VÀ ĐIỂM (PTS)</b><br><br>
+2.1. Tất cả các đối tượng hiển thị trong ứng dụng — số dư PTS, cấp độ dự án, chứng nhận tài sản, thẻ và tăng tốc trong game — là quyền kỹ thuật số vô hình để sử dụng chức năng của phần mềm giải trí.<br><br>
+2.2. Điểm PTS được tích lũy và các cấp độ nâng cấp không phải là:<br>
+• chứng khoán, cổ phiếu, trái phiếu hoặc công cụ phái sinh tài chính;<br>
+• phần vốn góp trong bất kỳ pháp nhân nào;<br>
+• giá trị tiền tệ, tiền gửi ngân hàng hoặc đối tượng ủy thác đầu tư.<br><br>
+2.3. Việc mua cấp độ và tăng tốc là khoản phí tự nguyện, không hoàn lại để mở rộng các đặc quyền trong nền tảng.<br><br>
+<b>ĐIỀU 3. MIỄN TRỪ BẢO ĐẢM ĐẦU TƯ (DISCLAIMER)</b><br><br>
+3.1. Dịch vụ không thực hiện hoạt động môi giới, đại lý, đầu tư hoặc ngân hàng. Mọi chỉ số tốc độ đào chỉ phản ánh các thông số thuật toán trò chơi.<br><br>
+3.2. Ban quản trị không bảo đảm lợi nhuận, hoàn vốn hoặc đạt mức giá thị trường nhất định khi niêm yết trong tương lai. Người dùng hoàn toàn nhận thức và chấp nhận mọi rủi ro biến động của thị trường tiền mã hóa.<br><br>
+<b>ĐIỀU 4. TRÁCH NHIỆM CÁC BÊN VÀ BẤT KHẢ KHÁNG</b><br><br>
+4.1. Dịch vụ được cung cấp trên nguyên tắc "NGUYÊN TRẠNG" (AS IS). Ban quản trị không chịu trách nhiệm về gián đoạn máy chủ Telegram, lỗi giao dịch trên blockchain TON/TRON hoặc sự chậm trễ của nhà cung cấp thanh toán Crypto Bot và Telegram Stars.<br><br>
+4.2. Ban quản trị có quyền đơn phương điều chỉnh kinh tế điểm số và giao diện để tối ưu hóa hệ sinh thái.`
+        }
+      },
+      AGENT: {
+        ru: {
+          title: "Реферальная программа",
+          content: `<b>СТАТЬЯ 1. УСЛОВИЯ ПАРТНЕРСКОГО ВОЗНАГРАЖДЕНИЯ</b><br><br>
+1.1. Каждый верифицированный Пользователь имеет право принимать участие в партнерской программе EquiCore посредством распространения своей уникальной реферальной ссылки вида t.me/EquiCoreBot?startapp=ref_ID.<br><br>
+1.2. Партнерское вознаграждение составляет фиксированные 10% от суммы каждого прямого пополнения баланса пользователями 1-й линии (прямые рефералы). Начисление производится моментально в расчетных единицах USDT на специальный «Партнерский счет».<br><br>
+<b>СТАТЬЯ 2. РЕГЛАМЕНТ И УСЛОВИЯ ВЫВОДА СРЕДСТВ</b><br><br>
+2.1. Вывод средств с партнерского счета осуществляется в цифровых активах USDT стандарта TRC20 или TON.<br><br>
+2.2. Минимальный порог для формирования заявки на вывод составляет 5.00 USDT.<br><br>
+2.3. Заявки обрабатываются автоматизированным финансовым шлюзом в срок от 5 минут до 24 часов. Платформа оставляет за собой право проводить ручную модерацию крупных транзакций с целью защиты от мошеннических действий.<br><br>
+<b>СТАТЬЯ 3. СТРОГАЯ АНТИФРОД-ПОЛИТИКА (ANTI-FRAUD REGULATIONS)</b><br><br>
+3.1. Категорически запрещены любые формы манипуляций и недобросовестного привлечения, включая:<br>
+• Создание мультиаккаунтов и самореферальных цепочек (регистрация собственных аккаунтов под свою ссылку);<br>
+• Использование спам-рассылок в личные сообщения Telegram, автоматических кликеров и ферм эмуляторов;<br>
+• Введение привлекаемых участников в заблуждение относительно функционала приложения.<br><br>
+3.2. При выявлении фактов фрода администрация сервиса имеет право немедленно аннулировать начисленный партнерский баланс и перманентно заблокировать профиль нарушителя.`
+        },
+        en: {
+          title: "Referral Program",
+          content: `<b>ARTICLE 1. CONDITIONS OF PARTNER REWARD</b><br><br>
+1.1. Every verified User has the right to participate in the EquiCore affiliate program by distributing their unique referral link format t.me/EquiCoreBot?startapp=ref_ID.<br><br>
+1.2. The partner reward is a fixed 10% of the amount of each direct balance deposit made by 1st line users (direct referrals). Rewards are credited instantly in USDT units to a dedicated "Partner Account".<br><br>
+<b>ARTICLE 2. WITHDRAWAL REGULATIONS AND TERMS</b><br><br>
+2.1. Withdrawal of funds from the partner account is carried out in USDT digital assets of TRC20 or TON standard.<br><br>
+2.2. The minimum threshold for submitting a withdrawal request is 5.00 USDT.<br><br>
+2.3. Requests are processed by an automated financial gateway within 5 minutes to 24 hours. The platform reserves the right to conduct manual moderation of large transactions to protect against fraudulent activities.<br><br>
+<b>ARTICLE 3. STRICT ANTI-FRAUD POLICY (ANTI-FRAUD REGULATIONS)</b><br><br>
+3.1. Any forms of manipulation and bad-faith acquisition are strictly prohibited, including:<br>
+• Creating multi-accounts and self-referral chains (registering own accounts under own link);<br>
+• Using spam distributions in Telegram private messages, automated clickers, and emulator farms;<br>
+• Misleading attracted participants regarding the functionality of the application.<br><br>
+3.2. Upon detection of fraud, the service administration reserves the right to immediately cancel the accrued partner balance and permanently ban the offender's profile.`
+        },
+        fr: {
+          title: "Programme de Parrainage",
+          content: `<b>ARTICLE 1. CONDITIONS DE LA COMMISSION PARTENAIRE</b><br><br>
+1.1. Tout Utilisateur vérifié a le droit de participer au programme d'affiliation EquiCore en partageant son lien de parrainage unique sous la forme t.me/EquiCoreBot?startapp=ref_ID.<br><br>
+1.2. La récompense partenaire est fixée à 10% du montant de chaque recharge directe effectuée par les filleuls de 1er niveau. Le versement est instantané en USDT sur un « Compte Partenaire » dédié.<br><br>
+<b>ARTICLE 2. RÈGLEMENT ET MODALITÉS DE RETRAIT</b><br><br>
+2.1. Les retraits du compte partenaire s'effectuent en actifs numériques USDT aux normes TRC20 ou TON.<br><br>
+2.2. Le seuil minimum de demande de retrait est de 5.00 USDT.<br><br>
+2.3. Les demandes sont traitées par une passerelle automatisée sous un délai de 5 minutes à 24 heures. La plateforme se réserve le droit d'effectuer une modération manuelle pour les transactions importantes.<br><br>
+<b>ARTICLE 3. POLITIQUE STRICTE ANTI-FRAUDE</b><br><br>
+3.1. Toute forme de manipulation ou de pratique déloyale est rigoureusement interdite, notamment :<br>
+• La création de multicomptes et d'auto-parrainage (inscriptions de ses propres comptes sous son lien) ;<br>
+• Le spam par message privé Telegram, l'usage de cliqueurs automatiques ou d'émulateurs ;<br>
+• La tromperie des participants sur les fonctionnalités du service.<br><br>
+3.2. En cas de fraude avérée, l'administration se réserve le droit d'annuler immédiatement le solde partenaire accumulé et de bannir définitivement le profil concerné.`
+        },
+        vi: {
+          title: "Chương trình giới thiệu",
+          content: `<b>ĐIỀU 1. ĐIỀU KIỆN NHẬN THƯỞNG ĐỐI TÁC</b><br><br>
+1.1. Mọi Người dùng đã xác minh đều có quyền tham gia chương trình đối tác EquiCore bằng cách chia sẻ liên kết giới thiệu độc quyền dạng t.me/EquiCoreBot?startapp=ref_ID.<br><br>
+1.2. Phần thưởng đối tác cố định là 10% trên mỗi khoản nạp trực tiếp của người dùng tầng 1 (F1). Tiền thưởng được cộng tức thì bằng đơn vị USDT vào "Tài khoản đối tác".<br><br>
+<b>ĐIỀU 2. QUY ĐỊNH VÀ ĐIỀU KIỆN RÚT TIỀN</b><br><br>
+2.1. Việc rút tiền từ tài khoản đối tác được thực hiện bằng tài sản kỹ thuật số USDT theo tiêu chuẩn TRC20 hoặc TON.<br><br>
+2.2. Hạn mức tối thiểu cho mỗi yêu cầu rút tiền là 5.00 USDT.<br><br>
+2.3. Yêu cầu rút tiền được cổng tài chính tự động xử lý trong thời gian từ 5 phút đến 24 giờ. Nền tảng có quyền kiểm duyệt thủ công các giao dịch lớn nhằm chống gian lận.<br><br>
+<b>ĐIỀU 3. CHÍNH SÁCH CHỐNG GIAN LẬN NGHIÊM NGẶT</b><br><br>
+3.1. Nghiêm cấm mọi hành vi thao túng và thu hút thiếu trung thực, bao gồm:<br>
+• Tạo nhiều tài khoản và chuỗi tự giới thiệu (tự đăng ký tài khoản dưới liên kết của chính mình);<br>
+• Gửi tin nhắn rác (spam) trong Telegram, dùng công cụ click tự động hoặc giả lập;<br>
+• Cung cấp thông tin sai lệch về tính năng ứng dụng cho người tham gia.<br><br>
+3.2. Khi phát hiện gian lận, ban quản trị có quyền hủy bỏ ngay lập tức số dư đối tác tích lũy và khóa vĩnh viễn hồ sơ vi phạm.`
+        }
+      },
+      RESERVE: {
+        ru: {
+          title: "Whitepaper / Токеномика",
+          content: `<b>РАЗДЕЛ 1. КОНЦЕПЦИЯ И АРХИТЕКТУРА EQUICORE</b><br><br>
+1.1. EquiCore — децентрализованная экосистема нового поколения, объединяющая инфраструктурные бизнес-проекты с игровыми механиками привлечения сообщества в Telegram.<br><br>
+1.2. Пользователи платформы получают доступ к трем пулам развития: автоматизированные медиасети (AI Media), кластеры облачного рендеринга (Cloud Compute) и промышленный зеленый майнинг на гидрогенерации (Green Energy Hashrate).<br><br>
+<b>РАЗДЕЛ 2. МАТЕМАТИКА МАЙНИНГА И СИНХРОНИЗАЦИЯ PTS</b><br><br>
+2.1. Базовая скорость фарма очков рассчитывается по алгоритмической формуле: Скорость = Сумма активированных мощностей × 0.8 PTS/час.<br><br>
+2.2. Начисление очков происходит посекундно в режиме реального времени на клиентской стороне и валидируется на сервере Supabase каждые 10 секунд с фиксацией в транзакционном реестре bonus_balance.<br><br>
+<b>РАЗДЕЛ 3. AIRDROP, ТОКЕНОГЕНЕРАЦИЯ (TGE) И СНАПШОТ</b><br><br>
+3.1. Все добытые в приложении пойнты PTS конвертируются в нативный utility-токен экосистемы в ходе Token Generation Event (TGE) на блокчейне The Open Network (TON).<br><br>
+3.2. Распределение дропа основывается на комплексном скоринге: объем накопленных PTS, уровень мощности проектов, активность в турнирных мини-играх и честный реферальный рейтинг.<br><br>
+3.3. Дата фиксации балансов (Snapshot) будет анонсирована за 14 календарных дней до события в официальном информационном канале.<br><br>
+<b>РАЗДЕЛ 4. ДОРОЖНАЯ КАРТА (ROADMAP)</b><br><br>
+• Фаза 1: Запуск комьюнити-пулов, реферального движка и мини-игры «Апгрейд» [Завершено].<br>
+• Фаза 2: Интеграция турнирных режимов «Мины», «Ракетка» и запуск смарт-контракта стейкинга.<br>
+• Фаза 3: Снапшот сети, выпуск смарт-контракта на TON, аудит безопасности CertiK.<br>
+• Фаза 4: Листинг токена на биржах (DEX STON.fi, DeDust) с последующим переходом на ведущие CEX-платформы.`
+        },
+        en: {
+          title: "Whitepaper / Tokenomics",
+          content: `<b>SECTION 1. EQUICORE CONCEPT AND ARCHITECTURE</b><br><br>
+1.1. EquiCore is a next-generation decentralized ecosystem combining infrastructure business projects with gamified community onboarding in Telegram.<br><br>
+1.2. Platform users gain access to three development pools: automated media networks (AI Media), cloud rendering clusters (Cloud Compute), and industrial green hydropower mining (Green Energy Hashrate).<br><br>
+<b>SECTION 2. MINING MATHEMATICS AND PTS SYNCHRONIZATION</b><br><br>
+2.1. The base farming rate is calculated using the algorithmic formula: Speed = Sum of activated capacities × 0.8 PTS/hour.<br><br>
+2.2. Points are accrued per second in real-time on the client side and validated on the Supabase server every 10 seconds with recording in the bonus_balance transaction ledger.<br><br>
+<b>SECTION 3. AIRDROP, TOKEN GENERATION EVENT (TGE), AND SNAPSHOT</b><br><br>
+3.1. All PTS points farmed in the application will convert into the ecosystem's native utility token during the Token Generation Event (TGE) on The Open Network (TON) blockchain.<br><br>
+3.2. Airdrop distribution is based on comprehensive scoring: total accumulated PTS, project power levels, mini-game tournament activity, and genuine referral rating.<br><br>
+3.3. The balance snapshot date will be announced 14 calendar days prior to the event in the official channel.<br><br>
+<b>SECTION 4. ROADMAP</b><br><br>
+• Phase 1: Launch of community pools, referral engine, and "Upgrade" game [Completed].<br>
+• Phase 2: Integration of tournament game modes ("Mines", "Rocket") and staking smart contracts.<br>
+• Phase 3: Network snapshot, TON smart contract deployment, CertiK security audit.<br>
+• Phase 4: Token listing on DEX (STON.fi, DeDust) followed by tier-1 CEX exchange listings.`
+        },
+        fr: {
+          title: "Whitepaper / Tokenomics",
+          content: `<b>SECTION 1. CONCEPT ET ARCHITECTURE EQUICORE</b><br><br>
+1.1. EquiCore est un écosystème décentralisé de nouvelle génération unissant des projets d'infrastructure réels aux mécanismes de gamification communautaire sur Telegram.<br><br>
+1.2. Les utilisateurs accèdent à trois pools d'expansion : réseaux de médias automatisés (AI Media), grappes de rendu cloud (Cloud Compute) et minage vert hydroélectrique industriel (Green Energy Hashrate).<br><br>
+<b>SECTION 2. MATHÉMATIQUE DU MINAGE ET SYNCHRONISATION DES PTS</b><br><br>
+2.1. La vitesse de farming de base est calculée selon la formule algorithmique : Vitesse = Somme des puissances activées × 0.8 PTS/heure.<br><br>
+2.2. L'accumulation des points s'effectue à la seconde en temps réel côté client et est validée sur Supabase toutes les 10 secondes dans le registre bonus_balance.<br><br>
+<b>SECTION 3. AIRDROP, TOKEN GENERATION EVENT (TGE) ET SNAPSHOT</b><br><br>
+3.1. Tous les points PTS accumulés seront convertis en token utilitaire natif lors de l'événement de génération de jetons (TGE) sur la blockchain TON.<br><br>
+3.2. L'allocation de l'airdrop repose sur un scoring global : volume de PTS, niveau des projets, performances aux mini-jeux et classement de parrainage.<br><br>
+3.3. La date du Snapshot sera annoncée 14 jours avant l'événement sur le canal officiel.<br><br>
+<b>SECTION 4. FEUILLE DE ROUTE (ROADMAP)</b><br><br>
+• Phase 1 : Lancement des pools communautaires, moteur de parrainage et jeu « Upgrade » [Terminé].<br>
+• Phase 2 : Modes tournois (« Mines », « Roquette ») et déploiement du smart contract de staking.<br>
+• Phase 3 : Snapshot réseau, déploiement du contrat TON, audit de sécurité CertiK.<br>
+• Phase 4 : Listing sur DEX (STON.fi, DeDust) puis déploiement sur les plateformes CEX majeures.`
+        },
+        vi: {
+          title: "Whitepaper / Tokenomics",
+          content: `<b>PHẦN 1. KHÁI NIỆM VÀ KIẾN TRÚC EQUICORE</b><br><br>
+1.1. EquiCore là hệ sinh thái phi tập trung thế hệ mới kết hợp các dự án kinh doanh hạ tầng với cơ chế trò chơi thu hút cộng đồng trên Telegram.<br><br>
+1.2. Người dùng nền tảng được tiếp cận 3 pool phát triển: mạng lưới truyền thông tự động (AI Media), cụm kết xuất đám mây (Cloud Compute) và khai thác xanh quy mô công nghiệp từ thủy điện (Green Energy Hashrate).<br><br>
+<b>PHẦN 2. THUẬT TOÁN ĐÀO VÀ ĐỒNG BỘ ĐIỂM PTS</b><br><br>
+2.1. Tốc độ đào cơ bản được tính theo công thức: Tốc độ = Tổng công suất kích hoạt × 0.8 PTS/giờ.<br><br>
+2.2. Điểm được tích lũy theo từng giây theo thời gian thực trên ứng dụng và được xác thực với máy chủ Supabase mỗi 10 giây qua sổ cái bonus_balance.<br><br>
+<b>PHẦN 3. AIRDROP, SỰ KIỆN TẠO TOKEN (TGE) VÀ SNAPSHOT</b><br><br>
+3.1. Toàn bộ điểm PTS tích lũy được sẽ được quy đổi sang utility token chính thức của hệ sinh thái trong sự kiện Token Generation Event (TGE) trên blockchain The Open Network (TON).<br><br>
+3.2. Tỷ lệ phân bổ airdrop dựa trên đánh giá tổng hợp: số lượng PTS, cấp độ dự án, mức độ tích cực trong mini game và điểm số giới thiệu chuẩn mực.<br><br>
+3.3. Thời điểm chốt số dư (Snapshot) sẽ được thông báo trước 14 ngày trên kênh thông tin chính thức.<br><br>
+<b>PHẦN 4. LỘ TRÌNH PHÁT TRIỂN (ROADMAP)</b><br><br>
+• Giai đoạn 1: Ra mắt các pool cộng đồng, hệ thống giới thiệu và mini game « Nâng cấp » [Đã hoàn thành].<br>
+• Giai đoạn 2: Tích hợp chế độ giải đấu (« Mìn », « Tên lửa ») và hợp đồng thông minh staking.<br>
+• Giai đoạn 3: Snapshot mạng lưới, triển khai hợp đồng TON, kiểm toán bảo mật CertiK.<br>
+• Giai đoạn 4: Niêm yết token trên các sàn DEX (STON.fi, DeDust) và tiếp theo là các sàn CEX hàng đầu.`
+        }
+      },
+      PRIVACY: {
+        ru: {
+          title: "Политика конфиденциальности",
+          content: `<b>СТАТЬЯ 1. ПРИНЦИП МИНИМИЗАЦИИ И АНОНИМНОСТИ</b><br><br>
+1.1. Сервис EquiCore уважает право пользователей на анонимность в концепции Web3. Сервис собирает исключительно минимально необходимые идентификаторы, передаваемые Telegram WebApp API:<br>
+• Уникальный числовой идентификатор Telegram (tg_id);<br>
+• Публичный никнейм (@username);<br>
+• Имя профиля (first_name) и ссылка на аватар (при наличии).<br><br>
+1.2. Сервис принципиально не запрашивает: персональные паспортные данные, номера телефонов, банковские реквизиты, физические адреса проживания и приватные ключи от криптокошельков.<br><br>
+<b>СТАТЬЯ 2. БЕЗОПАСНОСТЬ И ХРАНЕНИЕ ДАННЫХ</b><br><br>
+2.1. Обработка данных производится в защищенной облачной инфраструктуре Supabase с применением изоляции доступа на уровне строк (Row Level Security).<br><br>
+2.2. Мы не передаем, не продаем и не раскрываем данные пользователей сторонним аналитическим платформам или рекламодателям.`
+        },
+        en: {
+          title: "Privacy Policy",
+          content: `<b>ARTICLE 1. PRINCIPLE OF MINIMIZATION AND ANONYMITY</b><br><br>
+1.1. The EquiCore Service respects the privacy rights of users in the Web3 concept. The Service collects only the strictly necessary identifiers transmitted by the Telegram WebApp API:<br>
+• Unique numeric Telegram ID (tg_id);<br>
+• Public nickname (@username);<br>
+• Profile name (first_name) and avatar URL (if available).<br><br>
+1.2. The Service fundamentally does not request: personal passport data, phone numbers, banking details, physical residential addresses, or private keys to cryptocurrency wallets.<br><br>
+<b>ARTICLE 2. DATA SECURITY AND STORAGE</b><br><br>
+2.1. Data processing is carried out in the secure cloud infrastructure of Supabase with Row Level Security (RLS) isolation.<br><br>
+2.2. We do not transfer, sell, or disclose user data to third-party analytics platforms or advertisers.`
+        },
+        fr: {
+          title: "Politique de confidentialité",
+          content: `<b>ARTICLE 1. PRINCIPE DE MINIMISATION ET D'ANONYMAT</b><br><br>
+1.1. Le Service EquiCore respecte le droit des utilisateurs à l'anonymat dans l'esprit du Web3. Le Service collecte uniquement les identifiants minimaux transmis par l'API Telegram WebApp :<br>
+• Identifiant numérique unique Telegram (tg_id) ;<br>
+• Pseudo public (@username) ;<br>
+• Prénom de profil (first_name) et URL de l'avatar (le cas échéant).<br><br>
+1.2. Le Service ne demande en aucun cas : données d'identité, numéros de téléphone, coordonnées bancaires, adresses physiques ou clés privées de portefeuilles crypto.<br><br>
+<b>ARTICLE 2. SÉCURITÉ ET STOCKAGE DES DONNÉES</b><br><br>
+2.1. Le traitement des données est opéré sur l'infrastructure cloud sécurisée Supabase avec isolation au niveau des lignes (Row Level Security).<br><br>
+2.2. Nous ne transmettons, ne vendons et ne divulguons aucune donnée utilisateur à des régies publicitaires ou services tiers.`
+        },
+        vi: {
+          title: "Chính sách bảo mật",
+          content: `<b>ĐIỀU 1. NGUYÊN TẮC TỐI THIỂU HÓA VÀ ẨN DANH</b><br><br>
+1.1. Dịch vụ EquiCore tôn trọng quyền riêng tư và ẩn danh của người dùng theo tinh thần Web3. Dịch vụ chỉ thu thập các thông tin nhận dạng tối thiểu do Telegram WebApp API cung cấp:<br>
+• Mã số định danh Telegram duy nhất (tg_id);<br>
+• Tên người dùng công khai (@username);<br>
+• Tên hiển thị (first_name) và liên kết ảnh đại diện (nếu có).<br><br>
+1.2. Dịch vụ tuyệt đối không thu thập: giấy tờ tùy thân, số điện thoại, thông tin tài khoản ngân hàng, địa chỉ cư trú hoặc khóa riêng tư ví tiền mã hóa.<br><br>
+<b>ĐIỀU 2. AN TOÀN VÀ LƯU TRỮ DỮ LIỆU</b><br><br>
+2.1. Việc xử lý dữ liệu được tiến hành trên hạ tầng đám mây an toàn của Supabase với cơ chế bảo vệ phân quyền cấp hàng (Row Level Security).<br><br>
+2.2. Chúng tôi không chia sẻ, bán hoặc tiết lộ thông tin người dùng cho bất kỳ bên phân tích hoặc nhà quảng cáo nào.`
+        }
       }
     };
 
@@ -1950,6 +2244,10 @@
           el.innerText = dict[key];
         }
       });
+
+      // Обновляем динамические элементы с новым языком
+      updateUplineUI();
+      renderPortfolio();
 
       // Если пользователь авторизован в Supabase, сохраняем язык в профиле
       if (supabaseClient && dbUserId) {
@@ -2090,7 +2388,8 @@
     }
 
     function updateUplineUI() {
-      const text = uplineName ? uplineName : "Пришел сам";
+      const directText = TRANSLATIONS[currentLang]?.upline_direct || "Прямая регистрация";
+      const text = uplineName ? uplineName : directText;
       safeSetText('upline-display', text);
       safeSetText('profile-upline-name', text);
     }
@@ -2311,8 +2610,9 @@
     function renderPortfolio() {
       const container = safeGet('portfolio-list');
       if (!container) return;
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
       if (myPortfolio.length === 0) {
-        container.innerHTML = `<div style="text-align: center; padding: 40px 10px; color: var(--text-dim);">Пусто</div>`;
+        container.innerHTML = `<div style="text-align: center; padding: 40px 10px; color: var(--text-dim);">${dict.empty_portfolio || 'Пусто'}</div>`;
         return;
       }
 
@@ -2326,6 +2626,11 @@
         }
       });
       
+      const spentLabel = dict.col_spent || "ПОТРАЧЕНО";
+      const farmLabel = dict.shares_label || "СКОРОСТЬ ДОБЫЧИ";
+      const statusLabel = dict.col_status || "СТАТУС";
+      const farmingBadge = dict.status_farming || "Фарминг ⚡";
+
       container.innerHTML = Object.values(groupedPortfolio).map(item => {
         const farmRate = Math.floor(item.invested * 0.8);
         const level = Math.floor(item.invested / 100) || 1;
@@ -2337,9 +2642,9 @@
             <div><span class="project-tag" style="background: rgba(16, 185, 129, 0.12); color: var(--accent-green); border: 1px solid rgba(16,185,129,0.3);">ACTIVE</span></div>
           </div>
           <div class="equity-specs" style="margin-top: 14px; margin-bottom: 0; background: rgba(0, 0, 0, 0.4);">
-            <div class="equity-col"><span>ПОТРАЧЕНО</span><b style="color: #fff;">${item.invested} USDT</b></div>
-            <div class="equity-col"><span>СКОРОСТЬ ДОБЫЧИ</span><b style="color: var(--primary);">+${farmRate} PTS/ч</b></div>
-            <div class="equity-col"><span>СТАТУС</span><b style="color: var(--accent-gold);">Фарминг ⚡</b></div>
+            <div class="equity-col"><span>${spentLabel}</span><b style="color: #fff;">${item.invested} USDT</b></div>
+            <div class="equity-col"><span>${farmLabel}</span><b style="color: var(--primary);">+${farmRate} PTS/ч</b></div>
+            <div class="equity-col"><span>${statusLabel}</span><b style="color: var(--accent-gold);">${farmingBadge}</b></div>
           </div>
         </div>`;
       }).join('');
@@ -2395,85 +2700,16 @@
       const btnClose = modal ? modal.querySelector('.btn[data-i18n="btn_close"]') : null;
       if (btnClose) btnClose.innerText = TRANSLATIONS[currentLang]?.btn_close || "Понятно";
 
-      if (docType === 'SAFE') {
-        if (title) title.innerText = currentLang === 'ru' ? "Пользовательское соглашение" : (TRANSLATIONS[currentLang]?.doc_safe_title || "User Agreement");
-        if (content) content.innerHTML = `
-          <b>СТАТЬЯ 1. ПРЕДМЕТ СОГЛАШЕНИЯ И ПОРЯДОК АКЦЕПТА</b><br><br>
-          1.1. Настоящее Пользовательское соглашение (далее — «Соглашение») представляет собой юридически обязывающую публичную оферту между разработчиками и администрацией экосистемы EquiCore (далее — «Сервис») и любым физическим лицом, использующим Telegram WebApp бота (далее — «Пользователь»).<br><br>
-          1.2. Запуск приложения, авторизация через Telegram WebApp SDK, а равно совершение любых финансовых или игровых действий внутри интерфейса признается полным и безоговорочным акцептом условий настоящего Соглашения в порядке ст. 438 ГК РФ и международного торгового права.<br><br>
-          <b>СТАТЬЯ 2. СТАТУС ВНУТРИИГРОВЫХ АКТИВОВ И ПОЙНТОВ (PTS)</b><br><br>
-          2.1. Все объекты, отображаемые в приложении — баланс PTS, уровни проектов, сертификаты активов, карточки и внутриигровые бусты — представляют собой нематериальные цифровые права на использование функционала развлекательного программного обеспечения.<br><br>
-          2.2. Начисляемые очки PTS и приобретаемые уровни мощности не являются:<br>
-          • ценными бумагами, акциями, облигациями или производными финансовыми инструментами (деривативами);<br>
-          • долями в уставном капитале каких-либо юридических лиц;<br>
-          • валютными ценностями, банковскими вкладами или объектами доверительного управления.<br><br>
-          2.3. Приобретение уровней и бустов является добровольной невозвратной платой за расширение игровых привилегий внутри платформы.<br><br>
-          <b>СТАТЬЯ 3. ОТКАЗ ОТ ИНВЕСТИЦИОННЫХ ГАРАНТИЙ (DISCLAIMER)</b><br><br>
-          3.1. Сервис не осуществляет брокерскую, дилерскую, инвестиционную или банковскую деятельность. Любые числовые показатели доходности и скорости майнинга отражают исключительно параметры игрового алгоритма.<br><br>
-          3.2. Администрация сервиса не дает гарантий получения прибыли, возврата внесенных средств или достижения определенной рыночной стоимости активов при будущем листинге. Пользователь осознает все риски волатильности крипторынка и принимает их в полном объеме.<br><br>
-          <b>СТАТЬЯ 4. ОТВЕТСТВЕННОСТЬ СТОРОН И ФОРС-МАЖОР</b><br><br>
-          4.1. Сервис предоставляется по принципу «как есть» (AS IS). Администрация не несет ответственности за перебои в работе серверов Telegram, сбои транзакций в блокчейнах TON/TRON, а также задержки платежных провайдеров Crypto Bot и Telegram Stars.<br><br>
-          4.2. Администрация вправе в одностороннем порядке вносить изменения в игровой баланс, экономику очков и интерфейс для оптимизации работы экосистемы.`;
-      } else if (docType === 'AGENT') {
-        if (title) title.innerText = currentLang === 'ru' ? "Реферальная программа" : (TRANSLATIONS[currentLang]?.doc_agent_title || "Referral Program");
-        if (content) content.innerHTML = `
-          <b>СТАТЬЯ 1. УСЛОВИЯ ПАРТНЕРСКОГО ВОЗНАГРАЖДЕНИЯ</b><br><br>
-          1.1. Каждый верифицированный Пользователь имеет право принимать участие в партнерской программе EquiCore посредством распространения своей уникальной реферальной ссылки вида t.me/EquiCoreBot?startapp=ref_ID.<br><br>
-          1.2. Партнерское вознаграждение составляет фиксированные 10% от суммы каждого прямого пополнения баланса пользователями 1-й линии (прямые рефералы). Начисление производится моментально в расчетных единицах USDT на специальный «Партнерский счет».<br><br>
-          <b>СТАТЬЯ 2. РЕГЛАМЕНТ И УСЛОВИЯ ВЫВОДА СРЕДСТВ</b><br><br>
-          2.1. Вывод средств с партнерского счета осуществляется в цифровых активах USDT стандарта TRC20 или TON.<br><br>
-          2.2. Минимальный порог для формирования заявки на вывод составляет 5.00 USDT.<br><br>
-          2.3. Заявки обрабатываются автоматизированным финансовым шлюзом в срок от 5 минут до 24 часов. Платформа оставляет за собой право проводить ручную модерацию крупных транзакций с целью защиты от мошеннических действий.<br><br>
-          <b>СТАТЬЯ 3. СТРОГАЯ АНТИФРОД-ПОЛИТИКА (ANTI-FRAUD REGULATIONS)</b><br><br>
-          3.1. Категорически запрещены любые формы манипуляций и недобросовестного привлечения, включая:<br>
-          • Создание мультиаккаунтов и самореферальных цепочек (регистрация собственных аккаунтов под свою ссылку);<br>
-          • Использование спам-рассылок в личные сообщения Telegram, автоматических кликеров и ферм эмуляторов;<br>
-          • Введение привлекаемых участников в заблуждение относительно функционала приложения.<br><br>
-          3.2. При выявлении фактов фрода администрация сервиса имеет право немедленно аннулировать начисленный партнерский баланс и перманентно заблокировать профиль нарушителя.`;
-      } else {
-        if (title) title.innerText = currentLang === 'ru' ? "Whitepaper / Токеномика" : (TRANSLATIONS[currentLang]?.doc_ledger_title || "Whitepaper / Tokenomics");
-        if (content) content.innerHTML = `
-          <b>РАЗДЕЛ 1. КОНЦЕПЦИЯ И АРХИТЕКТУРА EQUICORE</b><br><br>
-          1.1. EquiCore — децентрализованная экосистема нового поколения, объединяющая инфраструктурные бизнес-проекты с игровыми механиками привлечения сообщества в Telegram.<br><br>
-          1.2. Пользователи платформы получают доступ к трем пулам развития: автоматизированные медиасети (AI Media), кластеры облачного рендеринга (Cloud Compute) и промышленный зеленый майнинг на гидрогенерации (Green Energy Hashrate).<br><br>
-          <b>РАЗДЕЛ 2. МАТЕМАТИКА МАЙНИНГА И СИНХРОНИЗАЦИЯ PTS</b><br><br>
-          2.1. Базовая скорость фарма очков рассчитывается по алгоритмической формуле: Скорость = Сумма активированных мощностей × 0.8 PTS/час.<br><br>
-          2.2. Начисление очков происходит посекундно в режиме реального времени на клиентской стороне и валидируется на сервере Supabase каждые 10 секунд с фиксацией в транзакционном реестре bonus_balance.<br><br>
-          <b>РАЗДЕЛ 3. AIRDROP, ТОКЕНОГЕНЕРАЦИЯ (TGE) И СНАПШОТ</b><br><br>
-          3.1. Все добытые в приложении пойнты PTS конвертируются в нативный utility-токен экосистемы в ходе Token Generation Event (TGE) на блокчейне The Open Network (TON).<br><br>
-          3.2. Распределение дропа основывается на комплексном скоринге: объем накопленных PTS, уровень мощности проектов, активность в турнирных мини-играх и честный реферальный рейтинг.<br><br>
-          3.3. Дата фиксации балансов (Snapshot) будет анонсирована за 14 календарных дней до события в официальном информационном канале.<br><br>
-          <b>РАЗДЕЛ 4. ДОРОЖНАЯ КАРТА (ROADMAP)</b><br><br>
-          • Фаза 1: Запуск комьюнити-пулов, реферального движка и мини-игры «Апгрейд» [Завершено].<br>
-          • Фаза 2: Интеграция турнирных режимов «Мины», «Ракетка» и запуск смарт-контракта стейкинга.<br>
-          • Фаза 3: Снапшот сети, выпуск смарт-контракта на TON, аудит безопасности CertiK.<br>
-          • Фаза 4: Листинг токена на биржах (DEX STON.fi, DeDust) с последующим переходом на ведущие CEX-платформы.`;
+      const doc = DOCS_DATA[docType]?.[currentLang] || DOCS_DATA[docType]?.['ru'];
+      if (doc) {
+        if (title) title.innerText = doc.title;
+        if (content) content.innerHTML = doc.content;
       }
       if (modal) modal.classList.add('active');
     }
     
     function openTerms() { closeSupportMenu(); openDocModal('SAFE'); }
-    function openPrivacy() {
-      closeSupportMenu();
-      const modal = safeGet('doc-modal');
-      const title = safeGet('doc-modal-title');
-      const content = safeGet('doc-modal-content');
-      const btnClose = modal ? modal.querySelector('.btn[data-i18n="btn_close"]') : null;
-      if (btnClose) btnClose.innerText = TRANSLATIONS[currentLang]?.btn_close || "Понятно";
-
-      if (title) title.innerText = currentLang === 'ru' ? "Политика конфиденциальности" : (TRANSLATIONS[currentLang]?.support_privacy || "Privacy Policy");
-      if (content) content.innerHTML = `
-        <b>СТАТЬЯ 1. ПРИНЦИП МИНИМИЗАЦИИ И АНОНИМНОСТИ</b><br><br>
-        1.1. Сервис EquiCore уважает право пользователей на анонимность в концепции Web3. Сервис собирает исключительно минимально необходимые идентификаторы, передаваемые Telegram WebApp API:<br>
-        • Уникальный числовой идентификатор Telegram (tg_id);<br>
-        • Публичный никнейм (@username);<br>
-        • Имя профиля (first_name) и ссылка на аватар (при наличии).<br><br>
-        1.2. Сервис принципиально не запрашивает: персональные паспортные данные, номера телефонов, банковские реквизиты, физические адреса проживания и приватные ключи от криптокошельков.<br><br>
-        <b>СТАТЬЯ 2. БЕЗОПАСНОСТЬ И ХРАНЕНИЕ ДАННЫХ</b><br><br>
-        2.1. Обработка данных производится в защищенной облачной инфраструктуре Supabase с применением изоляции доступа на уровне строк (Row Level Security).<br><br>
-        2.2. Мы не передаем, не продаем и не раскрываем данные пользователей сторонним аналитическим платформам или рекламодателям.`;
-      if (modal) modal.classList.add('active');
-    }
+    function openPrivacy() { closeSupportMenu(); openDocModal('PRIVACY'); }
     
     function closeDocModal() { const m = safeGet('doc-modal'); if (m) m.classList.remove('active'); }
 
