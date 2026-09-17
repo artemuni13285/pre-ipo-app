@@ -5009,6 +5009,24 @@
       }
     }
 
+    function stopAllShowcaseAnimations() {
+      if (typeof window.stopShowcaseGifts === 'function') {
+        window.stopShowcaseGifts();
+      }
+      if (typeof window.stopShowcaseRocket === 'function') {
+        window.stopShowcaseRocket();
+      }
+      if (typeof window.stopShowcaseRoulette === 'function') {
+        window.stopShowcaseRoulette();
+      }
+      if (typeof window.stopShowcaseUpgrade === 'function') {
+        window.stopShowcaseUpgrade();
+      }
+      if (typeof window.stopShowcaseMines === 'function') {
+        window.stopShowcaseMines();
+      }
+    }
+
     function restartShowcaseAnimations() {
       if (typeof window.restartShowcaseRoulette === 'function') {
         window.restartShowcaseRoulette();
@@ -5039,11 +5057,13 @@
         if (matchingBtn) matchingBtn.classList.add('active');
       }
 
-      // Устранение статичного первого цикла при переходе во вкладку «Игры»
       if (screenId === 'games') {
+        stopAllShowcaseAnimations();
         setTimeout(() => {
           restartShowcaseAnimations();
-        }, 50);
+        }, 100);
+      } else {
+        stopAllShowcaseAnimations();
       }
     }
 
@@ -5124,6 +5144,9 @@
     }
 
     function openInnerGame(gameId) {
+      // Глушим все анимации витрины при переходе во внутреннюю игру
+      stopAllShowcaseAnimations();
+
       // Скрываем глобальную верхнюю карточку .hero-card
       const hero = document.querySelector('.hero-card');
       if (hero) hero.style.display = 'none';
@@ -5163,9 +5186,10 @@
       if (hero) hero.style.display = 'block';
 
       updateUI();
+      stopAllShowcaseAnimations();
       setTimeout(() => {
         restartShowcaseAnimations();
-      }, 50);
+      }, 100);
     }
 
     function switchUpgradeCurrency(curr) {
@@ -6594,6 +6618,13 @@
       const p5 = document.getElementById('sc-pill-5');
 
       if (cowWrap && giftTrack) {
+        let giftsShowcaseTimeouts = [];
+
+        const clearGiftsTimeouts = () => {
+          giftsShowcaseTimeouts.forEach(t => clearTimeout(t));
+          giftsShowcaseTimeouts = [];
+        };
+
         const triggerJump = (targetLeft) => {
           cowWrap.classList.add('is-moving');
           giftTrack.classList.add('is-moving');
@@ -6636,6 +6667,7 @@
         };
 
         const hardCutToSidewalk = () => {
+          clearGiftsTimeouts();
           if (coinsBurst) coinsBurst.innerHTML = '';
           cowWrap.classList.remove('is-moving');
           giftTrack.classList.remove('is-moving');
@@ -6657,58 +6689,79 @@
         };
 
         const runGiftsCycle = () => {
+          clearGiftsTimeouts();
+
+          // Проверка активности вкладки игр и видимости витрины
+          const sg = document.getElementById('screen-games');
+          const hv = document.getElementById('games-hub-view');
+          if ((sg && !sg.classList.contains('active')) || (hv && (hv.style.display === 'none' || getComputedStyle(hv).display === 'none'))) return;
+
           hardCutToSidewalk();
 
           // 1.0с: Прыжок на Люк 1 -> мягкое касание на 420мс
-          setTimeout(() => {
+          giftsShowcaseTimeouts.push(setTimeout(() => {
             triggerJump('56px');
-            setTimeout(() => {
+            giftsShowcaseTimeouts.push(setTimeout(() => {
               if (mh1) mh1.src = 'assets/manhole-passed.png';
               if (p1) p1.classList.add('pill-active');
-            }, 420);
-          }, 1000);
+            }, 420));
+          }, 1000));
 
           // 2.3с: Прыжок на Люк 2 -> мягкое касание на 420мс
-          setTimeout(() => {
+          giftsShowcaseTimeouts.push(setTimeout(() => {
             triggerJump('160px');
-            setTimeout(() => {
+            giftsShowcaseTimeouts.push(setTimeout(() => {
               if (mh2) mh2.src = 'assets/manhole-passed.png';
               if (p2) p2.classList.add('pill-active');
-            }, 420);
-          }, 2300);
+            }, 420));
+          }, 2300));
 
           // 3.6с: Сдвиг трека (-104px) & прыжок на Люк 3 -> мягкое касание на 420мс
-          setTimeout(() => {
+          giftsShowcaseTimeouts.push(setTimeout(() => {
             giftTrack.style.transform = 'translateX(-104px)';
             triggerJump('264px');
-            setTimeout(() => {
+            giftsShowcaseTimeouts.push(setTimeout(() => {
               if (mh3) mh3.src = 'assets/manhole-passed.png';
               if (p3) p3.classList.add('pill-active');
-            }, 420);
-          }, 3600);
+            }, 420));
+          }, 3600));
 
           // 4.9с: Сдвиг трека (-208px) & прыжок на Люк 4 -> мягкое касание на 420мс + салют
-          setTimeout(() => {
+          giftsShowcaseTimeouts.push(setTimeout(() => {
             giftTrack.style.transform = 'translateX(-208px)';
             triggerJump('368px');
-            setTimeout(() => {
+            giftsShowcaseTimeouts.push(setTimeout(() => {
               if (mh4) mh4.src = 'assets/manhole-passed.png';
               if (p4) p4.classList.add('pill-active');
               spawnCoinsFromCowBack();
-            }, 420);
-          }, 4900);
+            }, 420));
+          }, 4900));
 
-          // 7.0с: Резкий монтажный сброс на старт
-          setTimeout(() => {
+          // 7.0с: Резкий монтажный сброс на старт и строгий последовательный запуск
+          giftsShowcaseTimeouts.push(setTimeout(() => {
             hardCutToSidewalk();
-          }, 7000);
+            giftsShowcaseTimeouts.push(setTimeout(() => {
+              runGiftsCycle();
+            }, 400));
+          }, 7000));
         };
 
-        runGiftsCycle();
-        setInterval(runGiftsCycle, 7400);
-        window.restartShowcaseGifts = () => {
-          runGiftsCycle();
+        window.stopShowcaseGifts = () => {
+          clearGiftsTimeouts();
+          hardCutToSidewalk();
         };
+
+        window.restartShowcaseGifts = () => {
+          clearGiftsTimeouts();
+          hardCutToSidewalk();
+          requestAnimationFrame(() => {
+            giftsShowcaseTimeouts.push(setTimeout(() => {
+              runGiftsCycle();
+            }, 80));
+          });
+        };
+
+        window.restartShowcaseGifts();
       }
 
       // 2. «РАКЕТКА»: Плавный экспоненциальный взлёт, инерция и динамическая физика джетпака
@@ -6725,10 +6778,36 @@
 
       if (rkLine && rkHead && rkMult) {
         let rocketAnimId = null;
+        let rocketShowcaseTimeouts = [];
+
+        const clearRocketTimeouts = () => {
+          rocketShowcaseTimeouts.forEach(t => clearTimeout(t));
+          rocketShowcaseTimeouts = [];
+        };
+
+        const stopRocketFlight = () => {
+          clearRocketTimeouts();
+          if (rocketAnimId) {
+            cancelAnimationFrame(rocketAnimId);
+            rocketAnimId = null;
+          }
+        };
 
         const runRocketFlight = () => {
+          clearRocketTimeouts();
+          if (rocketAnimId) {
+            cancelAnimationFrame(rocketAnimId);
+            rocketAnimId = null;
+          }
+
+          // Проверка активности вкладки игр и видимости витрины
+          const screenGames = document.getElementById('screen-games');
+          const hubView = document.getElementById('games-hub-view');
+          if (screenGames && !screenGames.classList.contains('active')) return;
+          if (hubView && (hubView.style.display === 'none' || getComputedStyle(hubView).display === 'none')) return;
+
           const duration = 3300;
-          const startTime = performance.now();
+          let startTime = performance.now();
           const targetMult = +(4.6 + Math.random() * 3.2).toFixed(2);
 
           // Сброс в исходное состояние
@@ -6748,6 +6827,13 @@
           rkHead.style.offsetDistance = '0%';
 
           const frame = (now) => {
+            const sg = document.getElementById('screen-games');
+            const hv = document.getElementById('games-hub-view');
+            if ((sg && !sg.classList.contains('active')) || (hv && (hv.style.display === 'none' || getComputedStyle(hv).display === 'none'))) {
+              stopRocketFlight();
+              return;
+            }
+
             const elapsed = now - startTime;
             const p = Math.min(elapsed / duration, 1);
 
@@ -6789,24 +6875,29 @@
               if (rkBoomBg) rkBoomBg.style.display = 'inline';
               rkMult.style.display = 'none';
 
-              setTimeout(() => {
+              rocketShowcaseTimeouts.push(setTimeout(() => {
                 if (rkBoomWrap) rkBoomWrap.style.display = 'inline';
-              }, 120);
+              }, 120));
 
-              setTimeout(() => {
+              rocketShowcaseTimeouts.push(setTimeout(() => {
                 runRocketFlight();
-              }, 2100);
+              }, 2100));
             }
           };
 
           rocketAnimId = requestAnimationFrame(frame);
         };
 
-        runRocketFlight();
+        window.stopShowcaseRocket = () => {
+          stopRocketFlight();
+        };
+
         window.restartShowcaseRocket = () => {
-          if (rocketAnimId) cancelAnimationFrame(rocketAnimId);
+          stopRocketFlight();
           runRocketFlight();
         };
+
+        window.restartShowcaseRocket();
       }
 
       // 3. «РУЛЕТКА»: Цикличная прокрутка strictly forward (4.7s) с разными подарками и двухфазным выходом
@@ -6857,6 +6948,12 @@
           clearTimeout(rouletteWinTimeout);
           clearTimeout(rouletteCloseTimeout);
           clearTimeout(rouletteNextTimeout);
+
+          // Проверка активности вкладки игр и видимости витрины
+          const sg = document.getElementById('screen-games');
+          const hv = document.getElementById('games-hub-view');
+          if ((sg && !sg.classList.contains('active')) || (hv && (hv.style.display === 'none' || getComputedStyle(hv).display === 'none'))) return;
+
           resetRouletteState();
 
           // 2. Случайный выбор следующего подарка (отличного от предыдущего)
@@ -6960,6 +7057,14 @@
           }, 4750);
         };
 
+        window.stopShowcaseRoulette = () => {
+          clearTimeout(rouletteSpinTimeout);
+          clearTimeout(rouletteWinTimeout);
+          clearTimeout(rouletteCloseTimeout);
+          clearTimeout(rouletteNextTimeout);
+          resetRouletteState();
+        };
+
         window.restartShowcaseRoulette = () => {
           clearTimeout(rouletteSpinTimeout);
           clearTimeout(rouletteWinTimeout);
@@ -6982,11 +7087,14 @@
           const startX = (visorW / 2) - startCenter;
           scRouletteTape.style.transition = 'none';
           scRouletteTape.style.transform = `translateX(${startX}px)`;
+          void scRouletteTape.offsetWidth; // Force reflow для iOS WebKit
 
           // Запуск вращения вперед с небольшой задержкой для инициализации отрисовки
-          rouletteSpinTimeout = setTimeout(() => {
-            runRouletteSpin();
-          }, 80);
+          requestAnimationFrame(() => {
+            rouletteSpinTimeout = setTimeout(() => {
+              runRouletteSpin();
+            }, 80);
+          });
         };
 
         window.restartShowcaseRoulette();
@@ -7028,6 +7136,12 @@
 
         const runUpgradeSpin = () => {
           clearUpgradeTimeouts();
+
+          // Проверка активности вкладки игр и видимости витрины
+          const sg = document.getElementById('screen-games');
+          const hv = document.getElementById('games-hub-view');
+          if ((sg && !sg.classList.contains('active')) || (hv && (hv.style.display === 'none' || getComputedStyle(hv).display === 'none'))) return;
+
           setUpgradeWinState(false);
 
           // Плавное вращение вперед на 3 полных оборота (+1080 градусов)
@@ -7047,11 +7161,27 @@
           }, 3400);
         };
 
+        window.stopShowcaseUpgrade = () => {
+          clearUpgradeTimeouts();
+          setUpgradeWinState(false);
+          if (upRotor) upRotor.classList.remove('is-spinning');
+        };
+
         window.restartShowcaseUpgrade = () => {
           clearUpgradeTimeouts();
-          upgradeSpinTimeout = setTimeout(() => {
-            runUpgradeSpin();
-          }, 60);
+          setUpgradeWinState(false);
+          if (upRotor) {
+            upRotor.classList.remove('is-spinning');
+            upRotor.style.transition = 'none';
+            upRotor.style.transform = `rotate(${upDeg}deg)`;
+            void upRotor.offsetWidth;
+            upRotor.style.transition = '';
+          }
+          requestAnimationFrame(() => {
+            upgradeSpinTimeout = setTimeout(() => {
+              runUpgradeSpin();
+            }, 60);
+          });
         };
 
         window.restartShowcaseUpgrade();
@@ -7109,6 +7239,12 @@
 
         const runMinesCycle = () => {
           clearMinesTimeouts();
+
+          // Проверка активности вкладки игр и видимости витрины
+          const sg = document.getElementById('screen-games');
+          const hv = document.getElementById('games-hub-view');
+          if ((sg && !sg.classList.contains('active')) || (hv && (hv.style.display === 'none' || getComputedStyle(hv).display === 'none'))) return;
+
           // 0.0s: Сброс сетки в покой
           resetMinesBoard();
 
@@ -7170,11 +7306,19 @@
           }, 6200));
         };
 
+        window.stopShowcaseMines = () => {
+          clearMinesTimeouts();
+          resetMinesBoard();
+        };
+
         window.restartShowcaseMines = () => {
           clearMinesTimeouts();
-          minesShowcaseTimeouts.push(setTimeout(() => {
-            runMinesCycle();
-          }, 60));
+          resetMinesBoard();
+          requestAnimationFrame(() => {
+            minesShowcaseTimeouts.push(setTimeout(() => {
+              runMinesCycle();
+            }, 60));
+          });
         };
 
         window.restartShowcaseMines();
@@ -7486,6 +7630,11 @@
         initShowcasePreviewCycle();
       } catch (e) {
         console.warn("Showcase preview init:", e);
+      }
+      // Если стартовый экран не screen-games, глушим фоновые анимации витрины для экономии ресурсов и защиты от рассинхрона на iOS
+      const screenGames = document.getElementById('screen-games');
+      if (!screenGames || !screenGames.classList.contains('active')) {
+        stopAllShowcaseAnimations();
       }
     }
 
