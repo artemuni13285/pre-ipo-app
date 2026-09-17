@@ -866,6 +866,10 @@
                   linear-gradient(155deg, #241c0b 0%, #0d0c07 100%);
       border: 1px solid rgba(234, 179, 8, 0.5);
       box-shadow: 0 14px 32px -6px rgba(0, 0, 0, 0.75), 0 0 20px -6px rgba(234, 179, 8, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+      transition: background 0.5s ease;
+    }
+    .gc-roulette.is-won {
+      background: radial-gradient(circle at 50% 40%, rgba(180, 115, 15, 0.4) 0%, rgba(35, 24, 8, 0.95) 65%, #0d0a04 100%) !important;
     }
     .gc-upgrade { 
       background: radial-gradient(circle at 50% 35%, rgba(249, 115, 22, 0.28) 0%, transparent 65%),
@@ -919,108 +923,195 @@
       left: 0;
       height: 100%;
       display: flex;
-      transition: transform 0.45s cubic-bezier(0.34, 1.2, 0.64, 1);
       will-change: transform;
     }
-    .giftroad-sidewalk {
-      width: 42px;
-      height: 100%;
-      position: relative;
-      flex-shrink: 0;
-      z-index: 3;
-    }
-    .sidewalk-grass {
-      position: absolute;
-      top: 0; left: 0; bottom: 0;
-      width: 6px;
-      background: #1a4731;
-      background-image: radial-gradient(circle at 100% 50%, #256643 3px, transparent 4px);
-      background-size: 6px 14px;
-    }
-    .sidewalk-pavement {
-      position: absolute;
-      top: 0; left: 6px; right: 0; bottom: 0;
-      background: #6c788a;
-      background-image: repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(0, 0, 0, 0.22) 19px, rgba(0, 0, 0, 0.22) 20px);
-      border-right: 3px solid #94a3b8;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 8px;
-      gap: 8px;
-    }
-    .giftroad-lane {
-      width: 70px;
-      height: 100%;
-      flex-shrink: 0;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding-top: 8px;
-      box-sizing: border-box;
-      border-right: 2px dashed rgba(255, 255, 255, 0.2);
-      background: #1d1e38;
-    }
-    .gift-top-circle {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(15, 23, 42, 0.6) 0%, transparent 70%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: giftFloat 2.4s ease-in-out infinite;
-    }
-    @keyframes giftFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
-    }
-    .lane-bottom-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 4px;
-    }
-    .lane-manhole-group {
-      position: relative;
-      width: 44px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .cow-runner-hop {
-      position: absolute;
-      bottom: 34px;
-      width: 44px;
-      height: 32px;
-      z-index: 6;
-      transition: left 0.45s cubic-bezier(0.34, 1.4, 0.64, 1);
-      pointer-events: none;
-    }
-    .cow-runner-hop img {
-      width: 44px;
-      display: block;
-      animation: cowHop 0.65s cubic-bezier(0.28, 0.84, 0.42, 1) infinite;
-      filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.7));
-    }
-    @keyframes cowHop {
-      0%, 100% { transform: translateY(0) scale(1, 1); }
-      50% { transform: translateY(-6px) scale(1.04, 0.96); }
-    }
-    .gifts-lane-pill {
-      font-family: 'JetBrains Mono', -apple-system, sans-serif;
-      font-size: 13px;
-      font-weight: 800;
-      padding: 1px 8px;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-      margin-top: 6px;
-      letter-spacing: -0.3px;
-      transition: all 0.3s ease;
-    }
+/* Фиксированная ширина тротуара */
+.giftroad-sidewalk {
+  width: 36px !important;
+  height: 100%;
+  position: relative;
+  flex-shrink: 0;
+  z-index: 3;
+}
+.giftroad-sidewalk img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  display: block;
+}
+
+/* Широкие полосы (104px) для свободного расстояния между люками и подарками */
+.giftroad-lane {
+  width: 104px !important;
+  height: 100%;
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 8px;
+  box-sizing: border-box;
+  border-right: none !important;
+  background-color: #1d1e38;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.22) 14px, transparent 14px);
+  background-size: 2px 36px;
+  background-repeat: repeat-y;
+  background-position: right top;
+}
+.gift-top-circle {
+  width: 44px;
+  height: 44px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(15, 23, 42, 0.6) 0%, transparent 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: giftFloat 2.4s ease-in-out infinite;
+}
+.gift-top-circle img {
+  width: 42px !important;
+  height: auto;
+}
+@keyframes giftFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.lane-bottom-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 4px;
+}
+
+/* Люки 44px и опущенные плашки множителей */
+.lane-manhole-group {
+  position: relative;
+  width: 44px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lane-manhole-group img {
+  width: 44px !important;
+  height: auto;
+}
+/* Базовый вид плашек множителей */
+.gifts-lane-pill {
+  font-family: 'JetBrains Mono', -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 2px 10px;
+  border-radius: 12px;
+  margin-top: 14px !important;
+  letter-spacing: -0.3px;
+  background: #1c2237;
+  color: #64748b;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  transition: all 0.35s ease;
+}
+
+/* Подсветка плашки при активации люка (яркий неоновый синий как в RubUP) */
+.gifts-lane-pill.pill-active {
+  background: #3b82f6 !important;
+  color: #ffffff !important;
+  border-color: #60a5fa !important;
+  box-shadow: 0 0 14px rgba(59, 130, 246, 0.85), 0 0 24px rgba(37, 99, 235, 0.5) !important;
+}
+
+/* Базовое положение коровы (transition отключен по умолчанию, чтобы исключить откат назад) */
+.cow-runner-hop {
+  position: absolute;
+  bottom: 54px !important;
+  width: 72px !important;
+  height: 48px !important;
+  z-index: 6;
+  pointer-events: none;
+}
+.cow-runner-hop img {
+  width: 72px !important;
+  display: block;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.8));
+}
+
+/* Плавное, упругое перемещение по горизонтали (0.45s) */
+.cow-runner-hop.is-moving {
+  transition: left 0.45s cubic-bezier(0.38, 0.1, 0.2, 1) !important;
+}
+.giftroad-track.is-moving {
+  transition: transform 0.45s cubic-bezier(0.38, 0.1, 0.2, 1) !important;
+}
+
+/* 
+  Мягкий мультяшный Squash & Stretch:
+  - 0-15%: легкий мягкий присед перед толчком (сжатие на 6%)
+  - 15-50%: плавный взлет с небольшим растяжением тела вверх (stretch 6%)
+  - 50-85%: свободный дуговой полет в нормальной пропорции
+  - 85-93%: мягкая пружинящая амортизация копытами при касании люка (сжатие 5%)
+  - 100%: спокойная стойка на люке
+  (Полностью исключены резкие rotate и skew, вызывавшие тряску спрайта)
+*/
+@keyframes cowPhysicsJump {
+  0% {
+    transform: translateY(0) scale(1, 1);
+  }
+  15% {
+    transform: translateY(1px) scale(1.05, 0.94);
+  }
+  48% {
+    transform: translateY(-24px) scale(0.96, 1.06);
+  }
+  84% {
+    transform: translateY(-2px) scale(0.99, 1.02);
+  }
+  92% {
+    transform: translateY(1px) scale(1.04, 0.95);
+  }
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+}
+
+.cow-jumping {
+  animation: cowPhysicsJump 0.45s cubic-bezier(0.35, 0.15, 0.25, 1) forwards !important;
+  transform-origin: 50% 95%; /* Точка опоры строго в копытах */
+}
+
+/* Монеты из спины */
+.sc-coins-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 8;
+  overflow: visible;
+}
+.coin-particle {
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffe066 0%, #f59e0b 70%, #b45309 100%);
+  border: 1px solid #fff;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.9);
+  opacity: 0;
+  animation: coinBurstBack 1.3s cubic-bezier(0.16, 0.8, 0.3, 1) forwards;
+}
+@keyframes coinBurstBack {
+  0% {
+    transform: translate(0, 0) scale(0.3);
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(1.1) rotate(var(--rot));
+    opacity: 0;
+  }
+}
     .pill-blue {
       background: #202c4f;
       color: #60a5fa;
@@ -1045,21 +1136,203 @@
     }
 
     /* 2. РАКЕТКА */
+    /* Ракета: плавное автоматическое следование углу дуги */
     .rocket-flyer-wrap {
-      offset-path: path('M 14 96 C 56 94, 98 84, 128 70 S 154 56, 168 50');
-      offset-rotate: auto;
+      offset-rotate: auto !important;
+      will-change: offset-distance;
     }
 
-    /* 3. РУЛЕТКА (ГОРИЗОНТАЛЬНЫЙ СКРОЛЛ) */
+    /* 1. Дышащая космическая туманность на фоне карточки */
+    @keyframes rkNebulaShift {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.35;
+      }
+      50% {
+        transform: translate(-14px, 10px) scale(1.2);
+        opacity: 0.6;
+      }
+    }
+    .rk-nebula-pulse {
+      animation: rkNebulaShift 4.5s ease-in-out infinite;
+      transform-origin: 140px 30px;
+    }
+
+    /* 2. Световые штрихи гиперскорости, летящие навстречу ракете (сверху-справа вниз-влево) */
+    @keyframes warpStreakFlow {
+      0% {
+        transform: translate(65px, -45px);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.75;
+      }
+      80% {
+        opacity: 0.75;
+      }
+      100% {
+        transform: translate(-105px, 75px);
+        opacity: 0;
+      }
+    }
+    .rk-warp-line {
+      stroke-linecap: round;
+      animation: warpStreakFlow 1.4s linear infinite;
+    }
+    .rk-warp-fast {
+      animation-duration: 0.95s;
+    }
+    .rk-w-del1 { animation-delay: 0s; }
+    .rk-w-del2 { animation-delay: 0.35s; }
+    .rk-w-del3 { animation-delay: 0.7s; }
+    .rk-w-del4 { animation-delay: 1.05s; }
+
+    /* Затухание потоков скорости при взрыве */
+    .rk-crashed .rk-warp-line {
+      opacity: 0 !important;
+      transition: opacity 0.3s ease;
+    }
+
+    /* 3. Живое мерцание космических звезд */
+    @keyframes starTwinkleLoop {
+      0%, 100% { opacity: 0.2; transform: scale(0.85); }
+      50% { opacity: 0.9; transform: scale(1.3); }
+    }
+    .rk-star-1 { animation: starTwinkleLoop 2.1s ease-in-out infinite; transform-origin: 26px 36px; }
+    .rk-star-2 { animation: starTwinkleLoop 2.7s ease-in-out 0.6s infinite; transform-origin: 92px 74px; }
+    .rk-star-3 { animation: starTwinkleLoop 1.8s ease-in-out 1.2s infinite; transform-origin: 132px 98px; }
+    .rk-star-4 { animation: starTwinkleLoop 2.4s ease-in-out 0.3s infinite; transform-origin: 170px 22px; }
+    .rk-star-5 { animation: starTwinkleLoop 2.9s ease-in-out 1.5s infinite; transform-origin: 58px 18px; }
+
+    /* Линия траектории: сочный неоновый градиент и свечение */
+    #sc-rk-line {
+      stroke-linecap: round;
+      transition: stroke 0.3s ease, opacity 0.3s ease;
+    }
+    #sc-rk-glow-line {
+      stroke-linecap: round;
+      filter: blur(4px);
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Единое мягкое неоновое свечение джетпака без стробящих анимаций */
+    #sc-rk-fire-glow {
+      opacity: 0.9;
+      filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.9));
+    }
+
+    /* Плавный улет / исчезновение ракеты в конце (без разрыва на кадры) */
+    @keyframes rocketFlyAway {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.12); opacity: 0.85; filter: brightness(1.8); }
+      100% { transform: scale(0.1); opacity: 0; }
+    }
+    .rk-crashed .rk-rocket-body {
+      animation: rocketFlyAway 0.22s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+    }
+
+    /* Чистые радарные волны на месте улета (строго как в оригинале RubUP, БЕЗ перекрестий и лучей) */
+    .rk-radar-wave {
+      fill: none;
+      stroke: rgba(244, 63, 94, 0.45);
+      transform-origin: 154px 38px;
+    }
+    .rk-radar-wave-2 {
+      stroke: rgba(244, 63, 94, 0.25);
+    }
+    @keyframes rkRadarPulse {
+      0% { r: 6px; opacity: 0.9; stroke-width: 3px; }
+      100% { r: 38px; opacity: 0; stroke-width: 1px; }
+    }
+    .rk-crashed .rk-radar-wave-1 {
+      animation: rkRadarPulse 1.5s cubic-bezier(0.2, 0.8, 0.4, 1) infinite;
+    }
+    .rk-crashed .rk-radar-wave-2 {
+      animation: rkRadarPulse 1.5s cubic-bezier(0.2, 0.8, 0.4, 1) 0.45s infinite;
+    }
+
+    /* Затемнение линии полета после улета ракеты */
+    .rk-crashed #sc-rk-line {
+      stroke: rgba(255, 255, 255, 0.12) !important;
+    }
+    .rk-crashed #sc-rk-glow-line {
+      opacity: 0 !important;
+    }
+
+    /* Стильная заставка «УЛЕТЕЛА» на переднем плане */
+    .gxrk-boom-title {
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      fill: url(#boomTextGrad);
+      filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 14px rgba(244, 63, 94, 0.45));
+      animation: rkBoomPop 0.32s cubic-bezier(0.18, 0.9, 0.3, 1.2) forwards;
+      transform-origin: 74px 44px;
+    }
+    @keyframes rkBoomPop {
+      0% { transform: scale(0.85); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* 3. РУЛЕТКА: РЕДИЗАЙН СТРОГО ПО РЕФЕРЕНСУ RUBUP */
     .roulette-h-viewport {
       width: 100%;
       height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* 1. Общая темная подложка-визор (окно слотов) */
+    .roulette-visor {
+      width: calc(100% - 10px);
+      max-width: 172px;
+      height: 104px;
+      background: radial-gradient(circle at 50% 25%, #181308 0%, #080603 100%);
+      border-radius: 20px;
       position: relative;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
+      border: 1px solid rgba(255, 201, 60, 0.16);
+      box-shadow: inset 0 4px 14px rgba(0, 0, 0, 0.95), inset 0 0 0 1px rgba(255, 201, 60, 0.08), 0 2px 8px rgba(0, 0, 0, 0.5);
+      -webkit-mask-image: -webkit-radial-gradient(white, black);
+      transform: translateZ(0);
+      transition: background 0.4s ease;
     }
+    .roulette-visor.is-won,
+    .roulette-visor.is-closing {
+      overflow: visible !important;
+      -webkit-mask-image: none !important;
+      background: transparent !important;
+    }
+
+    /* 2. Единая центральная золотая рамка-селектор */
+    .roulette-center-frame {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 54px;
+      height: 92px;
+      border-radius: 18px;
+      border: 2px solid #FFC93C;
+      box-shadow: 0 0 16px rgba(255, 201, 60, 0.45), inset 0 0 8px rgba(255, 201, 60, 0.2);
+      pointer-events: none;
+      z-index: 5;
+      background: transparent;
+      box-sizing: border-box;
+      transition: opacity 0.35s ease, box-shadow 0.35s ease;
+    }
+    .roulette-visor .roulette-center-frame {
+      transition: opacity 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    /* 3. Слой ленты подарков */
     .roulette-h-tape {
       display: flex;
       align-items: center;
@@ -1067,88 +1340,163 @@
       left: 0;
       height: 100%;
       will-change: transform;
+      z-index: 3;
     }
+
+    /* Каждый подарок — на своей собственной движущейся капсуле */
     .roulette-h-item {
-      width: 64px;
-      height: 64px;
+      width: 52px;
+      height: 90px;
+      border-radius: 18px;
+      border: 1.5px solid rgba(255, 201, 60, 0.22);
+      background: linear-gradient(180deg, rgba(32, 24, 10, 0.75) 0%, rgba(14, 10, 4, 0.95) 100%);
+      box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
+      margin: 0 3px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      margin: 0 4px;
+      position: relative;
+      box-sizing: border-box;
+      transition: opacity 0.35s ease, filter 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+    .roulette-visor .roulette-h-item {
+      transition: opacity 0.35s ease, filter 0.35s ease;
     }
     .roulette-h-item img {
-      width: 46px;
-      height: 46px;
+      width: 42px;
+      height: 42px;
       object-fit: contain;
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .roulette-center-frame {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 72px;
-      height: 110px;
-      border-radius: 18px;
-      border: 2px solid #FFC93C;
-      box-shadow: 0 0 16px rgba(255, 201, 60, 0.45), inset 0 0 12px rgba(255, 201, 60, 0.2);
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.25, 1), filter 0.35s ease;
       pointer-events: none;
-      z-index: 4;
-      overflow: hidden;
     }
+    .roulette-visor .roulette-h-item img {
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.25, 1), filter 0.35s ease;
+    }
+
+    /* Фоновые золотые лучи за центральной рамкой (сочный золотой spotlight 150px) */
     .roulette-center-glow {
       position: absolute;
       left: 50%;
-      top: 50%;
+      top: 40%;
+      width: 150px;
+      height: 150px;
       transform: translate(-50%, -50%);
-      width: 86px;
-      height: 86px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 201, 60, 0.6) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-      z-index: 2;
-    }
-    .roulette-rays {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 90px;
-      height: 90px;
-      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(255, 201, 60, 0.65) 0%, rgba(217, 119, 6, 0.35) 45%, transparent 75%);
       opacity: 0;
       transition: opacity 0.4s ease;
       pointer-events: none;
       z-index: 1;
-      animation: raysRotate 6s linear infinite;
+    }
+    .roulette-visor.is-won .roulette-center-glow {
+      opacity: 1;
+    }
+    .roulette-rays {
+      position: absolute;
+      left: 50%;
+      top: 40%;
+      width: 125px;
+      height: 125px;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 2;
+      animation: raysRotate 8s linear infinite;
     }
     @keyframes raysRotate {
       from { transform: translate(-50%, -50%) rotate(0deg); }
       to { transform: translate(-50%, -50%) rotate(360deg); }
     }
+
+    /* Соседние слоты мягко погружаются в золотистый туман (скрыты во время победы и закрытия) */
+    .roulette-visor.is-won .roulette-h-item:not(.is-winner):not(.is-target),
+    .roulette-visor.is-closing .roulette-h-item:not(.is-winner):not(.is-target) {
+      opacity: 0.12 !important;
+      filter: blur(0.5px) grayscale(0.2) !important;
+      border-color: rgba(255, 255, 255, 0.04) !important;
+      transition: opacity 0.25s ease-out, filter 0.25s ease-out !important;
+    }
+
+    /* Моментальное растворение центральной рамки (скрыта во время победы и закрытия) */
+    .roulette-visor.is-won .roulette-center-frame,
+    .roulette-visor.is-closing .roulette-center-frame {
+      opacity: 0 !important;
+      box-shadow: none !important;
+      transition: opacity 0.15s ease-out !important;
+    }
+
+    /* 1. Выигравшая капсула: ПОЛНОСТЬЮ прозрачная рамка, фон и тень (строго по референсу) */
+    .roulette-visor.is-won .roulette-h-item.is-winner,
+    .roulette-visor.is-won .roulette-h-item.is-target,
+    .roulette-visor.is-closing .roulette-h-item.is-winner,
+    .roulette-visor.is-closing .roulette-h-item.is-target {
+      opacity: 1 !important;
+      border-color: transparent !important;
+      box-shadow: none !important;
+      background: transparent !important;
+      z-index: 25;
+    }
+
+    /* 2. Фаза победы (2.0s): крупно строго по центру золотого светового шара */
+    .roulette-visor.is-won .roulette-h-item.is-winner img,
+    .roulette-visor.is-won .roulette-h-item.is-target img {
+      transform: scale(1.6) translateY(-8px) !important;
+      filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.85)) !important;
+      transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.25, 1) 0.1s, filter 0.3s ease 0.1s !important;
+    }
+
+    /* Фаза А (0.35s): плавное уменьшение приза обратно к норме при всё ещё скрытой рамке */
+    .roulette-visor.is-closing .roulette-h-item.is-winner img,
+    .roulette-visor.is-closing .roulette-h-item.is-target img {
+      transform: scale(1) translateY(0) !important;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4)) !important;
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.25, 1), filter 0.35s ease !important;
+    }
+
+    /* 3. Фирменная широкая плашка выигрыша (130x36px, border-radius 18px, bottom: -10px) */
     .roulette-win-badge {
       position: absolute;
-      bottom: 6px;
-      left: 4px;
-      right: 4px;
-      background: rgba(18, 12, 3, 0.95);
-      border: 1.2px solid #FFC93C;
-      border-radius: 8px;
-      padding: 2px 0;
+      bottom: -10px;
+      left: 50%;
+      transform: translate(-50%, 12px) scale(0.9);
+      width: 130px;
+      height: 36px;
+      box-sizing: border-box;
+      border-radius: 18px;
+      border: 2.2px solid #FFC93C;
+      background: rgba(14, 10, 4, 0.96);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.85), 0 0 16px rgba(255, 201, 60, 0.3);
       display: flex;
       flex-direction: column;
       align-items: center;
-      z-index: 5;
+      justify-content: center;
+      z-index: 30;
       opacity: 0;
-      transform: translateY(8px);
-      transition: all 0.4s cubic-bezier(0.34, 1.4, 0.64, 1);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.8);
+      transition: all 0.38s cubic-bezier(0.34, 1.4, 0.64, 1) 0.14s;
+      white-space: nowrap;
+      pointer-events: none;
     }
     .roulette-win-badge.visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: translate(-50%, 0) scale(1);
+    }
+    .roulette-win-badge .rw-title {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 0.2px;
+      line-height: 1.1;
+      margin-top: 2px;
+    }
+    .roulette-win-badge .rw-val {
+      font-size: 13px;
+      font-weight: 900;
+      color: #FFC93C;
+      letter-spacing: -0.2px;
+      line-height: 1.1;
+      margin-top: 1px;
     }
 
     /* 4. АПГРЕЙД */
@@ -2488,90 +2836,121 @@
           
           <!-- 1. ПУТЬ ПОДАРКОВ (Широкая карточка) -->
           <div class="g-card wide gc-gifts" onclick="openInnerGame('gifts')">
+            <div class="sc-coins-container" id="sc-coins-burst"></div>
             <div class="giftroad-track" id="sc-gift-track">
-              <!-- СЛЕВА: ТРОТУАР (42px) -->
-              <div class="giftroad-sidewalk">
-                <div class="sidewalk-grass"></div>
-                <div class="sidewalk-pavement">
-                  <img src="assets/IceCream.webp" style="width:24px; height:auto;" alt="IceCream">
-                  <svg viewBox="0 0 20 20" width="18" height="18" style="filter: drop-shadow(0 2px 3px rgba(0,0,0,0.5));">
-                    <circle cx="10" cy="10" r="8.5" fill="#fff" stroke="#ef4444" stroke-width="2.2"/>
-                    <line x1="4.2" y1="4.2" x2="15.8" y2="15.8" stroke="#ef4444" stroke-width="2.2"/>
-                    <circle cx="10" cy="7" r="1.6" fill="#1e293b"/>
-                    <path d="M8.5 13.5v-3h3v3" stroke="#1e293b" stroke-width="1.6" fill="none"/>
-                  </svg>
-                </div>
+              <!-- Оригинальный тротуар из ассетов -->
+              <div class="giftroad-sidewalk" style="width: auto; height: 100%; flex-shrink: 0; z-index: 3;">
+                <img src="assets/road-left.png" style="height: 100%; width: auto; display: block; object-fit: contain;" alt="Sidewalk">
               </div>
 
               <!-- 5 ПОЛОС ДОРОГИ (каждая 70px) -->
               <!-- Полоса 1: RestlessJar, 1.19x -->
               <div class="giftroad-lane">
                 <div class="gift-top-circle">
-                  <img src="assets/RestlessJar.webp" style="width:34px; height:auto;" alt="Jar">
+                  <img src="assets/RestlessJar.webp" style="width:42px; height:auto;" alt="Jar">
                 </div>
                 <div class="lane-bottom-wrap">
                   <div class="lane-manhole-group">
-                    <img id="sc-manhole-1" src="assets/manhole-dark.png" style="width:32px; opacity:0.85; transition: filter 0.2s;" alt="Manhole">
+                    <img id="sc-manhole-1" src="assets/manhole-dark.png" style="width:42px; opacity:0.85; transition: filter 0.2s;" alt="Manhole">
                   </div>
-                  <div class="gifts-lane-pill pill-blue">1.19x</div>
+                  <div class="gifts-lane-pill" id="sc-pill-1">1.19x</div>
                 </div>
               </div>
 
               <!-- Полоса 2: SleighBell, 1.47x -->
               <div class="giftroad-lane">
                 <div class="gift-top-circle">
-                  <img src="assets/SleighBell.webp" style="width:34px; height:auto;" alt="SleighBell">
+                  <img src="assets/SleighBell.webp" style="width:42px; height:auto;" alt="SleighBell">
                 </div>
                 <div class="lane-bottom-wrap">
                   <div class="lane-manhole-group">
-                    <img id="sc-manhole-2" src="assets/manhole-dark.png" style="width:32px; opacity:0.85; transition: filter 0.2s;" alt="Manhole">
+                    <img id="sc-manhole-2" src="assets/manhole-dark.png" style="width:42px; opacity:0.85; transition: filter 0.2s;" alt="Manhole">
                   </div>
-                  <div class="gifts-lane-pill pill-purple">1.47x</div>
+                  <div class="gifts-lane-pill" id="sc-pill-2">1.47x</div>
                 </div>
               </div>
 
               <!-- Полоса 3: BerryBox, 1.84x -->
               <div class="giftroad-lane">
                 <div class="gift-top-circle">
-                  <img src="assets/BerryBox.webp" onerror="this.onerror=null;this.src='assets/TopHat.webp';" style="width:34px; height:auto;" alt="BerryBox">
+                  <img src="assets/BerryBox.webp" onerror="this.onerror=null;this.src='assets/TopHat.webp';" style="width:42px; height:auto;" alt="BerryBox">
                 </div>
                 <div class="lane-bottom-wrap">
                   <div class="lane-manhole-group">
-                    <img id="sc-manhole-3" src="assets/manhole-dark.png" style="width:32px; opacity:0.85; transition: filter 0.2s;" alt="Manhole">
+                    <img id="sc-manhole-3" src="assets/manhole-dark.png" style="width:42px; opacity:0.85; transition: filter 0.2s;" alt="Manhole">
                   </div>
-                  <div class="gifts-lane-pill pill-purple">1.84x</div>
+                  <div class="gifts-lane-pill" id="sc-pill-3">1.84x</div>
                 </div>
               </div>
 
               <!-- Полоса 4: TopHat, 2.32x -->
               <div class="giftroad-lane">
                 <div class="gift-top-circle">
-                  <img src="assets/TopHat.webp" style="width:34px; height:auto;" alt="TopHat">
+                  <img src="assets/TopHat.webp" style="width:42px; height:auto;" alt="TopHat">
                 </div>
                 <div class="lane-bottom-wrap">
                   <div class="lane-manhole-group">
-                    <img id="sc-manhole-4" src="assets/manhole-dark.png" style="width:32px; opacity:0.85; transition: filter 0.2s;" alt="Manhole">
+                    <img id="sc-manhole-4" src="assets/manhole-dark.png" style="width:42px; opacity:0.85; transition: filter 0.2s;" alt="Manhole">
                   </div>
-                  <div class="gifts-lane-pill pill-purple">2.32x</div>
+                  <div class="gifts-lane-pill" id="sc-pill-4">2.32x</div>
                 </div>
               </div>
 
               <!-- Полоса 5: LootBag, 2.97x -->
               <div class="giftroad-lane">
                 <div class="gift-top-circle">
-                  <img src="assets/LootBag.webp" onerror="this.onerror=null;this.src='assets/RestlessJar.webp';" style="width:34px; height:auto;" alt="LootBag">
+                  <img src="assets/LootBag.webp" onerror="this.onerror=null;this.src='assets/RestlessJar.webp';" style="width:42px; height:auto;" alt="LootBag">
                 </div>
                 <div class="lane-bottom-wrap">
                   <div class="lane-manhole-group">
-                    <img id="sc-manhole-5" src="assets/manhole-dark.png" style="width:32px; opacity:0.85; transition: filter 0.2s;" alt="Manhole">
+                    <img id="sc-manhole-5" src="assets/manhole-dark.png" style="width:42px; opacity:0.85; transition: filter 0.2s;" alt="Manhole">
                   </div>
-                  <div class="gifts-lane-pill pill-purple">2.97x</div>
+                  <div class="gifts-lane-pill" id="sc-pill-5">2.97x</div>
                 </div>
               </div>
 
-              <!-- Перепрыгивающая корова -->
-              <div id="sc-cow-wrap" class="cow-runner-hop" style="left: 55px;">
-                <img id="sc-cow-img" src="assets/cow-animated.webp" onerror="this.onerror=null;this.src='assets/cow-idle-original-9bf76b57.webp';" alt="Cow">
+              <!-- Полоса 6: DiamondRing, 3.84x -->
+              <div class="giftroad-lane">
+                <div class="gift-top-circle">
+                  <img src="assets/DiamondRing.webp" onerror="this.onerror=null;this.src='assets/RestlessJar.webp';" style="width:42px; height:auto;" alt="DiamondRing">
+                </div>
+                <div class="lane-bottom-wrap">
+                  <div class="lane-manhole-group">
+                    <img id="sc-manhole-6" src="assets/manhole-dark.png" style="width:42px; opacity:0.85; transition: filter 0.2s;" alt="Manhole">
+                  </div>
+                  <div class="gifts-lane-pill pill-purple">3.84x</div>
+                </div>
+              </div>
+
+              <!-- Полоса 7: CandyCane, 5.05x -->
+              <div class="giftroad-lane">
+                <div class="gift-top-circle">
+                  <img src="assets/CandyCane.webp" onerror="this.onerror=null;this.src='assets/RestlessJar.webp';" style="width:42px; height:auto;" alt="CandyCane">
+                </div>
+                <div class="lane-bottom-wrap">
+                  <div class="lane-manhole-group">
+                    <img id="sc-manhole-7" src="assets/manhole-dark.png" style="width:42px; opacity:0.85; transition: filter 0.2s;" alt="Manhole">
+                  </div>
+                  <div class="gifts-lane-pill pill-purple">5.05x</div>
+                </div>
+              </div>
+
+              <!-- Полоса 8: IonGem, 7.50x -->
+              <div class="giftroad-lane">
+                <div class="gift-top-circle">
+                  <img src="assets/IonGem.webp" onerror="this.onerror=null;this.src='assets/RestlessJar.webp';" style="width:42px; height:auto;" alt="IonGem">
+                </div>
+                <div class="lane-bottom-wrap">
+                  <div class="lane-manhole-group">
+                    <img id="sc-manhole-8" src="assets/manhole-dark.png" style="width:42px; opacity:0.85; transition: filter 0.2s;" alt="Manhole">
+                  </div>
+                  <div class="gifts-lane-pill pill-purple">7.50x</div>
+                </div>
+              </div>
+
+              <!-- Перепрыгивающая корова строго над люком (bottom: 54px, width: 72px) -->
+              <div id="sc-cow-wrap" class="cow-runner-hop" style="bottom: 54px; left: -20px;">
+                <img id="sc-cow-img" src="assets/cow-animated.webp" onerror="this.onerror=null;this.src='assets/cow-idle-original-9bf76b57.webp';" style="width: 72px; display: block;" alt="Cow">
               </div>
             </div>
 
@@ -2583,30 +2962,102 @@
           </div>
 
           <!-- 2. РАКЕТКА -->
-          <div class="g-card gc-rocket" onclick="openInnerGame('rocket')">
+          <div class="g-card gc-rocket" id="sc-rocket-card" onclick="openInnerGame('rocket')">
             <div class="gxv">
-              <svg class="gxrk" viewBox="0 0 190 125" preserveAspectRatio="xMidYMid meet">
+              <svg class="gxrk" id="sc-rk-svg" viewBox="0 0 190 125" preserveAspectRatio="xMidYMid meet">
                 <defs>
-                  <radialGradient id="rkGlow"><stop offset="0" stop-color="#38bdf8" stop-opacity=".45"></stop><stop offset="1" stop-color="#38bdf8" stop-opacity="0"></stop></radialGradient>
-                  <radialGradient id="rkHead"><stop offset="0" stop-color="#818cf8" stop-opacity=".6"></stop><stop offset=".6" stop-color="#38bdf8" stop-opacity=".25"></stop><stop offset="1" stop-color="#38bdf8" stop-opacity="0"></stop></radialGradient>
-                </defs>
-                <!-- Верхняя треть: крупный множитель по центру -->
-                <g class="gxrk-nums">
-                  <text class="rocket-pulse-val" id="sc-rk-mult" x="95" y="32" text-anchor="middle" font-size="34" font-weight="900" fill="#c084fc">1.12x</text>
-                </g>
-                <text class="gxrk-boom-t" id="sc-rk-boom" x="95" y="32" text-anchor="middle" font-size="24" font-weight="900" fill="#F87171" style="display:none;">💥 УЛЕТЕЛА</text>
+                  <!-- Градиент неоновой траектории -->
+                  <linearGradient id="rkTrailGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#0284c7"/>
+                    <stop offset="50%" stop-color="#38bdf8"/>
+                    <stop offset="100%" stop-color="#818cf8"/>
+                  </linearGradient>
 
-                <!-- Опущенная SVG-дуга полета c pathLength="1" для точного синхронного заполнения линии за ракетой -->
-                <circle class="gxrk-aura" id="sc-rk-aura" cx="152" cy="56" r="28" fill="url(#rkGlow)" style="opacity: 0;"></circle>
-                <path id="sc-rk-line" d="M 14 96 C 56 94, 98 84, 128 70 S 154 56, 168 50" fill="none" stroke="#38bdf8" stroke-width="3.6" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"></path>
+                  <!-- Мягкий монолитный ореол джетпака -->
+                  <radialGradient id="rkHeadGlow">
+                    <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.95"/>
+                    <stop offset="50%" stop-color="#60a5fa" stop-opacity="0.35"/>
+                    <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+                  </radialGradient>
+
+                  <!-- Градиент текста «УЛЕТЕЛА» -->
+                  <linearGradient id="boomTextGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#fed7aa"/>
+                    <stop offset="45%" stop-color="#fb7185"/>
+                    <stop offset="100%" stop-color="#e11d48"/>
+                  </linearGradient>
+
+                  <!-- Фоновое туманное свечение глубины космоса -->
+                  <radialGradient id="rkSpaceNebula">
+                    <stop offset="0%" stop-color="#6366f1" stop-opacity="0.5"/>
+                    <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.2"/>
+                    <stop offset="100%" stop-color="#0a0b1f" stop-opacity="0"/>
+                  </radialGradient>
+
+                  <!-- Градиент для скоростных световых линий -->
+                  <linearGradient id="warpGrad" x1="100%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#a855f7" stop-opacity="0.8"/>
+                    <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.6"/>
+                    <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+                  </linearGradient>
+
+                  <!-- Мягкое фоновое пятно в точке финала -->
+                  <radialGradient id="rkBoomAtmosphere">
+                    <stop offset="0%" stop-color="#e11d48" stop-opacity="0.4"/>
+                    <stop offset="60%" stop-color="#881337" stop-opacity="0.12"/>
+                    <stop offset="100%" stop-color="#0f172a" stop-opacity="0"/>
+                  </radialGradient>
+                </defs>
+
+                <!-- СЛОЙ 0: Пульсирующая космическая туманность -->
+                <circle cx="140" cy="30" r="75" fill="url(#rkSpaceNebula)" class="rk-nebula-pulse"/>
+
+                <!-- СЛОЙ 0.5: Летящие световые полосы гиперпространства (встречный поток) -->
+                <g id="sc-rk-warp-layer">
+                  <line x1="160" y1="20" x2="142" y2="33" stroke="url(#warpGrad)" stroke-width="1.6" class="rk-warp-line rk-warp-fast rk-w-del1"/>
+                  <line x1="130" y1="45" x2="114" y2="57" stroke="url(#warpGrad)" stroke-width="1.2" class="rk-warp-line rk-w-del2"/>
+                  <line x1="175" y1="55" x2="158" y2="68" stroke="url(#warpGrad)" stroke-width="1.4" class="rk-warp-line rk-w-del3"/>
+                  <line x1="105" y1="25" x2="90" y2="36" stroke="url(#warpGrad)" stroke-width="1.1" class="rk-warp-line rk-warp-fast rk-w-del4"/>
+                </g>
+
+                <!-- СЛОЙ 0.8: Живые мерцающие звезды -->
+                <circle cx="26" cy="36" r="1.1" fill="#94a3b8" class="rk-star-1"/>
+                <circle cx="92" cy="74" r="1.3" fill="#94a3b8" class="rk-star-2"/>
+                <circle cx="132" cy="98" r="1" fill="#94a3b8" class="rk-star-3"/>
+                <circle cx="170" cy="22" r="1.2" fill="#94a3b8" class="rk-star-4"/>
+                <circle cx="58" cy="18" r="0.9" fill="#94a3b8" class="rk-star-5"/>
+
+                <!-- СЛОЙ 1: Радарные волны в точке финала (154, 38) -->
+                <g id="sc-rk-boom-bg" style="display:none;">
+                  <circle cx="154" cy="38" r="38" fill="url(#rkBoomAtmosphere)"/>
+                  <circle class="rk-radar-wave rk-radar-wave-1" cx="154" cy="38" r="8"/>
+                  <circle class="rk-radar-wave rk-radar-wave-2" cx="154" cy="38" r="16"/>
+                  <circle cx="154" cy="38" r="4.5" fill="#f43f5e" opacity="0.85" style="filter: drop-shadow(0 0 6px #f43f5e);"/>
+                </g>
+
+                <!-- СЛОЙ 2: Линия взлета -->
+                <path id="sc-rk-glow-line" d="M 22 96 C 65 96, 115 82, 154 38" fill="none" stroke="#38bdf8" stroke-width="8" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" style="filter: blur(4px); opacity: 0.6;"/>
+                <path id="sc-rk-line" d="M 22 96 C 65 96, 115 82, 154 38" fill="none" stroke="url(#rkTrailGrad)" stroke-width="3.8" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+
+                <!-- СЛОЙ 3: Ракета (точное следование дуге и наклон +15°) -->
+                <g class="rocket-flyer-wrap" id="sc-rk-head" style="offset-path: path('M 22 96 C 65 96, 115 82, 154 38'); offset-distance: 0%;">
+                  <g class="rk-rocket-body" id="sc-rk-dynamic-body">
+                    <circle id="sc-rk-fire-glow" cx="-10" cy="5" r="16" fill="url(#rkHeadGlow)"/>
+                    <g id="sc-rk-tilt-group" transform="rotate(15)">
+                      <image href="assets/rocket.png" x="-18" y="-18" width="36" height="36" preserveAspectRatio="xMidYMid meet"/>
+                    </g>
+                  </g>
+                </g>
+
+                <!-- СЛОЙ 4: Множитель и заставка «УЛЕТЕЛА» -->
+                <text class="rocket-pulse-val" id="sc-rk-mult" x="78" y="44" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="34" font-weight="900" fill="#c084fc">1.00x</text>
                 
-                <!-- Ракета летит по дуге с помощью offset-path -->
-                <g class="rocket-flyer-wrap" id="sc-rk-head" style="offset-distance: 0%;">
-                  <circle r="16" fill="url(#rkHead)"></circle>
-                  <ellipse rx="7.5" ry="9" fill="#38bdf8"></ellipse>
-                  <text y="3.2" text-anchor="middle" font-size="9" font-weight="900">🚀</text>
+                <g id="sc-rk-boom-wrap" style="display:none;">
+                  <text class="gxrk-boom-title" x="74" y="44" text-anchor="middle">УЛЕТЕЛА</text>
                 </g>
               </svg>
+              
+              <!-- История коэффициентов -->
               <div class="cp-rocket-history" style="display:flex; gap:4px; justify-content:center; margin-top:-8px;">
                 <span style="font-size:9px; font-weight:800; color:#5B9DFF; background:rgba(0,0,0,0.5); padding:2px 5px; border-radius:6px; border:1px solid #5B9DFF;">2.33x</span>
                 <span style="font-size:9px; font-weight:800; color:#F5B942; background:rgba(0,0,0,0.5); padding:2px 5px; border-radius:6px; border:1px solid #F5B942;">14.8x</span>
@@ -2621,43 +3072,99 @@
             </div>
           </div>
 
-          <!-- 3. РУЛЕТКА: горизонтальный скролл с центрированием на Durov's Cap -->
-          <div class="g-card gc-roulette" onclick="openInnerGame('roulette')">
+          <!-- 3. РУЛЕТКА -->
+          <div class="g-card gc-roulette" id="sc-roulette-card" onclick="openInnerGame('roulette')">
             <div class="gxv">
               <div class="roulette-h-viewport" id="sc-roulette-vp">
-                <!-- Вращающиеся лучи и свечение за центральной рамкой -->
-                <div class="roulette-center-glow" id="sc-roulette-glow"></div>
-                <svg class="roulette-rays" id="sc-roulette-rays" viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" r="48" fill="none" stroke="#FFC93C" stroke-width="1.5" stroke-dasharray="4 8" opacity="0.7"/>
-                  <g stroke="#FFC93C" stroke-width="1.2" opacity="0.6">
-                    <line x1="50" y1="2" x2="50" y2="98"/>
-                    <line x1="2" y1="50" x2="98" y2="50"/>
-                    <line x1="16" y1="16" x2="84" y2="84"/>
-                    <line x1="16" y1="84" x2="84" y2="16"/>
-                  </g>
-                </svg>
+                <!-- 1. Общая тёмная подложка-визор (окно слотов) -->
+                <div class="roulette-visor" id="sc-roulette-visor">
+                  <!-- Круглое свечение под лучами без прямых углов -->
+                  <div class="roulette-center-glow" id="sc-roulette-glow"></div>
+                  <!-- Вращающиеся золотые лучи за центральной рамкой -->
+                  <svg class="roulette-rays" id="sc-roulette-rays" viewBox="0 0 100 100">
+                    <g stroke="#FFC93C" stroke-width="1.3" opacity="0.65">
+                      <line x1="50" y1="0" x2="50" y2="100"/>
+                      <line x1="0" y1="50" x2="100" y2="50"/>
+                      <line x1="15" y1="15" x2="85" y2="85"/>
+                      <line x1="15" y1="85" x2="85" y2="15"/>
+                      <line x1="30" y1="4" x2="70" y2="96"/>
+                      <line x1="4" y1="30" x2="96" y2="70"/>
+                      <line x1="70" y1="4" x2="30" y2="96"/>
+                      <line x1="96" y1="30" x2="4" y2="70"/>
+                    </g>
+                  </svg>
 
-                <!-- Золотая рамка в центре -->
-                <div class="roulette-center-frame"></div>
+                  <!-- 2. Единая центральная золотая рамка-селектор -->
+                  <div class="roulette-center-frame"></div>
 
-                <!-- Горизонтальная лента предметов -->
-                <div class="roulette-h-tape" id="sc-roulette-tape" style="transform: translateX(0px);">
-                  <div class="roulette-h-item"><img src="assets/JollyChimp.webp" alt="Chimp"></div>
-                  <div class="roulette-h-item"><img src="assets/HeroicHelmet.webp" alt="Helmet"></div>
-                  <div class="roulette-h-item"><img src="assets/PreciousPeach.webp" alt="Peach"></div>
-                  <div class="roulette-h-item"><img src="assets/IonGem.webp" alt="Gem"></div>
-                  <div class="roulette-h-item" id="sc-roulette-target"><img id="sc-roulette-target-img" src="assets/DurovsCap.webp" alt="Cap"></div>
-                  <div class="roulette-h-item"><img src="assets/PreciousPeach.webp" alt="Peach"></div>
-                  <div class="roulette-h-item"><img src="assets/HeroicHelmet.webp" alt="Helmet"></div>
-                  <div class="roulette-h-item"><img src="assets/JollyChimp.webp" alt="Chimp"></div>
-                  <div class="roulette-h-item"><img src="assets/IonGem.webp" alt="Gem"></div>
-                  <div class="roulette-h-item"><img src="assets/DurovsCap.webp" alt="Cap"></div>
-                </div>
+                  <!-- 3. Слой ленты подарков: цикличный массив (паттерн из 8 предметов × 6 повторений) -->
+                  <div class="roulette-h-tape" id="sc-roulette-tape">
+                    <!-- Период 0 (0..7, кепка: 6) -->
+                    <div class="roulette-h-item"><img src="assets/HeroicHelmet.webp" alt="Helmet"></div>
+                    <div class="roulette-h-item"><img src="assets/IonGem.webp" alt="Gem"></div>
+                    <div class="roulette-h-item"><img src="assets/JollyChimp.webp" alt="Chimp"></div>
+                    <div class="roulette-h-item"><img src="assets/HeroicHelmet.webp" alt="Helmet"></div>
+                    <div class="roulette-h-item"><img src="assets/IonGem.webp" alt="Gem"></div>
+                    <div class="roulette-h-item"><img src="assets/PreciousPeach.webp" alt="Peach"></div>
+                    <div class="roulette-h-item"><img src="assets/DurovsCap.webp" alt="Cap"></div>
+                    <div class="roulette-h-item"><img src="assets/JollyChimp.webp" alt="Chimp"></div>
 
-                <!-- Выплывающая плашка выигрыша -->
-                <div class="roulette-win-badge" id="sc-roulette-win-badge">
-                  <span style="font-size: 8px; font-weight: 800; color: #fff; line-height: 1.1;">Durov’s Cap</span>
-                  <span style="font-size: 9px; font-weight: 900; color: #FFC93C; line-height: 1.1;">37 562 ★</span>
+                    <!-- Период 1 (8..15, кепка: 14) -->
+                    <div class="roulette-h-item"><img src="assets/HeroicHelmet.webp" alt="Helmet"></div>
+                    <div class="roulette-h-item"><img src="assets/IonGem.webp" alt="Gem"></div>
+                    <div class="roulette-h-item"><img src="assets/JollyChimp.webp" alt="Chimp"></div>
+                    <div class="roulette-h-item"><img src="assets/HeroicHelmet.webp" alt="Helmet"></div>
+                    <div class="roulette-h-item"><img src="assets/IonGem.webp" alt="Gem"></div>
+                    <div class="roulette-h-item"><img src="assets/PreciousPeach.webp" alt="Peach"></div>
+                    <div class="roulette-h-item"><img src="assets/DurovsCap.webp" alt="Cap"></div>
+                    <div class="roulette-h-item"><img src="assets/JollyChimp.webp" alt="Chimp"></div>
+
+                    <!-- Период 2 (16..23, целевая кепка: 22) -->
+                    <div class="roulette-h-item"><img src="assets/HeroicHelmet.webp" alt="Helmet"></div>
+                    <div class="roulette-h-item"><img src="assets/IonGem.webp" alt="Gem"></div>
+                    <div class="roulette-h-item"><img src="assets/JollyChimp.webp" alt="Chimp"></div>
+                    <div class="roulette-h-item"><img src="assets/HeroicHelmet.webp" alt="Helmet"></div>
+                    <div class="roulette-h-item"><img src="assets/IonGem.webp" alt="Gem"></div>
+                    <div class="roulette-h-item"><img src="assets/PreciousPeach.webp" alt="Peach"></div>
+                    <div class="roulette-h-item"><img src="assets/DurovsCap.webp" alt="Cap"></div>
+                    <div class="roulette-h-item"><img src="assets/JollyChimp.webp" alt="Chimp"></div>
+
+                    <!-- Период 3 (24..31, кепка: 30) -->
+                    <div class="roulette-h-item"><img src="assets/HeroicHelmet.webp" alt="Helmet"></div>
+                    <div class="roulette-h-item"><img src="assets/IonGem.webp" alt="Gem"></div>
+                    <div class="roulette-h-item"><img src="assets/JollyChimp.webp" alt="Chimp"></div>
+                    <div class="roulette-h-item"><img src="assets/HeroicHelmet.webp" alt="Helmet"></div>
+                    <div class="roulette-h-item"><img src="assets/IonGem.webp" alt="Gem"></div>
+                    <div class="roulette-h-item"><img src="assets/PreciousPeach.webp" alt="Peach"></div>
+                    <div class="roulette-h-item"><img src="assets/DurovsCap.webp" alt="Cap"></div>
+                    <div class="roulette-h-item"><img src="assets/JollyChimp.webp" alt="Chimp"></div>
+
+                    <!-- Период 4 (32..39, кепка: 38) -->
+                    <div class="roulette-h-item"><img src="assets/HeroicHelmet.webp" alt="Helmet"></div>
+                    <div class="roulette-h-item"><img src="assets/IonGem.webp" alt="Gem"></div>
+                    <div class="roulette-h-item"><img src="assets/JollyChimp.webp" alt="Chimp"></div>
+                    <div class="roulette-h-item"><img src="assets/HeroicHelmet.webp" alt="Helmet"></div>
+                    <div class="roulette-h-item"><img src="assets/IonGem.webp" alt="Gem"></div>
+                    <div class="roulette-h-item"><img src="assets/PreciousPeach.webp" alt="Peach"></div>
+                    <div class="roulette-h-item"><img src="assets/DurovsCap.webp" alt="Cap"></div>
+                    <div class="roulette-h-item"><img src="assets/JollyChimp.webp" alt="Chimp"></div>
+
+                    <!-- Период 5 (40..47, кепка: 46) -->
+                    <div class="roulette-h-item"><img src="assets/HeroicHelmet.webp" alt="Helmet"></div>
+                    <div class="roulette-h-item"><img src="assets/IonGem.webp" alt="Gem"></div>
+                    <div class="roulette-h-item"><img src="assets/JollyChimp.webp" alt="Chimp"></div>
+                    <div class="roulette-h-item"><img src="assets/HeroicHelmet.webp" alt="Helmet"></div>
+                    <div class="roulette-h-item"><img src="assets/IonGem.webp" alt="Gem"></div>
+                    <div class="roulette-h-item"><img src="assets/PreciousPeach.webp" alt="Peach"></div>
+                    <div class="roulette-h-item"><img src="assets/DurovsCap.webp" alt="Cap"></div>
+                    <div class="roulette-h-item"><img src="assets/JollyChimp.webp" alt="Chimp"></div>
+                  </div>
+
+                  <!-- 4. Фирменная выплывающая золотая плашка выигрыша -->
+                  <div class="roulette-win-badge" id="sc-roulette-win-badge">
+                    <span class="rw-title">Durov’s Cap</span>
+                    <span class="rw-val">37 562 ★</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -4378,6 +4885,18 @@
       }
     }
 
+    function restartShowcaseAnimations() {
+      if (typeof window.restartShowcaseRoulette === 'function') {
+        window.restartShowcaseRoulette();
+      }
+      if (typeof window.restartShowcaseRocket === 'function') {
+        window.restartShowcaseRocket();
+      }
+      if (typeof window.restartShowcaseGifts === 'function') {
+        window.restartShowcaseGifts();
+      }
+    }
+
     function switchTab(screenId, btnElement) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -4388,6 +4907,13 @@
       } else {
         const matchingBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick')?.includes(`'${screenId}'`));
         if (matchingBtn) matchingBtn.classList.add('active');
+      }
+
+      // Устранение статичного первого цикла при переходе во вкладку «Игры»
+      if (screenId === 'games') {
+        setTimeout(() => {
+          restartShowcaseAnimations();
+        }, 50);
       }
     }
 
@@ -4507,6 +5033,9 @@
       if (hero) hero.style.display = 'block';
 
       updateUI();
+      setTimeout(() => {
+        restartShowcaseAnimations();
+      }, 50);
     }
 
     function switchUpgradeCurrency(curr) {
@@ -5917,104 +6446,226 @@
     // 6.5. КОМПЛЕКСНАЯ ДИНАМИКА ВИТРИНЫ ИГР (RUBUP LIVE)
     // ==================================================
     function initShowcasePreviewCycle() {
-      // 1. «ПУТЬ ПОДАРКОВ»: Горизонтальная дорога и прыжки коровы
+      // 1. «ПУТЬ ПОДАРКОВ»: Центрирование копыт на люках (56px шаг 104px) + физика приземления
       const cowWrap = document.getElementById('sc-cow-wrap');
+      const cowImg = document.getElementById('sc-cow-img');
       const giftTrack = document.getElementById('sc-gift-track');
+      const coinsBurst = document.getElementById('sc-coins-burst');
       const mh1 = document.getElementById('sc-manhole-1');
       const mh2 = document.getElementById('sc-manhole-2');
       const mh3 = document.getElementById('sc-manhole-3');
       const mh4 = document.getElementById('sc-manhole-4');
       const mh5 = document.getElementById('sc-manhole-5');
 
+      const p1 = document.getElementById('sc-pill-1');
+      const p2 = document.getElementById('sc-pill-2');
+      const p3 = document.getElementById('sc-pill-3');
+      const p4 = document.getElementById('sc-pill-4');
+      const p5 = document.getElementById('sc-pill-5');
+
       if (cowWrap && giftTrack) {
-        const resetRoad = () => {
+        const triggerJump = (targetLeft) => {
+          cowWrap.classList.add('is-moving');
+          giftTrack.classList.add('is-moving');
+          cowWrap.style.left = targetLeft;
+
+          if (cowImg) {
+            cowImg.classList.remove('cow-jumping');
+            void cowImg.offsetWidth;
+            cowImg.classList.add('cow-jumping');
+          }
+        };
+
+        const spawnCoinsFromCowBack = () => {
+          if (!coinsBurst || !cowWrap) return;
+          coinsBurst.innerHTML = '';
+          const cowRect = cowWrap.getBoundingClientRect();
+          const parentRect = coinsBurst.parentElement.getBoundingClientRect();
+          const originX = (cowRect.left - parentRect.left) + 26;
+          const originY = (cowRect.top - parentRect.top) + 2;
+
+          const count = 18;
+          for (let i = 0; i < count; i++) {
+            const coin = document.createElement('div');
+            coin.className = 'coin-particle';
+            coin.style.left = `${originX}px`;
+            coin.style.top = `${originY}px`;
+
+            const angle = (Math.PI * 0.14) + (Math.random() * (Math.PI * 0.72));
+            const distance = 45 + Math.random() * 65;
+            const tx = Math.cos(angle) * (distance * 1.25);
+            const ty = -Math.sin(angle) * (distance + 15);
+            const rot = (Math.random() * 720 - 360) + 'deg';
+
+            coin.style.setProperty('--tx', `${tx.toFixed(1)}px`);
+            coin.style.setProperty('--ty', `${ty.toFixed(1)}px`);
+            coin.style.setProperty('--rot', rot);
+            coin.style.animationDelay = (Math.random() * 0.16) + 's';
+            coinsBurst.appendChild(coin);
+          }
+        };
+
+        const hardCutToSidewalk = () => {
+          if (coinsBurst) coinsBurst.innerHTML = '';
+          cowWrap.classList.remove('is-moving');
+          giftTrack.classList.remove('is-moving');
+
           giftTrack.style.transform = 'translateX(0px)';
-          cowWrap.style.left = '55px'; // Полоса 1 (центр 55px)
+          cowWrap.style.left = '-20px'; // За бордюром на тротуаре
+
           if (mh1) mh1.src = 'assets/manhole-dark.png';
           if (mh2) mh2.src = 'assets/manhole-dark.png';
           if (mh3) mh3.src = 'assets/manhole-dark.png';
           if (mh4) mh4.src = 'assets/manhole-dark.png';
           if (mh5) mh5.src = 'assets/manhole-dark.png';
+
+          [p1, p2, p3, p4, p5].forEach(p => {
+            if (p) p.classList.remove('pill-active');
+          });
+
+          void cowWrap.offsetWidth;
         };
 
-        const runCowCycle = () => {
-          resetRoad();
-          // 1.2s: Прыжок на полосу 2 & люк 1 активирован
-          setTimeout(() => {
-            cowWrap.style.left = '125px';
-            if (mh1) mh1.src = 'assets/manhole-passed.png';
-          }, 1200);
+        const runGiftsCycle = () => {
+          hardCutToSidewalk();
 
-          // 2.4s: Сдвиг полотна влево (-70px) & прыжок на полосу 3 & люк 2 активирован
+          // 1.0с: Прыжок на Люк 1 -> мягкое касание на 420мс
           setTimeout(() => {
-            giftTrack.style.transform = 'translateX(-70px)';
-            cowWrap.style.left = '195px';
-            if (mh2) mh2.src = 'assets/manhole-passed.png';
-          }, 2400);
+            triggerJump('56px');
+            setTimeout(() => {
+              if (mh1) mh1.src = 'assets/manhole-passed.png';
+              if (p1) p1.classList.add('pill-active');
+            }, 420);
+          }, 1000);
 
-          // 3.6s: Сдвиг полотна влево (-140px) & прыжок на полосу 4 & люк 3 активирован
+          // 2.3с: Прыжок на Люк 2 -> мягкое касание на 420мс
           setTimeout(() => {
-            giftTrack.style.transform = 'translateX(-140px)';
-            cowWrap.style.left = '265px';
-            if (mh3) mh3.src = 'assets/manhole-passed.png';
+            triggerJump('160px');
+            setTimeout(() => {
+              if (mh2) mh2.src = 'assets/manhole-passed.png';
+              if (p2) p2.classList.add('pill-active');
+            }, 420);
+          }, 2300);
+
+          // 3.6с: Сдвиг трека (-104px) & прыжок на Люк 3 -> мягкое касание на 420мс
+          setTimeout(() => {
+            giftTrack.style.transform = 'translateX(-104px)';
+            triggerJump('264px');
+            setTimeout(() => {
+              if (mh3) mh3.src = 'assets/manhole-passed.png';
+              if (p3) p3.classList.add('pill-active');
+            }, 420);
           }, 3600);
 
-          // 4.8s: Сброс в исходное состояние
+          // 4.9с: Сдвиг трека (-208px) & прыжок на Люк 4 -> мягкое касание на 420мс + салют
           setTimeout(() => {
-            resetRoad();
-          }, 4800);
+            giftTrack.style.transform = 'translateX(-208px)';
+            triggerJump('368px');
+            setTimeout(() => {
+              if (mh4) mh4.src = 'assets/manhole-passed.png';
+              if (p4) p4.classList.add('pill-active');
+              spawnCoinsFromCowBack();
+            }, 420);
+          }, 4900);
+
+          // 7.0с: Резкий монтажный сброс на старт
+          setTimeout(() => {
+            hardCutToSidewalk();
+          }, 7000);
         };
 
-        runCowCycle();
-        setInterval(runCowCycle, 5000);
+        runGiftsCycle();
+        setInterval(runGiftsCycle, 7400);
+        window.restartShowcaseGifts = () => {
+          runGiftsCycle();
+        };
       }
 
-      // 2. «РАКЕТКА»: Плавная отрисовка линии строго за ракетой, рост множителя, взрыв
+      // 2. «РАКЕТКА»: Плавный экспоненциальный взлёт, инерция и динамическая физика джетпака
+      const rkCard = document.getElementById('sc-rocket-card');
       const rkLine = document.getElementById('sc-rk-line');
+      const rkGlowLine = document.getElementById('sc-rk-glow-line');
       const rkHead = document.getElementById('sc-rk-head');
       const rkMult = document.getElementById('sc-rk-mult');
-      const rkBoom = document.getElementById('sc-rk-boom');
-      const rkAura = document.getElementById('sc-rk-aura');
+      const rkBoomWrap = document.getElementById('sc-rk-boom-wrap');
+      const rkBoomBg = document.getElementById('sc-rk-boom-bg');
+      const rkDynamicBody = document.getElementById('sc-rk-dynamic-body');
+      const rkTiltGroup = document.getElementById('sc-rk-tilt-group');
+      const rkFireGlow = document.getElementById('sc-rk-fire-glow');
 
       if (rkLine && rkHead && rkMult) {
         let rocketAnimId = null;
 
         const runRocketFlight = () => {
-          const duration = 3200; // 3.2s полет
+          const duration = 3300;
           const startTime = performance.now();
-          const targetMult = +(6.2 + Math.random() * 2.0).toFixed(2);
+          const targetMult = +(4.6 + Math.random() * 3.2).toFixed(2);
 
-          if (rkBoom) rkBoom.style.display = 'none';
+          // Сброс в исходное состояние
+          if (rkCard) rkCard.classList.remove('rk-crashed');
+          if (rkBoomWrap) rkBoomWrap.style.display = 'none';
+          if (rkBoomBg) rkBoomBg.style.display = 'none';
+          
+          if (rkDynamicBody) rkDynamicBody.setAttribute('transform', 'scale(1, 1)');
+          if (rkTiltGroup) rkTiltGroup.setAttribute('transform', 'rotate(15)');
+          if (rkFireGlow) rkFireGlow.setAttribute('transform', 'scale(1, 1)');
+
           rkMult.style.display = 'inline';
-          if (rkAura) rkAura.style.opacity = '0';
+          rkMult.textContent = '1.00x';
+          
           rkLine.setAttribute('stroke-dashoffset', '1');
+          if (rkGlowLine) rkGlowLine.setAttribute('stroke-dashoffset', '1');
           rkHead.style.offsetDistance = '0%';
 
           const frame = (now) => {
             const elapsed = now - startTime;
-            const progress = Math.min(elapsed / duration, 1);
+            const p = Math.min(elapsed / duration, 1);
 
-            // Плавное продвижение по траектории
-            const easeProgress = Math.pow(progress, 1.25);
-            rkLine.setAttribute('stroke-dashoffset', (1 - easeProgress).toString());
-            rkHead.style.offsetDistance = (easeProgress * 100) + '%';
+            // Экспоненциальный прогресс перемещения
+            const expProgress = (Math.exp(2.5 * p) - 1) / (Math.exp(2.5) - 1);
 
-            // Синхронный рост множителя
-            const currentMult = (1.12 + Math.pow(progress, 2.1) * (targetMult - 1.12)).toFixed(2);
-            rkMult.textContent = `${currentMult}x`;
+            rkLine.setAttribute('stroke-dashoffset', (1 - expProgress).toString());
+            if (rkGlowLine) rkGlowLine.setAttribute('stroke-dashoffset', (1 - expProgress).toString());
+            rkHead.style.offsetDistance = (expProgress * 100) + '%';
 
-            if (progress < 1) {
+            // 1. Физика перегрузки (G-force stretch): корпус упруго вытягивается вдоль вектора
+            if (rkDynamicBody) {
+              const stretch = (1 + expProgress * 0.12).toFixed(3);
+              const squash = (1 - expProgress * 0.05).toFixed(3);
+              rkDynamicBody.setAttribute('transform', `scale(${stretch}, ${squash})`);
+            }
+
+            // 2. Аэродинамический угол атаки: на вираже нос слегка приподнимается (+21°), к финалу ложится в курс
+            if (rkTiltGroup) {
+              const dynamicAngle = (15 + Math.sin(p * Math.PI) * 6.5).toFixed(1);
+              rkTiltGroup.setAttribute('transform', `rotate(${dynamicAngle})`);
+            }
+
+            // 3. Форсаж факела: пламя джетпака удлиняется назад по мере разгона
+            if (rkFireGlow) {
+              const flameScale = (1 + expProgress * 0.75).toFixed(2);
+              rkFireGlow.setAttribute('transform', `scale(${flameScale}, 1)`);
+            }
+
+            // Плавный счетчик множителя
+            const currentVal = 1.00 + expProgress * (targetMult - 1.00);
+            rkMult.textContent = currentVal < 3.0 ? `${currentVal.toFixed(2)}x` : `${currentVal.toFixed(1)}x`;
+
+            if (p < 1) {
               rocketAnimId = requestAnimationFrame(frame);
             } else {
-              // Пик: взрыв и надпись «💥 УЛЕТЕЛА»
+              // Финал полета
+              if (rkCard) rkCard.classList.add('rk-crashed');
+              if (rkBoomBg) rkBoomBg.style.display = 'inline';
               rkMult.style.display = 'none';
-              if (rkBoom) rkBoom.style.display = 'inline';
-              if (rkAura) rkAura.style.opacity = '0.85';
 
-              // Пауза 1.2с перед следующим полетом
+              setTimeout(() => {
+                if (rkBoomWrap) rkBoomWrap.style.display = 'inline';
+              }, 120);
+
               setTimeout(() => {
                 runRocketFlight();
-              }, 1200);
+              }, 2100);
             }
           };
 
@@ -6022,50 +6673,193 @@
         };
 
         runRocketFlight();
+        window.restartShowcaseRocket = () => {
+          if (rocketAnimId) cancelAnimationFrame(rocketAnimId);
+          runRocketFlight();
+        };
       }
 
-      // 3. «РУЛЕТКА»: Горизонтальный скролл с остановкой на Durov's Cap и золотой плашкой
+      // 3. «РУЛЕТКА»: Цикличная прокрутка strictly forward (4.7s) с разными подарками и двухфазным выходом
+      const scRouletteCard = document.getElementById('sc-roulette-card');
+      const scRouletteVisor = document.getElementById('sc-roulette-visor');
       const scRouletteTape = document.getElementById('sc-roulette-tape');
-      const scRouletteVp = document.getElementById('sc-roulette-vp');
-      const scRouletteGlow = document.getElementById('sc-roulette-glow');
       const scRouletteRays = document.getElementById('sc-roulette-rays');
+      const scRouletteGlow = document.getElementById('sc-roulette-glow');
       const scRouletteWinBadge = document.getElementById('sc-roulette-win-badge');
-      const scRouletteTargetImg = document.getElementById('sc-roulette-target-img');
 
-      if (scRouletteTape && scRouletteVp) {
-        const runRouletteSpin = () => {
-          // Сброс подсветки и бейджа
+      if (scRouletteTape && scRouletteVisor) {
+        let rouletteSpinTimeout = null;
+        let rouletteWinTimeout = null;
+        let rouletteCloseTimeout = null;
+        let rouletteNextTimeout = null;
+
+        const slotPitch = 58; // 52px ширина капсулы + 6px отступы
+        const patternLength = 8; // Длина повторяющегося паттерна
+
+        // 1. База доступных подарков
+        const rouletteGifts = [
+          { title: 'Durov’s Cap', val: '37 562 ★', src: 'assets/DurovsCap.webp' },
+          { title: 'Heroic Helmet', val: '8 200 ★', src: 'assets/HeroicHelmet.webp' },
+          { title: 'Precious Peach', val: '5 400 ★', src: 'assets/PreciousPeach.webp' },
+          { title: 'Jolly Chimp', val: '2 150 ★', src: 'assets/JollyChimp.webp' },
+          { title: 'Ion Gem', val: '1 450 ★', src: 'assets/IonGem.webp' }
+        ];
+
+        let lastWinIndex = 0; // Начинаем с Durov's Cap (индекс 0), чтобы первый спин выбрал другой приз
+        let currentSlotIndex = 6; // Стартовая позиция по центру — Кепка в периоде 0 (индекс 6)
+        let currentWinningItem = null;
+
+        const resetRouletteState = () => {
+          if (scRouletteCard) scRouletteCard.classList.remove('is-won');
+          scRouletteVisor.classList.remove('is-won', 'is-closing');
           if (scRouletteWinBadge) scRouletteWinBadge.classList.remove('visible');
-          if (scRouletteGlow) scRouletteGlow.style.opacity = '0';
           if (scRouletteRays) scRouletteRays.style.opacity = '0';
-          if (scRouletteTargetImg) scRouletteTargetImg.style.transform = 'scale(1)';
-
-          // Откатываем ленту в начало
-          scRouletteTape.style.transition = 'none';
-          scRouletteTape.style.transform = 'translateX(0px)';
-
-          setTimeout(() => {
-            // Центрируем 4-й элемент (DurovsCap) вьюпорта
-            const vpW = scRouletteVp.clientWidth || 160;
-            // 4-й элемент: 4 * 72px + 36px (центр)
-            const targetCenter = (4 * 72) + 36;
-            const destX = (vpW / 2) - targetCenter;
-
-            scRouletteTape.style.transition = 'transform 2.0s cubic-bezier(0.12, 0.8, 0.32, 1)';
-            scRouletteTape.style.transform = `translateX(${destX}px)`;
-
-            // По остановке: золотые лучи, увеличение кепки и всплывающий бейдж
-            setTimeout(() => {
-              if (scRouletteGlow) scRouletteGlow.style.opacity = '0.9';
-              if (scRouletteRays) scRouletteRays.style.opacity = '0.85';
-              if (scRouletteTargetImg) scRouletteTargetImg.style.transform = 'scale(1.18)';
-              if (scRouletteWinBadge) scRouletteWinBadge.classList.add('visible');
-            }, 2050);
-          }, 100);
+          if (scRouletteGlow) scRouletteGlow.style.opacity = '0';
+          const allItems = scRouletteTape.children;
+          for (let i = 0; i < allItems.length; i++) {
+            allItems[i].classList.remove('is-winner', 'is-target');
+          }
+          currentWinningItem = null;
         };
 
-        runRouletteSpin();
-        setInterval(runRouletteSpin, 4500);
+        const runRouletteSpin = () => {
+          clearTimeout(rouletteSpinTimeout);
+          clearTimeout(rouletteWinTimeout);
+          clearTimeout(rouletteCloseTimeout);
+          clearTimeout(rouletteNextTimeout);
+          resetRouletteState();
+
+          // 2. Случайный выбор следующего подарка (отличного от предыдущего)
+          let nextGiftIndex;
+          do {
+            nextGiftIndex = Math.floor(Math.random() * rouletteGifts.length);
+          } while (nextGiftIndex === lastWinIndex && rouletteGifts.length > 1);
+          lastWinIndex = nextGiftIndex;
+          const nextGift = rouletteGifts[nextGiftIndex];
+
+          // 3. Поиск индекса нужного подарка строго вперёд по ленте (минимум +15 позиций для динамичного спина)
+          const allItems = scRouletteTape.children;
+          const minDistance = 15;
+          let targetIndex = -1;
+
+          for (let i = currentSlotIndex + minDistance; i < allItems.length; i++) {
+            const img = allItems[i].querySelector('img');
+            const src = img ? (img.getAttribute('src') || '') : '';
+            if (src.includes(nextGift.src)) {
+              targetIndex = i;
+              break;
+            }
+          }
+
+          if (targetIndex === -1) {
+            targetIndex = Math.min(allItems.length - 2, currentSlotIndex + minDistance);
+          }
+
+          // Точный расчет destX для центровки выбранной капсулы по центру визора:
+          // destX = (visorW / 2) - (targetIndex * slotPitch + slotPitch / 2)
+          const visorW = scRouletteVisor.clientWidth || 164;
+          const targetCenter = (targetIndex * slotPitch) + (slotPitch / 2);
+          const destX = (visorW / 2) - targetCenter;
+
+          // Плавное непрерывное движение строго вперёд (4.7s) с мягким кинематическим замедлением
+          scRouletteTape.style.transition = 'transform 4.7s cubic-bezier(0.1, 0.96, 0.18, 1)';
+          scRouletteTape.style.transform = `translateX(${destX}px)`;
+
+          // По завершении вращения на 4.7s:
+          rouletteWinTimeout = setTimeout(() => {
+            currentWinningItem = scRouletteTape.children[targetIndex];
+            if (currentWinningItem) {
+              currentWinningItem.classList.add('is-winner', 'is-target');
+            }
+
+            // 4. Обновление плашки выигрыша под выпавший подарок
+            if (scRouletteWinBadge) {
+              const rwTitle = scRouletteWinBadge.querySelector('.rw-title');
+              const rwVal = scRouletteWinBadge.querySelector('.rw-val');
+              if (rwTitle) rwTitle.textContent = nextGift.title;
+              if (rwVal) rwVal.textContent = nextGift.val;
+              scRouletteWinBadge.classList.add('visible');
+            }
+
+            // Активируем победное состояние (тёплый янтарный свет, spotlight, скрытие рамки)
+            if (scRouletteCard) scRouletteCard.classList.add('is-won');
+            scRouletteVisor.classList.add('is-won');
+            if (scRouletteRays) scRouletteRays.style.opacity = '0.85';
+            if (scRouletteGlow) scRouletteGlow.style.opacity = '1';
+
+            // Приз стоит неподвижно и монолитно РОВНО 2.0 секунды (без сдвигов ленты и смены классов!)
+            rouletteCloseTimeout = setTimeout(() => {
+              // ФАЗА А (закрытие победы, 0.35s):
+              // Плашка исчезает, лучи затухают, фон карточки возвращается, приз уменьшается обратно к норме.
+              // Рамка и боковые слоты ОСТАЮТСЯ скрытыми (.is-closing)!
+              if (scRouletteCard) scRouletteCard.classList.remove('is-won');
+              scRouletteVisor.classList.remove('is-won');
+              scRouletteVisor.classList.add('is-closing');
+              if (scRouletteWinBadge) scRouletteWinBadge.classList.remove('visible');
+              if (scRouletteRays) scRouletteRays.style.opacity = '0';
+              if (scRouletteGlow) scRouletteGlow.style.opacity = '0';
+
+              // ФАЗА Б (через 350 мс, когда приз полностью встал в исходный размер):
+              rouletteNextTimeout = setTimeout(() => {
+                // Приз уменьшился. Снимаем победные классы и класс закрытия
+                if (currentWinningItem) {
+                  currentWinningItem.classList.remove('is-winner', 'is-target');
+                  currentWinningItem = null;
+                }
+                scRouletteVisor.classList.remove('is-closing');
+
+                // Нормализация сдвига ленты (бесшовно с transition: none на одинаковые предметы)
+                const rem = targetIndex % patternLength;
+                const normalizedIndex = patternLength + rem;
+                const normalizedCenter = (normalizedIndex * slotPitch) + (slotPitch / 2);
+                const normalizedX = (visorW / 2) - normalizedCenter;
+
+                scRouletteTape.style.transition = 'none';
+                scRouletteTape.style.transform = `translateX(${normalizedX}px)`;
+                currentSlotIndex = normalizedIndex;
+
+                // Через комфортную паузу (700 мс) плавно запускаем следующий оборот
+                rouletteSpinTimeout = setTimeout(() => {
+                  runRouletteSpin();
+                }, 700);
+
+              }, 350);
+
+            }, 2000);
+
+          }, 4750);
+        };
+
+        window.restartShowcaseRoulette = () => {
+          clearTimeout(rouletteSpinTimeout);
+          clearTimeout(rouletteWinTimeout);
+          clearTimeout(rouletteCloseTimeout);
+          clearTimeout(rouletteNextTimeout);
+
+          resetRouletteState();
+          currentSlotIndex = 6;
+          lastWinIndex = 0; // Чтобы при первом вращении выпал другой подарок
+
+          if (scRouletteWinBadge) {
+            const rwTitle = scRouletteWinBadge.querySelector('.rw-title');
+            const rwVal = scRouletteWinBadge.querySelector('.rw-val');
+            if (rwTitle) rwTitle.textContent = rouletteGifts[0].title;
+            if (rwVal) rwVal.textContent = rouletteGifts[0].val;
+          }
+
+          const visorW = scRouletteVisor.clientWidth || 164;
+          const startCenter = (currentSlotIndex * slotPitch) + (slotPitch / 2);
+          const startX = (visorW / 2) - startCenter;
+          scRouletteTape.style.transition = 'none';
+          scRouletteTape.style.transform = `translateX(${startX}px)`;
+
+          // Запуск вращения вперед с небольшой задержкой для инициализации отрисовки
+          rouletteSpinTimeout = setTimeout(() => {
+            runRouletteSpin();
+          }, 80);
+        };
+
+        window.restartShowcaseRoulette();
       }
 
       // 4. «АПГРЕЙД»: Вращение диска на 360° и вспышка выигрыша «+3000 PTS»
