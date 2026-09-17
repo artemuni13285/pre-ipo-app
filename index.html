@@ -878,10 +878,15 @@
       box-shadow: 0 14px 32px -6px rgba(0, 0, 0, 0.75), 0 0 20px -6px rgba(249, 115, 22, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.14);
     }
     .gc-mines { 
-      background: radial-gradient(circle at 50% 30%, rgba(225, 29, 72, 0.3) 0%, transparent 65%),
-                  linear-gradient(155deg, #340a17 0%, #120308 100%);
-      border: 1px solid rgba(225, 29, 72, 0.5);
+      background: radial-gradient(circle at 50% 42%, #4a101d 0%, #1c050b 70%, #0d0205 100%);
+      border: 1px solid rgba(225, 29, 72, 0.4);
       box-shadow: 0 14px 32px -6px rgba(0, 0, 0, 0.75), 0 0 20px -6px rgba(225, 29, 72, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+      transition: background 0.35s ease, border-color 0.35s ease;
+    }
+    .gc-mines.is-exploded {
+      background: radial-gradient(circle at 12% 72%, rgba(249, 115, 22, 0.55) 0%, rgba(225, 29, 72, 0.25) 45%, transparent 70%),
+                  radial-gradient(circle at 50% 42%, #4a101d 0%, #0d0205 100%) !important;
+      border-color: rgba(249, 115, 22, 0.55) !important;
     }
 
     /* АНИМАЦИИ ДЛЯ ЖИВОЙ ВИТРИНЫ RubUP */
@@ -889,12 +894,6 @@
     @keyframes goldBadgePulse {
       0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(255, 201, 60, 0.4)); }
       50% { transform: scale(1.08); filter: drop-shadow(0 0 8px rgba(255, 201, 60, 0.95)); }
-    }
-
-    /* Вспышка победы Апгрейд */
-    @keyframes upgradeWinFlash {
-      0%, 100% { transform: scale(1); fill: #FFF3E6; }
-      50% { transform: scale(1.18); fill: #facc15; filter: drop-shadow(0 0 10px #f59e0b); }
     }
 
     /* SVG контейнеры для карточек */
@@ -1499,67 +1498,187 @@
       margin-top: 1px;
     }
 
-    /* 4. АПГРЕЙД */
-    .sc-up-rotor {
-      transform-origin: 90px 58px;
-      transition: transform 2.2s cubic-bezier(0.16, 1, 0.3, 1);
+    /* 4. АПГРЕЙД: Витринная карточка RubUP с физикой вращения и победной анимацией */
+    .gc-upgrade .gxv {
+      height: 128px;
+      margin-bottom: 2px;
     }
-    .sc-up-win-flash {
-      animation: upgradeWinFlash 1.2s ease-in-out;
+    .gc-upgrade .gxup {
+      height: 128px;
+      max-height: 128px;
+    }
+    .sc-up-rotor {
+      transform-origin: 90px 68px;
+      will-change: transform;
+    }
+    .sc-up-rotor.is-spinning {
+      transition: transform 3.4s cubic-bezier(0.12, 0.9, 0.18, 1);
+    }
+    .sc-up-arrow {
+      transition: filter 0.3s ease, transform 0.3s ease;
+      transform-origin: 90px 12px;
+    }
+    .sc-up-arrow.is-won {
+      animation: upgradeArrowPulse 0.9s ease-in-out infinite alternate;
+    }
+    @keyframes upgradeArrowPulse {
+      0% {
+        transform: scale(1) translateY(0);
+        filter: drop-shadow(0 0 4px #FFFFFF) drop-shadow(0 0 8px #F97316);
+      }
+      100% {
+        transform: scale(1.15) translateY(1.5px);
+        filter: drop-shadow(0 0 8px #FFD700) drop-shadow(0 0 16px #F97316);
+      }
+    }
+    .sc-up-sector {
+      transition: filter 0.3s ease;
+    }
+    .sc-up-sector.is-won {
+      animation: upgradeSectorGlow 0.9s ease-in-out infinite alternate;
+    }
+    @keyframes upgradeSectorGlow {
+      0% { filter: drop-shadow(0 0 6px #F97316) drop-shadow(0 0 12px #EA580C); }
+      100% { filter: drop-shadow(0 0 12px #FDE047) drop-shadow(0 0 22px #F97316); }
+    }
+    .sc-up-sum {
+      transform-origin: 90px 64px;
+      transition: transform 0.3s ease, fill 0.3s ease, filter 0.3s ease;
+    }
+    .sc-up-sum.is-won {
+      animation: upgradeWinFlash 1.0s ease-in-out infinite alternate;
+    }
+    @keyframes upgradeWinFlash {
+      0% {
+        transform: scale(1.05);
+        fill: #FFFBEB;
+        filter: drop-shadow(0 0 4px #F59E0B);
+      }
+      100% {
+        transform: scale(1.16);
+        fill: #FEF08A;
+        filter: drop-shadow(0 0 10px #F59E0B) drop-shadow(0 0 18px #EA580C);
+      }
     }
 
-    /* 5. МИНЫ (СТАБИЛЬНАЯ СЕТКА HTML) */
+    /* 5. МИНЫ: ВИЗУАЛЬНЫЙ РЕДИЗАЙН СТРОГО ПО РЕФЕРЕНСУ RUBUP */
     .mines-showcase-wrap {
       width: 100%;
-      height: 120px;
+      height: 124px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       position: relative;
+      margin-bottom: 2px;
     }
     .mines-showcase-grid {
       margin: 0 auto;
-      width: 96px;
-      height: 96px;
+      width: 132px;
+      height: 98px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 5px;
+      grid-template-columns: repeat(3, 40px);
+      gap: 6px;
+      justify-content: center;
+      align-content: center;
       transition: transform 0.2s ease;
     }
     .mines-showcase-cell {
-      width: 28px;
+      width: 40px;
       height: 28px;
-      border-radius: 7px;
-      background: #161B2A;
+      border-radius: 9px;
+      background: linear-gradient(180deg, #1d2538 0%, #121724 100%);
       border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 3px 6px rgba(0, 0, 0, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.25s ease;
+      box-sizing: border-box;
+      will-change: transform, box-shadow;
+      transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
     .cell-rhombus {
       width: 6px;
       height: 6px;
-      background: #2c3b54;
       transform: rotate(45deg);
+      background: #242d40;
+      border-radius: 1px;
+    }
+    .mines-showcase-cell.cell-gem {
+      background: linear-gradient(180deg, #4ade80 0%, #22c55e 55%, #15803d 100%) !important;
+      border-color: #4ade80 !important;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.6), 
+                  inset 0 -2px 4px rgba(0, 0, 0, 0.35),
+                  0 0 14px rgba(34, 197, 94, 0.75), 
+                  0 4px 10px rgba(0, 0, 0, 0.5) !important;
+      animation: cellPopIn 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    .gem-white-rhombus {
+      width: 9px;
+      height: 9px;
+      transform: rotate(45deg);
+      background: #ffffff;
+      border-radius: 1.5px;
+      filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.9));
+    }
+    .mines-showcase-cell.cell-bomb {
+      background: linear-gradient(180deg, #f87171 0%, #ef4444 50%, #b91c1c 100%) !important;
+      border-color: #fca5a5 !important;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.7),
+                  inset 0 -2px 4px rgba(0, 0, 0, 0.4),
+                  0 0 20px rgba(239, 68, 68, 0.9), 
+                  0 0 35px rgba(239, 68, 68, 0.45) !important;
+      animation: cellBombPop 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    .mines-showcase-cell.cell-bomb svg {
+      filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8));
     }
     .mines-showcase-mult {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Inter', -apple-system, sans-serif;
       font-size: 15px;
       font-weight: 900;
-      color: #10B981;
-      margin-top: 4px;
+      color: #66758c;
+      margin-top: 6px;
       line-height: 1;
+      letter-spacing: -0.2px;
       transition: color 0.2s ease;
     }
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-3px); }
-      75% { transform: translateX(3px); }
+    @keyframes cellPopIn {
+      0% {
+        transform: scale(0.8);
+        filter: brightness(1.5);
+      }
+      60% {
+        transform: scale(1.08);
+        filter: brightness(1.15);
+      }
+      100% {
+        transform: scale(1);
+        filter: brightness(1);
+      }
+    }
+    @keyframes cellBombPop {
+      0% {
+        transform: scale(0.7) rotate(-6deg);
+        filter: brightness(1.8);
+      }
+      55% {
+        transform: scale(1.14) rotate(3deg);
+      }
+      100% {
+        transform: scale(1) rotate(0deg);
+        filter: brightness(1);
+      }
+    }
+    @keyframes minesShake {
+      0%, 100% { transform: translate(0, 0); }
+      20% { transform: translate(-3px, 1px); }
+      40% { transform: translate(3px, -1px); }
+      60% { transform: translate(-2px, -1px); }
+      80% { transform: translate(2px, 1px); }
     }
     .mines-shake {
-      animation: shake 0.4s ease;
+      animation: minesShake 0.4s ease;
     }
 
     /* ==================================================
@@ -3175,44 +3294,49 @@
             </div>
           </div>
 
-          <!-- 4. АПГРЕЙД: чистый центрированный барабан (96px) -->
+          <!-- 4. АПГРЕЙД: крупный барабан RubUP с физикой вращения и выигрышем +3000 $ -->
           <div class="g-card gc-upgrade" onclick="openInnerGame('upgrade')">
             <div class="gxv">
-              <svg class="gxup" viewBox="0 0 180 120" preserveAspectRatio="xMidYMid meet">
+              <svg class="gxup" viewBox="0 0 180 135" preserveAspectRatio="xMidYMid meet">
                 <defs>
-                  <linearGradient id="upG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE0BC"></stop><stop offset="1" stop-color="#FB923C"></stop></linearGradient>
-                  <radialGradient id="upGlow"><stop offset="0" stop-color="#F97316" stop-opacity=".32"></stop><stop offset="1" stop-color="#F97316" stop-opacity="0"></stop></radialGradient>
-                  <radialGradient id="upCore" cx=".5" cy=".3"><stop offset="0" stop-color="#3A2415"></stop><stop offset="1" stop-color="#100802"></stop></radialGradient>
-                  <radialGradient id="upRadarGlow" cx="0%" cy="50%" r="100%"><stop offset="0%" stop-color="#FB923C" stop-opacity="0.6"/><stop offset="100%" stop-color="#FB923C" stop-opacity="0"/></radialGradient>
+                  <linearGradient id="upG" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#FFE2C8"></stop>
+                    <stop offset="40%" stop-color="#FF923C"></stop>
+                    <stop offset="100%" stop-color="#EA580C"></stop>
+                  </linearGradient>
+                  <radialGradient id="upGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#F97316" stop-opacity="0.35"></stop>
+                    <stop offset="70%" stop-color="#F97316" stop-opacity="0.12"></stop>
+                    <stop offset="100%" stop-color="#F97316" stop-opacity="0"></stop>
+                  </radialGradient>
+                  <radialGradient id="upCore" cx="50%" cy="32%" r="65%">
+                    <stop offset="0%" stop-color="#382214"></stop>
+                    <stop offset="100%" stop-color="#140B05"></stop>
+                  </radialGradient>
                 </defs>
-                <!-- Внешнее свечение диска -->
-                <circle cx="90" cy="58" r="54" fill="url(#upGlow)"></circle>
+                <!-- Внешнее мягкое свечение барабана -->
+                <circle cx="90" cy="68" r="66" fill="url(#upGlow)"></circle>
                 
                 <!-- Вращающийся диск с делениями и секторами -->
                 <g id="sc-upgrade-rotor" class="sc-up-rotor">
-                  <!-- Деления/штрихи вокруг диска диаметром 96px (радиус 44px) -->
-                  <circle cx="90" cy="58" r="44" fill="none" stroke="#FB923C" stroke-opacity=".55" stroke-width="4.5" stroke-dasharray="1.6 4.6"></circle>
-                  <!-- Темный сектор кольца барабана -->
-                  <circle cx="90" cy="58" r="32" fill="none" stroke="#352920" stroke-width="13"></circle>
-                  <!-- Оранжевый сектор победы -->
-                  <circle cx="90" cy="58" r="32" fill="none" stroke="url(#upG)" stroke-width="13" stroke-dasharray="40 201" transform="rotate(-126 90 58)"></circle>
-                  <!-- Слово МИМО в нижней части кольца -->
-                  <text x="90" y="85" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="900" fill="#6b533f" letter-spacing="1.2">МИМО</text>
+                  <!-- Внешний обод с рисками/делениями вокруг диска (радиус 56px) -->
+                  <circle cx="90" cy="68" r="56" fill="none" stroke="#FB923C" stroke-opacity="0.5" stroke-width="4.5" stroke-dasharray="1.8 4.2"></circle>
+                  <!-- Тёмный сектор кольца барабана (80.8%) -->
+                  <circle cx="90" cy="68" r="42" fill="none" stroke="#251A12" stroke-width="17"></circle>
+                  <!-- Оранжевый сектор победы (19.2%) строго на 12 часов при повороте 0/1080deg -->
+                  <circle id="sc-up-sector" class="sc-up-sector" cx="90" cy="68" r="42" fill="none" stroke="url(#upG)" stroke-width="17" stroke-dasharray="50.7 213.2" transform="rotate(-124.6 90 68)"></circle>
+                  <!-- Чёткая надпись МИМО на 6 часах в темном секторе -->
+                  <text x="90" y="113.5" text-anchor="middle" font-family="'JetBrains Mono', -apple-system, monospace" font-size="9.5" font-weight="900" fill="#9A7A60" letter-spacing="1.8">МИМО</text>
                 </g>
 
-                <!-- Вращающийся луч сканера радара -->
-                <g class="dial-radar-layer" style="transform-origin: 90px 58px;">
-                  <path d="M 90 58 L 90 14 A 44 44 0 0 1 126 32 Z" fill="url(#upRadarGlow)"></path>
-                  <line x1="90" y1="58" x2="90" y2="14" stroke="#FFF3E6" stroke-width="1.6" stroke-linecap="round" filter="drop-shadow(0 0 3px #FB923C)"></line>
-                </g>
+                <!-- Неподвижный центральный диск-хаб (диаметр 66px) -->
+                <circle cx="90" cy="68" r="33" fill="url(#upCore)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"></circle>
+                <!-- Сумма +3000 $ и шанс 19.2% строго в центре -->
+                <text id="sc-up-sum" class="sc-up-sum" x="90" y="66" text-anchor="middle" font-family="'JetBrains Mono', -apple-system, sans-serif" font-size="14" font-weight="900" fill="#FFFFFF" letter-spacing="-0.3">+3000 $</text>
+                <text x="90" y="77" text-anchor="middle" font-family="'JetBrains Mono', -apple-system, sans-serif" font-size="7.5" font-weight="700" fill="#E4EAF8" fill-opacity="0.65" letter-spacing="0.2">шанс 19.2%</text>
 
-                <!-- Внутренний центр диска -->
-                <circle cx="90" cy="58" r="24" fill="url(#upCore)" stroke="rgba(255,255,255,.14)" stroke-width="1"></circle>
-                <!-- Сумма и шанс в центре -->
-                <text id="sc-up-sum" x="90" y="57" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="900" fill="#FFF3E6" style="transition: all 0.3s ease;">+3000 <tspan font-size="8" fill="#FB923C">PTS</tspan></text>
-                <text x="90" y="68" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="700" fill="#E4EAF8" fill-opacity=".65">шанс 19.2%</text>
-                <!-- Неподвижная стрелка на 12 часов сверху, не обрезается -->
-                <polygon points="90,19 96,10 84,10" fill="#FFF4E8" filter="drop-shadow(0 0 3px #fff)"></polygon>
+                <!-- Неподвижная белая стрелка-указатель сверху на 12 часов, плотно прилегает к ободу -->
+                <polygon id="sc-up-arrow" class="sc-up-arrow" points="90,17.5 96.5,7 83.5,7" fill="#FFFFFF" filter="drop-shadow(0 0 4px rgba(255,255,255,0.8))"></polygon>
               </svg>
             </div>
 
@@ -3241,7 +3365,7 @@
 
             <div class="g-card-footer">
               <div class="g-title">Мины</div>
-              <div class="g-online"><span class="dot"></span> 12</div>
+              <div class="g-online"><span class="dot"></span> 2</div>
             </div>
           </div>
 
@@ -4894,6 +5018,12 @@
       }
       if (typeof window.restartShowcaseGifts === 'function') {
         window.restartShowcaseGifts();
+      }
+      if (typeof window.restartShowcaseUpgrade === 'function') {
+        window.restartShowcaseUpgrade();
+      }
+      if (typeof window.restartShowcaseMines === 'function') {
+        window.restartShowcaseMines();
       }
     }
 
@@ -6862,104 +6992,192 @@
         window.restartShowcaseRoulette();
       }
 
-      // 4. «АПГРЕЙД»: Вращение диска на 360° и вспышка выигрыша «+3000 PTS»
+      // 4. «АПГРЕЙД»: Физика вращения колеса (3.4s) и победное замирание (2.0s)
       const upRotor = document.getElementById('sc-upgrade-rotor');
       const upSum = document.getElementById('sc-up-sum');
+      const upArrow = document.getElementById('sc-up-arrow');
+      const upSector = document.getElementById('sc-up-sector');
+
       if (upRotor) {
         let upDeg = 0;
-        setInterval(() => {
-          upDeg += 360;
+        let upgradeSpinTimeout = null;
+        let upgradeWinTimeout = null;
+
+        const clearUpgradeTimeouts = () => {
+          if (upgradeSpinTimeout) {
+            clearTimeout(upgradeSpinTimeout);
+            upgradeSpinTimeout = null;
+          }
+          if (upgradeWinTimeout) {
+            clearTimeout(upgradeWinTimeout);
+            upgradeWinTimeout = null;
+          }
+        };
+
+        const setUpgradeWinState = (isWon) => {
+          if (isWon) {
+            if (upArrow) upArrow.classList.add('is-won');
+            if (upSector) upSector.classList.add('is-won');
+            if (upSum) upSum.classList.add('is-won');
+          } else {
+            if (upArrow) upArrow.classList.remove('is-won');
+            if (upSector) upSector.classList.remove('is-won');
+            if (upSum) upSum.classList.remove('is-won');
+          }
+        };
+
+        const runUpgradeSpin = () => {
+          clearUpgradeTimeouts();
+          setUpgradeWinState(false);
+
+          // Плавное вращение вперед на 3 полных оборота (+1080 градусов)
+          upDeg += 1080;
+          upRotor.classList.add('is-spinning');
           upRotor.style.transform = `rotate(${upDeg}deg)`;
-          setTimeout(() => {
-            if (upSum) {
-              upSum.classList.add('sc-up-win-flash');
-              setTimeout(() => upSum.classList.remove('sc-up-win-flash'), 1200);
-            }
-          }, 2100);
-        }, 4500);
+
+          // Через 3.4 секунды колесо плавно останавливается сектором под стрелкой
+          upgradeSpinTimeout = setTimeout(() => {
+            setUpgradeWinState(true);
+
+            // Победное сияние и фиксация выигрыша длятся ровно 2.0 секунды
+            upgradeWinTimeout = setTimeout(() => {
+              // Следующий спин бесшовно запускается вперед
+              runUpgradeSpin();
+            }, 2000);
+          }, 3400);
+        };
+
+        window.restartShowcaseUpgrade = () => {
+          clearUpgradeTimeouts();
+          upgradeSpinTimeout = setTimeout(() => {
+            runUpgradeSpin();
+          }, 60);
+        };
+
+        window.restartShowcaseUpgrade();
       }
 
-      // 5. «МИНЫ»: Чистая HTML/CSS симуляция открытий в 3x3 сетке
-      const mn0 = document.getElementById('sc-mn-0');
-      const mn4 = document.getElementById('sc-mn-4');
-      const mn2 = document.getElementById('sc-mn-2');
-      const mn6 = document.getElementById('sc-mn-6');
+      // 5. «МИНЫ»: Редизайн и анимация строго по референсу RubUP
       const mnGrid = document.getElementById('sc-mines-grid');
       const mnMult = document.getElementById('sc-mines-mult');
+      const gcMinesCard = document.querySelector('#games-hub-view .gc-mines');
 
       if (mnGrid && mnMult) {
         const defaultRhombus = '<div class="cell-rhombus"></div>';
+        const whiteRhombus = '<div class="gem-white-rhombus"></div>';
+        const bombSvg = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="13.5" r="7"></circle><path d="M15.5 8.5l2.5 -2.5"></path><path d="M14 7l3 3"></path></svg>';
+
+        let minesShowcaseTimeouts = [];
+
+        const clearMinesTimeouts = () => {
+          minesShowcaseTimeouts.forEach(t => clearTimeout(t));
+          minesShowcaseTimeouts = [];
+        };
+
+        const setCellDefault = (cell) => {
+          if (!cell) return;
+          cell.className = 'mines-showcase-cell';
+          cell.innerHTML = defaultRhombus;
+          cell.style.background = '';
+          cell.style.borderColor = '';
+        };
+
+        const setCellGem = (cell) => {
+          if (!cell) return;
+          cell.className = 'mines-showcase-cell cell-gem';
+          cell.innerHTML = whiteRhombus;
+        };
+
+        const setCellBomb = (cell) => {
+          if (!cell) return;
+          cell.className = 'mines-showcase-cell cell-bomb';
+          cell.innerHTML = bombSvg;
+        };
 
         const resetMinesBoard = () => {
           for (let i = 0; i < 9; i++) {
             const cell = document.getElementById(`sc-mn-${i}`);
-            if (cell) {
-              cell.innerHTML = defaultRhombus;
-              cell.style.background = '#161B2A';
-              cell.style.borderColor = 'rgba(255, 255, 255, 0.08)';
-            }
+            setCellDefault(cell);
           }
-          mnGrid.classList.remove('mines-shake');
-          mnMult.textContent = '1.00x';
-          mnMult.style.color = '#10B981';
+          if (gcMinesCard) gcMinesCard.classList.remove('is-exploded');
+          if (mnGrid) mnGrid.classList.remove('mines-shake');
+          if (mnMult) {
+            mnMult.textContent = '1.00x';
+            mnMult.style.color = '#66758c';
+          }
         };
 
         const runMinesCycle = () => {
+          clearMinesTimeouts();
+          // 0.0s: Сброс сетки в покой
           resetMinesBoard();
 
-          // 1.0s: Ячейка 0 -> изумруд, 1.18x
-          setTimeout(() => {
-            if (mn0) {
-              mn0.style.background = '#10B981';
-              mn0.style.borderColor = '#10B981';
-              mn0.innerHTML = '<img src="assets/IonGem.webp" style="width:20px;height:20px;" alt="Gem">';
-            }
-            mnMult.textContent = '1.18x';
-            mnMult.style.color = '#10B981';
-          }, 1000);
+          // 0.8s (Шаг 1): Открывается 1-я ячейка (ячейка 0), множитель 2.15x (золотой)
+          minesShowcaseTimeouts.push(setTimeout(() => {
+            const c0 = document.getElementById('sc-mn-0');
+            setCellGem(c0);
+            mnMult.textContent = '2.15x';
+            mnMult.style.color = '#f5b73d';
+          }, 800));
 
-          // 2.0s: Ячейка 4 -> изумруд, 1.45x
-          setTimeout(() => {
-            if (mn4) {
-              mn4.style.background = '#10B981';
-              mn4.style.borderColor = '#10B981';
-              mn4.innerHTML = '<img src="assets/IonGem.webp" style="width:20px;height:20px;" alt="Gem">';
-            }
-            mnMult.textContent = '1.45x';
-            mnMult.style.color = '#10B981';
-          }, 2000);
+          // 1.6s (Шаг 2): Открывается 2-я ячейка (ячейка 1), множитель 5.40x (золотой)
+          minesShowcaseTimeouts.push(setTimeout(() => {
+            const c1 = document.getElementById('sc-mn-1');
+            setCellGem(c1);
+            mnMult.textContent = '5.40x';
+            mnMult.style.color = '#f5b73d';
+          }, 1600));
 
-          // 3.0s: Ячейка 2 -> изумруд, 1.85x
-          setTimeout(() => {
-            if (mn2) {
-              mn2.style.background = '#10B981';
-              mn2.style.borderColor = '#10B981';
-              mn2.innerHTML = '<img src="assets/IonGem.webp" style="width:20px;height:20px;" alt="Gem">';
-            }
-            mnMult.textContent = '1.85x';
-            mnMult.style.color = '#10B981';
-          }, 3000);
+          // 2.4s (Шаг 3): Открывается 3-я ячейка (ячейка 2), множитель 11.2x (золотой)
+          minesShowcaseTimeouts.push(setTimeout(() => {
+            const c2 = document.getElementById('sc-mn-2');
+            setCellGem(c2);
+            mnMult.textContent = '11.2x';
+            mnMult.style.color = '#f5b73d';
+          }, 2400));
 
-          // 4.0s: Ячейка 6 -> бомба 💣, тряска, красный 💥 0.00x
-          setTimeout(() => {
-            if (mn6) {
-              mn6.style.background = '#EF4444';
-              mn6.style.borderColor = '#EF4444';
-              mn6.innerHTML = '<span style="font-size:15px;line-height:1;">💣</span>';
-            }
-            mnGrid.classList.add('mines-shake');
-            mnMult.textContent = '💥 0.00x';
-            mnMult.style.color = '#EF4444';
-          }, 4000);
+          // 3.2s (Шаг 4): Открывается 4-я ячейка (ячейка 3), множитель 20.6x (золотой)
+          minesShowcaseTimeouts.push(setTimeout(() => {
+            const c3 = document.getElementById('sc-mn-3');
+            setCellGem(c3);
+            mnMult.textContent = '20.6x';
+            mnMult.style.color = '#f5b73d';
+          }, 3200));
 
-          // 5.2s: Сброс
-          setTimeout(() => {
-            resetMinesBoard();
-          }, 5200);
+          // 4.1s (Шаг 5 — Взрыв): Открывается 5-я ячейка (ячейка 6 — бомба), сетка вздрагивает, зарево взрыва, множитель 0.00x (красный)
+          minesShowcaseTimeouts.push(setTimeout(() => {
+            for (let i = 0; i < 9; i++) {
+              if (i !== 6) {
+                setCellDefault(document.getElementById(`sc-mn-${i}`));
+              }
+            }
+            const c6 = document.getElementById('sc-mn-6');
+            setCellBomb(c6);
+
+            if (gcMinesCard) gcMinesCard.classList.add('is-exploded');
+            if (mnGrid) {
+              mnGrid.classList.remove('mines-shake');
+              void mnGrid.offsetWidth;
+              mnGrid.classList.add('mines-shake');
+            }
+            mnMult.textContent = '0.00x';
+            mnMult.style.color = '#e14949';
+          }, 4100));
+
+          // 6.2s (пауза ~2.1с после взрыва): Перезапуск цикла
+          minesShowcaseTimeouts.push(setTimeout(() => {
+            runMinesCycle();
+          }, 6200));
         };
 
-        runMinesCycle();
-        setInterval(runMinesCycle, 5500);
+        window.restartShowcaseMines = () => {
+          clearMinesTimeouts();
+          minesShowcaseTimeouts.push(setTimeout(() => {
+            runMinesCycle();
+          }, 60));
+        };
+
+        window.restartShowcaseMines();
       }
     }
 
