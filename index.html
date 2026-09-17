@@ -1500,12 +1500,13 @@
 
     /* 4. АПГРЕЙД: Витринная карточка RubUP с физикой вращения и победной анимацией */
     .gc-upgrade .gxv {
-      height: 128px;
-      margin-bottom: 2px;
+      height: 132px;
+      margin-bottom: 0;
     }
     .gc-upgrade .gxup {
-      height: 128px;
-      max-height: 128px;
+      height: 132px;
+      max-height: 132px;
+      overflow: visible;
     }
     .sc-up-rotor {
       transform-origin: 90px 68px;
@@ -2191,94 +2192,392 @@
     /* ==================================================
        СТИЛИ ЭКРАНА ИГРЫ «ПУТЬ ПОДАРКОВ» (#game-view-gifts)
        ================================================== */
-    .gifts-board {
+    .gifts-road-viewport {
       position: relative;
       width: 100%;
-      height: 290px;
-      border-radius: 18px;
-      background: #0f172a;
+      height: 380px;
+      border-radius: 20px;
+      background: #131826;
       border: 1px solid rgba(255, 255, 255, 0.08);
       overflow: hidden;
       margin-bottom: 12px;
-      display: flex;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      user-select: none;
     }
-    .gifts-sidewalk {
-      width: 68px;
-      background: #1e2536;
-      border-right: 3px solid #334155;
+    .gifts-road-track {
+      display: flex;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+      transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .gifts-sidewalk-left {
+      width: 66px;
+      height: 100%;
+      flex-shrink: 0;
       position: relative;
+      z-index: 5;
+      background: url('assets/road-left.png') no-repeat center center / 100% 100%;
+      border-right: 3px solid #232a3e;
+    }
+    .gifts-sidewalk-right {
+      width: 160px;
+      height: 100%;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 5;
+      background: url('assets/road-right.png') no-repeat left center / cover;
+      border-left: 3px solid #232a3e;
+    }
+    .gifts-road-lane {
+      width: 132px;
+      height: 100%;
+      flex-shrink: 0;
+      position: relative;
+      box-sizing: border-box;
+      border-right: 2px dashed rgba(255, 255, 255, 0.16);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 0;
-      flex-shrink: 0;
-      z-index: 2;
+      padding: 22px 0 20px 0;
+      transition: background 0.25s ease;
     }
-    .gifts-cow-token {
-      position: absolute;
-      width: 44px;
-      height: 44px;
+    .gifts-road-lane.is-active {
+      background: rgba(59, 130, 246, 0.08);
+    }
+    .gifts-road-lane.is-passed {
+      background: rgba(16, 185, 129, 0.05);
+    }
+    .lane-gift-badge {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 35%, #252e47 0%, #131726 100%);
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.15);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 28px;
-      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-      z-index: 15;
-      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.7));
-      pointer-events: none;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      z-index: 4;
     }
-    .gifts-cow-token.crashed {
-      animation: cowCrash 0.6s ease forwards;
+    .gifts-road-lane.is-passed .lane-gift-badge {
+      border-color: #3b82f6;
+      box-shadow: 0 0 14px rgba(59, 130, 246, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+      transform: scale(1.06);
     }
-    @keyframes cowCrash {
-      0% { transform: scale(1) rotate(0deg); }
-      30% { transform: scale(1.4) rotate(-25deg); filter: drop-shadow(0 0 16px #ef4444); }
-      70% { transform: scale(0.8) rotate(45deg); opacity: 0.8; }
-      100% { transform: scale(0) rotate(90deg); opacity: 0; }
+    .lane-gift-badge img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.4));
     }
-    .gifts-lanes-area {
-      flex: 1;
-      display: flex;
-      flex-direction: column-reverse;
-      justify-content: space-between;
-      padding: 8px 12px;
+    .lane-manhole-wrap {
       position: relative;
-      background: repeating-linear-gradient(90deg, transparent 0, transparent 40px, rgba(255,255,255,0.03) 40px, rgba(255,255,255,0.03) 42px);
+      width: 84px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
     }
-    .gifts-lane-row {
-      height: 46px;
-      border-bottom: 2px dashed rgba(255, 255, 255, 0.1);
+    .lane-manhole-img {
+      width: 84px;
+      height: 68px;
+      object-fit: contain;
+      display: block;
+      transition: filter 0.25s ease, transform 0.25s ease;
+    }
+    .gifts-road-lane.is-passed .lane-manhole-img {
+      filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.7));
+    }
+    .lane-mult-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #8fa0c0;
+      background: #1c2237;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      width: 74px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      transition: all 0.25s ease;
+      white-space: nowrap;
+      letter-spacing: -0.2px;
+      z-index: 4;
+    }
+    .gifts-road-lane.is-passed .lane-mult-pill,
+    .lane-mult-pill.is-active {
+      background: #3b82f6;
+      color: #ffffff;
+      border-color: #60a5fa;
+      box-shadow: 0 0 16px rgba(59, 130, 246, 0.8), 0 2px 8px rgba(0, 0, 0, 0.4);
+      transform: scale(1.06);
+    }
+    .gifts-traffic-car,
+    .gifts-ambient-car {
+      position: absolute;
+      top: -160px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 78px;
+      height: 146px;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .gifts-traffic-car img,
+    .gifts-ambient-car img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.6));
+    }
+    .gifts-traffic-car {
+      z-index: 25;
+      display: none;
+    }
+    .gifts-traffic-car.is-crashing {
+      display: block;
+      animation: carCrashRun 0.35s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+    }
+    @keyframes carCrashRun {
+      0% {
+        top: -160px;
+        opacity: 1;
+      }
+      100% {
+        top: 410px;
+        opacity: 1;
+      }
+    }
+    @keyframes ambientCarDrive {
+      0% {
+        top: -160px;
+      }
+      100% {
+        top: 410px;
+      }
+    }
+    #gifts-cow-player {
+      position: absolute;
+      width: 86px;
+      height: auto;
+      z-index: 20;
+      pointer-events: none;
+      will-change: left, top, transform;
+      transition: left 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #gifts-cow-player img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
+      transform-origin: center bottom;
+    }
+    .cow-physics-jump {
+      animation: cowPhysicsJump 0.42s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    @keyframes cowPhysicsJump {
+      0% { transform: translateY(0) scale(1, 1); }
+      35% { transform: translateY(-40px) scale(0.92, 1.12); }
+      65% { transform: translateY(-44px) scale(0.95, 1.08); }
+      85% { transform: translateY(-4px) scale(1.12, 0.88); }
+      100% { transform: translateY(0) scale(1, 1); }
+    }
+    .cow-hit-spin {
+      animation: cowHitSpin 0.55s cubic-bezier(0.2, 0.8, 0.25, 1) forwards;
+    }
+    @keyframes cowHitSpin {
+      0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+        filter: drop-shadow(0 4px 8px rgba(0,0,0,0.6));
+      }
+      25% {
+        transform: translate(18px, -36px) rotate(60deg) scale(1.25);
+        filter: drop-shadow(0 0 24px #ef4444) brightness(1.7);
+      }
+      60% {
+        transform: translate(45px, 25px) rotate(220deg) scale(0.9);
+        filter: drop-shadow(0 0 30px #ef4444) brightness(1.4);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translate(75px, 90px) rotate(420deg) scale(0);
+        opacity: 0;
+        filter: drop-shadow(0 0 35px #ef4444);
+      }
+    }
+    .gifts-crash-flash {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle, rgba(239, 68, 68, 0.45) 0%, rgba(220, 38, 38, 0.15) 60%, transparent 100%);
+      pointer-events: none;
+      z-index: 30;
+      opacity: 0;
+      transition: opacity 0.1s ease;
+    }
+    .gifts-crash-flash.is-active {
+      opacity: 1;
+    }
+    #gifts-coins-burst {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 35;
+      overflow: hidden;
+    }
+    .gifts-info-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #111726;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 14px;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+    }
+    .gifts-info-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #8fa0c0;
+    }
+    .gifts-hazard-pill {
+      font-size: 12px;
+      font-weight: 800;
+      color: #f87171;
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 3px 8px;
+      border-radius: 8px;
+    }
+    .gifts-status-val {
+      font-size: 12px;
+      font-weight: 700;
+      color: #94a3b8;
+    }
+    .gifts-status-val.warning {
+      color: #ef4444;
+      font-weight: 800;
+    }
+    .gifts-chips-row {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .gifts-chip-btn {
+      background: #151c2e;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 8px 2px;
+      color: #94a3b8;
+      font-size: 12px;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: center;
+    }
+    .gifts-chip-btn:hover {
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.2);
+      background: #1e263d;
+    }
+    .gifts-chip-btn:active {
+      transform: scale(0.96);
+    }
+    .gifts-actions-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .gifts-btn-cashout {
+      flex: 1.2;
+      height: 52px;
+      border-radius: 14px;
+      border: none;
+      font-size: 13.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .gifts-btn-cashout:disabled {
+      background: #1a2730;
+      color: #4b6672;
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+    .gifts-btn-step {
+      flex: 1;
+      height: 52px;
+      border-radius: 14px;
+      border: none;
+      font-size: 13.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .gifts-btn-step:disabled {
+      background: #1c2237;
+      color: #5b6987;
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+    .gifts-provably-fair {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 8px;
-      border-radius: 8px;
-      transition: all 0.25s ease;
-      position: relative;
+      padding: 10px 14px;
+      background: rgba(17, 23, 38, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      margin-top: 14px;
+      font-size: 11px;
+      color: #64748b;
     }
-    .gifts-lane-row:last-child {
-      border-bottom: none;
+    .gifts-fair-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      color: #10b981;
     }
-    .gifts-lane-row.active-row {
-      background: rgba(59, 130, 246, 0.18);
-      border-color: rgba(59, 130, 246, 0.5);
-      box-shadow: 0 0 12px rgba(59, 130, 246, 0.25);
-    }
-    .gifts-lane-row.passed-row {
-      background: rgba(16, 185, 129, 0.12);
-      border-color: rgba(16, 185, 129, 0.35);
-    }
-    .gifts-lane-mult {
+    .gifts-hash-code {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 8px;
-      background: rgba(59, 130, 246, 0.2);
-      color: #60a5fa;
-      border: 1px solid rgba(59, 130, 246, 0.4);
+      font-size: 10.5px;
+      color: #94a3b8;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2px 6px;
+      border-radius: 6px;
+      letter-spacing: 0.2px;
     }
     .gifts-diff-grid {
       display: grid;
@@ -3297,7 +3596,7 @@
           <!-- 4. АПГРЕЙД: крупный барабан RubUP с физикой вращения и выигрышем +3000 $ -->
           <div class="g-card gc-upgrade" onclick="openInnerGame('upgrade')">
             <div class="gxv">
-              <svg class="gxup" viewBox="0 0 180 135" preserveAspectRatio="xMidYMid meet">
+              <svg class="gxup" viewBox="18 4 144 128" preserveAspectRatio="xMidYMid meet">
                 <defs>
                   <linearGradient id="upG" x1="0" y1="0" x2="1" y2="1">
                     <stop offset="0%" stop-color="#FFE2C8"></stop>
@@ -3509,7 +3808,7 @@
 
       </div>
 
-      <!-- 1. ИГРА: ПУТЬ ПОДАРКОВ -->
+      <!-- 1. ИГРА: ПУТЬ ПОДАРКОВ (RUBUP LIVE) -->
       <div id="game-view-gifts" class="inner-game-view" style="display: none;">
         <!-- Шапка: Назад и балансы -->
         <div class="inner-game-header rubup-top-nav" style="margin-bottom: 12px;">
@@ -3535,90 +3834,183 @@
           <div id="tab-gifts-usdt" class="rubup-mode-tab" onclick="switchGiftsCurrency('usdt')">USDT</div>
         </div>
 
-        <!-- Игровое поле: Дорога из 5 рядов и тротуар слева -->
-        <div class="gifts-board">
-          <!-- Левый тротуар со стартовой позицией -->
-          <div class="gifts-sidewalk">
-            <div class="gifts-cart" title="Тележка">🎪</div>
-            <div id="gifts-cow-token" class="gifts-cow-token" style="left: 12px; top: 120px;">🐮</div>
-            <div style="font-size: 22px;" title="Знак">🚷</div>
-          </div>
+        <!-- ИГРОВОЕ ПОЛЕ: Горизонтальная трасса со скроллируемой камерой -->
+        <div class="gifts-road-viewport" id="gifts-viewport">
+          <div class="gifts-crash-flash" id="gifts-crash-flash"></div>
+          <div id="gifts-coins-burst"></div>
 
-          <!-- 5 рядов дороги с множителями -->
-          <div class="gifts-lanes-area">
-            <div class="gifts-lane-row" id="gifts-lane-0">
-              <span style="font-size: 18px;">🚗</span>
-              <span class="gifts-lane-mult">×1.15</span>
-              <span style="font-size: 18px;">🪙</span>
+          <div class="gifts-road-track" id="gifts-road-track">
+            <!-- Левый тротуар со знаком и тележкой (road-left.png) -->
+            <div class="gifts-sidewalk-left"></div>
+
+            <!-- 10 ПОЛОС ДВИЖЕНИЯ -->
+            <!-- Полоса 0 -->
+            <div class="gifts-road-lane" id="lane-0">
+              <div class="lane-gift-badge"><img src="assets/RestlessJar.webp" alt="Jar"></div>
+              <div class="lane-manhole-wrap"><img class="lane-manhole-img" id="manhole-0" src="assets/manhole-dark.png" alt="Manhole"></div>
+              <div class="lane-mult-pill" id="mult-pill-0">1.15x</div>
+              <div class="gifts-traffic-car" id="car-0"><img id="car-img-0" src="assets/car-sport.png" alt="Car"></div>
             </div>
-            <div class="gifts-lane-row" id="gifts-lane-1">
-              <span style="font-size: 18px;">🚙</span>
-              <span class="gifts-lane-mult">×1.45</span>
-              <span style="font-size: 18px;">🏆</span>
+
+            <!-- Полоса 1 -->
+            <div class="gifts-road-lane" id="lane-1">
+              <div class="lane-gift-badge"><img src="assets/SleighBell.webp" alt="Bell"></div>
+              <div class="lane-manhole-wrap"><img class="lane-manhole-img" id="manhole-1" src="assets/manhole-dark.png" alt="Manhole"></div>
+              <div class="lane-mult-pill" id="mult-pill-1">1.38x</div>
+              <div class="gifts-traffic-car" id="car-1"><img id="car-img-1" src="assets/car4-Ca-dW4I6.png" alt="Car"></div>
             </div>
-            <div class="gifts-lane-row" id="gifts-lane-2">
-              <span style="font-size: 18px;">🚕</span>
-              <span class="gifts-lane-mult">×2.10</span>
-              <span style="font-size: 18px;">💎</span>
+
+            <!-- Полоса 2 -->
+            <div class="gifts-road-lane" id="lane-2">
+              <div class="lane-gift-badge"><img src="assets/BerryBox.webp" onerror="this.src='assets/TopHat.webp'" alt="Berry"></div>
+              <div class="lane-manhole-wrap"><img class="lane-manhole-img" id="manhole-2" src="assets/manhole-dark.png" alt="Manhole"></div>
+              <div class="lane-mult-pill" id="mult-pill-2">1.72x</div>
+              <div class="gifts-traffic-car" id="car-2"><img id="car-img-2" src="assets/car6-B4qb0SWg.png" alt="Car"></div>
             </div>
-            <div class="gifts-lane-row" id="gifts-lane-3">
-              <span style="font-size: 18px;">🏎️</span>
-              <span class="gifts-lane-mult">×3.80</span>
-              <span style="font-size: 18px;">👑</span>
+
+            <!-- Полоса 3 -->
+            <div class="gifts-road-lane" id="lane-3">
+              <div class="lane-gift-badge"><img src="assets/TopHat.webp" alt="Hat"></div>
+              <div class="lane-manhole-wrap"><img class="lane-manhole-img" id="manhole-3" src="assets/manhole-dark.png" alt="Manhole"></div>
+              <div class="lane-mult-pill" id="mult-pill-3">2.25x</div>
+              <div class="gifts-traffic-car" id="car-3"><img id="car-img-3" src="assets/car-black.png" alt="Car"></div>
             </div>
-            <div class="gifts-lane-row" id="gifts-lane-4">
-              <span style="font-size: 18px;">🚀</span>
-              <span class="gifts-lane-mult" style="color: #facc15; border-color: #facc15;">×7.50</span>
-              <span style="font-size: 18px;">⭐</span>
+
+            <!-- Полоса 4 -->
+            <div class="gifts-road-lane" id="lane-4">
+              <div class="lane-gift-badge"><img src="assets/LootBag.webp" onerror="this.src='assets/RestlessJar.webp'" alt="Bag"></div>
+              <div class="lane-manhole-wrap"><img class="lane-manhole-img" id="manhole-4" src="assets/manhole-dark.png" alt="Manhole"></div>
+              <div class="lane-mult-pill" id="mult-pill-4">3.10x</div>
+              <div class="gifts-traffic-car" id="car-4"><img id="car-img-4" src="assets/car14-E0usv2dx.png" alt="Car"></div>
+            </div>
+
+            <!-- Полоса 5 -->
+            <div class="gifts-road-lane" id="lane-5">
+              <div class="lane-gift-badge"><img src="assets/DiamondRing.webp" onerror="this.src='assets/RestlessJar.webp'" alt="Ring"></div>
+              <div class="lane-manhole-wrap"><img class="lane-manhole-img" id="manhole-5" src="assets/manhole-dark.png" alt="Manhole"></div>
+              <div class="lane-mult-pill" id="mult-pill-5">4.45x</div>
+              <div class="gifts-traffic-car" id="car-5"><img id="car-img-5" src="assets/car2-BbJDPMaV.png" alt="Car"></div>
+            </div>
+
+            <!-- Полоса 6 -->
+            <div class="gifts-road-lane" id="lane-6">
+              <div class="lane-gift-badge"><img src="assets/CandyCane.webp" onerror="this.src='assets/RestlessJar.webp'" alt="Candy"></div>
+              <div class="lane-manhole-wrap"><img class="lane-manhole-img" id="manhole-6" src="assets/manhole-dark.png" alt="Manhole"></div>
+              <div class="lane-mult-pill" id="mult-pill-6">6.80x</div>
+              <div class="gifts-traffic-car" id="car-6"><img id="car-img-6" src="assets/car10-Dcu1MWWX.png" alt="Car"></div>
+            </div>
+
+            <!-- Полоса 7 -->
+            <div class="gifts-road-lane" id="lane-7">
+              <div class="lane-gift-badge"><img src="assets/HeroicHelmet.webp" alt="Helmet"></div>
+              <div class="lane-manhole-wrap"><img class="lane-manhole-img" id="manhole-7" src="assets/manhole-dark.png" alt="Manhole"></div>
+              <div class="lane-mult-pill" id="mult-pill-7">11.0x</div>
+              <div class="gifts-traffic-car" id="car-7"><img id="car-img-7" src="assets/car-sport.png" alt="Car"></div>
+            </div>
+
+            <!-- Полоса 8 -->
+            <div class="gifts-road-lane" id="lane-8">
+              <div class="lane-gift-badge"><img src="assets/PreciousPeach.webp" alt="Peach"></div>
+              <div class="lane-manhole-wrap"><img class="lane-manhole-img" id="manhole-8" src="assets/manhole-dark.png" alt="Manhole"></div>
+              <div class="lane-mult-pill" id="mult-pill-8">18.0x</div>
+              <div class="gifts-traffic-car" id="car-8"><img id="car-img-8" src="assets/car6-B4qb0SWg.png" alt="Car"></div>
+            </div>
+
+            <!-- Полоса 9 (Финиш) -->
+            <div class="gifts-road-lane" id="lane-9">
+              <div class="lane-gift-badge"><img src="assets/DurovsCap.webp" alt="Cap"></div>
+              <div class="lane-manhole-wrap"><img class="lane-manhole-img" id="manhole-9" src="assets/manhole-dark.png" alt="Manhole"></div>
+              <div class="lane-mult-pill" id="mult-pill-9" style="color: #facc15; border-color: rgba(250, 204, 21, 0.4);">28.5x</div>
+              <div class="gifts-traffic-car" id="car-9"><img id="car-img-9" src="assets/car-black.png" alt="Car"></div>
+            </div>
+
+            <!-- Правый тротуар с домиком (road-right.png) -->
+            <div class="gifts-sidewalk-right"></div>
+
+            <!-- Корова-игрок -->
+            <div id="gifts-cow-player" style="left: -4px; top: 168px;">
+              <img id="gifts-cow-img" src="assets/cow-idle-original-9bf76b57.webp" alt="Cow">
             </div>
           </div>
         </div>
 
-        <!-- Инфо-панель раунда -->
-        <div style="display: flex; justify-content: space-between; align-items: center; background: #111726; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 8px 12px; margin-bottom: 10px;">
-          <span style="font-size: 12px; color: #94a3b8;">Шанс аварии: <b id="gifts-crash-chance" style="color: #f87171;">15%</b></span>
-          <span style="font-size: 12px; color: #94a3b8;">Текущий выигрыш: <b id="gifts-current-win" style="color: #4ade80;">0 PTS</b></span>
+        <!-- Информационная строка: Ставка, Сбитие, Статус -->
+        <div class="gifts-info-bar">
+          <span class="gifts-info-title">Сумма ставки</span>
+          <div>
+            <span style="font-size: 12px; color: #8fa0c0;">Сбитие: </span>
+            <span class="gifts-hazard-pill" id="gifts-live-hazard">5.0%</span>
+          </div>
+          <span class="gifts-status-val" id="gifts-status-warning">Готов к игре</span>
         </div>
 
-        <!-- Выбор сложности -->
-        <div class="gifts-diff-grid">
-          <div class="gifts-diff-btn active" onclick="setGiftsDiff(0)">
-            <b>Лёгкая</b>
-            <span>до 7.5x</span>
-          </div>
-          <div class="gifts-diff-btn" onclick="setGiftsDiff(1)">
-            <b>Средняя</b>
-            <span>до 15.2x</span>
-          </div>
-          <div class="gifts-diff-btn" onclick="setGiftsDiff(2)">
-            <b>Тяжёлая</b>
-            <span>до 35x</span>
-          </div>
-          <div class="gifts-diff-btn" onclick="setGiftsDiff(3)">
-            <b>Хардкор</b>
-            <span>до 85x</span>
-          </div>
-        </div>
-
-        <!-- Панель ставки -->
-        <div class="rubup-action-panel">
-          <div class="rubup-bet-stepper">
+        <!-- Степпер ставки -->
+        <div class="rubup-action-panel" style="margin-bottom: 10px;">
+          <div class="rubup-bet-stepper" style="width: 100%;">
             <button class="rubup-step-btn" onclick="changeGiftsBet(-1)">−</button>
-            <div class="rubup-bet-val">
-              <span id="gifts-bet-display">100</span>
-              <span id="gifts-bet-curr">PTS</span>
+            <div class="rubup-bet-val" style="justify-content: center; flex: 1;">
+              <span id="gifts-bet-display" style="font-size: 19px;">100</span>
+              <span id="gifts-bet-curr" style="font-size: 13px; margin-left: 2px;">PTS</span>
             </div>
             <button class="rubup-step-btn" onclick="changeGiftsBet(1)">+</button>
           </div>
-          <button id="gifts-action-btn" class="rubup-spin-btn ready" onclick="handleGiftsAction()">
+        </div>
+
+        <!-- Быстрые чипсы ставок -->
+        <div class="gifts-chips-row" id="gifts-chips-container">
+          <button class="gifts-chip-btn" onclick="setGiftsQuickBet(10)">10</button>
+          <button class="gifts-chip-btn" onclick="setGiftsQuickBet(50)">50</button>
+          <button class="gifts-chip-btn" onclick="setGiftsQuickBet(100)">100</button>
+          <button class="gifts-chip-btn" onclick="setGiftsQuickBet(500)">500</button>
+          <button class="gifts-chip-btn" onclick="setGiftsQuickBet(1000)">1000</button>
+          <button class="gifts-chip-btn" onclick="setGiftsQuickBet('max')">Макс</button>
+        </div>
+
+        <!-- Кнопки действий: До старта или в раунде -->
+        <div id="gifts-pre-actions" style="margin-bottom: 12px;">
+          <button id="gifts-start-btn" class="rubup-spin-btn ready" style="width: 100%;" onclick="handleGiftsAction()">
             Начать игру
           </button>
         </div>
 
-        <!-- Кнопка "Забрать выигрыш" в активном раунде -->
-        <button id="gifts-cashout-btn" class="rubup-spin-btn ready" onclick="cashoutGifts()" style="display: none; width: 100%; margin-top: 8px; background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
-          Забрать выигрыш
-        </button>
+        <div id="gifts-live-actions" class="gifts-actions-row" style="display: none;">
+          <button id="gifts-cashout-btn" class="gifts-btn-cashout" disabled onclick="cashoutGifts()">
+            Забрать (+0 PTS)
+          </button>
+          <button id="gifts-step-btn" class="gifts-btn-step" onclick="stepGiftsGame()">
+            Шаг 1 🐮
+          </button>
+        </div>
+
+        <!-- Выбор сложности (4 таба по референсу) -->
+        <div class="gifts-diff-grid">
+          <div class="gifts-diff-btn active" onclick="setGiftsDiff(0)">
+            <b>Лёгкая</b>
+            <span>до 28.52x</span>
+          </div>
+          <div class="gifts-diff-btn" onclick="setGiftsDiff(1)">
+            <b>Средняя</b>
+            <span>до 3014x</span>
+          </div>
+          <div class="gifts-diff-btn" onclick="setGiftsDiff(2)">
+            <b>Тяжёлая</b>
+            <span>до 13Kx</span>
+          </div>
+          <div class="gifts-diff-btn" onclick="setGiftsDiff(3)">
+            <b>Хардкор</b>
+            <span>до 20Kx</span>
+          </div>
+        </div>
+
+        <!-- Подвал: Честная игра, Хеш раунда, Как играть -->
+        <div class="gifts-provably-fair">
+          <div class="gifts-fair-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+            <span>Честная игра</span>
+          </div>
+          <div class="gifts-hash-code" id="gifts-round-hash">3d657b...c945e9</div>
+          <button onclick="showGiftsRulesModal()" style="background: none; border: none; color: #38bdf8; font-size: 11px; font-weight: 700; cursor: pointer;">Как играть?</button>
+        </div>
       </div>
 
       <!-- 2. ИГРА: РАКЕТКА / CRASH -->
@@ -4989,6 +5381,10 @@
       const allUsdtIds = ['game-inner-usdt', 'gifts-inner-usdt', 'rocket-inner-usdt', 'roulette-inner-usdt', 'mines-inner-usdt'];
       allUsdtIds.forEach(id => safeSetText(id, formattedUsdt));
 
+      if (safeGet('game-view-gifts')?.style.display === 'block' && typeof updateGiftsUI === 'function') {
+        updateGiftsUI();
+      }
+
       if (window.miningInterval) clearInterval(window.miningInterval);
       if (window.saveInterval) clearInterval(window.saveInterval);
       
@@ -5010,6 +5406,9 @@
     }
 
     function stopAllShowcaseAnimations() {
+      if (typeof stopGiftsAmbientTraffic === 'function') {
+        stopGiftsAmbientTraffic();
+      }
       if (typeof window.stopShowcaseGifts === 'function') {
         window.stopShowcaseGifts();
       }
@@ -5177,6 +5576,15 @@
     }
 
     function closeInnerGame() {
+      if (typeof stopGiftsAmbientTraffic === 'function') {
+        stopGiftsAmbientTraffic();
+      }
+      if (typeof giftsInRound !== 'undefined' && giftsInRound) {
+        giftsInRound = false;
+        giftsCurrentStep = -1;
+        giftsIsAnimating = false;
+        if (typeof resetGiftsBoard === 'function') resetGiftsBoard();
+      }
       document.querySelectorAll('.inner-game-view').forEach(el => el.style.display = 'none');
       const hubView = safeGet('games-hub-view');
       if (hubView) hubView.style.display = 'block';
@@ -5568,24 +5976,170 @@
     // ==================================================
     // 6.1. ДВИЖОК: ПУТЬ ПОДАРКОВ (#game-view-gifts)
     // ==================================================
+    const TRAFFIC_CARS = [
+      'assets/car-black.png',
+      'assets/car-sport.png',
+      'assets/car4-Ca-dW4I6.png',
+      'assets/car6-B4qb0SWg.png',
+      'assets/car14-E0usv2dx.png',
+      'assets/car2-BbJDPMaV.png',
+      'assets/car10-Dcu1MWWX.png'
+    ];
+    const CAR_SPRITES = TRAFFIC_CARS;
+
+    const GIFTS_DIFF_CONFIG = [
+      {
+        name: "Лёгкая",
+        mults: [1.00, 1.03, 1.07, 1.15, 1.35, 1.85, 3.20, 6.50, 14.00, 28.52],
+        crashChances: [5.0, 6.5, 8.0, 10.0, 12.5, 15.0, 18.0, 20.0, 22.0, 24.0]
+      },
+      {
+        name: "Средняя",
+        mults: [1.02, 1.10, 1.25, 1.65, 2.80, 6.50, 22.00, 95.00, 480.00, 3014.00],
+        crashChances: [10.0, 13.0, 16.0, 20.0, 24.0, 28.0, 32.0, 35.0, 38.0, 40.0]
+      },
+      {
+        name: "Тяжёлая",
+        mults: [1.05, 1.20, 1.55, 2.50, 6.00, 24.00, 120.00, 650.00, 3200.00, 13000.00],
+        crashChances: [18.0, 22.0, 26.0, 30.0, 35.0, 40.0, 45.0, 48.0, 52.0, 55.0]
+      },
+      {
+        name: "Хардкор",
+        mults: [1.10, 1.40, 2.20, 5.50, 20.00, 110.00, 750.00, 3800.00, 9500.00, 20000.00],
+        crashChances: [30.0, 35.0, 40.0, 45.0, 50.0, 55.0, 60.0, 65.0, 70.0, 75.0]
+      }
+    ];
+
     let giftsCurrency = 'pts';
     let giftsBetPts = 100;
     let giftsBetUsdt = 1.00;
     let giftsDiff = 0; // 0: Легкая, 1: Средняя, 2: Тяжелая, 3: Хардкор
     let giftsInRound = false;
-    let giftsCurrentStep = -1; // -1: тротуар, 0..4: ряды 1..5
+    let giftsCurrentStep = -1; // -1: тротуар, 0..9: полосы 0..9
+    let giftsIsAnimating = false;
+    let giftsRoundHash = '';
 
-    const GIFTS_DIFF_CONFIG = [
-      { name: "Лёгкая", mults: [1.15, 1.45, 2.10, 3.80, 7.50], crashChances: [12, 16, 20, 26, 32] },
-      { name: "Средняя", mults: [1.25, 1.75, 2.80, 5.50, 15.20], crashChances: [18, 24, 30, 38, 46] },
-      { name: "Тяжёлая", mults: [1.40, 2.20, 4.50, 11.00, 35.00], crashChances: [24, 32, 42, 52, 62] },
-      { name: "Хардкор", mults: [1.60, 3.20, 8.00, 25.00, 85.00], crashChances: [32, 42, 54, 66, 78] }
-    ];
+    // Фоновое движение машинок (Ambient Traffic)
+    let giftsAmbientTimer = null;
+    let giftsAmbientActive = false;
+
+    function startGiftsAmbientTraffic() {
+      if (giftsAmbientActive) return;
+      giftsAmbientActive = true;
+      scheduleNextAmbientCar();
+    }
+
+    function stopGiftsAmbientTraffic() {
+      giftsAmbientActive = false;
+      if (giftsAmbientTimer) {
+        clearTimeout(giftsAmbientTimer);
+        giftsAmbientTimer = null;
+      }
+      document.querySelectorAll('.gifts-ambient-car').forEach(el => el.remove());
+    }
+
+    function scheduleNextAmbientCar() {
+      if (!giftsAmbientActive || giftsInRound) return;
+      // Редкий трафик: строго одна машина раз в 4.0 – 6.5 секунд
+      const delay = 4000 + Math.random() * 2500;
+      giftsAmbientTimer = setTimeout(() => {
+        if (!giftsAmbientActive || giftsInRound) return;
+        spawnAmbientCar();
+        scheduleNextAmbientCar();
+      }, delay);
+    }
+
+    function spawnAmbientCar() {
+      if (giftsInRound) return;
+      const giftsView = safeGet('game-view-gifts');
+      if (!giftsView || giftsView.style.display === 'none') {
+        stopGiftsAmbientTraffic();
+        return;
+      }
+
+      // До старта игры в кадре находятся полосы 0, 1, 2
+      let candidateLanes = [0, 1, 2];
+      const laneIdx = candidateLanes[Math.floor(Math.random() * candidateLanes.length)];
+      const laneEl = safeGet(`lane-${laneIdx}`);
+      if (!laneEl) return;
+
+      const randomSprite = TRAFFIC_CARS[Math.floor(Math.random() * TRAFFIC_CARS.length)];
+      // Плавное движение вниз за 1.5 – 2.2 секунды
+      const duration = (1.5 + Math.random() * 0.7).toFixed(2);
+
+      const carEl = document.createElement('div');
+      carEl.className = 'gifts-ambient-car';
+      carEl.innerHTML = `<img src="${randomSprite}" alt="Car">`;
+      carEl.style.animation = `ambientCarDrive ${duration}s linear forwards`;
+
+      laneEl.appendChild(carEl);
+
+      carEl.addEventListener('animationend', () => {
+        carEl.remove();
+      });
+    }
+
+    function getGiftsCameraShift(step) {
+      if (step <= 1) return 0;
+      return Math.round((step - 1) * 132);
+    }
+
+    function generateGiftsRoundHash() {
+      const chars = '0123456789abcdef';
+      let h = '';
+      for (let i = 0; i < 16; i++) h += chars[Math.floor(Math.random() * 16)];
+      giftsRoundHash = h.substring(0, 6) + '...' + h.substring(10, 16);
+      safeSetText('gifts-round-hash', giftsRoundHash);
+    }
 
     function initGiftsGame() {
       giftsInRound = false;
       giftsCurrentStep = -1;
+      giftsIsAnimating = false;
+      resetGiftsBoard();
+      generateGiftsRoundHash();
+      renderGiftsChips();
+      updateGiftsLanePills();
       updateGiftsUI();
+      startGiftsAmbientTraffic();
+    }
+
+    function resetGiftsBoard() {
+      const cow = safeGet('gifts-cow-player');
+      const cowImg = safeGet('gifts-cow-img');
+      if (cow) {
+        cow.style.left = '-4px';
+        cow.style.top = '168px';
+      }
+      if (cowImg) {
+        cowImg.className = '';
+        cowImg.src = 'assets/cow-idle-original-9bf76b57.webp';
+      }
+
+      const track = safeGet('gifts-road-track');
+      if (track) {
+        track.style.transform = 'translate3d(0, 0, 0)';
+      }
+
+      for (let i = 0; i < 10; i++) {
+        const mh = safeGet(`manhole-${i}`);
+        if (mh) mh.src = 'assets/manhole-dark.png';
+
+        const lane = safeGet(`lane-${i}`);
+        if (lane) lane.classList.remove('is-passed', 'is-active');
+
+        const pill = safeGet(`mult-pill-${i}`);
+        if (pill) pill.classList.remove('is-active');
+
+        const car = safeGet(`car-${i}`);
+        if (car) {
+          car.classList.remove('is-crashing');
+          car.style.display = 'none';
+        }
+      }
+
+      const flash = safeGet('gifts-crash-flash');
+      if (flash) flash.classList.remove('is-active');
     }
 
     function switchGiftsCurrency(curr) {
@@ -5601,6 +6155,7 @@
         if (tabPts) tabPts.classList.remove('active');
       }
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+      renderGiftsChips();
       updateGiftsUI();
     }
 
@@ -5621,6 +6176,39 @@
       updateGiftsUI();
     }
 
+    function renderGiftsChips() {
+      const container = safeGet('gifts-chips-container');
+      if (!container) return;
+      const isPts = (giftsCurrency === 'pts');
+      const chips = isPts ? [10, 50, 100, 500, 1000, 'max'] : [0.5, 1, 2, 5, 10, 'max'];
+      let html = '';
+      chips.forEach(c => {
+        const label = c === 'max' ? 'Макс' : (isPts ? c : (c < 1 ? c.toFixed(1) : c));
+        const arg = c === 'max' ? `'max'` : c;
+        html += `<button class="gifts-chip-btn" onclick="setGiftsQuickBet(${arg})">${label}</button>`;
+      });
+      container.innerHTML = html;
+    }
+
+    function setGiftsQuickBet(val) {
+      if (giftsInRound) return;
+      if (val === 'max') {
+        if (giftsCurrency === 'pts') {
+          giftsBetPts = Math.max(10, Math.floor(window.totalPts || 0));
+        } else {
+          giftsBetUsdt = Math.max(0.1, parseFloat((balance || 0).toFixed(2)));
+        }
+      } else {
+        if (giftsCurrency === 'pts') {
+          giftsBetPts = Math.max(10, parseInt(val));
+        } else {
+          giftsBetUsdt = Math.max(0.1, parseFloat(val));
+        }
+      }
+      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+      updateGiftsUI();
+    }
+
     function setGiftsDiff(idx) {
       if (giftsInRound) return;
       giftsDiff = Math.max(0, Math.min(3, idx));
@@ -5628,16 +6216,26 @@
         if (i === giftsDiff) btn.classList.add('active');
         else btn.classList.remove('active');
       });
-      const conf = GIFTS_DIFF_CONFIG[giftsDiff];
-      conf.mults.forEach((m, i) => {
-        const lane = safeGet(`gifts-lane-${i}`);
-        if (lane) {
-          const badge = lane.querySelector('.gifts-lane-mult');
-          if (badge) badge.innerText = `×${m.toFixed(2)}`;
-        }
-      });
+      updateGiftsLanePills();
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
       updateGiftsUI();
+    }
+
+    function updateGiftsLanePills() {
+      const conf = GIFTS_DIFF_CONFIG[giftsDiff];
+      for (let i = 0; i < 10; i++) {
+        const pill = safeGet(`mult-pill-${i}`);
+        if (pill) {
+          const m = conf.mults[i];
+          if (m >= 10000) pill.innerText = `${Math.round(m / 1000)}Kx`;
+          else if (m >= 1000) pill.innerText = `${Math.round(m)}x`;
+          else if (Number.isInteger(m)) pill.innerText = `${m}.00x`;
+          else {
+            const s = String(m);
+            pill.innerText = s.split('.')[1]?.length === 1 ? `${m.toFixed(2)}x` : `${m}x`;
+          }
+        }
+      }
     }
 
     function updateGiftsUI() {
@@ -5650,163 +6248,276 @@
 
       const conf = GIFTS_DIFF_CONFIG[giftsDiff];
       const nextStep = giftsCurrentStep + 1;
-      const nextChance = nextStep < 5 ? conf.crashChances[nextStep] : 0;
-      safeSetText('gifts-crash-chance', `${nextChance}%`);
+      const nextChance = nextStep < 10 ? conf.crashChances[nextStep] : 0;
+      safeSetText('gifts-live-hazard', `${nextChance.toFixed(1)}%`);
 
-      const cow = safeGet('gifts-cow-token');
-      if (cow) {
-        cow.classList.remove('crashed');
-        if (giftsCurrentStep === -1) {
-          cow.style.left = '12px';
-          cow.style.top = '120px';
-          cow.style.display = 'flex';
-        } else {
-          const topPositions = [228, 172, 116, 60, 8];
-          cow.style.left = '160px';
-          cow.style.top = `${topPositions[giftsCurrentStep]}px`;
-        }
-      }
+      const activeBet = isPts ? giftsBetPts : giftsBetUsdt;
+      const currentBal = isPts ? (window.totalPts || 0) : (balance || 0);
+      const hasBalance = currentBal >= activeBet;
 
-      for (let i = 0; i < 5; i++) {
-        const lane = safeGet(`gifts-lane-${i}`);
-        if (lane) {
-          lane.classList.remove('active-row', 'passed-row');
-          if (i === giftsCurrentStep) lane.classList.add('active-row');
-          else if (i < giftsCurrentStep) lane.classList.add('passed-row');
-        }
-      }
-
-      const currentMult = giftsCurrentStep >= 0 ? conf.mults[giftsCurrentStep] : 0;
-      if (currentMult > 0) {
-        if (isPts) {
-          safeSetText('gifts-current-win', `+${Math.floor(giftsBetPts * currentMult).toLocaleString()} PTS (×${currentMult})`);
-        } else {
-          safeSetText('gifts-current-win', `+$${(giftsBetUsdt * currentMult).toFixed(2)} USDT (×${currentMult})`);
-        }
-      } else {
-        safeSetText('gifts-current-win', isPts ? '0 PTS' : '$0.00');
-      }
-
-      const actionBtn = safeGet('gifts-action-btn');
+      const warnEl = safeGet('gifts-status-warning');
+      const startBtn = safeGet('gifts-start-btn');
+      const preActions = safeGet('gifts-pre-actions');
+      const liveActions = safeGet('gifts-live-actions');
       const cashoutBtn = safeGet('gifts-cashout-btn');
+      const stepBtn = safeGet('gifts-step-btn');
+
       if (!giftsInRound) {
-        if (actionBtn) {
-          actionBtn.innerText = 'НАЧАТЬ ИГРУ';
-          actionBtn.className = 'rubup-spin-btn ready';
-          actionBtn.disabled = false;
-        }
-        if (cashoutBtn) cashoutBtn.style.display = 'none';
-      } else {
-        if (actionBtn) {
-          if (giftsCurrentStep < 4) {
-            actionBtn.innerText = `ШАГ НА РЯД ${giftsCurrentStep + 2} 🐮`;
-            actionBtn.className = 'rubup-spin-btn ready';
-            actionBtn.disabled = false;
-          } else {
-            actionBtn.innerText = 'ФИНИШ! 🏆';
-            actionBtn.className = 'rubup-spin-btn disabled';
-            actionBtn.disabled = true;
+        if (preActions) preActions.style.display = 'block';
+        if (liveActions) liveActions.style.display = 'none';
+
+        if (!hasBalance) {
+          if (warnEl) {
+            warnEl.innerText = 'Не хватает на балансе';
+            warnEl.className = 'gifts-status-val warning';
           }
+          if (startBtn) startBtn.disabled = true;
+        } else {
+          if (warnEl) {
+            warnEl.innerText = 'Готов к игре';
+            warnEl.className = 'gifts-status-val';
+          }
+          if (startBtn) startBtn.disabled = giftsIsAnimating;
         }
+      } else {
+        if (preActions) preActions.style.display = 'none';
+        if (liveActions) liveActions.style.display = 'flex';
+
+        if (warnEl) {
+          warnEl.innerText = `В игре (Шаг ${giftsCurrentStep + 1}/10)`;
+          warnEl.className = 'gifts-status-val';
+        }
+
+        const currentMult = giftsCurrentStep >= 0 ? conf.mults[giftsCurrentStep] : 0;
+        const winVal = isPts ? `+${Math.floor(activeBet * currentMult).toLocaleString()} PTS` : `+$${(activeBet * currentMult).toFixed(2)} USDT`;
+
         if (cashoutBtn) {
           if (giftsCurrentStep >= 0) {
-            cashoutBtn.style.display = 'block';
-            const winVal = isPts ? `+${Math.floor(giftsBetPts * currentMult).toLocaleString()} PTS` : `+$${(giftsBetUsdt * currentMult).toFixed(2)} USDT`;
-            cashoutBtn.innerText = `ЗАБРАТЬ ВЫИГРЫШ (${winVal})`;
+            cashoutBtn.disabled = giftsIsAnimating;
+            cashoutBtn.innerText = `Забрать (${winVal})`;
           } else {
-            cashoutBtn.style.display = 'none';
+            cashoutBtn.disabled = true;
+            cashoutBtn.innerText = `Забрать (+0 ${isPts ? 'PTS' : 'USDT'})`;
           }
         }
+
+        if (stepBtn) {
+          if (giftsCurrentStep < 9) {
+            stepBtn.innerText = `Шаг ${giftsCurrentStep + 2} 🐮`;
+            stepBtn.disabled = giftsIsAnimating;
+          } else {
+            stepBtn.innerText = 'Финиш! 🏆';
+            stepBtn.disabled = true;
+          }
+        }
+      }
+    }
+
+    function spawnGiftsCoinParticles() {
+      const container = safeGet('gifts-coins-burst');
+      const cow = safeGet('gifts-cow-player');
+      if (!container || !cow) return;
+      container.innerHTML = '';
+      const cowRect = cow.getBoundingClientRect();
+      const parentRect = container.getBoundingClientRect();
+      const originX = (cowRect.left - parentRect.left) + 43;
+      const originY = (cowRect.top - parentRect.top) + 30;
+
+      for (let i = 0; i < 24; i++) {
+        const coin = document.createElement('div');
+        coin.className = 'coin-particle';
+        coin.style.left = `${originX}px`;
+        coin.style.top = `${originY}px`;
+
+        const angle = (Math.PI * 0.1) + (Math.random() * (Math.PI * 0.8));
+        const distance = 50 + Math.random() * 90;
+        const tx = Math.cos(angle) * (distance * 1.3);
+        const ty = -Math.sin(angle) * (distance + 30);
+        const rot = (Math.random() * 720 - 360) + 'deg';
+
+        coin.style.setProperty('--tx', `${tx.toFixed(1)}px`);
+        coin.style.setProperty('--ty', `${ty.toFixed(1)}px`);
+        coin.style.setProperty('--rot', rot);
+        coin.style.animationDelay = (Math.random() * 0.18) + 's';
+        container.appendChild(coin);
       }
     }
 
     function handleGiftsAction() {
+      if (giftsInRound) {
+        stepGiftsGame();
+        return;
+      }
+
+      if (giftsIsAnimating) return;
+
+      // Полное отключение фейковых машин во время раунда
+      stopGiftsAmbientTraffic();
+      document.querySelectorAll('.gifts-ambient-car').forEach(el => el.remove());
+
       const isPts = (giftsCurrency === 'pts');
       const bet = isPts ? giftsBetPts : giftsBetUsdt;
 
-      if (!giftsInRound) {
-        if (isPts && (!window.totalPts || window.totalPts < bet)) {
-          alert("Недостаточно PTS для ставки!");
-          return;
-        }
-        if (!isPts && (!balance || balance < bet)) {
-          alert("Недостаточно USDT на балансе!");
-          return;
-        }
-
-        if (isPts) window.totalPts -= bet;
-        else balance = Math.max(0, balance - bet);
-
-        updateUI();
-        giftsInRound = true;
-        giftsCurrentStep = -1;
-        if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
-        stepGifts();
-      } else {
-        stepGifts();
+      if (isPts && (!window.totalPts || window.totalPts < bet)) {
+        alert("Недостаточно PTS для ставки!");
+        return;
       }
-    }
+      if (!isPts && (!balance || balance < bet)) {
+        alert("Недостаточно USDT на балансе!");
+        return;
+      }
 
-    function stepGifts() {
-      if (!giftsInRound) return;
-      const conf = GIFTS_DIFF_CONFIG[giftsDiff];
-      const targetStep = giftsCurrentStep + 1;
-      if (targetStep > 4) return;
+      if (isPts) window.totalPts -= bet;
+      else balance = Math.max(0, balance - bet);
 
-      const crashChance = conf.crashChances[targetStep];
-      const roll = Math.random() * 100;
-      const isCrash = roll < crashChance;
-
-      giftsCurrentStep = targetStep;
+      updateUI();
+      giftsInRound = true;
+      giftsCurrentStep = -1;
+      resetGiftsBoard();
+      generateGiftsRoundHash();
+      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
       updateGiftsUI();
 
-      if (isCrash) {
-        giftsInRound = false;
-        const cow = safeGet('gifts-cow-token');
-        if (cow) cow.classList.add('crashed');
-        if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('error');
+      // Автоматический первый шаг на дорогу
+      stepGiftsGame();
+    }
 
-        const isPts = (giftsCurrency === 'pts');
-        const bet = isPts ? giftsBetPts : giftsBetUsdt;
-        if (supabaseClient && dbUserId) {
-          try {
-            if (isPts) supabaseClient.from('accounts').update({ bonus_balance: window.totalPts }).eq('user_id', dbUserId).then();
-            else supabaseClient.from('accounts').update({ invest_balance: balance }).eq('user_id', dbUserId).then();
+    function stepGiftsGame() {
+      if (!giftsInRound || giftsIsAnimating) return;
+      const targetStep = giftsCurrentStep + 1;
+      if (targetStep > 9) return;
 
-            supabaseClient.from('transactions').insert([{
-              user_id: dbUserId,
-              type: 'GIFTS_GAME',
-              amount: -bet,
-              account_type: isPts ? 'BONUS' : 'INVEST',
-              details: { win: false, step: targetStep, bet: bet }
-            }]).then();
-          } catch(e) { console.warn("Gifts sync error:", e); }
-        }
+      giftsIsAnimating = true;
+      updateGiftsUI();
 
+      // Центрирование коровы по люку полосы targetStep:
+      // 66 + targetStep * 132 + (132 - 86) / 2 = 89 + targetStep * 132
+      const targetLeft = 89 + targetStep * 132;
+      const cow = safeGet('gifts-cow-player');
+      const cowImg = safeGet('gifts-cow-img');
+
+      if (cow) cow.style.left = `${targetLeft}px`;
+      if (cowImg) {
+        cowImg.classList.remove('cow-physics-jump');
+        void cowImg.offsetWidth;
+        cowImg.classList.add('cow-physics-jump');
+      }
+
+      // Камера: плавный сдвиг трека
+      const track = safeGet('gifts-road-track');
+      if (track) {
+        const shiftX = getGiftsCameraShift(targetStep);
+        track.style.transform = `translate3d(-${shiftX}px, 0, 0)`;
+      }
+
+      const conf = GIFTS_DIFF_CONFIG[giftsDiff];
+      const hazard = conf.crashChances[targetStep];
+      const roll = Math.random() * 100;
+      const isCrash = roll < hazard;
+
+      if (!isCrash) {
+        // УСПЕШНЫЙ ПРЫЖОК
         setTimeout(() => {
-          alert("💥 АВАРИЯ!\nМашина сбила корову на переходе! Ставка сгорела.");
-          giftsCurrentStep = -1;
+          const mh = safeGet(`manhole-${targetStep}`);
+          if (mh) mh.src = 'assets/manhole-passed.png';
+
+          const ln = safeGet(`lane-${targetStep}`);
+          if (ln) ln.classList.add('is-passed');
+
+          const pill = safeGet(`mult-pill-${targetStep}`);
+          if (pill) pill.classList.add('is-active');
+
+          giftsCurrentStep = targetStep;
+          giftsIsAnimating = false;
+          if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
           updateGiftsUI();
-          updateUI();
-        }, 600);
+
+          // Достижение финиша (10 полос)
+          if (targetStep === 9) {
+            setTimeout(() => {
+              cashoutGifts(true);
+            }, 600);
+          }
+        }, 280);
+
       } else {
-        if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-        if (giftsCurrentStep === 4) {
+        // АВАРИЯ: СБИТИЕ МАШИНОЙ
+        setTimeout(() => {
+          const randomCar = TRAFFIC_CARS[Math.floor(Math.random() * TRAFFIC_CARS.length)];
+          const carContainer = safeGet(`car-${targetStep}`);
+          const carImg = safeGet(`car-img-${targetStep}`);
+          if (carImg) carImg.src = randomCar;
+          if (carContainer) {
+            carContainer.style.display = 'block';
+            carContainer.classList.remove('is-crashing');
+            void carContainer.offsetWidth;
+            carContainer.classList.add('is-crashing');
+          }
+
+          // Момент столкновения машины с коровой (в точке пересечения)
           setTimeout(() => {
-            cashoutGifts(true);
-          }, 400);
-        }
+            if (cowImg) {
+              cowImg.classList.remove('cow-physics-jump');
+              void cowImg.offsetWidth;
+              cowImg.classList.add('cow-hit-spin');
+            }
+            const flash = safeGet('gifts-crash-flash');
+            if (flash) {
+              flash.classList.add('is-active');
+              setTimeout(() => flash.classList.remove('is-active'), 250);
+            }
+            if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('error');
+          }, 140);
+
+          // Фиксация поражения в Supabase
+          const isPts = (giftsCurrency === 'pts');
+          const bet = isPts ? giftsBetPts : giftsBetUsdt;
+          if (supabaseClient && dbUserId) {
+            try {
+              if (isPts) supabaseClient.from('accounts').update({ bonus_balance: window.totalPts }).eq('user_id', dbUserId).then();
+              else supabaseClient.from('accounts').update({ invest_balance: balance }).eq('user_id', dbUserId).then();
+
+              supabaseClient.from('transactions').insert([{
+                user_id: dbUserId,
+                type: 'GIFTS_GAME',
+                amount: -bet,
+                account_type: isPts ? 'BONUS' : 'INVEST',
+                details: { win: false, step: targetStep, bet: bet }
+              }]).then();
+            } catch (e) {
+              console.warn("Gifts crash sync error:", e);
+            }
+          }
+
+          // Через 1.2с корова возвращается на тротуар, и трасса возвращается на translateX(0px)
+          setTimeout(() => {
+            resetGiftsBoard();
+            giftsInRound = false;
+            giftsCurrentStep = -1;
+            giftsIsAnimating = false;
+            generateGiftsRoundHash();
+            updateGiftsUI();
+            updateUI();
+            const warnEl = safeGet('gifts-status-warning');
+            if (warnEl) {
+              warnEl.innerText = 'Сбита машиной!';
+              warnEl.className = 'gifts-status-val warning';
+            }
+            startGiftsAmbientTraffic();
+          }, 1200);
+
+        }, 100);
       }
     }
 
     function cashoutGifts(isJackpot = false) {
-      if (!giftsInRound || giftsCurrentStep < 0) return;
+      if (!giftsInRound || giftsCurrentStep < 0 || giftsIsAnimating) return;
+      giftsIsAnimating = true;
+
       const conf = GIFTS_DIFF_CONFIG[giftsDiff];
       const mult = conf.mults[giftsCurrentStep];
       const isPts = (giftsCurrency === 'pts');
       const bet = isPts ? giftsBetPts : giftsBetUsdt;
-
-      giftsInRound = false;
 
       let winAmount = 0;
       if (isPts) {
@@ -5817,8 +6528,8 @@
         balance += winAmount;
       }
 
+      spawnGiftsCoinParticles();
       if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
-      alert(`🎉 ${isJackpot ? 'ДЖЕКПОТ НА ФИНИШЕ!' : 'ВЫИГРЫШ ЗАБРАН!'}\nВы успешно перешли дорогу с множителем ×${mult} и получили +${isPts ? winAmount.toLocaleString() + ' PTS' : '$' + winAmount.toFixed(2) + ' USDT'}!`);
 
       if (supabaseClient && dbUserId) {
         try {
@@ -5833,12 +6544,25 @@
             account_type: isPts ? 'BONUS' : 'INVEST',
             details: { win: true, step: giftsCurrentStep, multiplier: mult, bet: bet, payout: winAmount }
           }]).then();
-        } catch(e) { console.warn("Gifts cashout sync error:", e); }
+        } catch (e) {
+          console.warn("Gifts cashout sync error:", e);
+        }
       }
 
+      alert(`🎉 ${isJackpot ? 'ДЖЕКПОТ НА ФИНИШЕ!' : 'ВЫИГРЫШ ЗАБРАН!'}\nВы преодолели ${giftsCurrentStep + 1} полос с множителем ×${mult} и получили +${isPts ? winAmount.toLocaleString() + ' PTS' : '$' + winAmount.toFixed(2) + ' USDT'}!`);
+
+      resetGiftsBoard();
+      giftsInRound = false;
       giftsCurrentStep = -1;
-      updateUI();
+      giftsIsAnimating = false;
+      generateGiftsRoundHash();
       updateGiftsUI();
+      updateUI();
+      startGiftsAmbientTraffic();
+    }
+
+    function showGiftsRulesModal() {
+      alert("🐮 ПРАВИЛА ИГРЫ «ПУТЬ ПОДАРКОВ»\n\n1. Выберите уровень сложности: Лёгкая (до 28.52x), Средняя (до 3014x), Тяжёлая (до 13Kx) или Хардкор (до 20Kx).\n2. Сделайте ставку в PTS или USDT и нажмите «Начать игру».\n3. Переходите по полосам движения через люки 🐮.\n4. На каждой полосе множитель выигрыша растёт.\n5. Забирайте выигрыш в любой момент после первого шага!\n6. Остерегайтесь машин: при сбитии ставка сгорает.");
     }
 
     // ==================================================
