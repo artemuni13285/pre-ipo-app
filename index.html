@@ -9681,9 +9681,9 @@
             type: 'WITHDRAW',
             amount: amount,
             account_type: 'PARTNER',
+            status: 'PENDING',
             details: { 
-              address: address, 
-              status: 'pending',
+              address: address,
               network: address.startsWith('T') ? 'TRC20' : 'TON'
             }
           }]).select().single();
