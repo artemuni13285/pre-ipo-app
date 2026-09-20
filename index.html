@@ -2377,16 +2377,46 @@
       align-items: center;
       justify-content: center;
       z-index: 2;
+      border-radius: 50%; /* Гарантирует овальную форму при любых раскладах */
     }
+
+    /* Стабильное аппаратное свечение без сбоев WebKit Safari */
+    .lane-manhole-wrap::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px;
+      height: 48px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.75) 0%, rgba(59, 130, 246, 0.3) 50%, transparent 75%);
+      box-shadow: 0 0 16px 3px rgba(59, 130, 246, 0.7);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Появление круглого свечения при прохождении люка */
+    .gifts-road-lane.is-passed .lane-manhole-wrap::before {
+      opacity: 1;
+    }
+
     .lane-manhole-img {
       width: 72px;
       height: 56px;
       object-fit: contain;
       display: block;
-      transition: filter 0.25s ease, transform 0.25s ease;
+      position: relative;
+      z-index: 2;
+      transition: transform 0.25s ease;
+      /* filter: drop-shadow полностью исключён во избежание квадратных артефактов на iOS */
     }
+
+    /* Убираем старое правило с drop-shadow */
     .gifts-road-lane.is-passed .lane-manhole-img {
-      filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.7));
+      filter: none !important;
     }
     .lane-mult-pill {
       font-family: 'JetBrains Mono', monospace;
