@@ -4924,7 +4924,7 @@
         * Вывод осуществляется исключительно с партнерского счета.
       </div>
 
-      <button class="btn" onclick="submitWithdrawal()" data-i18n="btn_confirm_withdraw">
+      <button id="withdraw-action-btn" class="btn" onclick="submitWithdrawal()" data-i18n="btn_confirm_withdraw">
         Подтвердить вывод
       </button>
     </div>
@@ -9641,6 +9641,7 @@
     async function submitWithdrawal() {
       const addressInput = safeGet('withdraw-address');
       const amountInput = safeGet('withdraw-amount');
+      const actionBtn = safeGet('withdraw-action-btn');
       const address = addressInput?.value?.trim();
       const amount = parseFloat(amountInput?.value);
 
@@ -9661,28 +9662,71 @@
         return;
       }
 
+      // Блокируем кнопку от повторных нажатий
+      if (actionBtn) {
+        actionBtn.disabled = true;
+        actionBtn.innerText = "Отправка заявки...";
+      }
+
       const newPartnerBalance = partnerBalance - amount;
-      if (supabaseClient && dbUserId) {
-        try {
+      let txId = null;
+
+      try {
+        // 1. Списываем баланс и создаем запись в Supabase
+        if (supabaseClient && dbUserId) {
           await supabaseClient.from('accounts').update({ partner_balance: newPartnerBalance }).eq('user_id', dbUserId);
-          await supabaseClient.from('transactions').insert([{
+          
+          const { data: txData } = await supabaseClient.from('transactions').insert([{
             user_id: dbUserId,
             type: 'WITHDRAW',
             amount: amount,
             account_type: 'PARTNER',
-            details: { address: address }
-          }]);
-        } catch (e) {
-          console.warn("DB withdrawal save error:", e);
+            details: { 
+              address: address, 
+              status: 'pending',
+              network: address.startsWith('T') ? 'TRC20' : 'TON'
+            }
+          }]).select().single();
+
+          if (txData) txId = txData.id;
+        }
+
+        // 2. Отправляем вебхук в n8n для отправки уведомления администратору
+        await fetch('https://vps-08612b66.vps.ovh.net/webhook/withdraw-request', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            tx_id: txId,
+            user_id: dbUserId,
+            tg_id: currentTgId,
+            username: currentUsername,
+            first_name: currentFirstName,
+            amount: amount,
+            address: address,
+            network: address.startsWith('T') ? 'TRC20' : 'TON',
+            created_at: new Date().toISOString()
+          })
+        });
+
+        // 3. Обновляем UI
+        partnerBalance = newPartnerBalance;
+        updateUI();
+        if (amountInput) amountInput.value = '';
+        if (addressInput) addressInput.value = '';
+        closeWithdrawModal();
+
+        if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
+        alert(`Заявка на вывод ${amount.toFixed(2)} USDT принята и отправлена администратору!`);
+
+      } catch (err) {
+        console.error("Ошибка оформления вывода:", err);
+        alert("Произошла ошибка при отправке заявки. Попробуйте снова.");
+      } finally {
+        if (actionBtn) {
+          actionBtn.disabled = false;
+          actionBtn.innerText = "Подтвердить вывод";
         }
       }
-
-      partnerBalance = newPartnerBalance;
-      updateUI();
-      if (amountInput) amountInput.value = '';
-      closeWithdrawModal();
-      if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
-      alert(`Заявка на вывод ${amount.toFixed(2)} USDT принята в обработку!`);
     }
 
     // ==========================================
