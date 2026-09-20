@@ -12,20 +12,25 @@
 
   <style>
     :root {
-      --bg-main: #090d16;
-      --bg-surface: #111827;
-      --bg-card: rgba(17, 24, 39, 0.75);
+      --bg-main: #070a13;
+      --bg-surface: #0e1424;
+      --bg-card: rgba(14, 20, 36, 0.82);
       --card-border: rgba(255, 255, 255, 0.08);
-      --border-focus: rgba(56, 189, 248, 0.4);
+      --border-focus: rgba(99, 102, 241, 0.45);
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --text-dim: #64748b;
-      --primary: #38bdf8;
-      --primary-hover: #0284c7;
-      --primary-gradient: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
-      --accent-gold: #f59e0b;
-      --accent-green: #10b981;
-      --accent-red: #ef4444;
+      
+      /* Фирменный градиент как в кнопке Рулетки */
+      --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+      --primary-glow: 0 6px 22px rgba(59, 130, 246, 0.42);
+      --primary-glow-hover: 0 8px 28px rgba(99, 102, 241, 0.55);
+      
+      --primary: #4f46e5;
+      --primary-light: #38bdf8;
+      --accent-gold: #facc15;
+      --accent-green: #34d399;
+      --accent-red: #f43f5e;
     }
 
     * {
@@ -131,16 +136,17 @@
   color: #ffffff; /* Контрастный белый текст на активной кнопке */
   text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
+    /* Главная карточка баланса */
     .hero-card {
-      background: linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
-      border: 1px solid var(--card-border);
-      backdrop-filter: blur(12px);
+      background: linear-gradient(150deg, rgba(20, 28, 52, 0.85) 0%, rgba(10, 14, 26, 0.95) 100%);
+      border: 1px solid rgba(99, 102, 241, 0.22);
+      backdrop-filter: blur(16px);
       border-radius: 20px;
       padding: 20px;
       margin-bottom: 22px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 12px 36px -10px rgba(0, 0, 0, 0.65), 0 0 20px rgba(79, 70, 229, 0.08);
     }
     .hero-card::before {
       content: '';
@@ -149,41 +155,49 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.5), transparent);
+      background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.7), transparent);
     }
-    
+
+    /* Партнёрский блок (гармоничный синий сапфир вместо едкого зелёного) */
     .partner-account-box {
-      background: rgba(16, 185, 129, 0.08);
-      border: 1px solid rgba(16, 185, 129, 0.25);
+      background: rgba(30, 42, 74, 0.45);
+      border: 1px solid rgba(99, 102, 241, 0.3);
       border-radius: 14px;
       padding: 12px 14px;
       margin-top: 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
     }
     .partner-balance-val {
       font-family: 'JetBrains Mono', monospace;
       font-size: 18px;
       font-weight: 700;
-      color: var(--accent-green);
+      color: #38bdf8;
+      text-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
     }
+
+    /* Кнопка "Вывод" в едином стиле индиго-градиента с мягким свечением */
     .btn-withdraw-small {
-      background: var(--accent-green);
-      color: #030712;
-      border: none;
-      border-radius: 8px;
-      padding: 7px 14px;
+      background: var(--primary-gradient);
+      color: #ffffff !important;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 10px;
+      padding: 7px 16px;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      transition: opacity 0.15s ease;
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+      transition: all 0.2s ease;
+      letter-spacing: 0.2px;
     }
     .btn-withdraw-small:active {
-      opacity: 0.8;
+      transform: scale(0.96);
+      opacity: 0.9;
     }
 
     .hero-header {
@@ -382,28 +396,39 @@
     .btn {
       width: 100%;
       background: var(--primary-gradient);
-      color: #030712;
-      border: none;
-      border-radius: 12px;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 14px;
       padding: 13px;
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 8px;
-      transition: opacity 0.15s ease, transform 0.1s ease;
+      box-shadow: var(--primary-glow);
+      transition: all 0.2s ease;
+      letter-spacing: 0.3px;
     }
     .btn:active {
-      opacity: 0.85;
+      opacity: 0.9;
       transform: scale(0.98);
     }
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.06);
-      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
       border: 1px solid var(--card-border);
-      margin-top: 8px;
+      box-shadow: none;
+      margin-top: 12px !important; /* Устраняет слипание кнопок */
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Гарантированный отступ между любыми идущими подряд кнопками */
+    .btn + .btn {
+      margin-top: 12px !important;
     }
 
     .tier-selector {
@@ -1858,7 +1883,7 @@
       font-weight: 700;
     }
 
-    /* БАРАБАН / КРУГОВОЙ ДИСК АПГРЕЙДА */
+    /* Контейнер диска с разрешением выхода теней за границы */
     .upgrade-dial-container {
       position: relative;
       width: 280px;
@@ -1867,21 +1892,23 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: visible !important;
     }
 
-    /* Фоновое объемное свечение за барабаном */
+    /* Мягкий рассеянный ореол за колесом */
     .upgrade-wheel-glow {
       position: absolute;
-      width: 300px;
-      height: 300px;
+      width: 290px;
+      height: 290px;
       border-radius: 50%;
       pointer-events: none;
       z-index: 0;
-      background: radial-gradient(circle, rgba(132, 204, 22, 0.2) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(234, 179, 8, 0.25) 0%, transparent 70%);
       transition: background 0.3s ease;
+      overflow: visible !important;
     }
 
-    /* Внешний светящийся контур со штрихами (тиками) */
+    /* Контур с тиками: убираем обрезку по краям */
     .upgrade-dial-ticks {
       position: absolute;
       width: 276px;
@@ -1889,12 +1916,15 @@
       border-radius: 50%;
       pointer-events: none;
       z-index: 1;
-      background: radial-gradient(circle, transparent 67%, rgba(255, 255, 255, 0.03) 68%, transparent 72%);
+      overflow: visible !important;
     }
+
+    /* Принудительно отключаем клиппинг внутри SVG для drop-shadow */
     .upgrade-dial-ticks svg {
       width: 100%;
       height: 100%;
       transform: rotate(-90deg);
+      overflow: visible !important;
     }
 
     /* Неподвижная стрелка сверху */
@@ -2165,7 +2195,7 @@
       height: 52px;
       border-radius: 14px;
       border: none;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 800;
       cursor: pointer;
       display: flex;
@@ -2177,16 +2207,79 @@
       letter-spacing: 0.5px;
       background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
       color: #ffffff;
-      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.45);
     }
+
+    /* Стартовое активное состояние: такой же сине-индиго градиент со свечением */
     .rubup-spin-btn.ready {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+      background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%) !important;
+      color: #ffffff !important;
+      box-shadow: 0 6px 22px rgba(59, 130, 246, 0.5) !important;
     }
-    .rubup-spin-btn.disabled {
-      background: #252243;
-      color: #7c77aa;
-      box-shadow: none;
+    .rubup-spin-btn.ready:active {
+      transform: scale(0.98);
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35) !important;
+    }
+
+    /* Неактивное состояние (недостаточно средств или раунд идёт) */
+    .rubup-spin-btn.disabled,
+    .rubup-spin-btn:disabled {
+      background: #151b2c !important;
+      color: #64748b !important;
+      box-shadow: none !important;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    /* Кнопка действия "Шаг" в Пути Подарков */
+    .gifts-btn-step {
+      flex: 1;
+      height: 48px;
+      border-radius: 14px;
+      border: none;
+      font-size: 13.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .gifts-btn-step:disabled {
+      background: #151b2c !important;
+      color: #5b6987 !important;
+      box-shadow: none !important;
+      cursor: not-allowed;
+    }
+
+    /* Кнопка "Забрать выигрыш" в едином стиле Рулетки */
+    .gifts-btn-cashout {
+      flex: 1.2;
+      height: 48px;
+      border-radius: 14px;
+      border: none;
+      font-size: 13.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%) !important;
+      color: #ffffff !important;
+      box-shadow: 0 6px 22px rgba(59, 130, 246, 0.45) !important;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .gifts-btn-cashout:disabled {
+      background: #151b2c !important;
+      color: #4b6672 !important;
+      box-shadow: none !important;
       cursor: not-allowed;
     }
     /* ==================================================
@@ -2195,12 +2288,12 @@
     .gifts-road-viewport {
       position: relative;
       width: 100%;
-      height: 380px;
-      border-radius: 20px;
+      height: 270px;
+      border-radius: 18px;
       background: #131826;
       border: 1px solid rgba(255, 255, 255, 0.08);
       overflow: hidden;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
       user-select: none;
     }
@@ -2215,7 +2308,7 @@
       transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
     }
     .gifts-sidewalk-left {
-      width: 66px;
+      width: 56px;
       height: 100%;
       flex-shrink: 0;
       position: relative;
@@ -2233,7 +2326,7 @@
       border-left: 3px solid #232a3e;
     }
     .gifts-road-lane {
-      width: 132px;
+      width: 118px;
       height: 100%;
       flex-shrink: 0;
       position: relative;
@@ -2243,7 +2336,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      padding: 22px 0 20px 0;
+      padding: 8px 0 10px 0;
       transition: background 0.25s ease;
     }
     .gifts-road-lane.is-active {
@@ -2253,17 +2346,17 @@
       background: rgba(16, 185, 129, 0.05);
     }
     .lane-gift-badge {
-      width: 52px;
-      height: 52px;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
-      background: radial-gradient(circle at 50% 35%, #252e47 0%, #131726 100%);
-      border: 1.5px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+      background: radial-gradient(circle at 50% 35%, #2a3450 0%, #141928 100%);
+      border: 2px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
       display: flex;
       align-items: center;
       justify-content: center;
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-      z-index: 4;
+      z-index: 25;
     }
     .gifts-road-lane.is-passed .lane-gift-badge {
       border-color: #3b82f6;
@@ -2271,23 +2364,23 @@
       transform: scale(1.06);
     }
     .lane-gift-badge img {
-      width: 36px;
-      height: 36px;
+      width: 44px;
+      height: 44px;
       object-fit: contain;
       filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.4));
     }
     .lane-manhole-wrap {
       position: relative;
-      width: 84px;
-      height: 68px;
+      width: 72px;
+      height: 56px;
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 3;
+      z-index: 2;
     }
     .lane-manhole-img {
-      width: 84px;
-      height: 68px;
+      width: 72px;
+      height: 56px;
       object-fit: contain;
       display: block;
       transition: filter 0.25s ease, transform 0.25s ease;
@@ -2297,13 +2390,13 @@
     }
     .lane-mult-pill {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 13.5px;
+      font-size: 14px;
       font-weight: 800;
       color: #8fa0c0;
       background: #1c2237;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-      width: 74px;
+      border-radius: 10px;
+      width: 72px;
       height: 28px;
       display: flex;
       align-items: center;
@@ -2312,7 +2405,7 @@
       transition: all 0.25s ease;
       white-space: nowrap;
       letter-spacing: -0.2px;
-      z-index: 4;
+      z-index: 25;
     }
     .gifts-road-lane.is-passed .lane-mult-pill,
     .lane-mult-pill.is-active {
@@ -2325,11 +2418,11 @@
     .gifts-traffic-car,
     .gifts-ambient-car {
       position: absolute;
-      top: -160px;
+      top: -130px;
       left: 50%;
       transform: translateX(-50%);
-      width: 78px;
-      height: 146px;
+      width: 64px;
+      height: 120px;
       pointer-events: none;
       z-index: 10;
     }
@@ -2342,36 +2435,36 @@
       filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.6));
     }
     .gifts-traffic-car {
-      z-index: 25;
+      z-index: 10;
       display: none;
     }
     .gifts-traffic-car.is-crashing {
       display: block;
-      animation: carCrashRun 0.35s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+      animation: carCrashRun 0.75s cubic-bezier(0.22, 0.85, 0.35, 1) forwards !important;
     }
     @keyframes carCrashRun {
       0% {
-        top: -160px;
+        top: -130px;
         opacity: 1;
       }
       100% {
-        top: 410px;
+        top: 295px;
         opacity: 1;
       }
     }
     @keyframes ambientCarDrive {
       0% {
-        top: -160px;
+        top: -130px;
       }
       100% {
-        top: 410px;
+        top: 295px;
       }
     }
     #gifts-cow-player {
       position: absolute;
-      width: 86px;
+      width: 108px;
       height: auto;
-      z-index: 20;
+      z-index: 30 !important;
       pointer-events: none;
       will-change: left, top, transform;
       transition: left 0.45s cubic-bezier(0.25, 1, 0.5, 1);
@@ -2391,32 +2484,33 @@
     }
     @keyframes cowPhysicsJump {
       0% { transform: translateY(0) scale(1, 1); }
-      35% { transform: translateY(-40px) scale(0.92, 1.12); }
-      65% { transform: translateY(-44px) scale(0.95, 1.08); }
+      35% { transform: translateY(-32px) scale(0.92, 1.12); }
+      65% { transform: translateY(-36px) scale(0.95, 1.08); }
       85% { transform: translateY(-4px) scale(1.12, 0.88); }
       100% { transform: translateY(0) scale(1, 1); }
     }
     .cow-hit-spin {
-      animation: cowHitSpin 0.55s cubic-bezier(0.2, 0.8, 0.25, 1) forwards;
+      animation: cowKnockout 0.65s cubic-bezier(0.18, 0.89, 0.32, 1.25) forwards;
     }
-    @keyframes cowHitSpin {
+    @keyframes cowKnockout {
       0% {
-        transform: translate(0, 0) rotate(0deg) scale(1);
-        filter: drop-shadow(0 4px 8px rgba(0,0,0,0.6));
+        transform: scale(1, 1) rotate(0deg);
       }
-      25% {
-        transform: translate(18px, -36px) rotate(60deg) scale(1.25);
-        filter: drop-shadow(0 0 24px #ef4444) brightness(1.7);
+      15% {
+        /* Момент сплющивания от удара бампером */
+        transform: scale(1.3, 0.65) translateY(10px);
+        filter: drop-shadow(0 0 20px #ef4444) brightness(1.8);
       }
-      60% {
-        transform: translate(45px, 25px) rotate(220deg) scale(0.9);
-        filter: drop-shadow(0 0 30px #ef4444) brightness(1.4);
-        opacity: 0.9;
+      45% {
+        /* Корова подлетает вверх и закручивается */
+        transform: scale(0.95, 1.1) translateY(-60px) rotate(160deg);
+        filter: drop-shadow(0 0 25px #ef4444) brightness(1.4);
+        opacity: 1;
       }
       100% {
-        transform: translate(75px, 90px) rotate(420deg) scale(0);
+        /* Улетает за нижний край экрана */
+        transform: scale(0.3) translateY(180px) rotate(380deg);
         opacity: 0;
-        filter: drop-shadow(0 0 35px #ef4444);
       }
     }
     .gifts-crash-flash {
@@ -2445,8 +2539,8 @@
       background: #111726;
       border: 1px solid rgba(255, 255, 255, 0.07);
       border-radius: 14px;
-      padding: 10px 14px;
-      margin-bottom: 12px;
+      padding: 8px 12px;
+      margin-bottom: 8px;
     }
     .gifts-info-title {
       font-size: 12px;
@@ -2471,17 +2565,23 @@
       color: #ef4444;
       font-weight: 800;
     }
+    #game-view-gifts .rubup-action-panel {
+      margin-bottom: 8px;
+    }
+    #game-view-gifts .rubup-bet-stepper {
+      height: 46px;
+    }
     .gifts-chips-row {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
-      gap: 6px;
-      margin-bottom: 12px;
+      gap: 5px;
+      margin-bottom: 8px;
     }
     .gifts-chip-btn {
       background: #151c2e;
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 10px;
-      padding: 8px 2px;
+      padding: 6px 2px;
       color: #94a3b8;
       font-size: 12px;
       font-weight: 800;
@@ -2498,68 +2598,27 @@
     .gifts-chip-btn:active {
       transform: scale(0.96);
     }
+    #gifts-pre-actions {
+      margin-bottom: 8px;
+    }
+    #game-view-gifts .rubup-spin-btn {
+      height: 48px;
+    }
     .gifts-actions-row {
       display: flex;
       gap: 8px;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
-    .gifts-btn-cashout {
-      flex: 1.2;
-      height: 52px;
-      border-radius: 14px;
-      border: none;
-      font-size: 13.5px;
-      font-weight: 800;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-      color: #ffffff;
-      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
-      transition: all 0.2s ease;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-    }
-    .gifts-btn-cashout:disabled {
-      background: #1a2730;
-      color: #4b6672;
-      box-shadow: none;
-      cursor: not-allowed;
-    }
-    .gifts-btn-step {
-      flex: 1;
-      height: 52px;
-      border-radius: 14px;
-      border: none;
-      font-size: 13.5px;
-      font-weight: 800;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-      color: #ffffff;
-      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
-      transition: all 0.2s ease;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-    }
-    .gifts-btn-step:disabled {
-      background: #1c2237;
-      color: #5b6987;
-      box-shadow: none;
-      cursor: not-allowed;
-    }
+
     .gifts-provably-fair {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 14px;
+      padding: 8px 12px;
       background: rgba(17, 23, 38, 0.6);
       border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 12px;
-      margin-top: 14px;
+      margin-top: 8px;
       font-size: 11px;
       color: #64748b;
     }
@@ -2583,13 +2642,13 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 6px;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
     .gifts-diff-btn {
       background: #111726;
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 10px;
-      padding: 6px 2px;
+      padding: 5px 2px;
       text-align: center;
       cursor: pointer;
       color: #94a3b8;
@@ -2612,75 +2671,162 @@
     /* ==================================================
        СТИЛИ ЭКРАНА ИГРЫ «РАКЕТКА / CRASH» (#game-view-rocket)
        ================================================== */
+    /* Обновленные стили арены RubUP */
     .rocket-arena {
       position: relative;
       width: 100%;
       height: 250px;
-      border-radius: 18px;
-      background: radial-gradient(circle at 80% 20%, #1e1b4b 0%, #0a0e17 70%);
+      border-radius: 20px;
+      background: #080b14;
       border: 1px solid rgba(255, 255, 255, 0.08);
       overflow: hidden;
       margin-bottom: 12px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      user-select: none;
     }
+
+    /* Рассеянная космическая атмосфера без резких кругов */
+    .rocket-space-atmosphere {
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 320px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(34, 197, 94, 0.28) 0%, rgba(34, 197, 94, 0.08) 50%, transparent 75%);
+      filter: blur(35px);
+      pointer-events: none;
+      z-index: 1;
+      transition: background 0.4s ease;
+    }
+
     .rocket-svg-canvas {
       position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
+      z-index: 3;
     }
-    .rocket-craft {
-      position: absolute;
-      width: 32px;
-      height: 32px;
+    .rocket-countdown-box {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 26px;
-      z-index: 10;
-      pointer-events: none;
-      filter: drop-shadow(0 0 12px #38bdf8) drop-shadow(-8px 8px 10px #ef4444);
-      transform-origin: center center;
-    }
-    .rocket-center-display {
       position: absolute;
-      top: 42%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      pointer-events: none;
+      inset: 0;
       z-index: 12;
+      pointer-events: none;
+    }
+    .rocket-countdown-num {
+      font-size: 68px;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1;
+      text-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .rocket-countdown-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #94a3b8;
+      margin-top: 6px;
+      letter-spacing: 0.5px;
+    }
+    .rocket-countdown-bar-wrap {
+      width: 170px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      margin: 10px auto 0;
+      overflow: hidden;
+    }
+    .rocket-countdown-bar-wrap .rocket-timer-fill {
+      height: 100%;
+      width: 100%;
+      background: #22c55e;
+      box-shadow: 0 0 12px #22c55e;
+      border-radius: 4px;
+      transition: width 0.08s linear;
+    }
+    /* Блок множителя: приподнят к верхнему краю, чистый шрифт без овала */
+    .rocket-flight-box {
+      position: absolute;
+      top: 24px;
+      left: 0;
+      right: 0;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      z-index: 5;
+      pointer-events: none;
     }
     .rocket-live-mult {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 46px;
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 54px;
       font-weight: 900;
-      color: #c084fc;
+      color: #34d399;
       line-height: 1;
-      text-shadow: 0 0 20px rgba(192, 132, 252, 0.7), 0 0 35px rgba(59, 130, 246, 0.5);
-      transition: color 0.2s ease, text-shadow 0.2s ease;
+      letter-spacing: -1px;
+      text-shadow: 0 2px 20px rgba(34, 197, 94, 0.7);
+      transition: color 0.3s ease, text-shadow 0.3s ease;
     }
     .rocket-live-mult.crashed {
-      color: #ef4444 !important;
-      text-shadow: 0 0 25px #ef4444, 0 0 45px #ef4444 !important;
+      /* Сохраняет цвет своего икса по цветовой системе RubUP */
     }
     .rocket-state-sub {
       font-size: 13px;
       font-weight: 700;
-      color: #94a3b8;
+      color: #ef4444;
       text-transform: uppercase;
       letter-spacing: 1.5px;
       margin-top: 6px;
+      z-index: 2;
     }
-    .rocket-timer-wrap {
+
+    /* Потоки гиперскорости: встречный полет сверху-справа вниз-влево */
+    @keyframes rkWarpSpeedFlow {
+      0% { transform: translate(70px, -50px); opacity: 0; }
+      30% { opacity: 0.85; }
+      75% { opacity: 0.85; }
+      100% { transform: translate(-95px, 68px); opacity: 0; }
+    }
+    .rk-warp-streak {
+      animation: rkWarpSpeedFlow var(--warp-time, 1.1s) linear infinite;
+    }
+    .rk-warp-streak.s1 { animation-delay: 0s; }
+    .rk-warp-streak.s2 { animation-delay: 0.25s; }
+    .rk-warp-streak.s3 { animation-delay: 0.5s; }
+    .rk-warp-streak.s4 { animation-delay: 0.75s; }
+    .rk-warp-streak.s5 { animation-delay: 0.95s; }
+
+    /* Звезды тоже плавно летят назад, создавая объем набора высоты */
+    @keyframes rkStarsFlowMotion {
+      0% { transform: translate(40px, -28px); }
+      100% { transform: translate(-50px, 35px); }
+    }
+    .rk-star-flow {
+      animation: rkStarsFlowMotion var(--stars-time, 2.2s) linear infinite;
+    }
+    .rk-star-flow.st1 { animation-delay: 0s; }
+    .rk-star-flow.st2 { animation-delay: 0.4s; }
+    .rk-star-flow.st3 { animation-delay: 0.8s; }
+    .rk-star-flow.st4 { animation-delay: 1.2s; }
+    .rk-star-flow.st5 { animation-delay: 1.6s; }
+    .rk-star-flow.st6 { animation-delay: 2.0s; }
+    .rocket-crash-flash {
       position: absolute;
-      bottom: 0; left: 0; right: 0; height: 5px;
-      background: rgba(255, 255, 255, 0.08);
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(239, 68, 68, 0.6) 0%, transparent 75%);
+      pointer-events: none;
+      opacity: 0;
+      z-index: 20;
+      transition: opacity 0.1s ease;
     }
-    .rocket-timer-fill {
-      height: 100%;
-      background: #38bdf8;
-      width: 0%;
-      box-shadow: 0 0 8px #38bdf8;
+    .rocket-crash-flash.is-active {
+      opacity: 1;
     }
     .rocket-history-bar {
       display: flex;
@@ -2722,6 +2868,9 @@
       flex-direction: column;
       gap: 6px;
     }
+    .rocket-players-feed:empty {
+      display: none !important;
+    }
     .rocket-feed-item {
       display: flex;
       align-items: center;
@@ -2733,52 +2882,134 @@
     }
 
     /* ==================================================
-       СТИЛИ ЭКРАНА ИГРЫ «РУЛЕТКА» (#game-view-roulette)
+       РУЛЕТКА RUBUP: СТИЛИ ВИЗОРА, ЛЕНТЫ И КНОПОК
        ================================================== */
+    .roulette-container-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    /* ==================================================
+       РУЛЕТКА: БЕЛЫЕ ЦИФРЫ, ЖЁЛТЫЕ ЗВЁЗДЫ И СЦЕНА ПОБЕДЫ
+       ================================================== */
+    .star-gold {
+      color: #facc15 !important;
+      text-shadow: 0 0 8px rgba(250, 204, 21, 0.85);
+      font-size: 13px;
+      display: inline-block;
+      margin-right: 2px;
+    }
+
+    .num-white {
+      color: #ffffff !important;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+    }
+
     .roulette-viewport {
       position: relative;
       width: 100%;
-      height: 150px;
-      background: #0a0e17;
-      border: 2px solid rgba(234, 179, 8, 0.35);
-      border-radius: 18px;
+      height: 164px;
+      background: radial-gradient(circle at 50% 30%, #151a2d 0%, #0a0d18 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
       overflow: hidden;
-      margin-bottom: 14px;
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0, 0, 0, 0.8);
+      margin-bottom: 16px;
+      box-shadow: inset 0 4px 20px rgba(0, 0, 0, 0.8), 0 10px 30px rgba(0, 0, 0, 0.5);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%);
     }
+
+    /* Золотой задник-прожектор */
+    .roulette-win-spotlight {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(250, 204, 21, 0.45) 0%, rgba(217, 119, 6, 0.18) 50%, transparent 80%);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 4;
+      transition: opacity 0.4s ease;
+    }
+    .roulette-win-spotlight.active {
+      opacity: 1;
+    }
+
+    /* Вращающиеся лучи */
+    .roulette-win-rays {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 260px;
+      height: 260px;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 5;
+      transition: opacity 0.4s ease;
+      animation: spinRouletteWinRays 9s linear infinite;
+    }
+    .roulette-win-rays.active {
+      opacity: 0.85;
+    }
+    @keyframes spinRouletteWinRays {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* Золотая рамка */
     .roulette-win-frame {
       position: absolute;
-      top: 0;
-      bottom: 0;
+      top: 50%;
       left: 50%;
-      width: 90px;
-      transform: translateX(-50%);
+      transform: translate(-50%, -50%);
+      width: 96px;
+      height: 144px;
       border: 2px solid #facc15;
-      border-radius: 14px;
+      border-radius: 18px;
       pointer-events: none;
-      z-index: 10;
-      box-shadow: 0 0 16px rgba(250, 204, 21, 0.5), inset 0 0 10px rgba(250, 204, 21, 0.2);
+      z-index: 15;
+      box-shadow: 0 0 16px rgba(250, 204, 21, 0.35), inset 0 0 12px rgba(250, 204, 21, 0.12);
+      background: rgba(250, 204, 21, 0.02);
+      transition: all 0.35s ease;
     }
     .roulette-win-frame::before {
       content: '';
       position: absolute;
-      top: -2px; left: 50%;
+      top: -2px;
+      left: 50%;
       transform: translateX(-50%);
-      border-left: 7px solid transparent;
-      border-right: 7px solid transparent;
-      border-top: 9px solid #facc15;
-      filter: drop-shadow(0 0 6px #facc15);
+      width: 18px;
+      height: 3px;
+      background: #facc15;
+      border-radius: 2px;
+      box-shadow: 0 0 8px #facc15;
     }
     .roulette-win-frame::after {
       content: '';
       position: absolute;
-      bottom: -2px; left: 50%;
+      bottom: -2px;
+      left: 50%;
       transform: translateX(-50%);
-      border-left: 7px solid transparent;
-      border-right: 7px solid transparent;
-      border-bottom: 9px solid #facc15;
-      filter: drop-shadow(0 0 6px #facc15);
+      width: 18px;
+      height: 3px;
+      background: #facc15;
+      border-radius: 2px;
+      box-shadow: 0 0 8px #facc15;
     }
+    .roulette-win-frame.is-winning {
+      border-color: #fffbeb;
+      box-shadow: 0 0 28px rgba(250, 204, 21, 0.95), inset 0 0 18px rgba(250, 204, 21, 0.45);
+      animation: winFramePulse 1.1s ease-in-out infinite alternate;
+    }
+    @keyframes winFramePulse {
+      0% { transform: translate(-50%, -50%) scale(1); }
+      100% { transform: translate(-50%, -50%) scale(1.04); }
+    }
+
     .roulette-reel-track-h {
       display: flex;
       align-items: center;
@@ -2786,68 +3017,180 @@
       position: absolute;
       left: 0;
       top: 0;
-      transition: transform 4s cubic-bezier(0.1, 0.9, 0.2, 1);
       will-change: transform;
+      z-index: 6;
     }
+    .roulette-reel-track-h.has-winner .roulette-gift-card:not(.is-winner) {
+      opacity: 0.15;
+      filter: blur(2px) grayscale(0.4);
+      transition: opacity 0.4s ease, filter 0.4s ease;
+    }
+
     .roulette-gift-card {
-      width: 84px;
-      height: 122px;
+      width: 90px;
+      height: 134px;
       flex-shrink: 0;
       margin: 0 4px;
-      background: #131c2e;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(29, 36, 56, 0.5) 0%, rgba(13, 17, 29, 0.8) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      gap: 4px;
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+      position: relative;
+      box-sizing: border-box;
+      user-select: none;
+      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease, border-color 0.4s ease;
     }
-    .roulette-gift-icon {
-      font-size: 34px;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+    .roulette-gift-card img {
+      width: 62px;
+      height: 62px;
+      object-fit: contain;
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.6));
+      pointer-events: none;
+      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.4s ease;
     }
-    .roulette-gift-title {
+    .roulette-gift-val {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .roulette-gift-card.is-winner {
+      z-index: 25;
+      border-color: rgba(250, 204, 21, 0.9);
+      background: linear-gradient(180deg, rgba(46, 35, 14, 0.92) 0%, rgba(18, 14, 5, 0.98) 100%);
+      box-shadow: 0 0 28px rgba(250, 204, 21, 0.65), inset 0 0 16px rgba(250, 204, 21, 0.35);
+      transform: scale(1.08);
+    }
+    .roulette-gift-card.is-winner img {
+      transform: scale(1.36) translateY(-4px);
+      filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 18px rgba(250, 204, 21, 0.95));
+    }
+
+    /* Информативная плашка с четким разделением статуса */
+    .roulette-win-banner {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translate(-50%, 20px) scale(0.85);
+      border-radius: 14px;
+      padding: 6px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 30;
+      transition: all 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
+      white-space: nowrap;
+    }
+    .roulette-win-banner.active {
+      opacity: 1;
+      transform: translate(-50%, 0) scale(1);
+    }
+    .roulette-win-banner.status-win {
+      background: rgba(14, 26, 20, 0.96);
+      border: 1.8px solid #10b981;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.85), 0 0 20px rgba(16, 185, 129, 0.45);
+    }
+    .roulette-win-banner.status-win .wb-title { color: #34d399; }
+
+    .roulette-win-banner.status-loss {
+      background: rgba(26, 20, 30, 0.96);
+      border: 1.8px solid #facc15;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.85), 0 0 20px rgba(250, 204, 21, 0.35);
+    }
+    .roulette-win-banner.status-loss .wb-title { color: #facc15; }
+
+    .roulette-win-banner .wb-title {
       font-size: 10px;
-      font-weight: 700;
-      color: #94a3b8;
-    }
-    .roulette-gift-mult {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
       font-weight: 800;
-      color: #facc15;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
     }
+    .roulette-win-banner .wb-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 900;
+      color: #ffffff;
+      margin-top: 1px;
+    }
+    .roulette-win-banner .wb-sub {
+      font-size: 10px;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
     .roulette-chances-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
-      margin-bottom: 12px;
+      gap: 8px;
+      width: 100%;
+      margin-bottom: 14px;
     }
     .roulette-chance-btn {
-      background: #111726;
+      background: #121726;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 8px 4px;
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      color: #94a3b8;
-      font-size: 10px;
-      transition: all 0.2s ease;
-    }
-    .roulette-chance-btn b {
-      display: block;
-      color: #fff;
-      font-size: 13px;
-      margin-bottom: 2px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      min-height: 58px;
     }
     .roulette-chance-btn.active {
       border-color: #facc15;
-      background: rgba(250, 204, 21, 0.15);
-      color: #fff;
-      box-shadow: 0 0 12px rgba(250, 204, 21, 0.25);
+      background: rgba(250, 204, 21, 0.12);
+      box-shadow: 0 0 14px rgba(250, 204, 21, 0.25);
+    }
+    .roulette-chance-badge {
+      font-size: 10px;
+      font-weight: 800;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.15);
+      padding: 1px 6px;
+      border-radius: 6px;
+      margin-bottom: 4px;
+    }
+    .roulette-chance-label {
+      font-size: 13px;
+      font-weight: 800;
+      color: #ffffff;
+      font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .roulette-action-btn {
+      width: 100%;
+      height: 52px;
+      border-radius: 14px;
+      border: none;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.45);
+      transition: all 0.2s ease;
+    }
+    .roulette-action-btn:disabled {
+      background: #1c2237;
+      color: #64748b;
+      box-shadow: none;
+      cursor: not-allowed;
     }
 
     /* ==================================================
@@ -2894,17 +3237,69 @@
     .mines-cell:active:not(.opened) {
       transform: scale(0.92);
     }
+    /* Открытая ячейка с кристаллом: неоново-сапфировое свечение под AstralShard */
     .mines-cell.gem-opened {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.3) 0%, rgba(5, 150, 105, 0.45) 100%);
-      border-color: #10b981;
-      box-shadow: 0 0 16px rgba(16, 185, 129, 0.8), inset 0 0 8px rgba(16, 185, 129, 0.4);
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.25) 0%, rgba(37, 99, 235, 0.45) 100%) !important;
+      border-color: #38bdf8 !important;
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.8), inset 0 0 10px rgba(56, 189, 248, 0.4) !important;
       animation: gemOpenPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
+
+    /* Изображение астрального кристалла внутри плитки */
+    .mines-shard-img {
+      width: 82%;
+      height: 82%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.85));
+      pointer-events: none;
+      animation: shardPopIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes shardPopIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      60% { transform: scale(1.15); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Поле прямого ввода любой ставки */
+    .mines-input-bet {
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 17px;
+      font-weight: 800;
+      text-align: center;
+      width: 85px;
+      outline: none;
+      padding: 0;
+      margin: 0;
+    }
+    .mines-input-bet:focus {
+      border-bottom: 1.5px solid #38bdf8;
+    }
+    /* Ячейка при подрыве на мине */
     .mines-cell.bomb-opened {
-      background: linear-gradient(135deg, rgba(225, 29, 72, 0.4) 0%, rgba(159, 18, 57, 0.6) 100%);
-      border-color: #ef4444;
-      box-shadow: 0 0 20px rgba(239, 68, 68, 0.9);
-      animation: bombShake 0.4s ease;
+      background: radial-gradient(circle, rgba(239, 68, 68, 0.35) 0%, rgba(136, 19, 55, 0.6) 100%) !important;
+      border-color: #f43f5e !important;
+      box-shadow: 0 0 24px rgba(244, 63, 94, 0.85), inset 0 0 12px rgba(244, 63, 94, 0.5) !important;
+      animation: bombShake 0.45s ease;
+    }
+
+    /* Изображение сферы с черепом */
+    .mines-bomb-img {
+      width: 84%;
+      height: 84%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 12px rgba(244, 63, 94, 0.95));
+      pointer-events: none;
+      animation: bombPop 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes bombPop {
+      0% { transform: scale(0.4) rotate(-15deg); opacity: 0; }
+      60% { transform: scale(1.18) rotate(6deg); opacity: 1; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
     }
     @keyframes gemOpenPop {
       0% { transform: scale(0.8); }
@@ -2970,8 +3365,8 @@
         <!-- Правый блок: запрещаем сжиматься (flex-shrink: 0) -->
         <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0;">
           <span class="hero-badge" data-i18n="badge_locked">🔒 Пул ликвидности</span>
-          <button onclick="openDepositModal()" style="background: rgba(0, 229, 255, 0.15); color: #00E5FF; border: 1px solid rgba(0, 229, 255, 0.3); padding: 6px 12px; border-radius: 10px; font-weight: 600; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 6px;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <button onclick="openDepositModal()" style="background: rgba(99, 102, 241, 0.18); color: #60a5fa; border: 1px solid rgba(99, 102, 241, 0.4); padding: 6px 14px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 0 12px rgba(99, 102, 241, 0.2);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
             <span data-i18n="btn_deposit">Пополнить</span>
           </button>
         </div>
@@ -3707,8 +4102,8 @@
 
         <!-- Переключатель валюты игры: Очками PTS / USDT -->
         <div class="rubup-mode-tabs">
-          <div id="tab-mode-pts" class="rubup-mode-tab active" onclick="switchUpgradeCurrency('pts')">Очками PTS</div>
-          <div id="tab-mode-usdt" class="rubup-mode-tab" onclick="switchUpgradeCurrency('usdt')">USDT</div>
+          <div id="tab-mode-pts" class="rubup-mode-tab" onclick="switchUpgradeCurrency('pts')">Очками PTS</div>
+          <div id="tab-mode-usdt" class="rubup-mode-tab active" onclick="switchUpgradeCurrency('usdt')">USDT</div>
         </div>
 
         <!-- Карточки статистики: Лучший сегодня / Рекорд режима -->
@@ -3751,9 +4146,9 @@
 
           <!-- Неподвижный центр диска с глубоким затемнением и глянцевой фаской -->
           <div id="upgrade-center-hub" class="upgrade-center-hub">
-            <div id="upgrade-center-win-val" class="upgrade-center-win">+150</div>
-            <div id="upgrade-center-curr-val" style="font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase;">PTS</div>
-            <div id="upgrade-center-chance-val" class="upgrade-center-chance">шанс 63.3%</div>
+            <div id="upgrade-center-win-val" class="upgrade-center-win">+200</div>
+            <div id="upgrade-center-curr-val" style="font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase;">USDT</div>
+            <div id="upgrade-center-chance-val" class="upgrade-center-chance">шанс 47.5%</div>
           </div>
 
         </div>
@@ -3773,12 +4168,12 @@
           </div>
 
           <div class="slider-chips-row">
-            <button class="slider-chip active" data-pos="0" onclick="setSliderPercent(0)">×1.5</button>
-            <button class="slider-chip" data-pos="20" onclick="setSliderPercent(20)">×3</button>
-            <button class="slider-chip" data-pos="40" onclick="setSliderPercent(40)">×5</button>
-            <button class="slider-chip" data-pos="60" onclick="setSliderPercent(60)">×10</button>
-            <button class="slider-chip" data-pos="80" onclick="setSliderPercent(80)">×20</button>
-            <button class="slider-chip" data-pos="100" onclick="setSliderPercent(100)">×50</button>
+            <button class="slider-chip active" data-pos="0" onclick="setSliderPercent(0)">×2</button>
+            <button class="slider-chip" data-pos="20" onclick="setSliderPercent(20)">×2.75</button>
+            <button class="slider-chip" data-pos="40" onclick="setSliderPercent(40)">×4</button>
+            <button class="slider-chip" data-pos="60" onclick="setSliderPercent(60)">×7</button>
+            <button class="slider-chip" data-pos="80" onclick="setSliderPercent(80)">×12</button>
+            <button class="slider-chip" data-pos="100" onclick="setSliderPercent(100)">×20</button>
           </div>
         </div>
 
@@ -3830,8 +4225,8 @@
 
         <!-- Переключатель валюты -->
         <div class="rubup-mode-tabs">
-          <div id="tab-gifts-pts" class="rubup-mode-tab active" onclick="switchGiftsCurrency('pts')">Очками PTS</div>
-          <div id="tab-gifts-usdt" class="rubup-mode-tab" onclick="switchGiftsCurrency('usdt')">USDT</div>
+          <div id="tab-gifts-pts" class="rubup-mode-tab" onclick="switchGiftsCurrency('pts')">Очками PTS</div>
+          <div id="tab-gifts-usdt" class="rubup-mode-tab active" onclick="switchGiftsCurrency('usdt')">USDT</div>
         </div>
 
         <!-- ИГРОВОЕ ПОЛЕ: Горизонтальная трасса со скроллируемой камерой -->
@@ -3928,7 +4323,7 @@
             <div class="gifts-sidewalk-right"></div>
 
             <!-- Корова-игрок -->
-            <div id="gifts-cow-player" style="left: -4px; top: 168px;">
+            <div id="gifts-cow-player" style="left: -12px; top: 90px;">
               <img id="gifts-cow-img" src="assets/cow-idle-original-9bf76b57.webp" alt="Cow">
             </div>
           </div>
@@ -3945,7 +4340,7 @@
         </div>
 
         <!-- Степпер ставки -->
-        <div class="rubup-action-panel" style="margin-bottom: 10px;">
+        <div class="rubup-action-panel" style="margin-bottom: 8px;">
           <div class="rubup-bet-stepper" style="width: 100%;">
             <button class="rubup-step-btn" onclick="changeGiftsBet(-1)">−</button>
             <div class="rubup-bet-val" style="justify-content: center; flex: 1;">
@@ -3967,7 +4362,7 @@
         </div>
 
         <!-- Кнопки действий: До старта или в раунде -->
-        <div id="gifts-pre-actions" style="margin-bottom: 12px;">
+        <div id="gifts-pre-actions" style="margin-bottom: 8px;">
           <button id="gifts-start-btn" class="rubup-spin-btn ready" style="width: 100%;" onclick="handleGiftsAction()">
             Начать игру
           </button>
@@ -4047,8 +4442,8 @@
 
         <!-- Переключатель валюты -->
         <div class="rubup-mode-tabs">
-          <div id="tab-rocket-pts" class="rubup-mode-tab active" onclick="switchRocketCurrency('pts')">Очками PTS</div>
-          <div id="tab-rocket-usdt" class="rubup-mode-tab" onclick="switchRocketCurrency('usdt')">USDT</div>
+          <div id="tab-rocket-pts" class="rubup-mode-tab" onclick="switchRocketCurrency('pts')">Очками PTS</div>
+          <div id="tab-rocket-usdt" class="rubup-mode-tab active" onclick="switchRocketCurrency('usdt')">USDT</div>
         </div>
 
         <!-- История предыдущих коэффициентов -->
@@ -4060,19 +4455,89 @@
           <div class="rocket-hist-chip" style="color: #facc15; border-color: #facc15;">69.37x</div>
         </div>
 
-        <!-- Арена полета ракеты -->
+        <!-- Арена полета ракеты (RubUP Pure Space) -->
         <div class="rocket-arena" id="rocket-arena">
-          <svg class="rocket-svg-canvas" viewBox="0 0 340 250">
-            <path id="rocket-path-line" d="M 30 220 Q 150 200 310 50" fill="none" stroke="rgba(168, 85, 247, 0.4)" stroke-width="3" stroke-dasharray="6 6"/>
+          <!-- 1. Фоновый атмосферный свет (мягкий расфокус без резких краев) -->
+          <div id="rocket-space-atmosphere" class="rocket-space-atmosphere"></div>
+
+          <!-- 2. Единый космический SVG-холст (фон, звезды, штрихи скорости, шлейф, ракета) -->
+          <!-- Космический SVG-холст 340x230 -->
+          <svg class="rocket-svg-canvas" id="inner-rk-svg" viewBox="0 0 340 230" preserveAspectRatio="none">
+            <defs>
+              <!-- Градиент конусовидного шлейфа: от прозрачного хвоста к плотному ядру -->
+              <linearGradient id="rkLaserGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#22c55e" stop-opacity="0.05"/>
+                <stop offset="65%" stop-color="#22c55e" stop-opacity="0.75"/>
+                <stop offset="100%" stop-color="#ffffff" stop-opacity="0.95"/>
+              </linearGradient>
+
+              <!-- Мягкий ореол сопла ранца -->
+              <radialGradient id="rkExhaustSoftGlow">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+                <stop offset="45%" stop-color="#22c55e" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#22c55e" stop-opacity="0"/>
+              </radialGradient>
+
+              <!-- Встречные полосы гиперпространства -->
+              <linearGradient id="rkSpeedLineGrad" x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+                <stop offset="60%" stop-color="#38bdf8" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+
+            <!-- СЛОЙ 0: Потоки гиперскорости -->
+            <g id="rk-warp-streaks">
+              <line x1="320" y1="10" x2="240" y2="65" stroke="url(#rkSpeedLineGrad)" stroke-width="1.8" stroke-linecap="round" class="rk-warp-streak s1"/>
+              <line x1="220" y1="35" x2="150" y2="85" stroke="url(#rkSpeedLineGrad)" stroke-width="1.3" stroke-linecap="round" class="rk-warp-streak s2"/>
+              <line x1="330" y1="80" x2="250" y2="135" stroke="url(#rkSpeedLineGrad)" stroke-width="1.6" stroke-linecap="round" class="rk-warp-streak s3"/>
+              <line x1="160" y1="10" x2="90" y2="55" stroke="url(#rkSpeedLineGrad)" stroke-width="1.2" stroke-linecap="round" class="rk-warp-streak s4"/>
+              <line x1="280" y1="120" x2="200" y2="175" stroke="url(#rkSpeedLineGrad)" stroke-width="1.4" stroke-linecap="round" class="rk-warp-streak s5"/>
+            </g>
+
+            <!-- СЛОЙ 1: Звёзды встречного потока -->
+            <g id="rk-stars-flow">
+              <circle cx="55" cy="40" r="1.1" fill="#ffffff" class="rk-star-flow st1"/>
+              <circle cx="130" cy="110" r="1" fill="#ffffff" class="rk-star-flow st2"/>
+              <circle cx="280" cy="65" r="1.3" fill="#ffffff" class="rk-star-flow st3"/>
+              <circle cx="210" cy="170" r="1.1" fill="#ffffff" class="rk-star-flow st4"/>
+              <circle cx="310" cy="140" r="1.2" fill="#ffffff" class="rk-star-flow st5"/>
+              <circle cx="85" cy="180" r="0.9" fill="#ffffff" class="rk-star-flow st6"/>
+            </g>
+
+            <!-- СЛОЙ 2: Размытый световой контур сужающегося шлейфа -->
+            <path id="inner-rocket-glow-trail" d="" fill="#22c55e" opacity="0.3" style="filter: blur(4px);"/>
+
+            <!-- СЛОЙ 3: Конусовидная лазерная лента шлейфа -->
+            <path id="inner-rocket-core-trail" d="" fill="url(#rkLaserGrad)"/>
+
+            <!-- СЛОЙ 4: Ракета (человечек) с соплом строго в (0,0) -->
+            <g id="inner-rk-ship-group" style="display: none; will-change: transform;">
+              <circle id="inner-rk-fire-core" cx="0" cy="0" r="9" fill="url(#rkExhaustSoftGlow)" style="filter: blur(1.2px);"/>
+              <circle cx="0" cy="0" r="3" fill="#ffffff"/>
+              <g transform="rotate(22)">
+                <image href="assets/rocket.png" x="-8" y="-28" width="38" height="38" preserveAspectRatio="xMidYMid meet"/>
+              </g>
+            </g>
           </svg>
-          <div id="rocket-craft-icon" class="rocket-craft" style="left: 20px; top: 200px;">🚀</div>
-          <div class="rocket-center-display">
+
+          <!-- 3. Блок отсчёта («Приём ставок», 8..1) -->
+          <div id="rocket-countdown-box" class="rocket-countdown-box">
+            <div id="rocket-countdown-num" class="rocket-countdown-num">8</div>
+            <div class="rocket-countdown-label">Приём ставок</div>
+            <div class="rocket-countdown-bar-wrap">
+              <div id="rocket-timer-fill" class="rocket-timer-fill"></div>
+            </div>
+          </div>
+
+          <!-- 4. Блок множителя (размещен строго в верхней части, чтобы не перекрывать полет) -->
+          <div id="rocket-flight-box" class="rocket-flight-box">
             <div id="rocket-mult-number" class="rocket-live-mult">1.00x</div>
-            <div id="rocket-status-text" class="rocket-state-sub">Ожидание старта</div>
+            <div id="rocket-status-text" class="rocket-state-sub" style="display: none;"></div>
           </div>
-          <div class="rocket-timer-wrap">
-            <div id="rocket-timer-fill" class="rocket-timer-fill"></div>
-          </div>
+
+          <!-- 5. Вспышка при крушении -->
+          <div id="rocket-crash-flash" class="rocket-crash-flash"></div>
         </div>
 
         <!-- Автовывод -->
@@ -4088,7 +4553,7 @@
         </div>
 
         <!-- Панель ставки и действий -->
-        <div class="rubup-action-panel">
+        <div class="rubup-action-panel" style="margin-bottom: 8px;">
           <div class="rubup-bet-stepper">
             <button class="rubup-step-btn" onclick="changeRocketBet(-1)">−</button>
             <div class="rubup-bet-val">
@@ -4102,21 +4567,13 @@
           </button>
         </div>
 
-        <!-- Лента других игроков раунда -->
-        <div class="rocket-players-feed" id="rocket-players-feed">
-          <div class="rocket-feed-item">
-            <span style="color: #94a3b8;">🤖 Юра (бот)</span>
-            <span style="color: #4ade80;">+594 PTS (×1.98)</span>
-          </div>
-          <div class="rocket-feed-item">
-            <span style="color: #94a3b8;">🤖 Angelina</span>
-            <span style="color: #38bdf8;">ставка 50 PTS</span>
-          </div>
-          <div class="rocket-feed-item">
-            <span style="color: #94a3b8;">🤖 аристо</span>
-            <span style="color: #4ade80;">+200 PTS (×2.00)</span>
-          </div>
+        <!-- Меню быстрых ставок (чипсы) -->
+        <div class="gifts-chips-row" id="rocket-chips-container" style="margin-bottom: 10px;">
+          <!-- Рендерится динамически через JS -->
         </div>
+
+        <!-- Лента других игроков раунда -->
+        <div class="rocket-players-feed" id="rocket-players-feed"></div>
       </div>
 
       <!-- 3. ИГРА: РУЛЕТКА / ПОДАРКИ TELEGRAM -->
@@ -4139,43 +4596,68 @@
           </div>
         </div>
 
-        <!-- Заголовок Рулетки -->
-        <div style="text-align: center; margin-bottom: 14px;">
-          <div style="font-size: 20px; font-weight: 900; color: #fff; letter-spacing: -0.5px;">Подарки Telegram</div>
-          <div style="font-size: 11px; color: #94a3b8; margin-top: 2px;">Бесплатно раз в сутки. Заберите подарок или PTS на баланс!</div>
-        </div>
-
-        <!-- Горизонтальная лента наград -->
-        <div class="roulette-viewport">
-          <div class="roulette-win-frame"></div>
-          <div id="roulette-reel-tape" class="roulette-reel-track-h">
-            <!-- Динамически наполняется карточками через JS -->
+        <!-- Заголовок и подзаголовок -->
+        <div style="text-align: center; margin-bottom: 16px;">
+          <div style="font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px;">Подарки Telegram</div>
+          <div id="roulette-subtitle" style="font-size: 12px; color: #94a3b8; margin-top: 3px;">
+            Бесплатно раз в сутки. Забрать подарком или деньгами на баланс.
           </div>
         </div>
 
-        <!-- Выбор шанса / стоимости спина -->
+        <div class="rubup-mode-tabs" style="margin-bottom: 14px;">
+          <div id="tab-roulette-pts" class="rubup-mode-tab" onclick="switchRouletteCurrency('pts')">Очками PTS</div>
+          <div id="tab-roulette-usdt" class="rubup-mode-tab active" onclick="switchRouletteCurrency('usdt')">USDT</div>
+        </div>
+
+        <!-- Визор рулетки -->
+        <div class="roulette-viewport" id="roulette-viewport">
+          <div class="roulette-win-spotlight" id="roulette-win-spotlight"></div>
+          <svg class="roulette-win-rays" id="roulette-win-rays" viewBox="0 0 100 100">
+            <g stroke="#facc15" stroke-width="1.2" opacity="0.65">
+              <line x1="50" y1="0" x2="50" y2="100"/>
+              <line x1="0" y1="50" x2="100" y2="50"/>
+              <line x1="15" y1="15" x2="85" y2="85"/>
+              <line x1="15" y1="85" x2="85" y2="15"/>
+              <line x1="30" y1="4" x2="70" y2="96"/>
+              <line x1="4" y1="30" x2="96" y2="70"/>
+              <line x1="70" y1="4" x2="30" y2="96"/>
+              <line x1="96" y1="30" x2="4" y2="70"/>
+            </g>
+          </svg>
+          <div class="roulette-win-frame" id="roulette-win-frame"></div>
+          <div id="roulette-reel-tape" class="roulette-reel-track-h"></div>
+
+          <!-- Плашка итогов -->
+          <div class="roulette-win-banner" id="roulette-win-banner">
+            <span class="wb-title" id="roulette-wb-title">ВЫИГРЫШ</span>
+            <span class="wb-val" id="roulette-wb-val">+0 PTS</span>
+            <span class="wb-sub" id="roulette-wb-sub"></span>
+          </div>
+        </div>
+
+        <!-- 4 режима выбора шанса -->
         <div class="roulette-chances-grid">
-          <div class="roulette-chance-btn active" onclick="setRouletteMode(0)">
-            <b>Бесплатно</b>
-            <span>1 в сутки</span>
+          <div class="roulette-chance-btn active" id="r-mode-0" onclick="setRouletteMode(0)">
+            <span class="roulette-chance-label" style="font-size: 14px;">Бесплатно</span>
           </div>
-          <div class="roulette-chance-btn" onclick="setRouletteMode(1)">
-            <b>×3 шанс</b>
-            <span>150 PTS</span>
+          <div class="roulette-chance-btn" id="r-mode-1" onclick="setRouletteMode(1)">
+            <span class="roulette-chance-badge">×3 шанс</span>
+            <span class="roulette-chance-label">150 <span class="star-gold">★</span></span>
           </div>
-          <div class="roulette-chance-btn" onclick="setRouletteMode(2)">
-            <b>×15 шанс</b>
-            <span>1 000 PTS</span>
+          <div class="roulette-chance-btn" id="r-mode-2" onclick="setRouletteMode(2)">
+            <span class="roulette-chance-badge">×15 шанс</span>
+            <span class="roulette-chance-label">1000 <span class="star-gold">★</span></span>
           </div>
-          <div class="roulette-chance-btn" onclick="setRouletteMode(3)">
-            <b>×50 шанс</b>
-            <span>5 000 PTS</span>
+          <div class="roulette-chance-btn" id="r-mode-3" onclick="setRouletteMode(3)">
+            <span class="roulette-chance-badge">×50 шанс</span>
+            <span class="roulette-chance-label">5000 <span class="star-gold">★</span></span>
           </div>
         </div>
 
-        <!-- Кнопка вращения -->
-        <button id="roulette-spin-btn" class="rubup-spin-btn ready" onclick="spinRoulette()" style="width: 100%; height: 54px; font-size: 15px;">
-          Крутить бесплатно
+        <!-- Главная кнопка действия -->
+        <button id="roulette-spin-btn" class="roulette-action-btn" onclick="spinRoulette()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.19"/></svg>
+          <span id="roulette-btn-text">Крутить бесплатно</span>
         </button>
       </div>
 
@@ -4201,15 +4683,18 @@
 
         <!-- Переключатель валюты -->
         <div class="rubup-mode-tabs">
-          <div id="tab-mines-pts" class="rubup-mode-tab active" onclick="switchMinesCurrency('pts')">Очками PTS</div>
-          <div id="tab-mines-usdt" class="rubup-mode-tab" onclick="switchMinesCurrency('usdt')">USDT</div>
+          <div id="tab-mines-pts" class="rubup-mode-tab" onclick="switchMinesCurrency('pts')">Очками PTS</div>
+          <div id="tab-mines-usdt" class="rubup-mode-tab active" onclick="switchMinesCurrency('usdt')">USDT</div>
         </div>
 
         <!-- Инфо-панель: Найдено кристаллов / Текущий икс -->
         <div class="mines-info-banner">
           <div>
             <div style="font-size: 10px; color: #94a3b8; font-weight: 700;">НАЙДЕНО</div>
-            <div style="font-size: 15px; font-weight: 800; color: #10b981;" id="mines-gems-count">💎 0 / 24</div>
+            <div style="font-size: 15px; font-weight: 800; color: #38bdf8; display: flex; align-items: center; gap: 4px;" id="mines-gems-count">
+              <img src="assets/AstralShard.webp" style="width: 17px; height: 17px; object-fit: contain;" alt="Shard">
+              <span>0 / 24</span>
+            </div>
           </div>
           <div style="text-align: right;">
             <div style="font-size: 10px; color: #94a3b8; font-weight: 700;">ВЫИГРЫШ</div>
@@ -4232,13 +4717,13 @@
           <div class="mines-bomb-btn" onclick="setMinesBombs(5)">5 бомб</div>
         </div>
 
-        <!-- Панель ставки и кнопка действия -->
-        <div class="rubup-action-panel">
+        <!-- Панель ставки с полем прямого ввода любой суммы -->
+        <div class="rubup-action-panel" style="margin-bottom: 8px;">
           <div class="rubup-bet-stepper">
             <button class="rubup-step-btn" onclick="changeMinesBet(-1)">−</button>
-            <div class="rubup-bet-val">
-              <span id="mines-bet-display">100</span>
-              <span id="mines-bet-curr">PTS</span>
+            <div class="rubup-bet-val" style="flex: 1; justify-content: center; gap: 2px;">
+              <input type="number" id="mines-bet-input" class="mines-input-bet" oninput="onMinesCustomBetInput(this.value)" value="1.00" step="any" min="0.1">
+              <span id="mines-bet-curr" style="font-size: 12px; color: var(--text-dim); margin-left: 3px;">USDT</span>
             </div>
             <button class="rubup-step-btn" onclick="changeMinesBet(1)">+</button>
           </div>
@@ -4246,6 +4731,9 @@
             Начать игру
           </button>
         </div>
+
+        <!-- Меню быстрых ставок (чипсы) -->
+        <div class="gifts-chips-row" id="mines-chips-container" style="margin-bottom: 12px;"></div>
       </div>
     </div>
 
@@ -5469,8 +5957,8 @@
     // ==========================================
     // 6. МИНИ-ИГРЫ В СТИЛЕ RubUP
     // ==========================================
-    let currentMultiplier = 1.5; // По умолчанию x1.5 (соответствует 0% позиции слайдера)
-    let upgradeCurrency = 'pts'; // 'pts' или 'usdt'
+    let currentMultiplier = 2.0; // Стартуем с честного и азартного порога x2.0
+    let upgradeCurrency = 'usdt'; // 'pts' или 'usdt'
     let upgradeBetPts = 100;
     let upgradeBetUsdt = 1.00;
     let isUpgradeSpinning = false;
@@ -5480,33 +5968,33 @@
     function getMultiplierTheme(mult) {
       if (mult <= 2.2) {
         return {
-          main: '#84cc16',      // Салатовый
-          grad1: '#4d7c0f',     // Глубокий лайм
-          grad2: '#bef264'      // Неоновый яркий лайм
+          main: '#38bdf8',      // Сапфирово-синий (x2.0 - x2.2)
+          grad1: '#0284c7',
+          grad2: '#38bdf8'
         };
-      } else if (mult <= 4.0) {
+      } else if (mult <= 3.2) {
         return {
-          main: '#eab308',      // Золотисто-желтый
-          grad1: '#a16207',     // Темный янтарный
-          grad2: '#fde047'      // Неоновый желтый
+          main: '#eab308',      // Золотисто-янтарный (x2.75 ровно как на референсе)
+          grad1: '#a16207',
+          grad2: '#fde047'
         };
-      } else if (mult <= 8.0) {
+      } else if (mult <= 5.5) {
         return {
-          main: '#f97316',      // Насыщенно-оранжевый
-          grad1: '#c2410c',     // Темный терракотовый
-          grad2: '#fb923c'      // Неоновый оранжевый
+          main: '#f97316',      // Оранжевый (x4.0)
+          grad1: '#c2410c',
+          grad2: '#fb923c'
         };
-      } else if (mult <= 20.0) {
+      } else if (mult <= 10.0) {
         return {
-          main: '#ef4444',      // Кораллово-красный
-          grad1: '#b91c1c',     // Глубокий бордовый
-          grad2: '#f87171'      // Неоновый алый
+          main: '#ef4444',      // Алый (x7.0)
+          grad1: '#b91c1c',
+          grad2: '#f87171'
         };
       } else {
         return {
-          main: '#ec4899',      // Неоновый малиново-пурпурный
-          grad1: '#9d174d',     // Глубокий фуксия
-          grad2: '#f472b6'      // Неоновый пурпурный
+          main: '#ec4899',      // Неоновый пурпур (x12.0 - x20.0)
+          grad1: '#9d174d',
+          grad2: '#f472b6'
         };
       }
     }
@@ -5515,29 +6003,20 @@
       return getMultiplierTheme(mult).main;
     }
 
-    // Кусочно-линейная интерполяция позиции слайдера (0–100%) в множитель:
-    // 0–20% -> от 1.5 до 3.0
-    // 20–40% -> от 3.0 до 5.0
-    // 40–60% -> от 5.0 до 10.0 (при 50% ровно 7.0x и шанс 13.5%)
-    // 60–80% -> от 10.0 до 20.0
-    // 80–100% -> от 20.0 до 50.0
+    // Плавная интерполяция слайдера от x2.0 до x20.0
     function sliderPosToMultiplier(pos) {
       pos = Math.max(0, Math.min(100, parseFloat(pos) || 0));
       let mult;
       if (pos <= 20) {
-        mult = 1.5 + (pos / 20) * (3.0 - 1.5);
+        mult = 2.0 + (pos / 20) * (2.75 - 2.0);
       } else if (pos <= 40) {
-        mult = 3.0 + ((pos - 20) / 20) * (5.0 - 3.0);
+        mult = 2.75 + ((pos - 20) / 20) * (4.0 - 2.75);
       } else if (pos <= 60) {
-        if (pos <= 50) {
-          mult = 5.0 + ((pos - 40) / 10) * (7.0 - 5.0);
-        } else {
-          mult = 7.0 + ((pos - 50) / 10) * (10.0 - 7.0);
-        }
+        mult = 4.0 + ((pos - 40) / 20) * (7.0 - 4.0);
       } else if (pos <= 80) {
-        mult = 10.0 + ((pos - 60) / 20) * (20.0 - 10.0);
+        mult = 7.0 + ((pos - 60) / 20) * (12.0 - 7.0);
       } else {
-        mult = 20.0 + ((pos - 80) / 20) * (50.0 - 20.0);
+        mult = 12.0 + ((pos - 80) / 20) * (20.0 - 12.0);
       }
       return parseFloat(mult.toFixed(2));
     }
@@ -5584,6 +6063,20 @@
         giftsCurrentStep = -1;
         giftsIsAnimating = false;
         if (typeof resetGiftsBoard === 'function') resetGiftsBoard();
+      }
+      if (typeof rocketFlightRaf !== 'undefined' && rocketFlightRaf) {
+        cancelAnimationFrame(rocketFlightRaf);
+        rocketFlightRaf = null;
+      }
+      if (typeof rocketWaitTimer !== 'undefined' && rocketWaitTimer) {
+        clearInterval(rocketWaitTimer);
+        rocketWaitTimer = null;
+      }
+      if (typeof stopRouletteIdleScroll === 'function') {
+        stopRouletteIdleScroll();
+      }
+      if (typeof resetRouletteWinScene === 'function') {
+        resetRouletteWinScene();
       }
       document.querySelectorAll('.inner-game-view').forEach(el => el.style.display = 'none');
       const hubView = safeGet('games-hub-view');
@@ -5655,11 +6148,11 @@
     }
 
     function setUpgradeMultiplier(mult) {
-      if (mult <= 1.5) setSliderPercent(0);
-      else if (mult <= 3.0) setSliderPercent(20);
-      else if (mult <= 5.0) setSliderPercent(40);
-      else if (mult <= 10.0) setSliderPercent(60);
-      else if (mult <= 20.0) setSliderPercent(80);
+      if (mult <= 2.0) setSliderPercent(0);
+      else if (mult <= 2.75) setSliderPercent(20);
+      else if (mult <= 4.0) setSliderPercent(40);
+      else if (mult <= 7.0) setSliderPercent(60);
+      else if (mult <= 12.0) setSliderPercent(80);
       else setSliderPercent(100);
     }
 
@@ -5990,27 +6483,27 @@
     const GIFTS_DIFF_CONFIG = [
       {
         name: "Лёгкая",
-        mults: [1.00, 1.03, 1.07, 1.15, 1.35, 1.85, 3.20, 6.50, 14.00, 28.52],
-        crashChances: [5.0, 6.5, 8.0, 10.0, 12.5, 15.0, 18.0, 20.0, 22.0, 24.0]
+        mults: [1.03, 1.08, 1.18, 1.35, 1.75, 2.45, 3.80, 6.50, 12.00, 28.52],
+        crashChances: [4.0, 6.0, 9.0, 14.0, 20.0, 28.0, 38.0, 48.0, 60.0, 72.0]
       },
       {
         name: "Средняя",
-        mults: [1.02, 1.10, 1.25, 1.65, 2.80, 6.50, 22.00, 95.00, 480.00, 3014.00],
-        crashChances: [10.0, 13.0, 16.0, 20.0, 24.0, 28.0, 32.0, 35.0, 38.0, 40.0]
+        mults: [1.08, 1.25, 1.65, 2.80, 6.50, 22.00, 95.00, 480.00, 1200.00, 3014.00],
+        crashChances: [10.0, 16.0, 24.0, 35.0, 48.0, 62.0, 75.0, 84.0, 90.0, 95.0]
       },
       {
         name: "Тяжёлая",
-        mults: [1.05, 1.20, 1.55, 2.50, 6.00, 24.00, 120.00, 650.00, 3200.00, 13000.00],
-        crashChances: [18.0, 22.0, 26.0, 30.0, 35.0, 40.0, 45.0, 48.0, 52.0, 55.0]
+        mults: [1.20, 1.65, 2.80, 6.00, 24.00, 120.00, 650.00, 2100.00, 6500.00, 13000.00],
+        crashChances: [18.0, 28.0, 42.0, 58.0, 72.0, 82.0, 89.0, 94.0, 97.0, 99.0]
       },
       {
         name: "Хардкор",
-        mults: [1.10, 1.40, 2.20, 5.50, 20.00, 110.00, 750.00, 3800.00, 9500.00, 20000.00],
-        crashChances: [30.0, 35.0, 40.0, 45.0, 50.0, 55.0, 60.0, 65.0, 70.0, 75.0]
+        mults: [1.40, 2.50, 6.00, 20.00, 110.00, 750.00, 3800.00, 8500.00, 14000.00, 20000.00],
+        crashChances: [30.0, 48.0, 68.0, 82.0, 90.0, 95.0, 97.5, 99.0, 99.5, 99.8]
       }
     ];
 
-    let giftsCurrency = 'pts';
+    let giftsCurrency = 'usdt';
     let giftsBetPts = 100;
     let giftsBetUsdt = 1.00;
     let giftsDiff = 0; // 0: Легкая, 1: Средняя, 2: Тяжелая, 3: Хардкор
@@ -6081,7 +6574,7 @@
 
     function getGiftsCameraShift(step) {
       if (step <= 1) return 0;
-      return Math.round((step - 1) * 132);
+      return Math.round((step - 1) * 118);
     }
 
     function generateGiftsRoundHash() {
@@ -6108,8 +6601,8 @@
       const cow = safeGet('gifts-cow-player');
       const cowImg = safeGet('gifts-cow-img');
       if (cow) {
-        cow.style.left = '-4px';
-        cow.style.top = '168px';
+        cow.style.left = '-12px';
+        cow.style.top = '90px';
       }
       if (cowImg) {
         cowImg.className = '';
@@ -6320,8 +6813,8 @@
       container.innerHTML = '';
       const cowRect = cow.getBoundingClientRect();
       const parentRect = container.getBoundingClientRect();
-      const originX = (cowRect.left - parentRect.left) + 43;
-      const originY = (cowRect.top - parentRect.top) + 30;
+      const originX = (cowRect.left - parentRect.left) + 54;
+      const originY = (cowRect.top - parentRect.top) + 24;
 
       for (let i = 0; i < 24; i++) {
         const coin = document.createElement('div');
@@ -6390,9 +6883,9 @@
       giftsIsAnimating = true;
       updateGiftsUI();
 
-      // Центрирование коровы по люку полосы targetStep:
-      // 66 + targetStep * 132 + (132 - 86) / 2 = 89 + targetStep * 132
-      const targetLeft = 89 + targetStep * 132;
+      // Центрирование коровы 108px на полосе 118px:
+      // (118 - 108) / 2 = 5px. Тротуар 56px + 5px = 61px.
+      const targetLeft = 61 + targetStep * 118;
       const cow = safeGet('gifts-cow-player');
       const cowImg = safeGet('gifts-cow-img');
 
@@ -6467,7 +6960,7 @@
               setTimeout(() => flash.classList.remove('is-active'), 250);
             }
             if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('error');
-          }, 140);
+          }, 300);
 
           // Фиксация поражения в Supabase
           const isPts = (giftsCurrency === 'pts');
@@ -6489,7 +6982,7 @@
             }
           }
 
-          // Через 1.2с корова возвращается на тротуар, и трасса возвращается на translateX(0px)
+          // Через 1.4с корова возвращается на тротуар, и трасса возвращается на translateX(0px)
           setTimeout(() => {
             resetGiftsBoard();
             giftsInRound = false;
@@ -6504,9 +6997,9 @@
               warnEl.className = 'gifts-status-val warning';
             }
             startGiftsAmbientTraffic();
-          }, 1200);
+          }, 1400);
 
-        }, 100);
+        }, 80);
       }
     }
 
@@ -6568,7 +7061,7 @@
     // ==================================================
     // 6.2. ДВИЖОК: РАКЕТКА (CRASH) (#game-view-rocket)
     // ==================================================
-    let rocketCurrency = 'pts';
+    let rocketCurrency = 'usdt';
     let rocketBetPts = 100;
     let rocketBetUsdt = 1.00;
     let rocketPhase = 'waiting'; // 'waiting', 'flying', 'crashed'
@@ -6581,12 +7074,115 @@
     let rocketFlightStartTime = 0;
     let rocketHistory = [5.43, 8.09, 1.27, 1.48, 69.37];
 
-    function initRocketGame() {
+    // Переменные онлайн-игры
+    let rocketChannel = null;
+    let currentOnlineRoundId = null;
+    let serverRoundStartTime = 0;
+    let myCurrentBetRecordId = null;
+
+    // Инициализация онлайн-подключения
+    async function initRocketGame() {
       updateRocketUI();
-      renderRocketHistory();
-      if (rocketPhase === 'waiting' && !rocketWaitTimer) {
-        startRocketWaitingRound();
+      renderRocketChips();
+      connectRocketRealtime();
+      await loadRocketHistoryFromDB();
+      await syncWithCurrentRound();
+    }
+
+    async function syncWithCurrentRound() {
+      if (!supabaseClient) return;
+
+      try {
+        const { data, error } = await supabaseClient
+          .from('rocket_rounds')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(1)
+          .maybeSingle();
+
+        if (error || !data) return;
+
+        // Если уже получили realtime-эвент текущего активного раунда, не перебиваем
+        if (currentOnlineRoundId === data.id && (rocketPhase === 'flying' || rocketPhase === 'waiting')) {
+          return;
+        }
+
+        if (data.status === 'waiting') {
+          const targetStartTime = data.start_time ? new Date(data.start_time).getTime() : (new Date(data.created_at).getTime() + 8000);
+          const remainingMs = targetStartTime - Date.now();
+          if (remainingMs > 400) {
+            onServerRoundWaiting({
+              roundId: data.id,
+              durationMs: remainingMs,
+              baseTotalMs: 8000
+            });
+          }
+        } else if (data.status === 'flying') {
+          const startTimeMs = data.start_time ? new Date(data.start_time).getTime() : new Date(data.created_at).getTime();
+          const elapsed = (Date.now() - startTimeMs) / 1000;
+          // Если полёт идёт в допустимом временном окне
+          if (elapsed >= 0 && elapsed < 25) {
+            onServerRoundFlying({
+              roundId: data.id,
+              startTime: startTimeMs
+            }, true); // isLateJoin = true
+          }
+        } else if (data.status === 'crashed') {
+          // Показываем последний краш и ждем ROUND_WAITING
+          const finalMultiplier = parseFloat(data.crash_multiplier) || 1.00;
+          rocketPhase = 'crashed';
+          safeSetText('rocket-mult-number', `${finalMultiplier.toFixed(2)}x`);
+          applyRocketTheme(finalMultiplier);
+          const countdownBox = safeGet('rocket-countdown-box');
+          if (countdownBox) countdownBox.style.display = 'none';
+          const flightBox = safeGet('rocket-flight-box');
+          if (flightBox) flightBox.style.display = 'flex';
+          const ship = safeGet('inner-rk-ship-group');
+          if (ship) ship.style.display = 'none';
+          const statusEl = safeGet('rocket-status-text');
+          if (statusEl) {
+            statusEl.style.display = 'none';
+            statusEl.innerText = '';
+          }
+          updateRocketUI();
+        }
+      } catch (err) {
+        console.error('[SYNC] Ошибка синхронизации текущего раунда:', err);
       }
+    }
+
+    function connectRocketRealtime() {
+      if (!supabaseClient || rocketChannel) return;
+
+      rocketChannel = supabaseClient.channel('rocket-game', {
+        config: { broadcast: { self: false } }
+      });
+
+      rocketChannel
+        // 1. Сервер объявил приём ставок (8 секунд)
+        .on('broadcast', { event: 'ROUND_WAITING' }, ({ payload }) => {
+          onServerRoundWaiting(payload);
+        })
+        // 2. Сервер запустил полёт ракеты
+        .on('broadcast', { event: 'ROUND_FLYING' }, ({ payload }) => {
+          onServerRoundFlying(payload);
+        })
+        // 3. Ракета потерпела крушение на сервере
+        .on('broadcast', { event: 'ROUND_CRASHED' }, ({ payload }) => {
+          onServerRoundCrashed(payload);
+        })
+        // 4. Ставки и выводы других игроков
+        .on('broadcast', { event: 'PLAYER_BET' }, ({ payload }) => {
+          addPlayerFeedBet(payload);
+        })
+        .on('broadcast', { event: 'PLAYER_CASHOUT' }, ({ payload }) => {
+          updatePlayerFeedCashout(payload);
+        })
+        .subscribe((status) => {
+          if (status === 'SUBSCRIBED') {
+            console.log('[CLIENT] Подключено к онлайн-комнате ракеты');
+          }
+        });
     }
 
     function switchRocketCurrency(curr) {
@@ -6600,6 +7196,40 @@
       } else {
         if (tabUsdt) tabUsdt.classList.add('active');
         if (tabPts) tabPts.classList.remove('active');
+      }
+      renderRocketChips();
+      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+      updateRocketUI();
+    }
+
+    function renderRocketChips() {
+      const container = safeGet('rocket-chips-container');
+      if (!container) return;
+      const isPts = (rocketCurrency === 'pts');
+      const chips = isPts ? [10, 50, 100, 500, 1000, 'max'] : [0.5, 1, 2, 5, 10, 'max'];
+      let html = '';
+      chips.forEach(c => {
+        const label = c === 'max' ? 'Макс' : (isPts ? c : (c < 1 ? c.toFixed(1) : c));
+        const arg = c === 'max' ? `'max'` : c;
+        html += `<button class="gifts-chip-btn" onclick="setRocketQuickBet(${arg})">${label}</button>`;
+      });
+      container.innerHTML = html;
+    }
+
+    function setRocketQuickBet(val) {
+      if (rocketHasUserBet && rocketPhase === 'flying') return;
+      if (val === 'max') {
+        if (rocketCurrency === 'pts') {
+          rocketBetPts = Math.max(10, Math.floor(window.totalPts || 0));
+        } else {
+          rocketBetUsdt = Math.max(0.1, parseFloat((balance || 0).toFixed(2)));
+        }
+      } else {
+        if (rocketCurrency === 'pts') {
+          rocketBetPts = Math.max(10, parseInt(val));
+        } else {
+          rocketBetUsdt = Math.max(0.1, parseFloat(val));
+        }
       }
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
       updateRocketUI();
@@ -6634,14 +7264,16 @@
       if (btn) {
         if (rocketPhase === 'waiting') {
           if (rocketHasUserBet) {
-            btn.innerText = 'ОТМЕНИТЬ СТАВКУ';
-            btn.className = 'rubup-spin-btn';
-            btn.style.background = '#dc2626';
-            btn.disabled = false;
+            btn.innerText = 'СТАВКА ПРИНЯТА';
+            btn.className = 'rubup-spin-btn disabled';
+            btn.style.background = '#1e293b';
+            btn.style.color = '#94a3b8';
+            btn.disabled = true;
           } else {
             btn.innerText = 'СДЕЛАТЬ СТАВКУ';
             btn.className = 'rubup-spin-btn ready';
             btn.style.background = '';
+            btn.style.color = '';
             btn.disabled = false;
           }
         } else if (rocketPhase === 'flying') {
@@ -6649,410 +7281,1018 @@
             const curWin = isPts ? Math.floor(rocketBetPts * rocketMultiplier) : (rocketBetUsdt * rocketMultiplier).toFixed(2);
             btn.innerText = `ЗАБРАТЬ ${curWin} ${isPts ? 'PTS' : 'USDT'}`;
             btn.className = 'rubup-spin-btn ready';
-            btn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+            btn.style.background = 'linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%)';
+            btn.style.boxShadow = '0 6px 22px rgba(59, 130, 246, 0.5)';
             btn.disabled = false;
           } else if (rocketUserCashedOut) {
             btn.innerText = 'ВЫИГРЫШ ЗАБРАН!';
             btn.className = 'rubup-spin-btn disabled';
             btn.style.background = '';
+            btn.style.boxShadow = '';
             btn.disabled = true;
           } else {
             btn.innerText = 'СТАВКА НА СЛЕДУЮЩИЙ РАУНД';
             btn.className = 'rubup-spin-btn disabled';
             btn.style.background = '';
+            btn.style.boxShadow = '';
             btn.disabled = true;
           }
         } else {
           btn.innerText = 'РАУНД ЗАВЕРШЕН';
           btn.className = 'rubup-spin-btn disabled';
           btn.style.background = '';
+          btn.style.boxShadow = '';
           btn.disabled = true;
         }
       }
     }
 
-    function startRocketWaitingRound() {
-      if (rocketWaitTimer) clearInterval(rocketWaitTimer);
-      if (rocketFlightRaf) cancelAnimationFrame(rocketFlightRaf);
-
-      rocketPhase = 'waiting';
-      rocketMultiplier = 1.00;
-      rocketUserCashedOut = false;
-
-      const numEl = safeGet('rocket-mult-number');
-      if (numEl) {
-        numEl.innerText = '1.00x';
-        numEl.classList.remove('crashed');
-      }
-
-      const craft = safeGet('rocket-craft-icon');
-      if (craft) {
-        craft.style.transform = 'translate(20px, 200px) rotate(-15deg)';
-      }
-
-      let timeLeft = 50;
-      const fillEl = safeGet('rocket-timer-fill');
-
-      updateRocketUI();
-      safeSetText('rocket-status-text', `Прием ставок (${(timeLeft / 10).toFixed(1)} сек)`);
-
-      rocketWaitTimer = setInterval(() => {
-        timeLeft--;
-        if (fillEl) fillEl.style.width = `${((50 - timeLeft) / 50) * 100}%`;
-        if (timeLeft > 0) {
-          safeSetText('rocket-status-text', `Прием ставок (${(timeLeft / 10).toFixed(1)} сек)`);
-        } else {
-          clearInterval(rocketWaitTimer);
-          rocketWaitTimer = null;
-          startRocketFlight();
-        }
-      }, 100);
-    }
-
-    function startRocketFlight() {
-      rocketPhase = 'flying';
-      safeSetText('rocket-status-text', 'Полет ракеты 🚀');
-
-      const isPts = (rocketCurrency === 'pts');
-      const bet = isPts ? rocketBetPts : rocketBetUsdt;
-
-      if (rocketHasUserBet) {
-        if (isPts) {
-          if (window.totalPts >= bet) window.totalPts -= bet;
-          else rocketHasUserBet = false;
-        } else {
-          if (balance >= bet) balance = Math.max(0, balance - bet);
-          else rocketHasUserBet = false;
-        }
-        updateUI();
-      }
-
-      const r = Math.random();
-      if (r < 0.08) rocketCrashPoint = 1.00 + Math.random() * 0.15;
-      else if (r < 0.55) rocketCrashPoint = 1.20 + Math.random() * 2.2;
-      else if (r < 0.85) rocketCrashPoint = 3.50 + Math.random() * 6.5;
-      else if (r < 0.96) rocketCrashPoint = 10.00 + Math.random() * 25.0;
-      else rocketCrashPoint = 35.00 + Math.random() * 85.0;
-      rocketCrashPoint = parseFloat(rocketCrashPoint.toFixed(2));
-
-      rocketFlightStartTime = performance.now();
-
-      function flightLoop(now) {
-        const elapsed = (now - rocketFlightStartTime) / 1000;
-        rocketMultiplier = parseFloat((1.00 + Math.pow(elapsed * 0.75, 1.75)).toFixed(2));
-
-        const numEl = safeGet('rocket-mult-number');
-        if (numEl) numEl.innerText = `${rocketMultiplier.toFixed(2)}x`;
-
-        const progress = Math.min(1, elapsed / 8);
-        const craft = safeGet('rocket-craft-icon');
-        if (craft) {
-          const x = 20 + progress * 270;
-          const y = 200 - Math.pow(progress, 0.8) * 160;
-          craft.style.transform = `translate(${x}px, ${y}px) rotate(${-25 - progress * 20}deg)`;
-        }
-
-        const autoCheck = safeGet('rocket-auto-cashout-check');
-        const autoValEl = safeGet('rocket-auto-val');
-        if (autoCheck && autoCheck.checked && autoValEl) {
-          const targetMult = parseFloat(autoValEl.value) || 2.0;
-          if (rocketMultiplier >= targetMult && rocketHasUserBet && !rocketUserCashedOut) {
-            cashoutRocket();
-          }
-        }
-
-        updateRocketUI();
-
-        if (rocketMultiplier >= rocketCrashPoint) {
-          crashRocket();
-        } else {
-          rocketFlightRaf = requestAnimationFrame(flightLoop);
-        }
-      }
-
-      rocketFlightRaf = requestAnimationFrame(flightLoop);
-    }
-
-    function handleRocketAction() {
-      if (rocketPhase === 'waiting') {
-        const isPts = (rocketCurrency === 'pts');
-        const bet = isPts ? rocketBetPts : rocketBetUsdt;
-        if (!rocketHasUserBet) {
-          if (isPts && (!window.totalPts || window.totalPts < bet)) {
-            alert("Недостаточно PTS для ставки!");
-            return;
-          }
-          if (!isPts && (!balance || balance < bet)) {
-            alert("Недостаточно USDT на балансе!");
-            return;
-          }
-          rocketHasUserBet = true;
-          if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
-        } else {
-          rocketHasUserBet = false;
-          if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-        }
-        updateRocketUI();
-      } else if (rocketPhase === 'flying') {
-        if (rocketHasUserBet && !rocketUserCashedOut) {
-          cashoutRocket();
-        }
-      }
-    }
-
-    function cashoutRocket() {
-      if (rocketPhase !== 'flying' || !rocketHasUserBet || rocketUserCashedOut) return;
-      rocketUserCashedOut = true;
-
-      const isPts = (rocketCurrency === 'pts');
-      const bet = isPts ? rocketBetPts : rocketBetUsdt;
-      const winMult = rocketMultiplier;
-      let winAmount = 0;
-
-      if (isPts) {
-        winAmount = Math.floor(bet * winMult);
-        window.totalPts += winAmount;
+    // 1. Единая система цветов тиров (для цифр, шлейфа и истории сверху)
+    function getRocketTier(mult) {
+      if (mult >= 10.0) {
+        // 10x+: ЖЕЛТЫЙ
+        return {
+          color: '#facc15',
+          glowColor: 'rgba(250, 204, 21, 0.35)',
+          textShadow: '0 2px 24px rgba(250, 204, 21, 0.85)',
+          warpTime: '0.38s',
+          starsTime: '0.8s',
+          fireScale: 1.6
+        };
+      } else if (mult >= 5.0) {
+        // 5x - 9.99x: ФИОЛЕТОВЫЙ
+        return {
+          color: '#c084fc',
+          glowColor: 'rgba(192, 132, 252, 0.35)',
+          textShadow: '0 2px 24px rgba(192, 132, 252, 0.85)',
+          warpTime: '0.55s',
+          starsTime: '1.1s',
+          fireScale: 1.4
+        };
+      } else if (mult >= 2.0) {
+        // 2x - 4.99x: СИНИЙ
+        return {
+          color: '#38bdf8',
+          glowColor: 'rgba(56, 189, 248, 0.3)',
+          textShadow: '0 2px 22px rgba(56, 189, 248, 0.75)',
+          warpTime: '0.75s',
+          starsTime: '1.4s',
+          fireScale: 1.25
+        };
       } else {
-        winAmount = parseFloat((bet * winMult).toFixed(2));
-        balance += winAmount;
+        // 1.00x - 1.99x: ЗЕЛЕНЫЙ
+        return {
+          color: '#22c55e',
+          glowColor: 'rgba(34, 197, 94, 0.28)',
+          textShadow: '0 2px 20px rgba(34, 197, 94, 0.7)',
+          warpTime: '1.1s',
+          starsTime: '2.0s',
+          fireScale: 1.0
+        };
       }
-
-      if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
-      alert(`🎉 УСПЕШНЫЙ ВЫВОД!\nВы забрали выигрыш на ×${winMult.toFixed(2)}: +${isPts ? winAmount.toLocaleString() + ' PTS' : '$' + winAmount.toFixed(2) + ' USDT'}!`);
-
-      if (supabaseClient && dbUserId) {
-        try {
-          const net = winAmount - bet;
-          if (isPts) supabaseClient.from('accounts').update({ bonus_balance: window.totalPts }).eq('user_id', dbUserId).then();
-          else supabaseClient.from('accounts').update({ invest_balance: balance }).eq('user_id', dbUserId).then();
-
-          supabaseClient.from('transactions').insert([{
-            user_id: dbUserId,
-            type: 'CRASH_GAME',
-            amount: net,
-            account_type: isPts ? 'BONUS' : 'INVEST',
-            details: { win: true, multiplier: winMult, bet: bet, payout: winAmount }
-          }]).then();
-        } catch(e) { console.warn("Crash sync error:", e); }
-      }
-
-      updateUI();
-      updateRocketUI();
     }
 
-    function crashRocket() {
-      rocketPhase = 'crashed';
-      if (rocketFlightRaf) cancelAnimationFrame(rocketFlightRaf);
+    function applyRocketTheme(mult) {
+      const tier = getRocketTier(mult);
 
       const numEl = safeGet('rocket-mult-number');
       if (numEl) {
-        numEl.innerText = `${rocketCrashPoint.toFixed(2)}x`;
-        numEl.classList.add('crashed');
-      }
-      safeSetText('rocket-status-text', '💥 УЛЕТЕЛА');
-      if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('error');
-
-      if (rocketHasUserBet && !rocketUserCashedOut) {
-        const isPts = (rocketCurrency === 'pts');
-        const bet = isPts ? rocketBetPts : rocketBetUsdt;
-        if (supabaseClient && dbUserId) {
-          try {
-            if (isPts) supabaseClient.from('accounts').update({ bonus_balance: window.totalPts }).eq('user_id', dbUserId).then();
-            else supabaseClient.from('accounts').update({ invest_balance: balance }).eq('user_id', dbUserId).then();
-
-            supabaseClient.from('transactions').insert([{
-              user_id: dbUserId,
-              type: 'CRASH_GAME',
-              amount: -bet,
-              account_type: isPts ? 'BONUS' : 'INVEST',
-              details: { win: false, multiplier: rocketCrashPoint, bet: bet }
-            }]).then();
-          } catch(e) { console.warn("Crash sync loss error:", e); }
-        }
+        numEl.style.color = tier.color;
+        numEl.style.textShadow = tier.textShadow;
       }
 
-      rocketHistory.unshift(rocketCrashPoint);
-      if (rocketHistory.length > 8) rocketHistory.pop();
-      renderRocketHistory();
+      const atmos = safeGet('rocket-space-atmosphere');
+      if (atmos) {
+        atmos.style.background = `radial-gradient(circle, ${tier.glowColor} 0%, transparent 75%)`;
+      }
 
-      rocketHasUserBet = false;
-      updateRocketUI();
+      const arena = safeGet('rocket-arena');
+      if (arena) {
+        arena.style.setProperty('--warp-time', tier.warpTime);
+        arena.style.setProperty('--stars-time', tier.starsTime);
+      }
 
-      setTimeout(() => {
-        startRocketWaitingRound();
-      }, 3000);
+      const laserGrad = document.querySelector('#rkLaserGrad');
+      if (laserGrad && laserGrad.children.length >= 3) {
+        laserGrad.children[0].setAttribute('stop-color', tier.color);
+        laserGrad.children[1].setAttribute('stop-color', tier.color);
+      }
+      const glowTrail = safeGet('inner-rocket-glow-trail');
+      if (glowTrail) {
+        glowTrail.setAttribute('fill', tier.color);
+      }
+
+      const nozzleGrad = document.querySelector('#rkExhaustSoftGlow');
+      if (nozzleGrad && nozzleGrad.children.length >= 3) {
+        nozzleGrad.children[1].setAttribute('stop-color', tier.color);
+        nozzleGrad.children[2].setAttribute('stop-color', tier.color);
+      }
+
+      const fireCore = safeGet('inner-rk-fire-core');
+      if (fireCore) {
+        fireCore.setAttribute('transform', `scale(${tier.fireScale})`);
+      }
     }
 
     function renderRocketHistory() {
       const bar = safeGet('rocket-history-bar');
       if (!bar) return;
       bar.innerHTML = rocketHistory.map(m => {
-        let color = '#4ade80';
-        if (m >= 10) color = '#facc15';
-        else if (m >= 2.0) color = '#c084fc';
-        else if (m < 1.5) color = '#f87171';
-        return `<div class="rocket-hist-chip" style="color: ${color}; border-color: ${color};">${m.toFixed(2)}x</div>`;
+        const tier = getRocketTier(m);
+        return `<div class="rocket-hist-chip" style="color: ${tier.color}; border-color: ${tier.color}; background: rgba(0,0,0,0.4); box-shadow: 0 0 8px ${tier.color}33;">${m.toFixed(2)}x</div>`;
       }).join('');
+    }
+
+    // ФАЗА 1: Ожидание ставок (получено от сервера)
+    function onServerRoundWaiting(payload) {
+      currentOnlineRoundId = payload.roundId || payload.round_id;
+      rocketPhase = 'waiting';
+      rocketMultiplier = 1.00;
+      rocketHasUserBet = false;
+      rocketUserCashedOut = false;
+      myCurrentBetRecordId = null;
+
+      if (rocketFlightRaf) {
+        cancelAnimationFrame(rocketFlightRaf);
+        rocketFlightRaf = null;
+      }
+
+      // Очистка ленты игроков раунда
+      const feed = safeGet('rocket-players-feed');
+      if (feed) feed.innerHTML = '';
+
+      // Сброс графики
+      const ship = safeGet('inner-rk-ship-group');
+      if (ship) ship.style.display = 'none';
+
+      const coreTrail = safeGet('inner-rocket-core-trail');
+      if (coreTrail) coreTrail.setAttribute('d', '');
+      const glowTrail = safeGet('inner-rocket-glow-trail');
+      if (glowTrail) glowTrail.setAttribute('d', '');
+
+      const flash = safeGet('rocket-crash-flash');
+      if (flash) flash.classList.remove('is-active');
+
+      const flightBox = safeGet('rocket-flight-box');
+      if (flightBox) flightBox.style.display = 'none';
+      const countdownBox = safeGet('rocket-countdown-box');
+      if (countdownBox) countdownBox.style.display = 'flex';
+
+      applyRocketTheme(1.00);
+      updateRocketUI();
+
+      // Синхронизированный таймер обратного отсчета
+      const totalMs = payload.durationMs || 8000;
+      const baseTotal = payload.baseTotalMs || totalMs;
+      const startLocal = performance.now();
+
+      if (rocketWaitTimer) clearInterval(rocketWaitTimer);
+      rocketWaitTimer = setInterval(() => {
+        const elapsed = performance.now() - startLocal;
+        const remaining = Math.max(0, totalMs - elapsed);
+        const sec = Math.max(1, Math.ceil(remaining / 1000));
+
+        safeSetText('rocket-countdown-num', String(sec));
+        const fillEl = safeGet('rocket-timer-fill');
+        if (fillEl) fillEl.style.width = `${(remaining / baseTotal) * 100}%`;
+
+        if (remaining <= 0) {
+          clearInterval(rocketWaitTimer);
+          rocketWaitTimer = null;
+        }
+      }, 50);
+    }
+
+    // ФАЗА 2: Синхронный полёт
+    function onServerRoundFlying(payload, isLateJoin = false) {
+      if (rocketWaitTimer) {
+        clearInterval(rocketWaitTimer);
+        rocketWaitTimer = null;
+      }
+
+      if (rocketFlightRaf) {
+        cancelAnimationFrame(rocketFlightRaf);
+        rocketFlightRaf = null;
+      }
+
+      rocketPhase = 'flying';
+      currentOnlineRoundId = payload.roundId || payload.round_id;
+      serverRoundStartTime = payload.startTime || (payload.start_time ? new Date(payload.start_time).getTime() : Date.now());
+
+      if (isLateJoin) {
+        rocketHasUserBet = false;
+        rocketUserCashedOut = false;
+        myCurrentBetRecordId = null;
+      }
+
+      const countdownBox = safeGet('rocket-countdown-box');
+      if (countdownBox) countdownBox.style.display = 'none';
+      const flightBox = safeGet('rocket-flight-box');
+      if (flightBox) flightBox.style.display = 'flex';
+
+      const ship = safeGet('inner-rk-ship-group');
+      if (ship) {
+        ship.style.display = 'block';
+        if (!isLateJoin) {
+          ship.setAttribute('transform', 'translate(24, 205)');
+        }
+      }
+
+      const statusEl = safeGet('rocket-status-text');
+      if (statusEl) {
+        statusEl.style.display = 'none';
+        statusEl.innerText = '';
+      }
+
+      updateRocketUI();
+
+      function flightLoop() {
+        if (rocketPhase !== 'flying') return;
+
+        // ВРЕМЯ РАССЧИТЫВАЕТСЯ ОТ ЕДИНОЙ СЕРВЕРНОЙ МЕТКИ
+        const elapsed = Math.max(0, (Date.now() - serverRoundStartTime) / 1000);
+        rocketMultiplier = parseFloat(Math.exp(elapsed / 4.8).toFixed(2));
+
+        safeSetText('rocket-mult-number', `${rocketMultiplier.toFixed(2)}x`);
+        applyRocketTheme(rocketMultiplier);
+
+        // Крейсерский подъем до (X=205, Y=115) за 2.8 сек
+        const climbDuration = 2.8;
+        const rawProgress = Math.min(1, elapsed / climbDuration);
+        const t = 1 - Math.pow(1 - rawProgress, 3);
+
+        const baseX = 24 + (205 - 24) * t;
+        const baseY = 205 - (205 - 115) * Math.pow(t, 0.82);
+
+        // Дрожание от перегрузки двигателей
+        const jitterFactor = Math.min(1, (rocketMultiplier - 1) / 12);
+        const jitterAmp = 0.6 + jitterFactor * 2.2;
+        const curX = baseX + Math.cos(performance.now() * 0.05) * (jitterAmp * 0.55);
+        const curY = baseY + Math.sin(performance.now() * 0.065) * jitterAmp;
+
+        if (ship) {
+          ship.setAttribute('transform', `translate(${curX.toFixed(2)}, ${curY.toFixed(2)})`);
+        }
+
+        // Построение сужающегося конуса шлейфа (0.5px -> 6.5px)
+        renderTaperedRibbonTrail(curX, curY);
+
+        // Проверка автовывода
+        const autoCheck = safeGet('rocket-auto-cashout-check');
+        const autoValEl = safeGet('rocket-auto-val');
+        if (autoCheck && autoCheck.checked && autoValEl && rocketHasUserBet && !rocketUserCashedOut) {
+          const targetMult = parseFloat(autoValEl.value) || 2.0;
+          if (rocketMultiplier >= targetMult) {
+            cashoutRocket();
+          }
+        }
+
+        updateRocketUI();
+        rocketFlightRaf = requestAnimationFrame(flightLoop);
+      }
+
+      rocketFlightRaf = requestAnimationFrame(flightLoop);
+    }
+
+    // Генерация конусовидного шлейфа
+    function renderTaperedRibbonTrail(curX, curY) {
+      const ctrlX = 24 + (curX - 24) * 0.52;
+      const ctrlY = 205 - (205 - curY) * 0.12;
+
+      const steps = 24;
+      let topPts = [], botPts = [];
+      for (let i = 0; i <= steps; i++) {
+        const u = i / steps, invU = 1 - u;
+        const px = invU * invU * 24 + 2 * invU * u * ctrlX + u * u * curX;
+        const py = invU * invU * 205 + 2 * invU * u * ctrlY + u * u * curY;
+
+        const dx = 2 * invU * (ctrlX - 24) + 2 * u * (curX - ctrlX);
+        const dy = 2 * invU * (ctrlY - 205) + 2 * u * (curY - ctrlY);
+        const len = Math.hypot(dx, dy) || 1;
+        const nx = -dy / len, ny = dx / len;
+        const halfW = 0.25 + 3.0 * Math.pow(u, 1.2);
+
+        topPts.push({ x: (px + nx * halfW).toFixed(1), y: (py + ny * halfW).toFixed(1) });
+        botPts.push({ x: (px - nx * halfW).toFixed(1), y: (py - ny * halfW).toFixed(1) });
+      }
+
+      let ribbon = `M ${topPts[0].x} ${topPts[0].y}`;
+      for (let i = 1; i <= steps; i++) ribbon += ` L ${topPts[i].x} ${topPts[i].y}`;
+      ribbon += ` A 3.25 3.25 0 0 1 ${botPts[steps].x} ${botPts[steps].y}`;
+      for (let i = steps - 1; i >= 0; i--) ribbon += ` L ${botPts[i].x} ${botPts[i].y}`;
+      ribbon += ` Z`;
+
+      const coreTrail = safeGet('inner-rocket-core-trail');
+      if (coreTrail) coreTrail.setAttribute('d', ribbon);
+      const glowTrail = safeGet('inner-rocket-glow-trail');
+      if (glowTrail) glowTrail.setAttribute('d', ribbon);
+    }
+
+    // ФАЗА 3: Крушение по команде сервера
+    function onServerRoundCrashed(payload) {
+      rocketPhase = 'crashed';
+      if (rocketFlightRaf) {
+        cancelAnimationFrame(rocketFlightRaf);
+        rocketFlightRaf = null;
+      }
+
+      const finalMultiplier = parseFloat(payload.crashMultiplier || payload.crash_multiplier || 1.00);
+
+      // Скрываем ракету
+      const ship = safeGet('inner-rk-ship-group');
+      if (ship) ship.style.display = 'none';
+
+      // Краткая вспышка
+      const flash = safeGet('rocket-crash-flash');
+      if (flash) {
+        flash.classList.add('is-active');
+        setTimeout(() => flash.classList.remove('is-active'), 200);
+      }
+
+      // Фиксируем цифру в цвете тира
+      safeSetText('rocket-mult-number', `${finalMultiplier.toFixed(2)}x`);
+      applyRocketTheme(finalMultiplier);
+
+      // Никаких надписей
+      const statusEl = safeGet('rocket-status-text');
+      if (statusEl) {
+        statusEl.style.display = 'none';
+        statusEl.innerText = '';
+      }
+
+      if (rocketHasUserBet && !rocketUserCashedOut) {
+        if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('error');
+      }
+
+      rocketHistory.unshift(finalMultiplier);
+      if (rocketHistory.length > 8) rocketHistory.pop();
+      renderRocketHistory();
+
+      rocketHasUserBet = false;
+      updateRocketUI();
+    }
+
+    // Обработка кнопки «Сделать ставку / Забрать»
+    async function handleRocketAction() {
+      const isPts = (rocketCurrency === 'pts');
+      const bet = isPts ? rocketBetPts : rocketBetUsdt;
+
+      if (rocketPhase === 'waiting' && !rocketHasUserBet) {
+        if (isPts && (!window.totalPts || window.totalPts < bet)) {
+          alert("Недостаточно PTS!");
+          return;
+        }
+        if (!isPts && (!balance || balance < bet)) {
+          alert("Недостаточно USDT!");
+          return;
+        }
+
+        // Списание баланса
+        if (isPts) window.totalPts -= bet;
+        else balance = Math.max(0, balance - bet);
+        updateUI();
+
+        rocketHasUserBet = true;
+        updateRocketUI();
+        if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+
+        // Сохранение ставки в таблице rocket_bets
+        if (supabaseClient && dbUserId && currentOnlineRoundId) {
+          const { data: betRecord } = await supabaseClient.from('rocket_bets').insert([{
+            round_id: currentOnlineRoundId,
+            user_id: dbUserId,
+            username: currentUsername || currentFirstName,
+            bet_amount: bet,
+            currency: isPts ? 'PTS' : 'USDT',
+            status: 'active'
+          }]).select().single();
+
+          if (betRecord) myCurrentBetRecordId = betRecord.id;
+
+          // Трансляция ставки в общую ленту игроков
+          if (rocketChannel) {
+            rocketChannel.send({
+              type: 'broadcast',
+              event: 'PLAYER_BET',
+              payload: {
+                username: currentUsername || currentFirstName,
+                amount: bet,
+                currency: isPts ? 'PTS' : 'USDT'
+              }
+            });
+          }
+        }
+
+      } else if (rocketPhase === 'flying' && rocketHasUserBet && !rocketUserCashedOut) {
+        cashoutRocket();
+      }
+    }
+
+    // Забрать выигрыш онлайн
+    async function cashoutRocket() {
+      if (rocketPhase !== 'flying' || !rocketHasUserBet || rocketUserCashedOut) return;
+      rocketUserCashedOut = true;
+
+      const isPts = (rocketCurrency === 'pts');
+      const bet = isPts ? rocketBetPts : rocketBetUsdt;
+      const winMult = rocketMultiplier;
+      const winAmount = isPts ? Math.floor(bet * winMult) : parseFloat((bet * winMult).toFixed(2));
+
+      if (isPts) window.totalPts += winAmount;
+      else balance += winAmount;
+
+      updateUI();
+      updateRocketUI();
+      if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
+
+      // Фиксация победы в БД
+      if (supabaseClient && dbUserId) {
+        if (myCurrentBetRecordId) {
+          await supabaseClient.from('rocket_bets').update({
+            cashout_mult: winMult,
+            win_amount: winAmount,
+            status: 'cashed_out'
+          }).eq('id', myCurrentBetRecordId);
+        }
+
+        if (isPts) {
+          supabaseClient.from('accounts').update({ bonus_balance: window.totalPts }).eq('user_id', dbUserId).then();
+        } else {
+          supabaseClient.from('accounts').update({ invest_balance: balance }).eq('user_id', dbUserId).then();
+        }
+
+        if (rocketChannel) {
+          rocketChannel.send({
+            type: 'broadcast',
+            event: 'PLAYER_CASHOUT',
+            payload: {
+              username: currentUsername || currentFirstName,
+              mult: winMult,
+              winAmount: winAmount,
+              currency: isPts ? 'PTS' : 'USDT'
+            }
+          });
+        }
+      }
+    }
+
+    // Загрузка начальной истории раундов из базы
+    async function loadRocketHistoryFromDB() {
+      if (!supabaseClient) return;
+      const { data } = await supabaseClient
+        .from('rocket_rounds')
+        .select('crash_multiplier')
+        .eq('status', 'crashed')
+        .order('created_at', { ascending: false })
+        .limit(8);
+
+      if (data && data.length > 0) {
+        rocketHistory = data.map(r => parseFloat(r.crash_multiplier));
+        renderRocketHistory();
+      }
+    }
+
+    // Обновление ленты игроков при получении событий
+    function addPlayerFeedBet(p) {
+      const feed = safeGet('rocket-players-feed');
+      if (!feed) return;
+      const item = document.createElement('div');
+      item.className = 'rocket-feed-item';
+      item.innerHTML = `
+        <span style="color: #94a3b8;">🚀 ${p.username}</span>
+        <span style="color: #38bdf8;">ставка ${p.amount} ${p.currency}</span>
+      `;
+      feed.prepend(item);
+      if (feed.children.length > 10) feed.lastElementChild.remove();
+    }
+
+    function updatePlayerFeedCashout(p) {
+      const feed = safeGet('rocket-players-feed');
+      if (!feed) return;
+      const item = document.createElement('div');
+      item.className = 'rocket-feed-item';
+      item.innerHTML = `
+        <span style="color: #94a3b8;">💰 ${p.username}</span>
+        <span style="color: #4ade80;">+${p.winAmount} ${p.currency} (×${p.mult.toFixed(2)})</span>
+      `;
+      feed.prepend(item);
+      if (feed.children.length > 10) feed.lastElementChild.remove();
     }
 
     // ==================================================
     // 6.3. ДВИЖОК: РУЛЕТКА (ПОДАРКИ TELEGRAM) (#game-view-roulette)
     // ==================================================
-    let rouletteMode = 0; // 0: Free, 1: x3 (150 PTS), 2: x15 (1000 PTS), 3: x50 (5000 PTS)
+    // Полная база всех 32 подарков с балансировкой под USDT и PTS
+    const ROULETTE_CONFIG = {
+      // ==========================================
+      // РЕЖИМ ОЧКАМИ PTS (★)
+      // ==========================================
+      pts: {
+        // 0: Бесплатный ежедневный прокрут (обычные и приятные подарки)
+        0: {
+          cost: 0,
+          label: 'Бесплатно',
+          badge: '',
+          items: [
+            { name: 'Леденец', img: 'assets/LolPop.webp', val: 80, weight: 30 },
+            { name: 'Эскимо', img: 'assets/IceCream.webp', val: 120, weight: 25 },
+            { name: 'Трость', img: 'assets/CandyCane.webp', val: 150, weight: 20 },
+            { name: 'Персик', img: 'assets/PreciousPeach.webp', val: 200, weight: 14 },
+            { name: 'Бубенчик', img: 'assets/SleighBell.webp', val: 250, weight: 6 },
+            { name: 'Банка сердец', img: 'assets/RestlessJar.webp', val: 350, weight: 3 },
+            { name: 'Духи', img: 'assets/PerfumeBottle.webp', val: 500, weight: 1.4 },
+            { name: 'Цилиндр', img: 'assets/TopHat.webp', val: 800, weight: 0.5 },
+            { name: 'Кристалл', img: 'assets/IonGem.webp', val: 1500, weight: 0.09 },
+            { name: 'Кепка Дурова', img: 'assets/DurovsCap.webp', val: 10000, weight: 0.01 }
+          ]
+        },
+        // 1: x3 шанс (Ставка 150 ★)
+        1: {
+          cost: 150,
+          label: '150 ★',
+          badge: '×3 шанс',
+          items: [
+            { name: 'Бубенчик', img: 'assets/SleighBell.webp', val: 100, weight: 24 },
+            { name: 'Банка сердец', img: 'assets/RestlessJar.webp', val: 180, weight: 30 },
+            { name: 'Сигара', img: 'assets/SnoopCigar.webp', val: 250, weight: 20 },
+            { name: 'Свеча', img: 'assets/EternalCandle.webp', val: 350, weight: 13 },
+            { name: 'Цилиндр', img: 'assets/TopHat.webp', val: 450, weight: 7 },
+            { name: 'Золотая соска', img: 'assets/BlingBinky.webp', val: 700, weight: 3.5 },
+            { name: 'Сумка', img: 'assets/LootBag.webp', val: 1200, weight: 1.8 },
+            { name: 'Обезьянка', img: 'assets/JollyChimp.webp', val: 2000, weight: 0.6 },
+            { name: 'Кепка Дурова', img: 'assets/DurovsCap.webp', val: 15000, weight: 0.1 }
+          ]
+        },
+        // 2: x15 шанс (Ставка 1 000 ★)
+        2: {
+          cost: 1000,
+          label: '1000 ★',
+          badge: '×15 шанс',
+          items: [
+            { name: 'Свеча', img: 'assets/EternalCandle.webp', val: 500, weight: 18 },
+            { name: 'Фен', img: 'assets/IonicDryer.webp', val: 800, weight: 26 },
+            { name: 'Ягоды', img: 'assets/BerryBox.webp', val: 1200, weight: 24 },
+            { name: 'Кольцо', img: 'assets/DiamondRing.webp', val: 1800, weight: 15 },
+            { name: 'Перстень', img: 'assets/GemSignet.webp', val: 2500, weight: 9 },
+            { name: 'Световой меч', img: 'assets/LightSword.webp', val: 3500, weight: 5 },
+            { name: 'Шлем героя', img: 'assets/HeroicHelmet.webp', val: 5000, weight: 2 },
+            { name: 'Лампа джинна', img: 'assets/GenieLamp.webp', val: 8000, weight: 0.8 },
+            { name: 'Кепка Дурова', img: 'assets/DurovsCap.webp', val: 25000, weight: 0.2 }
+          ]
+        },
+        // 3: x50 шанс (Ставка 5 000 ★ — Эксклюзивы и VIP)
+        3: {
+          cost: 5000,
+          label: '5000 ★',
+          badge: '×50 шанс',
+          items: [
+            { name: 'Испуганный кот', img: 'assets/ScaredCat.webp', val: 2500, weight: 16 },
+            { name: 'Браслет', img: 'assets/NailBracelet.webp', val: 4000, weight: 24 },
+            { name: 'Сёрфборд', img: 'assets/SurgeBoard.webp', val: 6500, weight: 24 },
+            { name: 'Снежный шар', img: 'assets/SnowGlobe.webp', val: 9000, weight: 16 },
+            { name: 'Лунный кулон', img: 'assets/MoonPendant.webp', val: 13000, weight: 10 },
+            { name: 'Мини-Оскар', img: 'assets/MiniOscar.webp', val: 18000, weight: 5.5 },
+            { name: 'Золотой бицепс', img: 'assets/MightyArm.webp', val: 25000, weight: 2.5 },
+            { name: 'Магический шар', img: 'assets/CrystalBall.webp', val: 35000, weight: 1.2 },
+            { name: 'Осколок звезд', img: 'assets/AstralShard.webp', val: 50000, weight: 0.5 },
+            { name: 'Westside Sign', img: 'assets/WestsideSign.webp', val: 75000, weight: 0.25 },
+            { name: 'Кепка Дурова', img: 'assets/DurovsCap.webp', val: 100000, weight: 0.05 }
+          ]
+        }
+      },
+
+      // ==========================================
+      // РЕЖИМ USDT ($)
+      // ==========================================
+      usdt: {
+        // 0: Бесплатный ежедневный прокрут
+        0: {
+          cost: 0,
+          label: 'Бесплатно',
+          badge: '',
+          items: [
+            { name: 'Леденец', img: 'assets/LolPop.webp', val: 0.05, weight: 30 },
+            { name: 'Эскимо', img: 'assets/IceCream.webp', val: 0.08, weight: 25 },
+            { name: 'Трость', img: 'assets/CandyCane.webp', val: 0.10, weight: 20 },
+            { name: 'Персик', img: 'assets/PreciousPeach.webp', val: 0.15, weight: 14 },
+            { name: 'Бубенчик', img: 'assets/SleighBell.webp', val: 0.25, weight: 6 },
+            { name: 'Банка сердец', img: 'assets/RestlessJar.webp', val: 0.50, weight: 3 },
+            { name: 'Духи', img: 'assets/PerfumeBottle.webp', val: 0.80, weight: 1.4 },
+            { name: 'Цилиндр', img: 'assets/TopHat.webp', val: 1.50, weight: 0.5 },
+            { name: 'Кристалл', img: 'assets/IonGem.webp', val: 3.00, weight: 0.09 },
+            { name: 'Кепка Дурова', img: 'assets/DurovsCap.webp', val: 25.00, weight: 0.01 }
+          ]
+        },
+        // 1: x3 шанс (Ставка $0.50)
+        1: {
+          cost: 0.50,
+          label: '$0.50',
+          badge: '×3 шанс',
+          items: [
+            { name: 'Бубенчик', img: 'assets/SleighBell.webp', val: 0.30, weight: 24 },
+            { name: 'Банка сердец', img: 'assets/RestlessJar.webp', val: 0.60, weight: 30 },
+            { name: 'Сигара', img: 'assets/SnoopCigar.webp', val: 0.85, weight: 20 },
+            { name: 'Свеча', img: 'assets/EternalCandle.webp', val: 1.20, weight: 13 },
+            { name: 'Цилиндр', img: 'assets/TopHat.webp', val: 1.80, weight: 7 },
+            { name: 'Золотая соска', img: 'assets/BlingBinky.webp', val: 2.50, weight: 3.5 },
+            { name: 'Сумка', img: 'assets/LootBag.webp', val: 4.50, weight: 1.8 },
+            { name: 'Обезьянка', img: 'assets/JollyChimp.webp', val: 8.00, weight: 0.6 },
+            { name: 'Кепка Дурова', img: 'assets/DurovsCap.webp', val: 50.00, weight: 0.1 }
+          ]
+        },
+        // 2: x15 шанс (Ставка $2.00)
+        2: {
+          cost: 2.00,
+          label: '$2.00',
+          badge: '×15 шанс',
+          items: [
+            { name: 'Свеча', img: 'assets/EternalCandle.webp', val: 1.00, weight: 18 },
+            { name: 'Фен', img: 'assets/IonicDryer.webp', val: 1.60, weight: 26 },
+            { name: 'Ягоды', img: 'assets/BerryBox.webp', val: 2.50, weight: 24 },
+            { name: 'Кольцо', img: 'assets/DiamondRing.webp', val: 3.80, weight: 15 },
+            { name: 'Перстень', img: 'assets/GemSignet.webp', val: 5.50, weight: 9 },
+            { name: 'Световой меч', img: 'assets/LightSword.webp', val: 8.00, weight: 5 },
+            { name: 'Шлем героя', img: 'assets/HeroicHelmet.webp', val: 12.00, weight: 2 },
+            { name: 'Лампа джинна', img: 'assets/GenieLamp.webp', val: 20.00, weight: 0.8 },
+            { name: 'Кепка Дурова', img: 'assets/DurovsCap.webp', val: 75.00, weight: 0.2 }
+          ]
+        },
+        // 3: x50 шанс (Ставка $10.00 — VIP пулы)
+        3: {
+          cost: 10.00,
+          label: '$10.00',
+          badge: '×50 шанс',
+          items: [
+            { name: 'Испуганный кот', img: 'assets/ScaredCat.webp', val: 5.00, weight: 16 },
+            { name: 'Браслет', img: 'assets/NailBracelet.webp', val: 8.50, weight: 24 },
+            { name: 'Сёрфборд', img: 'assets/SurgeBoard.webp', val: 14.00, weight: 24 },
+            { name: 'Снежный шар', img: 'assets/SnowGlobe.webp', val: 20.00, weight: 16 },
+            { name: 'Лунный кулон', img: 'assets/MoonPendant.webp', val: 30.00, weight: 10 },
+            { name: 'Мини-Оскар', img: 'assets/MiniOscar.webp', val: 45.00, weight: 5.5 },
+            { name: 'Золотой бицепс', img: 'assets/MightyArm.webp', val: 70.00, weight: 2.5 },
+            { name: 'Магический шар', img: 'assets/CrystalBall.webp', val: 100.00, weight: 1.2 },
+            { name: 'Осколок звезд', img: 'assets/AstralShard.webp', val: 160.00, weight: 0.5 },
+            { name: 'Westside Sign', img: 'assets/WestsideSign.webp', val: 250.00, weight: 0.25 },
+            { name: 'Кепка Дурова', img: 'assets/DurovsCap.webp', val: 400.00, weight: 0.05 }
+          ]
+        }
+      }
+    };
+
+    let rouletteCurrency = 'usdt';
+    let rouletteMode = 0;
     let isRouletteSpinning = false;
     let rouletteFreeClaimed = false;
 
-    const ROULETTE_ITEMS = [
-      { icon: '🍭', title: 'Леденец', mult: 1.5, pts: 150 },
-      { icon: '🦯', title: 'Трость', mult: 2.5, pts: 250 },
-      { icon: '🦩', title: 'Фламинго', mult: 5.0, pts: 500 },
-      { icon: '⭐', title: 'Звезда', mult: 2.0, pts: 200 },
-      { icon: '🏆', title: 'Кубок', mult: 10.0, pts: 1000 },
-      { icon: '🧢', title: 'Кепка', mult: 3.5, pts: 350 },
-      { icon: '💎', title: 'Бриллиант', mult: 25.0, pts: 2500 },
-      { icon: '🪙', title: 'Монета', mult: 1.2, pts: 120 },
-      { icon: '💨', title: 'Утешение', mult: 0.5, pts: 50 }
-    ];
+    let rouletteIdleRaf = null;
+    let rouletteCurrentX = 0;
+    let rouletteLastTimestamp = 0;
+    const ROULETTE_CARD_WIDTH = 98;
 
     function initRouletteGame() {
       safeSetText('roulette-inner-pts', Math.floor(window.totalPts || 0).toLocaleString());
       safeSetText('roulette-inner-usdt', `$${(balance || 0).toFixed(2)}`);
 
+      setRouletteMode(rouletteMode);
+    }
+
+    function switchRouletteCurrency(curr) {
+      if (isRouletteSpinning) return;
+      rouletteCurrency = curr;
+
+      const tabPts = safeGet('tab-roulette-pts');
+      const tabUsdt = safeGet('tab-roulette-usdt');
+      if (curr === 'pts') {
+        if (tabPts) tabPts.classList.add('active');
+        if (tabUsdt) tabUsdt.classList.remove('active');
+      } else {
+        if (tabUsdt) tabUsdt.classList.add('active');
+        if (tabPts) tabPts.classList.remove('active');
+      }
+
+      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+
+      // Обновляем режим и перерисовываем барабан
+      setRouletteMode(rouletteMode);
+    }
+
+    function populateRouletteTape() {
       const tape = safeGet('roulette-reel-tape');
-      if (tape && tape.children.length === 0) {
-        let html = '';
-        for (let i = 0; i < 60; i++) {
-          const item = ROULETTE_ITEMS[i % ROULETTE_ITEMS.length];
-          html += `
-            <div class="roulette-gift-card">
-              <div class="roulette-gift-icon">${item.icon}</div>
-              <div class="roulette-gift-title">${item.title}</div>
-              <div class="roulette-gift-mult">×${item.mult}</div>
-            </div>
-          `;
+      if (!tape) return;
+      tape.innerHTML = '';
+
+      const tier = ROULETTE_CONFIG[rouletteCurrency][rouletteMode];
+      const pool = tier.items;
+      const totalCards = Math.max(60, pool.length * 9);
+      const isUsdt = (rouletteCurrency === 'usdt');
+
+      for (let i = 0; i < totalCards; i++) {
+        const item = pool[i % pool.length];
+        const card = document.createElement('div');
+        card.className = 'roulette-gift-card';
+        card.id = `r-card-${i}`;
+
+        const priceLabel = isUsdt
+          ? `<span class="star-gold">$</span><span class="num-white">${item.val.toFixed(2)}</span>`
+          : `<span class="star-gold">★</span><span class="num-white">${item.val.toLocaleString()}</span>`;
+
+        card.innerHTML = `
+          <img src="${item.img}" alt="${item.name}">
+          <div class="roulette-gift-val">
+            ${priceLabel}
+          </div>
+        `;
+        tape.appendChild(card);
+      }
+
+      rouletteCurrentX = 0;
+      tape.style.transition = 'none';
+      tape.style.transform = `translateX(0px)`;
+    }
+
+    function startRouletteIdleScroll() {
+      if (isRouletteSpinning) return;
+      if (rouletteIdleRaf) cancelAnimationFrame(rouletteIdleRaf);
+
+      const tape = safeGet('roulette-reel-tape');
+      if (!tape) return;
+
+      tape.style.transition = 'none';
+      rouletteLastTimestamp = performance.now();
+
+      const pool = ROULETTE_CONFIG[rouletteCurrency][rouletteMode].items;
+      const loopWidth = pool.length * ROULETTE_CARD_WIDTH;
+
+      function step(now) {
+        if (isRouletteSpinning) return;
+
+        const dt = (now - rouletteLastTimestamp) / 1000;
+        rouletteLastTimestamp = now;
+
+        rouletteCurrentX -= 34 * dt;
+
+        if (Math.abs(rouletteCurrentX) >= loopWidth * 3) {
+          rouletteCurrentX += loopWidth;
         }
-        tape.innerHTML = html;
+
+        tape.style.transform = `translateX(${rouletteCurrentX}px)`;
+        rouletteIdleRaf = requestAnimationFrame(step);
+      }
+
+      rouletteIdleRaf = requestAnimationFrame(step);
+    }
+
+    function stopRouletteIdleScroll() {
+      if (rouletteIdleRaf) {
+        cancelAnimationFrame(rouletteIdleRaf);
+        rouletteIdleRaf = null;
       }
     }
 
     function setRouletteMode(idx) {
       if (isRouletteSpinning) return;
       rouletteMode = idx;
-      document.querySelectorAll('.roulette-chance-btn').forEach((btn, i) => {
-        if (i === idx) btn.classList.add('active');
-        else btn.classList.remove('active');
-      });
 
-      const btn = safeGet('roulette-spin-btn');
-      if (btn) {
-        if (idx === 0) btn.innerText = rouletteFreeClaimed ? 'БЕСПЛАТНЫЙ СПИН ИСПОЛЬЗОВАН' : 'КРУТИТЬ БЕСПЛАТНО';
-        else if (idx === 1) btn.innerText = 'КРУТИТЬ (150 PTS)';
-        else if (idx === 2) btn.innerText = 'КРУТИТЬ (1 000 PTS)';
-        else btn.innerText = 'КРУТИТЬ (5 000 PTS)';
+      const isUsdt = (rouletteCurrency === 'usdt');
+      const currencyConfig = ROULETTE_CONFIG[rouletteCurrency];
+
+      // Обновляем 4 кнопки шансов под текущую валюту
+      for (let i = 0; i < 4; i++) {
+        const btn = safeGet(`r-mode-${i}`);
+        if (btn) {
+          if (i === idx) btn.classList.add('active');
+          else btn.classList.remove('active');
+
+          const conf = currencyConfig[i];
+          if (i === 0) {
+            btn.innerHTML = `<span class="roulette-chance-label" style="font-size: 14px;">${conf.label}</span>`;
+          } else {
+            const symbol = isUsdt ? '$' : '★';
+            btn.innerHTML = `
+              <span class="roulette-chance-badge">${conf.badge}</span>
+              <span class="roulette-chance-label">${isUsdt ? '$' + conf.cost.toFixed(2) : conf.cost.toLocaleString() + ' <span class="star-gold">★</span>'}</span>
+            `;
+          }
+        }
       }
+
+      const sub = safeGet('roulette-subtitle');
+      const btnText = safeGet('roulette-btn-text');
+      const currentCost = currencyConfig[idx].cost;
+
+      if (idx === 0) {
+        if (sub) sub.innerHTML = 'Бесплатно раз в сутки. Забрать подарком или на баланс.';
+        if (btnText) btnText.innerHTML = rouletteFreeClaimed ? 'Бесплатный спин использован' : 'Крутить бесплатно';
+      } else {
+        if (isUsdt) {
+          if (sub) sub.innerHTML = `Ставка $${currentCost.toFixed(2)} USDT за прокрут. Редкие подарки на барабане!`;
+          if (btnText) btnText.innerHTML = `Крутить за $${currentCost.toFixed(2)} USDT`;
+        } else {
+          if (sub) sub.innerHTML = `Ставка ${currentCost.toLocaleString()} <span class="star-gold">★</span> за прокрут. Редкие подарки на барабане!`;
+          if (btnText) btnText.innerHTML = `Крутить за ${currentCost.toLocaleString()} <span class="star-gold">★</span>`;
+        }
+      }
+
+      populateRouletteTape();
+      startRouletteIdleScroll();
+
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
     }
 
     function spinRoulette() {
       if (isRouletteSpinning) return;
 
-      const costs = [0, 150, 1000, 5000];
-      const cost = costs[rouletteMode];
+      const isUsdt = (rouletteCurrency === 'usdt');
+      const currentTier = ROULETTE_CONFIG[rouletteCurrency][rouletteMode];
+      const cost = currentTier.cost;
 
       if (rouletteMode === 0) {
         if (rouletteFreeClaimed) {
-          alert("Вы уже использовали бесплатный спин сегодня!");
+          alert("Бесплатный спин уже использован сегодня!");
           return;
         }
         rouletteFreeClaimed = true;
       } else {
-        if (!window.totalPts || window.totalPts < cost) {
-          alert(`Недостаточно PTS для вращения! Требуется ${cost} PTS.`);
-          return;
+        if (isUsdt) {
+          if (!balance || balance < cost) {
+            alert(`Недостаточно USDT для прокрута! Требуется $${cost.toFixed(2)} USDT`);
+            return;
+          }
+          balance = Math.max(0, balance - cost);
+        } else {
+          if (!window.totalPts || window.totalPts < cost) {
+            alert(`Недостаточно PTS для прокрута! Требуется ${cost} ★`);
+            return;
+          }
+          window.totalPts -= cost;
         }
-        window.totalPts -= cost;
         updateUI();
       }
 
       isRouletteSpinning = true;
+      stopRouletteIdleScroll();
+      resetRouletteWinScene();
+
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
 
-      const btn = safeGet('roulette-spin-btn');
-      if (btn) {
-        btn.innerText = 'ВРАЩЕНИЕ...';
-        btn.className = 'rubup-spin-btn disabled';
-        btn.disabled = true;
+      const spinBtn = safeGet('roulette-spin-btn');
+      if (spinBtn) spinBtn.disabled = true;
+
+      // Выбор приза по весам
+      const pool = currentTier.items;
+      const totalWeight = pool.reduce((acc, it) => acc + it.weight, 0);
+      let r = Math.random() * totalWeight;
+      let targetIndex = 0;
+
+      for (let i = 0; i < pool.length; i++) {
+        if (r < pool[i].weight) {
+          targetIndex = i;
+          break;
+        }
+        r -= pool[i].weight;
       }
 
-      let targetItemIndex = Math.floor(Math.random() * ROULETTE_ITEMS.length);
-      if (rouletteMode === 3) targetItemIndex = [2, 4, 6][Math.floor(Math.random() * 3)];
-      else if (rouletteMode === 2) targetItemIndex = [1, 2, 4, 5][Math.floor(Math.random() * 4)];
+      const chosenItem = pool[targetIndex];
 
-      const chosenItem = ROULETTE_ITEMS[targetItemIndex];
-
-      const stopCardIndex = 40 + targetItemIndex;
-      const cardWidth = 92;
-      const viewportEl = document.querySelector('.roulette-viewport');
-      const viewportWidth = viewportEl ? viewportEl.offsetWidth : 340;
-      const centerOffset = viewportWidth / 2 - cardWidth / 2;
-      const randomJitter = (Math.random() - 0.5) * 26;
-      const targetTranslateX = -(stopCardIndex * cardWidth - centerOffset + randomJitter);
+      // Точная центровка выбранного предмета
+      const stopIndex = (5 * pool.length) + targetIndex;
+      const viewport = safeGet('roulette-viewport');
+      const vpWidth = viewport ? viewport.offsetWidth : 350;
+      const cardCenterOffset = (stopIndex * ROULETTE_CARD_WIDTH) + 49;
+      const finalX = (vpWidth / 2) - cardCenterOffset;
 
       const tape = safeGet('roulette-reel-tape');
       if (tape) {
-        tape.style.transition = 'transform 4s cubic-bezier(0.1, 0.9, 0.2, 1)';
-        tape.style.transform = `translateX(${targetTranslateX}px)`;
+        tape.style.transition = 'transform 4.6s cubic-bezier(0.12, 0.95, 0.2, 1)';
+        tape.style.transform = `translateX(${finalX}px)`;
       }
 
       let tick = 0;
       const spinInterval = setInterval(() => {
         tick++;
         if (tg?.HapticFeedback && tick % 2 === 0) tg.HapticFeedback.impactOccurred('light');
-        if (tick >= 12) clearInterval(spinInterval);
-      }, 280);
+        if (tick >= 14) clearInterval(spinInterval);
+      }, 260);
 
       setTimeout(() => {
         clearInterval(spinInterval);
-        isRouletteSpinning = false;
 
-        const winPts = chosenItem.pts * (rouletteMode === 0 ? 1 : (rouletteMode === 1 ? 1 : (rouletteMode === 2 ? 2 : 4)));
-        window.totalPts += winPts;
+        const spotlight = safeGet('roulette-win-spotlight');
+        const rays = safeGet('roulette-win-rays');
+        const winFrame = safeGet('roulette-win-frame');
+        const winBanner = safeGet('roulette-win-banner');
+        const wbTitle = safeGet('roulette-wb-title');
+        const wbVal = safeGet('roulette-wb-val');
+        const wbSub = safeGet('roulette-wb-sub');
 
-        if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
-        alert(`🎉 ВЫИГРЫШ В РУЛЕТКЕ!\nВыпала награда: ${chosenItem.icon} ${chosenItem.title}!\nНачислено: +${winPts.toLocaleString()} PTS!`);
+        if (spotlight) spotlight.classList.add('active');
+        if (rays) rays.classList.add('active');
+        if (winFrame) winFrame.classList.add('is-winning');
+        if (tape) tape.classList.add('has-winner');
+
+        const winningCard = safeGet(`r-card-${stopIndex}`);
+        if (winningCard) winningCard.classList.add('is-winner');
+
+        // Расчёт профита
+        const netProfit = isUsdt ? parseFloat((chosenItem.val - cost).toFixed(2)) : (chosenItem.val - cost);
+        const isFree = (cost === 0);
+
+        if (isFree) {
+          if (wbTitle) wbTitle.innerText = 'БЕСПЛАТНЫЙ ПРИЗ';
+          if (wbVal) wbVal.innerHTML = isUsdt ? `+$${chosenItem.val.toFixed(2)} USDT` : `<span class="star-gold">★</span> +${chosenItem.val.toLocaleString()} PTS`;
+          if (wbSub) wbSub.innerText = chosenItem.name;
+          if (winBanner) winBanner.className = 'roulette-win-banner status-win active';
+        } else if (netProfit >= 0) {
+          if (wbTitle) wbTitle.innerText = 'ЧИСТЫЙ ВЫИГРЫШ';
+          if (wbVal) wbVal.innerHTML = isUsdt ? `+$${netProfit.toFixed(2)} USDT` : `+${netProfit.toLocaleString()} PTS`;
+          if (wbSub) wbSub.innerText = isUsdt ? `Приз: $${chosenItem.val.toFixed(2)} | Ставка: $${cost.toFixed(2)}` : `Приз: ★ ${chosenItem.val.toLocaleString()} | Ставка: ${cost.toLocaleString()}`;
+          if (winBanner) winBanner.className = 'roulette-win-banner status-win active';
+        } else {
+          if (wbTitle) wbTitle.innerText = 'УТЕШИТЕЛЬНЫЙ ПРИЗ';
+          if (wbVal) wbVal.innerHTML = isUsdt ? `+$${chosenItem.val.toFixed(2)} USDT` : `+${chosenItem.val.toLocaleString()} PTS`;
+          if (wbSub) wbSub.innerText = isUsdt ? `Возврат части ставки $${cost.toFixed(2)}` : `Возврат части ставки ${cost.toLocaleString()} ★`;
+          if (winBanner) winBanner.className = 'roulette-win-banner status-loss active';
+        }
+
+        // Зачисление выигрыша
+        if (isUsdt) {
+          balance += chosenItem.val;
+        } else {
+          window.totalPts += chosenItem.val;
+        }
+        updateUI();
+
+        if (tg?.HapticFeedback) {
+          if (netProfit >= 0 || isFree) tg.HapticFeedback.notificationOccurred('success');
+          else tg.HapticFeedback.notificationOccurred('warning');
+        }
 
         if (supabaseClient && dbUserId) {
-          try {
+          if (isUsdt) {
+            supabaseClient.from('accounts').update({ invest_balance: balance }).eq('user_id', dbUserId).then();
+            supabaseClient.from('transactions').insert([{
+              user_id: dbUserId,
+              type: 'ROULETTE_GAME',
+              amount: netProfit,
+              account_type: 'INVEST',
+              details: { item: chosenItem.name, payout: chosenItem.val, cost: cost, currency: 'USDT' }
+            }]).then();
+          } else {
             supabaseClient.from('accounts').update({ bonus_balance: window.totalPts }).eq('user_id', dbUserId).then();
             supabaseClient.from('transactions').insert([{
               user_id: dbUserId,
               type: 'ROULETTE_GAME',
-              amount: winPts - cost,
+              amount: netProfit,
               account_type: 'BONUS',
-              details: { item: chosenItem.title, multiplier: chosenItem.mult, bet: cost, payout: winPts }
+              details: { item: chosenItem.name, stars: chosenItem.val, cost: cost, currency: 'PTS' }
             }]).then();
-          } catch(e) { console.warn("Roulette sync error:", e); }
+          }
         }
 
-        updateUI();
-        safeSetText('roulette-inner-pts', Math.floor(window.totalPts || 0).toLocaleString());
-        setRouletteMode(rouletteMode);
-      }, 4100);
+        setTimeout(() => {
+          resetRouletteWinScene();
+          isRouletteSpinning = false;
+          if (spinBtn) spinBtn.disabled = false;
+
+          rouletteCurrentX = finalX;
+          startRouletteIdleScroll();
+          setRouletteMode(rouletteMode);
+        }, 2800);
+
+      }, 4600);
+    }
+
+    function resetRouletteWinScene() {
+      const spotlight = safeGet('roulette-win-spotlight');
+      const rays = safeGet('roulette-win-rays');
+      const winFrame = safeGet('roulette-win-frame');
+      const winBanner = safeGet('roulette-win-banner');
+      const tape = safeGet('roulette-reel-tape');
+
+      if (spotlight) spotlight.classList.remove('active');
+      if (rays) rays.classList.remove('active');
+      if (winFrame) winFrame.classList.remove('is-winning');
+      if (winBanner) winBanner.className = 'roulette-win-banner';
+      if (tape) {
+        tape.classList.remove('has-winner');
+        document.querySelectorAll('.roulette-gift-card.is-winner').forEach(el => el.classList.remove('is-winner'));
+      }
     }
 
     // ==================================================
     // 6.4. ДВИЖОК: МИНЫ 5x5 (#game-view-mines)
     // ==================================================
-    let minesCurrency = 'pts';
+    let minesCurrency = 'usdt';
     let minesBetPts = 100;
     let minesBetUsdt = 1.00;
-    let minesBombsCount = 1; // 1, 2, 3, 5
+    let minesBombsCount = 1;
     let minesInRound = false;
     let minesBoard = [];
     let minesGemsFound = 0;
     let minesCurrentMult = 1.00;
 
     function initMinesGame() {
+      renderMinesChips();
       updateMinesUI();
       renderMinesGrid();
     }
@@ -7070,7 +8310,22 @@
         if (tabPts) tabPts.classList.remove('active');
       }
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+      renderMinesChips();
       updateMinesUI();
+    }
+
+    // Прямой ввод любой суммы пользователем с клавиатуры
+    function onMinesCustomBetInput(val) {
+      if (minesInRound) return;
+      const num = parseFloat(val);
+      if (isNaN(num) || num <= 0) return;
+
+      if (minesCurrency === 'pts') {
+        minesBetPts = Math.max(1, Math.floor(num));
+      } else {
+        minesBetUsdt = Math.max(0.01, parseFloat(num.toFixed(2)));
+      }
+      updateMinesUI(false);
     }
 
     function changeMinesBet(dir) {
@@ -7087,7 +8342,49 @@
         }
       }
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-      updateMinesUI();
+      updateMinesUI(true);
+    }
+
+    // Генерация чипсов быстрых ставок
+    function renderMinesChips() {
+      const container = safeGet('mines-chips-container');
+      if (!container) return;
+      const isPts = (minesCurrency === 'pts');
+      const chips = isPts ? [10, 50, 100, 500, '2X', 'max'] : [0.5, 1, 2, 5, '2X', 'max'];
+      let html = '';
+      chips.forEach(c => {
+        const label = c === 'max' ? 'Макс' : (c === '2X' ? '2X' : (isPts ? c : (c < 1 ? c.toFixed(1) : c)));
+        const arg = typeof c === 'string' ? `'${c}'` : c;
+        html += `<button class="gifts-chip-btn" onclick="setMinesQuickBet(${arg})">${label}</button>`;
+      });
+      container.innerHTML = html;
+    }
+
+    function setMinesQuickBet(val) {
+      if (minesInRound) return;
+      const isPts = (minesCurrency === 'pts');
+
+      if (val === 'max') {
+        if (isPts) {
+          minesBetPts = Math.max(10, Math.floor(window.totalPts || 0));
+        } else {
+          minesBetUsdt = Math.max(0.1, parseFloat((balance || 0).toFixed(2)));
+        }
+      } else if (val === '2X') {
+        if (isPts) {
+          minesBetPts = Math.floor(minesBetPts * 2);
+        } else {
+          minesBetUsdt = parseFloat((minesBetUsdt * 2).toFixed(2));
+        }
+      } else {
+        if (isPts) {
+          minesBetPts = Math.max(1, parseInt(val));
+        } else {
+          minesBetUsdt = Math.max(0.01, parseFloat(val));
+        }
+      }
+      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+      updateMinesUI(true);
     }
 
     function setMinesBombs(count) {
@@ -7098,7 +8395,7 @@
         else btn.classList.remove('active');
       });
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-      updateMinesUI();
+      updateMinesUI(false);
     }
 
     function renderMinesGrid() {
@@ -7111,16 +8408,28 @@
       grid.innerHTML = html;
     }
 
-    function updateMinesUI() {
+    function updateMinesUI(syncInput = true) {
       const isPts = (minesCurrency === 'pts');
       safeSetText('mines-inner-pts', Math.floor(window.totalPts || 0).toLocaleString());
       safeSetText('mines-inner-usdt', `$${(balance || 0).toFixed(2)}`);
 
-      safeSetText('mines-bet-display', isPts ? String(minesBetPts) : minesBetUsdt.toFixed(2));
+      const betInput = safeGet('mines-bet-input');
+      if (betInput) {
+        betInput.disabled = minesInRound;
+        if (syncInput && document.activeElement !== betInput) {
+          betInput.value = isPts ? String(minesBetPts) : minesBetUsdt.toFixed(2);
+        }
+      }
       safeSetText('mines-bet-curr', isPts ? 'PTS' : 'USDT');
 
       const totalGems = 25 - minesBombsCount;
-      safeSetText('mines-gems-count', `💎 ${minesGemsFound} / ${totalGems}`);
+      const gemsCountEl = safeGet('mines-gems-count');
+      if (gemsCountEl) {
+        gemsCountEl.innerHTML = `
+          <img src="assets/AstralShard.webp" style="width: 17px; height: 17px; object-fit: contain;" alt="Shard">
+          <span>${minesGemsFound} / ${totalGems}</span>
+        `;
+      }
 
       const bet = isPts ? minesBetPts : minesBetUsdt;
       const winVal = isPts ? `+${Math.floor(bet * minesCurrentMult).toLocaleString()} PTS` : `+$${(bet * minesCurrentMult).toFixed(2)} USDT`;
@@ -7131,15 +8440,21 @@
         if (!minesInRound) {
           btn.innerText = 'НАЧАТЬ ИГРУ';
           btn.className = 'rubup-spin-btn ready';
+          btn.style.background = '';
+          btn.style.boxShadow = '';
           btn.disabled = false;
         } else {
           if (minesGemsFound > 0) {
             btn.innerText = `ЗАБРАТЬ ВЫИГРЫШ (${winVal})`;
             btn.className = 'rubup-spin-btn ready';
+            btn.style.background = 'linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%)';
+            btn.style.boxShadow = '0 6px 22px rgba(59, 130, 246, 0.5)';
             btn.disabled = false;
           } else {
-            btn.innerText = 'ОТКРОЙТЕ АЛМАЗ...';
+            btn.innerText = 'ОТКРОЙТЕ КРИСТАЛЛ...';
             btn.className = 'rubup-spin-btn disabled';
+            btn.style.background = '';
+            btn.style.boxShadow = '';
             btn.disabled = true;
           }
         }
@@ -7188,7 +8503,7 @@
       }
 
       renderMinesGrid();
-      updateMinesUI();
+      updateMinesUI(true);
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
     }
 
@@ -7203,17 +8518,18 @@
       if (cellData.isBomb) {
         if (cellEl) {
           cellEl.classList.add('bomb-opened');
-          cellEl.innerText = '💣';
+          cellEl.innerHTML = '<img src="assets/CrystalBall.webp" class="mines-bomb-img" alt="Trap">';
         }
         minesInRound = false;
         if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('error');
 
+        // Вскрываем все остальные мины на поле
         minesBoard.forEach((c, i) => {
           if (c.isBomb) {
             const el = safeGet(`mine-cell-${i}`);
             if (el) {
               el.classList.add('bomb-opened');
-              el.innerText = '💣';
+              el.innerHTML = '<img src="assets/CrystalBall.webp" class="mines-bomb-img" alt="Trap">';
             }
           }
         });
@@ -7237,14 +8553,15 @@
 
         setTimeout(() => {
           alert("💥 БОМБА!\nВы подорвались на мине. Ставка сгорела!");
-          updateMinesUI();
+          updateMinesUI(true);
           updateUI();
         }, 500);
 
       } else {
+        // Вставка картинки AstralShard вместо эмодзи
         if (cellEl) {
           cellEl.classList.add('gem-opened');
-          cellEl.innerText = '💎';
+          cellEl.innerHTML = '<img src="assets/AstralShard.webp" class="mines-shard-img" alt="Shard">';
         }
         minesGemsFound++;
         if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
@@ -7255,7 +8572,7 @@
         const remainingGems = totalGems - (minesGemsFound - 1);
         minesCurrentMult = parseFloat((minesCurrentMult * (remainingTiles / remainingGems) * 0.96).toFixed(2));
 
-        updateMinesUI();
+        updateMinesUI(true);
 
         if (minesGemsFound >= totalGems) {
           setTimeout(() => {
@@ -7283,22 +8600,21 @@
 
       if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
 
+      // Раскрытие оставшихся ячеек
       minesBoard.forEach((c, i) => {
         if (!c.revealed) {
           const el = safeGet(`mine-cell-${i}`);
           if (el) {
             if (c.isBomb) {
-              el.innerText = '💣';
-              el.style.opacity = '0.5';
+              el.innerHTML = '<img src="assets/CrystalBall.webp" class="mines-bomb-img" style="opacity: 0.45;">';
             } else {
-              el.innerText = '💎';
-              el.style.opacity = '0.5';
+              el.innerHTML = '<img src="assets/AstralShard.webp" class="mines-shard-img" style="opacity: 0.45;">';
             }
           }
         }
       });
 
-      alert(`🎉 ВЫИГРЫШ ЗАБРАН!\nВы нашли ${minesGemsFound} 💎 с множителем ×${minesCurrentMult.toFixed(2)}: +${isPts ? winAmount.toLocaleString() + ' PTS' : '$' + winAmount.toFixed(2) + ' USDT'}!`);
+      alert(`🎉 ВЫИГРЫШ ЗАБРАН!\nВы открыли ${minesGemsFound} кристаллов с множителем ×${minesCurrentMult.toFixed(2)}: +${isPts ? winAmount.toLocaleString() + ' PTS' : '$' + winAmount.toFixed(2) + ' USDT'}!`);
 
       if (supabaseClient && dbUserId) {
         try {
@@ -7317,7 +8633,7 @@
       }
 
       updateUI();
-      updateMinesUI();
+      updateMinesUI(true);
     }
 
     // ==================================================
