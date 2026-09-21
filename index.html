@@ -26,7 +26,7 @@
       --primary-glow: 0 6px 22px rgba(59, 130, 246, 0.42);
       --primary-glow-hover: 0 8px 28px rgba(99, 102, 241, 0.55);
       
-      --primary: #4f46e5;
+      --primary: #38bdf8;
       --primary-light: #38bdf8;
       --accent-gold: #facc15;
       --accent-green: #34d399;
@@ -215,11 +215,12 @@
     }
     .hero-badge {
       background: rgba(56, 189, 248, 0.12);
-      color: var(--primary);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.25);
       padding: 2px 8px;
       border-radius: 12px;
       font-size: 10px;
-      font-weight: 600;
+      font-weight: 700;
     }
     .hero-balance {
       font-size: 28px;
@@ -232,19 +233,155 @@
       gap: 6px; /* Жестко фиксируем расстояние между цифрой и USDT */
       white-space: nowrap;
     }
+    /* Web3 Dark Mode Stats Cards (Скорость майнинга и Нафармлено PTS) */
+    .stats-container {
+      display: flex;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .stat-card {
+      flex: 1;
+      min-width: 0;
+      background: rgba(10, 16, 30, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 14px;
+      padding: 11px 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .stat-card-speed {
+      border: 1px solid rgba(0, 180, 255, 0.28);
+      box-shadow: inset 0 0 12px rgba(0, 180, 255, 0.05);
+    }
+    .stat-card-farmed {
+      border: 1px solid rgba(245, 197, 24, 0.35);
+      box-shadow: inset 0 0 12px rgba(245, 197, 24, 0.05);
+    }
+
+    /* Верхняя строка (Header) */
+    .stat-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 4px;
+    }
+    .stat-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: #728299;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Бейджи */
+    .badge-live {
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #00d2ff;
+      border: 1px solid #00d2ff;
+      background: rgba(0, 210, 255, 0.12);
+      padding: 2px 5px;
+      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .live-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: #00d2ff;
+      display: inline-block;
+      animation: pulse-live 1.6s infinite ease-in-out;
+      flex-shrink: 0;
+    }
+    @keyframes pulse-live {
+      0% {
+        transform: scale(0.9);
+        opacity: 0.4;
+      }
+      50% {
+        transform: scale(1.3);
+        opacity: 1;
+        box-shadow: 0 0 6px rgba(0, 210, 255, 0.8);
+      }
+      100% {
+        transform: scale(0.9);
+        opacity: 0.4;
+      }
+    }
+    .badge-airdrop {
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #f5c518;
+      border: 1px solid #f5c518;
+      background: rgba(245, 197, 24, 0.12);
+      padding: 2px 5px;
+      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    /* Нижняя строка (Value & Unit) */
+    .stat-value-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      white-space: nowrap;
+    }
+    .stat-val-speed {
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffffff;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1;
+    }
+    .stat-unit-speed {
+      font-size: 13px;
+      font-weight: 500;
+      color: #8da0b8;
+    }
+    .stat-val-farmed {
+      font-size: 22px;
+      font-weight: 700;
+      color: #f5c518;
+      font-family: 'JetBrains Mono', monospace;
+      text-shadow: 0 0 16px rgba(245, 197, 24, 0.35);
+      line-height: 1;
+    }
+    .stat-unit-farmed {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(245, 197, 24, 0.7);
+    }
+
+    /* Статы реферального экрана */
     .hero-stats {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 10px;
       margin-top: 14px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 0;
+      border-top: none;
     }
     .stat-item span {
       font-size: 10px;
       color: var(--text-dim);
       display: block;
       margin-bottom: 3px;
+      font-weight: 600;
     }
     .stat-item b {
       font-size: 13px;
@@ -304,11 +441,12 @@
     }
     .project-tag {
       background: rgba(56, 189, 248, 0.12);
-      color: var(--primary);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.25);
       padding: 4px 9px;
       border-radius: 8px;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
@@ -519,6 +657,10 @@
       justify-content: center;
       color: var(--primary);
       font-size: 16px;
+    }
+    .info-tile span[data-i18n="doc_view"] {
+      color: #38bdf8 !important;
+      font-weight: 700 !important;
     }
 
     .profile-hero {
@@ -767,7 +909,7 @@
       background: rgba(255, 255, 255, 0.05);
     }
     .support-menu-item svg {
-      stroke: var(--text-muted);
+      stroke: #38bdf8 !important;
       fill: none;
       stroke-width: 2;
       stroke-linecap: round;
@@ -3414,14 +3556,32 @@
         </button>
       </div>
 
-      <div class="hero-stats">
-        <div class="stat-item">
-          <span data-i18n="shares_label">СКОРОСТЬ ДОБЫЧИ</span>
-          <b id="total-farm-rate" style="color: var(--primary);">+0 PTS/ч</b>
+      <!-- Web3 Dark Mode Виджеты: Скорость майнинга и Нафармлено PTS -->
+      <div class="stats-container">
+        <!-- Карточка 1: Скорость -->
+        <div class="stat-card stat-card-speed">
+          <div class="stat-card-header">
+            <span class="stat-label" data-i18n="shares_label">СКОРОСТЬ</span>
+            <span class="badge-live">
+              <span class="live-dot"></span>LIVE
+            </span>
+          </div>
+          <div class="stat-value-row">
+            <span class="stat-val-speed" id="total-farm-rate">+0</span>
+            <span class="stat-unit-speed" data-i18n="pts_hourly_unit">PTS/ч</span>
+          </div>
         </div>
-        <div class="stat-item">
-          <span data-i18n="valuation_label">НАФАРМЛЕНО (PTS)</span>
-          <b id="total-farmed-pts" style="color: var(--accent-gold); font-size: 16px; text-shadow: 0 0 10px rgba(245, 158, 11, 0.4);">0</b>
+
+        <!-- Карточка 2: Нафармлено -->
+        <div class="stat-card stat-card-farmed">
+          <div class="stat-card-header">
+            <span class="stat-label" data-i18n="valuation_label">НАФАРМЛЕНО</span>
+            <span class="badge-airdrop">AIRDROP</span>
+          </div>
+          <div class="stat-value-row">
+            <span class="stat-val-farmed" id="total-farmed-pts">0</span>
+            <span class="stat-unit-farmed">PTS</span>
+          </div>
         </div>
       </div>
     </div>
@@ -3518,7 +3678,7 @@
             <div class="project-name">MegaWatt Mining Cluster</div>
             <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;" data-i18n="p3_ticker">Целевой тикер: $MWMC</div>
           </div>
-          <span class="project-tag" style="background: rgba(245, 158, 11, 0.15); color: var(--accent-gold);">Mining & Energy</span>
+          <span class="project-tag" style="background: rgba(245, 158, 11, 0.12); color: #facc15; border: 1px solid rgba(245, 158, 11, 0.3);">Mining & Energy</span>
         </div>
         <p class="project-desc" data-i18n="p3_desc">
           Промышленный майнинг-кластер с прямым подключением к гидрогенерации. Инвестиции в доли хешрейта без покупки оборудования.
@@ -3634,12 +3794,12 @@
 
       <div class="project-card">
         <p class="project-desc" data-i18n="ref_desc">
-          Приглашайте друзей в проект и получайте 10% в USDT сразу на ваш баланс с каждого пополнения.
+          Приглашайте партнеров и получайте до 27.5% в USDT с каждого пополнения: 20% с 1-й линии, 5% со 2-й линии и 2.5% с 3-й линии.
         </p>
         
         <div class="ref-box">
           <span class="ref-code" id="ref-link">Загрузка реферальной ссылки...</span>
-          <button style="background: none; border: none; color: var(--primary); font-size: 12px; font-weight: 600; cursor: pointer;" onclick="copyRefLink()" data-i18n="btn_copy">Копировать</button>
+          <button style="background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 8px; cursor: pointer;" onclick="copyRefLink()" data-i18n="btn_copy">Копировать</button>
         </div>
 
         <button class="btn" onclick="copyRefLink()" data-i18n="btn_share_link">Поделиться ссылкой</button>
@@ -3652,12 +3812,12 @@
         </div>
         <div class="stat-item" style="background: var(--bg-card); padding: 12px; border-radius: 12px; border: 1px solid var(--card-border);">
           <span data-i18n="ref_earnings_label">ДОСТУПНО К ВЫВОДУ</span>
-          <b id="ref-earnings-display" style="color: var(--accent-green);">$0.00 USDT</b>
+          <b id="ref-earnings-display" style="color: #38bdf8; text-shadow: 0 0 10px rgba(56, 189, 248, 0.35);">$0.00 USDT</b>
         </div>
       </div>
 
       <div class="section-title">
-        <span data-i18n="structure_title">Ваша структура (1 линия)</span>
+        <span data-i18n="structure_title">Ваша структура (3 линии)</span>
       </div>
       <div id="referrals-list">
         <div style="text-align: center; padding: 20px; color: var(--text-dim); font-size: 12px;" data-i18n="structure_empty">
@@ -4806,7 +4966,7 @@
           <div class="info-tile-icon">📄</div>
           <div>
             <div style="font-size: 13px; font-weight: 600; color: #fff;" data-i18n="doc_safe_title">Пользовательское соглашение</div>
-            <div style="font-size: 11px; color: var(--accent-green);" data-i18n="doc_signed">● Принято при регистрации</div>
+            <div style="font-size: 11px; color: #38bdf8;" data-i18n="doc_signed">● Принято при регистрации</div>
           </div>
         </div>
         <span style="font-size: 11px; color: var(--primary); font-weight: 600;" data-i18n="doc_view">Открыть</span>
@@ -4817,7 +4977,7 @@
           <div class="info-tile-icon">⚖️</div>
           <div>
             <div style="font-size: 13px; font-weight: 600; color: #fff;" data-i18n="doc_agent_title">Реферальная программа</div>
-            <div style="font-size: 11px; color: var(--accent-green);" data-i18n="doc_signed_ref">● Бонус 10% в USDT</div>
+            <div style="font-size: 11px; color: #38bdf8;" data-i18n="doc_signed_ref">● Бонус до 27.5% (3 линии)</div>
           </div>
         </div>
         <span style="font-size: 11px; color: var(--primary); font-weight: 600;" data-i18n="doc_view">Открыть</span>
@@ -4905,9 +5065,9 @@
         <button class="modal-close" onclick="closeWithdrawModal()">&times;</button>
       </div>
 
-      <div style="background: rgba(16, 185, 129, 0.1); border-radius: 10px; padding: 10px; margin-bottom: 14px;">
+      <div style="background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 12px; padding: 12px; margin-bottom: 14px;">
         <span style="font-size: 11px; color: var(--text-dim); display: block;" data-i18n="modal_available_label">ДОСТУПНО НА ПАРТНЕРСКОМ СЧЕТЕ:</span>
-        <b style="font-family: 'JetBrains Mono'; font-size: 16px; color: var(--accent-green);" id="modal-avail-balance">$0.00 USDT</b>
+        <b style="font-family: 'JetBrains Mono'; font-size: 18px; color: #38bdf8; text-shadow: 0 0 10px rgba(56, 189, 248, 0.35);" id="modal-avail-balance">$0.00 USDT</b>
       </div>
 
       <div class="modal-input-group">
@@ -5039,8 +5199,9 @@
         btn_deposit: "Пополнить",
         partner_acc_label: "ПАРТНЕРСКИЙ СЧЕТ (РЕФЕРАЛ)",
         btn_withdraw: "Вывод",
-        shares_label: "СКОРОСТЬ ДОБЫЧИ",
-        valuation_label: "НАФАРМЛЕНО (PTS)",
+        shares_label: "СКОРОСТЬ",
+        valuation_label: "НАФАРМЛЕНО",
+        pts_hourly_unit: "PTS/ч",
         section_rounds: "Экосистема проектов",
         stage_label: "Стадия: Запуск пула",
         p1_ticker: "Целевой тикер: $MNX",
@@ -5075,12 +5236,12 @@
         sub_portfolio: "Активные бусты",
         title_partners: "Реферальная программа",
         upline_label: "Вас пригласил наставник:",
-        ref_desc: "Приглашайте друзей в проект и получайте 10% в USDT сразу на ваш баланс с каждого пополнения.",
+        ref_desc: "Приглашайте партнеров и получайте до 27.5% в USDT с каждого пополнения: 20% с 1-й линии, 5% со 2-й линии и 2.5% с 3-й линии.",
         btn_copy: "Копировать",
         btn_share_link: "Поделиться ссылкой",
         ref_invited_label: "ПРИГЛАШЕНО ПАРТНЕРОВ",
         ref_earnings_label: "ДОСТУПНО К ВЫВОДУ",
-        structure_title: "Ваша структура (1 линия)",
+        structure_title: "Ваша структура (3 линии)",
         structure_empty: "У вас пока нет прямых партнеров.",
         profile_accredited: "● Участник сообщества",
         prof_tg_id: "Telegram ID",
@@ -5088,7 +5249,7 @@
         docs_title: "Информация и правила",
         doc_safe_title: "Пользовательское соглашение",
         doc_signed: "● Принято при регистрации",
-        doc_signed_ref: "● Бонус 10% в USDT",
+        doc_signed_ref: "● Бонус до 27.5% (3 линии)",
         doc_view: "Открыть",
         doc_agent_title: "Реферальная программа",
         doc_ledger_title: "Whitepaper / Токеномика",
@@ -5124,8 +5285,9 @@
         btn_deposit: "Deposit",
         partner_acc_label: "PARTNER ACCOUNT (REFERRAL)",
         btn_withdraw: "Withdraw",
-        shares_label: "FARMING SPEED",
-        valuation_label: "FARMED (PTS)",
+        shares_label: "SPEED",
+        valuation_label: "FARMED",
+        pts_hourly_unit: "PTS/h",
         section_rounds: "Project Ecosystem",
         stage_label: "Stage: Pool Launch",
         p1_ticker: "Target Ticker: $MNX",
@@ -5160,12 +5322,12 @@
         sub_portfolio: "Active Boosts",
         title_partners: "Referral Program",
         upline_label: "You were invited by:",
-        ref_desc: "Invite friends to the project and get 10% in USDT directly to your balance from every deposit.",
+        ref_desc: "Invite partners and earn up to 27.5% in USDT from each deposit: 20% from tier 1, 5% from tier 2, and 2.5% from tier 3.",
         btn_copy: "Copy",
         btn_share_link: "Share Link",
         ref_invited_label: "INVITED PARTNERS",
         ref_earnings_label: "AVAILABLE TO WITHDRAW",
-        structure_title: "Your Structure (1st Line)",
+        structure_title: "Your Structure (3 Tiers)",
         structure_empty: "You have no direct partners yet.",
         profile_accredited: "● Community Member",
         prof_tg_id: "Telegram ID",
@@ -5173,7 +5335,7 @@
         docs_title: "Info & Rules",
         doc_safe_title: "User Agreement",
         doc_signed: "● Accepted upon signup",
-        doc_signed_ref: "● 10% bonus in USDT",
+        doc_signed_ref: "● Up to 27.5% bonus (3 tiers)",
         doc_view: "Open",
         doc_agent_title: "Referral Program",
         doc_ledger_title: "Whitepaper / Tokenomics",
@@ -5209,8 +5371,9 @@
         btn_deposit: "Déposer",
         partner_acc_label: "COMPTE PARTENAIRE (PARRAINAGE)",
         btn_withdraw: "Retrait",
-        shares_label: "VITESSE DE FARMING",
-        valuation_label: "FARMÉ (PTS)",
+        shares_label: "VITESSE",
+        valuation_label: "FARMÉ",
+        pts_hourly_unit: "PTS/h",
         section_rounds: "Écosystème de projets",
         stage_label: "Phase: Lancement du pool",
         p1_ticker: "Ticker cible: $MNX",
@@ -5245,12 +5408,12 @@
         sub_portfolio: "Boosts Actifs",
         title_partners: "Programme de Parrainage",
         upline_label: "Invité par:",
-        ref_desc: "Invitez des amis et recevez 10% en USDT directement sur votre solde à chaque dépôt.",
+        ref_desc: "Invitez des partenaires et gagnez jusqu'à 27.5% en USDT sur chaque dépôt : 20% au niveau 1, 5% au niveau 2 et 2.5% au niveau 3.",
         btn_copy: "Copier",
         btn_share_link: "Partager le lien",
         ref_invited_label: "PARTENAIRES INVITÉS",
         ref_earnings_label: "DISPONIBLE AU RETRAIT",
-        structure_title: "Votre Structure (Niveau 1)",
+        structure_title: "Votre Structure (3 Niveaux)",
         structure_empty: "Vous n'avez pas encore de partenaires directs.",
         profile_accredited: "● Membre de la communauté",
         prof_tg_id: "Identifiant Telegram",
@@ -5258,7 +5421,7 @@
         docs_title: "Info & Règles",
         doc_safe_title: "Conditions d'utilisation",
         doc_signed: "● Accepté lors de l'inscription",
-        doc_signed_ref: "● Bonus de 10% en USDT",
+        doc_signed_ref: "● Jusqu'à 27.5% de bonus (3 niveaux)",
         doc_view: "Ouvrir",
         doc_agent_title: "Programme de Parrainage",
         doc_ledger_title: "Whitepaper / Tokenomics",
@@ -5294,8 +5457,9 @@
         btn_deposit: "Nạp tiền",
         partner_acc_label: "TÀI KHOẢN ĐỐI TÁC (GIỚI THIỆU)",
         btn_withdraw: "Rút tiền",
-        shares_label: "TỐC ĐỘ ĐÀO",
-        valuation_label: "ĐÃ ĐÀO (PTS)",
+        shares_label: "TỐC ĐỘ",
+        valuation_label: "ĐÃ ĐÀO",
+        pts_hourly_unit: "PTS/h",
         section_rounds: "Hệ sinh thái dự án",
         stage_label: "Giai đoạn: Ra mắt pool",
         p1_ticker: "Mã dự kiến: $MNX",
@@ -5330,12 +5494,12 @@
         sub_portfolio: "Tăng tốc đang hoạt động",
         title_partners: "Chương trình giới thiệu",
         upline_label: "Người giới thiệu bạn:",
-        ref_desc: "Mời bạn bè tham gia dự án và nhận ngay 10% bằng USDT vào số dư từ mỗi lần nạp.",
+        ref_desc: "Mời đối tác và nhận tới 27.5% bằng USDT từ mỗi lần nạp: 20% tầng 1, 5% tầng 2 và 2.5% tầng 3.",
         btn_copy: "Sao chép",
         btn_share_link: "Chia sẻ liên kết",
         ref_invited_label: "ĐỐI TÁC ĐÃ MỜI",
         ref_earnings_label: "KHẢ DỤNG ĐỂ RÚT",
-        structure_title: "Hệ thống của bạn (Tầng 1)",
+        structure_title: "Hệ thống của bạn (3 Tầng)",
         structure_empty: "Bạn chưa có đối tác trực tiếp nào.",
         profile_accredited: "● Thành viên cộng đồng",
         prof_tg_id: "Telegram ID",
@@ -5343,7 +5507,7 @@
         docs_title: "Thông tin & Quy tắc",
         doc_safe_title: "Điều khoản sử dụng",
         doc_signed: "● Đã chấp nhận khi đăng ký",
-        doc_signed_ref: "● Thưởng 10% bằng USDT",
+        doc_signed_ref: "● Thưởng tới 27.5% (3 tầng)",
         doc_view: "Mở",
         doc_agent_title: "Chương trình giới thiệu",
         doc_ledger_title: "Whitepaper / Tokenomics",
@@ -5462,7 +5626,7 @@
           title: "Реферальная программа",
           content: `<b>СТАТЬЯ 1. УСЛОВИЯ ПАРТНЕРСКОГО ВОЗНАГРАЖДЕНИЯ</b><br><br>
 1.1. Каждый верифицированный Пользователь имеет право принимать участие в партнерской программе EquiCore посредством распространения своей уникальной реферальной ссылки вида t.me/EquiCoreBot?startapp=ref_ID.<br><br>
-1.2. Партнерское вознаграждение составляет фиксированные 10% от суммы каждого прямого пополнения баланса пользователями 1-й линии (прямые рефералы). Начисление производится моментально в расчетных единицах USDT на специальный «Партнерский счет».<br><br>
+1.2. Партнерское вознаграждение начисляется по трехуровневой шкале от суммы каждого пополнения баланса в структуре: 1-я линия (прямые рефералы) — 20%, 2-я линия — 5%, 3-я линия — 2.5%. Начисление производится моментально в USDT на «Партнерский счет».<br><br>
 <b>СТАТЬЯ 2. РЕГЛАМЕНТ И УСЛОВИЯ ВЫВОДА СРЕДСТВ</b><br><br>
 2.1. Вывод средств с партнерского счета осуществляется в цифровых активах USDT стандарта TRC20 или TON.<br><br>
 2.2. Минимальный порог для формирования заявки на вывод составляет 5.00 USDT.<br><br>
@@ -5478,7 +5642,7 @@
           title: "Referral Program",
           content: `<b>ARTICLE 1. CONDITIONS OF PARTNER REWARD</b><br><br>
 1.1. Every verified User has the right to participate in the EquiCore affiliate program by distributing their unique referral link format t.me/EquiCoreBot?startapp=ref_ID.<br><br>
-1.2. The partner reward is a fixed 10% of the amount of each direct balance deposit made by 1st line users (direct referrals). Rewards are credited instantly in USDT units to a dedicated "Partner Account".<br><br>
+1.2. Partner rewards are credited on a 3-tier scale from each deposit in the structure: Tier 1 (direct referrals) — 20%, Tier 2 — 5%, Tier 3 — 2.5%. Rewards are credited instantly in USDT to the dedicated "Partner Account".<br><br>
 <b>ARTICLE 2. WITHDRAWAL REGULATIONS AND TERMS</b><br><br>
 2.1. Withdrawal of funds from the partner account is carried out in USDT digital assets of TRC20 or TON standard.<br><br>
 2.2. The minimum threshold for submitting a withdrawal request is 5.00 USDT.<br><br>
@@ -5494,7 +5658,7 @@
           title: "Programme de Parrainage",
           content: `<b>ARTICLE 1. CONDITIONS DE LA COMMISSION PARTENAIRE</b><br><br>
 1.1. Tout Utilisateur vérifié a le droit de participer au programme d'affiliation EquiCore en partageant son lien de parrainage unique sous la forme t.me/EquiCoreBot?startapp=ref_ID.<br><br>
-1.2. La récompense partenaire est fixée à 10% du montant de chaque recharge directe effectuée par les filleuls de 1er niveau. Le versement est instantané en USDT sur un « Compte Partenaire » dédié.<br><br>
+1.2. La récompense partenaire est calculée sur 3 niveaux sur chaque recharge : 1er niveau (filleuls directs) — 20%, 2ème niveau — 5%, 3ème niveau — 2.5%. Le versement est instantané en USDT sur le « Compte Partenaire ».<br><br>
 <b>ARTICLE 2. RÈGLEMENT ET MODALITÉS DE RETRAIT</b><br><br>
 2.1. Les retraits du compte partenaire s'effectuent en actifs numériques USDT aux normes TRC20 ou TON.<br><br>
 2.2. Le seuil minimum de demande de retrait est de 5.00 USDT.<br><br>
@@ -5510,7 +5674,7 @@
           title: "Chương trình giới thiệu",
           content: `<b>ĐIỀU 1. ĐIỀU KIỆN NHẬN THƯỞNG ĐỐI TÁC</b><br><br>
 1.1. Mọi Người dùng đã xác minh đều có quyền tham gia chương trình đối tác EquiCore bằng cách chia sẻ liên kết giới thiệu độc quyền dạng t.me/EquiCoreBot?startapp=ref_ID.<br><br>
-1.2. Phần thưởng đối tác cố định là 10% trên mỗi khoản nạp trực tiếp của người dùng tầng 1 (F1). Tiền thưởng được cộng tức thì bằng đơn vị USDT vào "Tài khoản đối tác".<br><br>
+1.2. Phần thưởng đối tác được tính theo hệ thống 3 tầng từ mỗi khoản nạp trong mạng lưới: Tầng 1 (trực tiếp) — 20%, Tầng 2 — 5%, Tầng 3 — 2.5%. Tiền thưởng được cộng tức thì bằng USDT vào "Tài khoản đối tác".<br><br>
 <b>ĐIỀU 2. QUY ĐỊNH VÀ ĐIỀU KIỆN RÚT TIỀN</b><br><br>
 2.1. Việc rút tiền từ tài khoản đối tác được thực hiện bằng tài sản kỹ thuật số USDT theo tiêu chuẩn TRC20 hoặc TON.<br><br>
 2.2. Hạn mức tối thiểu cho mỗi yêu cầu rút tiền là 5.00 USDT.<br><br>
@@ -5783,13 +5947,24 @@
 
             if (!regErr && newUser) {
               user = newUser;
-              let initialBalance = resolvedReferrerId ? 25.00 : 0.00;
+              let initialBalance = resolvedReferrerId ? 25.00 : 5.00;
               await supabaseClient.from('accounts').insert([{
                 user_id: user.id,
                 invest_balance: initialBalance,
                 partner_balance: 0.00,
                 bonus_balance: initialBalance
               }]);
+
+              let inviterDisplay = "Прямая регистрация";
+              if (resolvedReferrerId && inviterTgId) {
+                let { data: inviterUser } = await supabaseClient.from('users').select('first_name, username').eq('id', resolvedReferrerId).maybeSingle();
+                if (inviterUser) {
+                  inviterDisplay = inviterUser.username ? `${inviterUser.first_name} (${inviterUser.username})` : inviterUser.first_name;
+                }
+              }
+
+              // Запуск приветственного окна
+              openWelcomeModal(initialBalance, inviterDisplay);
             }
           }
 
@@ -5843,12 +6018,41 @@
               });
             }
 
-            const { data: referrals } = await supabaseClient.from('users').select('first_name, username, created_at').eq('referrer_id', dbUserId);
-            if (referrals) {
-              myReferrals.length = 0;
-              referrals.forEach(r => myReferrals.push(r));
-              refCount = myReferrals.length;
+            myReferrals.length = 0;
+
+            // Линия 1
+            const { data: l1 } = await supabaseClient
+              .from('users')
+              .select('id, first_name, username, created_at')
+              .eq('referrer_id', dbUserId);
+
+            if (l1 && l1.length > 0) {
+              l1.forEach(u => myReferrals.push({ ...u, level: 1 }));
+              const l1Ids = l1.map(u => u.id);
+
+              // Линия 2
+              const { data: l2 } = await supabaseClient
+                .from('users')
+                .select('id, first_name, username, created_at')
+                .in('referrer_id', l1Ids);
+
+              if (l2 && l2.length > 0) {
+                l2.forEach(u => myReferrals.push({ ...u, level: 2 }));
+                const l2Ids = l2.map(u => u.id);
+
+                // Линия 3
+                const { data: l3 } = await supabaseClient
+                  .from('users')
+                  .select('id, first_name, username, created_at')
+                  .in('referrer_id', l2Ids);
+
+                if (l3 && l3.length > 0) {
+                  l3.forEach(u => myReferrals.push({ ...u, level: 3 }));
+                }
+              }
             }
+
+            refCount = myReferrals.length;
           }
         } catch (err) {
           console.warn("Supabase load error:", err);
@@ -5885,7 +6089,7 @@
           hourlyRate += Math.floor((item.invested || 0) * 0.8);
         });
       }
-      safeSetText('total-farm-rate', `+${hourlyRate} PTS/ч`);
+      safeSetText('total-farm-rate', `+${hourlyRate}`);
 
       if (window.totalPts === undefined || isNaN(window.totalPts)) window.totalPts = 0;
       const ptsElement = safeGet('total-farmed-pts');
@@ -7109,6 +7313,8 @@
     let currentOnlineRoundId = null;
     let serverRoundStartTime = 0;
     let myCurrentBetRecordId = null;
+    let rocketLocalFlightStart = 0;
+    let serverClockOffset = 0;
 
     // Инициализация онлайн-подключения
     async function initRocketGame() {
@@ -7137,9 +7343,11 @@
           return;
         }
 
+        const estimatedServerNow = Date.now() - serverClockOffset;
+
         if (data.status === 'waiting') {
           const targetStartTime = data.start_time ? new Date(data.start_time).getTime() : (new Date(data.created_at).getTime() + 8000);
-          const remainingMs = targetStartTime - Date.now();
+          const remainingMs = targetStartTime - estimatedServerNow;
           if (remainingMs > 400) {
             onServerRoundWaiting({
               roundId: data.id,
@@ -7149,12 +7357,13 @@
           }
         } else if (data.status === 'flying') {
           const startTimeMs = data.start_time ? new Date(data.start_time).getTime() : new Date(data.created_at).getTime();
-          const elapsed = (Date.now() - startTimeMs) / 1000;
+          const elapsed = Math.max(0, (estimatedServerNow - startTimeMs) / 1000);
           // Если полёт идёт в допустимом временном окне
           if (elapsed >= 0 && elapsed < 25) {
             onServerRoundFlying({
               roundId: data.id,
-              startTime: startTimeMs
+              startTime: startTimeMs,
+              elapsedAlready: elapsed
             }, true); // isLateJoin = true
           }
         } else if (data.status === 'crashed') {
@@ -7435,6 +7644,9 @@
 
     // ФАЗА 1: Ожидание ставок (получено от сервера)
     function onServerRoundWaiting(payload) {
+      if (payload.serverTime) {
+        serverClockOffset = Date.now() - payload.serverTime;
+      }
       currentOnlineRoundId = payload.roundId || payload.round_id;
       rocketPhase = 'waiting';
       rocketMultiplier = 1.00;
@@ -7495,6 +7707,10 @@
 
     // ФАЗА 2: Синхронный полёт
     function onServerRoundFlying(payload, isLateJoin = false) {
+      if (payload.serverTime) {
+        serverClockOffset = Date.now() - payload.serverTime;
+      }
+
       if (rocketWaitTimer) {
         clearInterval(rocketWaitTimer);
         rocketWaitTimer = null;
@@ -7510,9 +7726,13 @@
       serverRoundStartTime = payload.startTime || (payload.start_time ? new Date(payload.start_time).getTime() : Date.now());
 
       if (isLateJoin) {
+        const alreadySec = payload.elapsedAlready || 0;
+        rocketLocalFlightStart = performance.now() - (alreadySec * 1000);
         rocketHasUserBet = false;
         rocketUserCashedOut = false;
         myCurrentBetRecordId = null;
+      } else {
+        rocketLocalFlightStart = performance.now();
       }
 
       const countdownBox = safeGet('rocket-countdown-box');
@@ -7539,8 +7759,7 @@
       function flightLoop() {
         if (rocketPhase !== 'flying') return;
 
-        // ВРЕМЯ РАССЧИТЫВАЕТСЯ ОТ ЕДИНОЙ СЕРВЕРНОЙ МЕТКИ
-        const elapsed = Math.max(0, (Date.now() - serverRoundStartTime) / 1000);
+        const elapsed = Math.max(0, (performance.now() - rocketLocalFlightStart) / 1000);
         rocketMultiplier = parseFloat(Math.exp(elapsed / 4.8).toFixed(2));
 
         safeSetText('rocket-mult-number', `${rocketMultiplier.toFixed(2)}x`);
@@ -7815,155 +8034,125 @@
     // Полная база всех 32 подарков с балансировкой под USDT и PTS
     const ROULETTE_CONFIG = {
       // ==========================================
-      // РЕЖИМ ОЧКАМИ PTS (★)
+      // РЕЖИМ PTS (★) — RTP ~94%
       // ==========================================
       pts: {
-        // 0: Бесплатный ежедневный прокрут (обычные и приятные подарки)
-        0: {
+        0: { // Бесплатный ежедневный
           cost: 0,
           label: 'Бесплатно',
           badge: '',
           items: [
-            { name: 'Леденец', img: 'assets/LolPop.webp', val: 80, weight: 30 },
-            { name: 'Эскимо', img: 'assets/IceCream.webp', val: 120, weight: 25 },
-            { name: 'Трость', img: 'assets/CandyCane.webp', val: 150, weight: 20 },
-            { name: 'Персик', img: 'assets/PreciousPeach.webp', val: 200, weight: 14 },
-            { name: 'Бубенчик', img: 'assets/SleighBell.webp', val: 250, weight: 6 },
-            { name: 'Банка сердец', img: 'assets/RestlessJar.webp', val: 350, weight: 3 },
-            { name: 'Духи', img: 'assets/PerfumeBottle.webp', val: 500, weight: 1.4 },
-            { name: 'Цилиндр', img: 'assets/TopHat.webp', val: 800, weight: 0.5 },
-            { name: 'Кристалл', img: 'assets/IonGem.webp', val: 1500, weight: 0.09 },
-            { name: 'Кепка Дурова', img: 'assets/DurovsCap.webp', val: 10000, weight: 0.01 }
+            { name: 'Леденец', img: 'assets/LolPop.webp', val: 50, weight: 40 },
+            { name: 'Эскимо', img: 'assets/IceCream.webp', val: 80, weight: 30 },
+            { name: 'Трость', img: 'assets/CandyCane.webp', val: 120, weight: 18 },
+            { name: 'Персик', img: 'assets/PreciousPeach.webp', val: 200, weight: 8 },
+            { name: 'Бубенчик', img: 'assets/SleighBell.webp', val: 350, weight: 3 },
+            { name: 'Цилиндр', img: 'assets/TopHat.webp', val: 800, weight: 0.9 },
+            { name: 'Кепка Дурова', img: 'assets/DurovsCap.webp', val: 5000, weight: 0.1 }
           ]
         },
-        // 1: x3 шанс (Ставка 150 ★)
-        1: {
+        1: { // Ставка 150 ★ (EV: 141 ★, RTP: 94%)
           cost: 150,
           label: '150 ★',
           badge: '×3 шанс',
           items: [
-            { name: 'Бубенчик', img: 'assets/SleighBell.webp', val: 100, weight: 24 },
-            { name: 'Банка сердец', img: 'assets/RestlessJar.webp', val: 180, weight: 30 },
-            { name: 'Сигара', img: 'assets/SnoopCigar.webp', val: 250, weight: 20 },
-            { name: 'Свеча', img: 'assets/EternalCandle.webp', val: 350, weight: 13 },
-            { name: 'Цилиндр', img: 'assets/TopHat.webp', val: 450, weight: 7 },
-            { name: 'Золотая соска', img: 'assets/BlingBinky.webp', val: 700, weight: 3.5 },
-            { name: 'Сумка', img: 'assets/LootBag.webp', val: 1200, weight: 1.8 },
-            { name: 'Обезьянка', img: 'assets/JollyChimp.webp', val: 2000, weight: 0.6 },
-            { name: 'Кепка Дурова', img: 'assets/DurovsCap.webp', val: 15000, weight: 0.1 }
+            { name: 'Бубенчик', img: 'assets/SleighBell.webp', val: 50, weight: 45 },   // -66%
+            { name: 'Банка сердец', img: 'assets/RestlessJar.webp', val: 90, weight: 30 }, // -40%
+            { name: 'Сигара', img: 'assets/SnoopCigar.webp', val: 200, weight: 14 },     // +33%
+            { name: 'Свеча', img: 'assets/EternalCandle.webp', val: 350, weight: 7 },    // x2.3
+            { name: 'Цилиндр', img: 'assets/TopHat.webp', val: 600, weight: 3 },        // x4.0
+            { name: 'Золотая соска', img: 'assets/BlingBinky.webp', val: 1200, weight: 0.8 }, // x8.0
+            { name: 'Кепка Дурова', img: 'assets/DurovsCap.webp', val: 5000, weight: 0.2 }  // Джекпот
           ]
         },
-        // 2: x15 шанс (Ставка 1 000 ★)
-        2: {
+        2: { // Ставка 1 000 ★ (EV: 938 ★, RTP: 93.8%)
           cost: 1000,
           label: '1000 ★',
           badge: '×15 шанс',
           items: [
-            { name: 'Свеча', img: 'assets/EternalCandle.webp', val: 500, weight: 18 },
-            { name: 'Фен', img: 'assets/IonicDryer.webp', val: 800, weight: 26 },
-            { name: 'Ягоды', img: 'assets/BerryBox.webp', val: 1200, weight: 24 },
-            { name: 'Кольцо', img: 'assets/DiamondRing.webp', val: 1800, weight: 15 },
-            { name: 'Перстень', img: 'assets/GemSignet.webp', val: 2500, weight: 9 },
-            { name: 'Световой меч', img: 'assets/LightSword.webp', val: 3500, weight: 5 },
-            { name: 'Шлем героя', img: 'assets/HeroicHelmet.webp', val: 5000, weight: 2 },
-            { name: 'Лампа джинна', img: 'assets/GenieLamp.webp', val: 8000, weight: 0.8 },
+            { name: 'Свеча', img: 'assets/EternalCandle.webp', val: 350, weight: 45 },
+            { name: 'Фен', img: 'assets/IonicDryer.webp', val: 650, weight: 30 },
+            { name: 'Ягоды', img: 'assets/BerryBox.webp', val: 1400, weight: 14 },
+            { name: 'Кольцо', img: 'assets/DiamondRing.webp', val: 2500, weight: 7 },
+            { name: 'Перстень', img: 'assets/GemSignet.webp', val: 4000, weight: 3 },
+            { name: 'Шлем героя', img: 'assets/HeroicHelmet.webp', val: 8000, weight: 0.8 },
             { name: 'Кепка Дурова', img: 'assets/DurovsCap.webp', val: 25000, weight: 0.2 }
           ]
         },
-        // 3: x50 шанс (Ставка 5 000 ★ — Эксклюзивы и VIP)
-        3: {
+        3: { // Ставка 5 000 ★ (EV: 4 720 ★, RTP: 94.4%)
           cost: 5000,
           label: '5000 ★',
           badge: '×50 шанс',
           items: [
-            { name: 'Испуганный кот', img: 'assets/ScaredCat.webp', val: 2500, weight: 16 },
-            { name: 'Браслет', img: 'assets/NailBracelet.webp', val: 4000, weight: 24 },
-            { name: 'Сёрфборд', img: 'assets/SurgeBoard.webp', val: 6500, weight: 24 },
-            { name: 'Снежный шар', img: 'assets/SnowGlobe.webp', val: 9000, weight: 16 },
-            { name: 'Лунный кулон', img: 'assets/MoonPendant.webp', val: 13000, weight: 10 },
-            { name: 'Мини-Оскар', img: 'assets/MiniOscar.webp', val: 18000, weight: 5.5 },
-            { name: 'Золотой бицепс', img: 'assets/MightyArm.webp', val: 25000, weight: 2.5 },
-            { name: 'Магический шар', img: 'assets/CrystalBall.webp', val: 35000, weight: 1.2 },
-            { name: 'Осколок звезд', img: 'assets/AstralShard.webp', val: 50000, weight: 0.5 },
-            { name: 'Westside Sign', img: 'assets/WestsideSign.webp', val: 75000, weight: 0.25 },
-            { name: 'Кепка Дурова', img: 'assets/DurovsCap.webp', val: 100000, weight: 0.05 }
+            { name: 'Испуганный кот', img: 'assets/ScaredCat.webp', val: 1800, weight: 45 },
+            { name: 'Браслет', img: 'assets/NailBracelet.webp', val: 3200, weight: 30 },
+            { name: 'Сёрфборд', img: 'assets/SurgeBoard.webp', val: 7500, weight: 14 },
+            { name: 'Снежный шар', img: 'assets/SnowGlobe.webp', val: 12000, weight: 7 },
+            { name: 'Мини-Оскар', img: 'assets/MiniOscar.webp', val: 22000, weight: 3 },
+            { name: 'Осколок звезд', img: 'assets/AstralShard.webp', val: 45000, weight: 0.8 },
+            { name: 'Кепка Дурова', img: 'assets/DurovsCap.webp', val: 100000, weight: 0.2 }
           ]
         }
       },
 
       // ==========================================
-      // РЕЖИМ USDT ($)
+      // РЕЖИМ USDT ($) — RTP ~94%
       // ==========================================
       usdt: {
-        // 0: Бесплатный ежедневный прокрут
-        0: {
+        0: { // Бесплатный ежедневный
           cost: 0,
           label: 'Бесплатно',
           badge: '',
           items: [
-            { name: 'Леденец', img: 'assets/LolPop.webp', val: 0.05, weight: 30 },
-            { name: 'Эскимо', img: 'assets/IceCream.webp', val: 0.08, weight: 25 },
-            { name: 'Трость', img: 'assets/CandyCane.webp', val: 0.10, weight: 20 },
-            { name: 'Персик', img: 'assets/PreciousPeach.webp', val: 0.15, weight: 14 },
-            { name: 'Бубенчик', img: 'assets/SleighBell.webp', val: 0.25, weight: 6 },
-            { name: 'Банка сердец', img: 'assets/RestlessJar.webp', val: 0.50, weight: 3 },
-            { name: 'Духи', img: 'assets/PerfumeBottle.webp', val: 0.80, weight: 1.4 },
-            { name: 'Цилиндр', img: 'assets/TopHat.webp', val: 1.50, weight: 0.5 },
-            { name: 'Кристалл', img: 'assets/IonGem.webp', val: 3.00, weight: 0.09 },
-            { name: 'Кепка Дурова', img: 'assets/DurovsCap.webp', val: 25.00, weight: 0.01 }
+            { name: 'Леденец', img: 'assets/LolPop.webp', val: 0.02, weight: 45 },
+            { name: 'Эскимо', img: 'assets/IceCream.webp', val: 0.05, weight: 30 },
+            { name: 'Трость', img: 'assets/CandyCane.webp', val: 0.10, weight: 16 },
+            { name: 'Персик', img: 'assets/PreciousPeach.webp', val: 0.25, weight: 6 },
+            { name: 'Банка сердец', img: 'assets/RestlessJar.webp', val: 0.50, weight: 2.5 },
+            { name: 'Цилиндр', img: 'assets/TopHat.webp', val: 1.00, weight: 0.45 },
+            { name: 'Кепка Дурова', img: 'assets/DurovsCap.webp', val: 10.00, weight: 0.05 }
           ]
         },
-        // 1: x3 шанс (Ставка $0.50)
-        1: {
+        1: { // Ставка $0.50 (EV: $0.468, RTP: 93.6%)
           cost: 0.50,
           label: '$0.50',
           badge: '×3 шанс',
           items: [
-            { name: 'Бубенчик', img: 'assets/SleighBell.webp', val: 0.30, weight: 24 },
-            { name: 'Банка сердец', img: 'assets/RestlessJar.webp', val: 0.60, weight: 30 },
-            { name: 'Сигара', img: 'assets/SnoopCigar.webp', val: 0.85, weight: 20 },
-            { name: 'Свеча', img: 'assets/EternalCandle.webp', val: 1.20, weight: 13 },
-            { name: 'Цилиндр', img: 'assets/TopHat.webp', val: 1.80, weight: 7 },
-            { name: 'Золотая соска', img: 'assets/BlingBinky.webp', val: 2.50, weight: 3.5 },
-            { name: 'Сумка', img: 'assets/LootBag.webp', val: 4.50, weight: 1.8 },
-            { name: 'Обезьянка', img: 'assets/JollyChimp.webp', val: 8.00, weight: 0.6 },
-            { name: 'Кепка Дурова', img: 'assets/DurovsCap.webp', val: 50.00, weight: 0.1 }
+            { name: 'Бубенчик', img: 'assets/SleighBell.webp', val: 0.15, weight: 46 },       // Утешительный (-70%)
+            { name: 'Банка сердец', img: 'assets/RestlessJar.webp', val: 0.30, weight: 30 }, // Утешительный (-40%)
+            { name: 'Сигара', img: 'assets/SnoopCigar.webp', val: 0.70, weight: 14 },         // Выигрыш (+40%)
+            { name: 'Свеча', img: 'assets/EternalCandle.webp', val: 1.20, weight: 6.5 },     // Выигрыш (x2.4)
+            { name: 'Цилиндр', img: 'assets/TopHat.webp', val: 2.50, weight: 2.5 },         // Выигрыш (x5.0)
+            { name: 'Золотая соска', img: 'assets/BlingBinky.webp', val: 5.00, weight: 0.8 }, // x10
+            { name: 'Кепка Дурова', img: 'assets/DurovsCap.webp', val: 25.00, weight: 0.2 }  // x50
           ]
         },
-        // 2: x15 шанс (Ставка $2.00)
-        2: {
+        2: { // Ставка $2.00 (EV: $1.88, RTP: 94.0%)
           cost: 2.00,
           label: '$2.00',
           badge: '×15 шанс',
           items: [
-            { name: 'Свеча', img: 'assets/EternalCandle.webp', val: 1.00, weight: 18 },
-            { name: 'Фен', img: 'assets/IonicDryer.webp', val: 1.60, weight: 26 },
-            { name: 'Ягоды', img: 'assets/BerryBox.webp', val: 2.50, weight: 24 },
-            { name: 'Кольцо', img: 'assets/DiamondRing.webp', val: 3.80, weight: 15 },
-            { name: 'Перстень', img: 'assets/GemSignet.webp', val: 5.50, weight: 9 },
-            { name: 'Световой меч', img: 'assets/LightSword.webp', val: 8.00, weight: 5 },
-            { name: 'Шлем героя', img: 'assets/HeroicHelmet.webp', val: 12.00, weight: 2 },
-            { name: 'Лампа джинна', img: 'assets/GenieLamp.webp', val: 20.00, weight: 0.8 },
+            { name: 'Свеча', img: 'assets/EternalCandle.webp', val: 0.60, weight: 46 },
+            { name: 'Фен', img: 'assets/IonicDryer.webp', val: 1.20, weight: 30 },
+            { name: 'Ягоды', img: 'assets/BerryBox.webp', val: 2.80, weight: 14 },
+            { name: 'Кольцо', img: 'assets/DiamondRing.webp', val: 5.00, weight: 6.5 },
+            { name: 'Перстень', img: 'assets/GemSignet.webp', val: 10.00, weight: 2.5 },
+            { name: 'Шлем героя', img: 'assets/HeroicHelmet.webp', val: 20.00, weight: 0.8 },
             { name: 'Кепка Дурова', img: 'assets/DurovsCap.webp', val: 75.00, weight: 0.2 }
           ]
         },
-        // 3: x50 шанс (Ставка $10.00 — VIP пулы)
-        3: {
+        3: { // Ставка $10.00 (EV: $9.43, RTP: 94.3%)
           cost: 10.00,
           label: '$10.00',
           badge: '×50 шанс',
           items: [
-            { name: 'Испуганный кот', img: 'assets/ScaredCat.webp', val: 5.00, weight: 16 },
-            { name: 'Браслет', img: 'assets/NailBracelet.webp', val: 8.50, weight: 24 },
-            { name: 'Сёрфборд', img: 'assets/SurgeBoard.webp', val: 14.00, weight: 24 },
-            { name: 'Снежный шар', img: 'assets/SnowGlobe.webp', val: 20.00, weight: 16 },
-            { name: 'Лунный кулон', img: 'assets/MoonPendant.webp', val: 30.00, weight: 10 },
-            { name: 'Мини-Оскар', img: 'assets/MiniOscar.webp', val: 45.00, weight: 5.5 },
-            { name: 'Золотой бицепс', img: 'assets/MightyArm.webp', val: 70.00, weight: 2.5 },
-            { name: 'Магический шар', img: 'assets/CrystalBall.webp', val: 100.00, weight: 1.2 },
-            { name: 'Осколок звезд', img: 'assets/AstralShard.webp', val: 160.00, weight: 0.5 },
-            { name: 'Westside Sign', img: 'assets/WestsideSign.webp', val: 250.00, weight: 0.25 },
-            { name: 'Кепка Дурова', img: 'assets/DurovsCap.webp', val: 400.00, weight: 0.05 }
+            { name: 'Испуганный кот', img: 'assets/ScaredCat.webp', val: 3.50, weight: 46 },
+            { name: 'Браслет', img: 'assets/NailBracelet.webp', val: 6.50, weight: 30 },
+            { name: 'Сёрфборд', img: 'assets/SurgeBoard.webp', val: 15.00, weight: 14 },
+            { name: 'Снежный шар', img: 'assets/SnowGlobe.webp', val: 25.00, weight: 6.5 },
+            { name: 'Мини-Оскар', img: 'assets/MiniOscar.webp', val: 50.00, weight: 2.5 },
+            { name: 'Осколок звезд', img: 'assets/AstralShard.webp', val: 100.00, weight: 0.8 },
+            { name: 'Кепка Дурова', img: 'assets/DurovsCap.webp', val: 300.00, weight: 0.2 }
           ]
         }
       }
@@ -8136,6 +8325,7 @@
       const currentTier = ROULETTE_CONFIG[rouletteCurrency][rouletteMode];
       const cost = currentTier.cost;
 
+      // 1. Проверка и списание баланса
       if (rouletteMode === 0) {
         if (rouletteFreeClaimed) {
           alert("Бесплатный спин уже использован сегодня!");
@@ -8168,7 +8358,7 @@
       const spinBtn = safeGet('roulette-spin-btn');
       if (spinBtn) spinBtn.disabled = true;
 
-      // Выбор приза по весам
+      // 2. ЧЕСТНЫЙ МАТЕМАТИЧЕСКИЙ RNG ВЫБОР ПРИЗА ПО ВЕСАМ
       const pool = currentTier.items;
       const totalWeight = pool.reduce((acc, it) => acc + it.weight, 0);
       let r = Math.random() * totalWeight;
@@ -8184,18 +8374,58 @@
 
       const chosenItem = pool[targetIndex];
 
-      // Точная центровка выбранного предмета
-      const stopIndex = (5 * pool.length) + targetIndex;
+      // 3. ДИНАМИЧЕСКАЯ ГЕНЕРАЦИЯ ЛЕНТЫ (Анти-абуз)
+      // Приз всегда монтируется на 45-й слот, а все остальные слоты заполняются случайными предметами
+      const tape = safeGet('roulette-reel-tape');
+      if (!tape) return;
+
+      tape.innerHTML = '';
+      const winSlotIndex = 45; // Целевой слот глубоко по ходу движения
+      const totalSlots = 65;
+
+      for (let i = 0; i < totalSlots; i++) {
+        let item;
+        if (i === winSlotIndex) {
+          item = chosenItem; // Строго выигрышный предмет на 45 слоте
+        } else {
+          // Случайный предмет из пула для создания иллюзии барабана
+          const randIdx = Math.floor(Math.random() * pool.length);
+          item = pool[randIdx];
+        }
+
+        const card = document.createElement('div');
+        card.className = 'roulette-gift-card';
+        card.id = `r-card-${i}`;
+
+        const priceLabel = isUsdt
+          ? `<span class="star-gold">$</span><span class="num-white">${item.val.toFixed(2)}</span>`
+          : `<span class="star-gold">★</span><span class="num-white">${item.val.toLocaleString()}</span>`;
+
+        card.innerHTML = `
+          <img src="${item.img}" alt="${item.name}">
+          <div class="roulette-gift-val">
+            ${priceLabel}
+          </div>
+        `;
+        tape.appendChild(card);
+      }
+
+      // 4. Мгновенный сброс ленты в нулевую точку перед рывком
+      tape.style.transition = 'none';
+      tape.style.transform = 'translateX(0px)';
+      rouletteCurrentX = 0;
+      void tape.offsetWidth; // Принудительный reflow для браузера
+
+      // 5. Расчет координат остановки со случайным смещением (Jitter +/- 18px)
       const viewport = safeGet('roulette-viewport');
       const vpWidth = viewport ? viewport.offsetWidth : 350;
-      const cardCenterOffset = (stopIndex * ROULETTE_CARD_WIDTH) + 49;
-      const finalX = (vpWidth / 2) - cardCenterOffset;
+      const jitter = Math.floor(Math.random() * 37) - 18; // Случайный сдвиг от -18px до +18px
+      const cardCenterOffset = (winSlotIndex * ROULETTE_CARD_WIDTH) + 49;
+      const finalX = (vpWidth / 2) - cardCenterOffset + jitter;
 
-      const tape = safeGet('roulette-reel-tape');
-      if (tape) {
-        tape.style.transition = 'transform 4.6s cubic-bezier(0.12, 0.95, 0.2, 1)';
-        tape.style.transform = `translateX(${finalX}px)`;
-      }
+      // 6. Запуск анимации прокрутки через 45 слотов
+      tape.style.transition = 'transform 4.5s cubic-bezier(0.12, 0.95, 0.2, 1)';
+      tape.style.transform = `translateX(${finalX}px)`;
 
       let tick = 0;
       const spinInterval = setInterval(() => {
@@ -8204,6 +8434,7 @@
         if (tick >= 14) clearInterval(spinInterval);
       }, 260);
 
+      // 7. Остановка и фиксация победы
       setTimeout(() => {
         clearInterval(spinInterval);
 
@@ -8220,10 +8451,9 @@
         if (winFrame) winFrame.classList.add('is-winning');
         if (tape) tape.classList.add('has-winner');
 
-        const winningCard = safeGet(`r-card-${stopIndex}`);
+        const winningCard = safeGet(`r-card-${winSlotIndex}`);
         if (winningCard) winningCard.classList.add('is-winner');
 
-        // Расчёт профита
         const netProfit = isUsdt ? parseFloat((chosenItem.val - cost).toFixed(2)) : (chosenItem.val - cost);
         const isFree = (cost === 0);
 
@@ -8244,7 +8474,6 @@
           if (winBanner) winBanner.className = 'roulette-win-banner status-loss active';
         }
 
-        // Зачисление выигрыша
         if (isUsdt) {
           balance += chosenItem.val;
         } else {
@@ -8257,6 +8486,7 @@
           else tg.HapticFeedback.notificationOccurred('warning');
         }
 
+        // Синхронизация с Supabase
         if (supabaseClient && dbUserId) {
           if (isUsdt) {
             supabaseClient.from('accounts').update({ invest_balance: balance }).eq('user_id', dbUserId).then();
@@ -8279,17 +8509,18 @@
           }
         }
 
+        // 8. Перезапуск после победы
         setTimeout(() => {
           resetRouletteWinScene();
           isRouletteSpinning = false;
           if (spinBtn) spinBtn.disabled = false;
 
-          rouletteCurrentX = finalX;
+          rouletteCurrentX = 0;
+          populateRouletteTape();
           startRouletteIdleScroll();
-          setRouletteMode(rouletteMode);
         }, 2800);
 
-      }, 4600);
+      }, 4500);
     }
 
     function resetRouletteWinScene() {
@@ -9489,13 +9720,13 @@
         return `
         <div class="project-card" style="margin-bottom: 14px; border-color: rgba(56, 189, 248, 0.25); background: linear-gradient(160deg, rgba(30,41,59,0.6) 0%, rgba(15,23,42,0.9) 100%);">
           <div class="project-top" style="align-items: center;">
-            <div><b style="font-size: 16px; color: #fff; display: flex; align-items: center; gap: 6px;">${item.project} <span style="background: rgba(56, 189, 248, 0.15); color: var(--primary); font-size: 10px; padding: 2px 6px; border-radius: 6px;">LVL ${level}</span></b>
+            <div><b style="font-size: 16px; color: #fff; display: flex; align-items: center; gap: 6px;">${item.project} <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-size: 10px; padding: 2px 6px; border-radius: 6px; border: 1px solid rgba(56, 189, 248, 0.3);">LVL ${level}</span></b>
             <div style="font-size: 11px; color: var(--text-dim); margin-top: 4px;">NFT ID: ${item.certId}</div></div>
             <div><span class="project-tag" style="background: rgba(16, 185, 129, 0.12); color: var(--accent-green); border: 1px solid rgba(16,185,129,0.3);">ACTIVE</span></div>
           </div>
           <div class="equity-specs" style="margin-top: 14px; margin-bottom: 0; background: rgba(0, 0, 0, 0.4);">
             <div class="equity-col"><span>${spentLabel}</span><b style="color: #fff;">${item.invested} USDT</b></div>
-            <div class="equity-col"><span>${farmLabel}</span><b style="color: var(--primary);">+${farmRate} PTS/ч</b></div>
+            <div class="equity-col"><span>${farmLabel}</span><b style="color: #38bdf8;">+${farmRate} PTS/ч</b></div>
             <div class="equity-col"><span>${statusLabel}</span><b style="color: var(--accent-gold);">${farmingBadge}</b></div>
           </div>
         </div>`;
@@ -9505,15 +9736,39 @@
     function renderReferrals() {
       const container = safeGet('referrals-list');
       if (!container) return;
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
+
       if (myReferrals.length === 0) {
-        container.innerHTML = `<div style="text-align: center; padding: 20px; color: var(--text-dim); font-size: 12px;">Пусто</div>`;
+        container.innerHTML = `<div style="text-align: center; padding: 20px; color: var(--text-dim); font-size: 12px;">${dict.structure_empty || 'У вас пока нет партнеров.'}</div>`;
         return;
       }
-      container.innerHTML = myReferrals.map(ref => `
-        <div class="info-tile">
-          <div class="info-tile-left"><div class="info-tile-icon">👤</div><div><div style="font-size: 13px; font-weight: 600; color: #fff;">${ref.first_name || 'Инвестор'}</div><div style="font-size: 11px; color: var(--text-dim);">${ref.username || 'нет username'}</div></div></div>
-          <span style="font-size: 11px; color: var(--accent-green); font-weight: 600;">1-й уровень</span>
-        </div>`).join('');
+
+      // Сортировка по уровням (1 -> 2 -> 3)
+      const sorted = [...myReferrals].sort((a, b) => (a.level || 1) - (b.level || 1));
+
+      const badges = {
+        1: { text: '1-я линия • 20%', color: '#34d399', bg: 'rgba(52, 211, 153, 0.12)', border: 'rgba(52, 211, 153, 0.3)' },
+        2: { text: '2-я линия • 5%', color: '#38bdf8', bg: 'rgba(56, 189, 248, 0.12)', border: 'rgba(56, 189, 248, 0.3)' },
+        3: { text: '3-я линия • 2.5%', color: '#a78bfa', bg: 'rgba(167, 139, 250, 0.12)', border: 'rgba(167, 139, 250, 0.3)' }
+      };
+
+      container.innerHTML = sorted.map(ref => {
+        const lvl = ref.level || 1;
+        const b = badges[lvl] || badges[1];
+        return `
+          <div class="info-tile" style="margin-bottom: 8px;">
+            <div class="info-tile-left">
+              <div class="info-tile-icon" style="background: ${b.bg}; color: ${b.color};">👤</div>
+              <div>
+                <div style="font-size: 13px; font-weight: 600; color: #fff;">${ref.first_name || 'Партнер'}</div>
+                <div style="font-size: 11px; color: var(--text-dim);">${ref.username || 'нет username'}</div>
+              </div>
+            </div>
+            <span style="font-size: 11px; font-weight: 700; color: ${b.color}; background: ${b.bg}; border: 1px solid ${b.border}; padding: 3px 8px; border-radius: 8px;">
+              ${b.text}
+            </span>
+          </div>`;
+      }).join('');
     }
 
     function copyRefLink() {
@@ -9573,6 +9828,30 @@
       if (m) m.classList.add('active');
     }
     function closeWithdrawModal() { const m = safeGet('withdraw-modal'); if (m) m.classList.remove('active'); }
+
+    function openWelcomeModal(bonusAmount, inviterText) {
+      safeSetText('welcome-bonus-val', `+${bonusAmount.toFixed(2)} USDT`);
+      safeSetText('welcome-inviter-val', inviterText);
+
+      const descEl = safeGet('welcome-desc');
+      if (descEl) {
+        if (bonusAmount >= 25) {
+          descEl.innerText = "Вы зарегистрировались по приглашению партнера! Вам начислен повышенный бонус для старта в проектах и мини-играх.";
+        } else {
+          descEl.innerText = "Вам начислен приветственный бонус для знакомства с возможностями экосистемы и тестирования игр.";
+        }
+      }
+
+      const modal = safeGet('welcome-modal');
+      if (modal) modal.classList.add('active');
+      if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
+    }
+
+    function closeWelcomeModal() {
+      const modal = safeGet('welcome-modal');
+      if (modal) modal.classList.remove('active');
+      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+    }
 
     let selectedPaymentMethod = 'cryptobot';
     function selectPayment(method) {
@@ -9758,5 +10037,38 @@
       initApp();
     }
   </script>
+
+  <!-- Модальное окно приветствия новичка -->
+  <div class="modal-overlay" id="welcome-modal">
+    <div class="modal-window" style="text-align: center; border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 0 35px rgba(56, 189, 248, 0.2);">
+      <div style="width: 68px; height: 68px; border-radius: 50%; background: radial-gradient(circle, rgba(56,189,248,0.2) 0%, rgba(79,70,229,0.3) 100%); border: 2px solid #38bdf8; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-size: 32px; box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);">
+        🎁
+      </div>
+
+      <div class="modal-title" style="font-size: 20px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.3px;">
+        Добро пожаловать в EquiCore!
+      </div>
+
+      <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;" id="welcome-desc">
+        Вам начислен стартовый капитал для тестирования платформы и разгона в мини-играх.
+      </p>
+
+      <!-- Плашка бонуса -->
+      <div style="background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 14px; padding: 14px; margin-bottom: 14px;">
+        <span style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 4px; font-weight: 700;">ВАШ ПРИВЕТСТВЕННЫЙ БОНУС</span>
+        <b style="font-family: 'JetBrains Mono', monospace; font-size: 26px; color: #38bdf8; text-shadow: 0 0 12px rgba(56, 189, 248, 0.5);" id="welcome-bonus-val">+0.00 USDT</b>
+      </div>
+
+      <!-- Плашка пригласителя -->
+      <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid var(--card-border); border-radius: 12px; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px;">
+        <span style="font-size: 12px; color: var(--text-dim);">Пригласитель:</span>
+        <b style="font-size: 13px; color: #fff;" id="welcome-inviter-val">Загрузка...</b>
+      </div>
+
+      <button class="btn" onclick="closeWelcomeModal()" style="font-size: 15px; padding: 14px;">
+        Начать зарабатывать 🚀
+      </button>
+    </div>
+  </div>
 </body>
 </html>
