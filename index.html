@@ -158,48 +158,6 @@
       background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.7), transparent);
     }
 
-    /* Партнёрский блок (гармоничный синий сапфир вместо едкого зелёного) */
-    .partner-account-box {
-      background: rgba(30, 42, 74, 0.45);
-      border: 1px solid rgba(99, 102, 241, 0.3);
-      border-radius: 14px;
-      padding: 12px 14px;
-      margin-top: 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-    }
-    .partner-balance-val {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 18px;
-      font-weight: 700;
-      color: #38bdf8;
-      text-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
-    }
-
-    /* Кнопка "Вывод" в едином стиле индиго-градиента с мягким свечением */
-    .btn-withdraw-small {
-      background: var(--primary-gradient);
-      color: #ffffff !important;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 10px;
-      padding: 7px 16px;
-      font-size: 12px;
-      font-weight: 800;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
-      transition: all 0.2s ease;
-      letter-spacing: 0.2px;
-    }
-    .btn-withdraw-small:active {
-      transform: scale(0.96);
-      opacity: 0.9;
-    }
-
     .hero-header {
       display: flex;
       justify-content: space-between;
@@ -233,11 +191,57 @@
       gap: 6px; /* Жестко фиксируем расстояние между цифрой и USDT */
       white-space: nowrap;
     }
-    /* Web3 Dark Mode Stats Cards (Скорость майнинга и Нафармлено PTS) */
+
+    /* Партнёрский блок: компактный и свободный */
+    .partner-account-box {
+      background: rgba(30, 42, 74, 0.45);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 14px;
+      padding: 10px 12px;
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+    .partner-balance-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      font-weight: 700;
+      color: #38bdf8;
+      text-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+      white-space: nowrap;
+    }
+
+    /* Компактные кнопки действий в партнерском счете */
+    .btn-withdraw-small {
+      background: var(--primary-gradient);
+      color: #ffffff !important;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 9px;
+      padding: 6px 11px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .btn-withdraw-small:active {
+      transform: scale(0.96);
+      opacity: 0.9;
+    }
+
+    /* Web3 Stats Cards (Скорость майнинга и Нафармлено PTS) */
     .stats-container {
       display: flex;
-      gap: 12px;
-      margin-top: 14px;
+      gap: 8px;
+      margin-top: 12px;
     }
     .stat-card {
       flex: 1;
@@ -246,11 +250,11 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-radius: 14px;
-      padding: 11px 10px;
+      padding: 10px 10px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 8px;
+      gap: 6px;
     }
     .stat-card-speed {
       border: 1px solid rgba(0, 180, 255, 0.28);
@@ -261,43 +265,42 @@
       box-shadow: inset 0 0 12px rgba(245, 197, 24, 0.05);
     }
 
-    /* Верхняя строка (Header) */
+    /* Верхняя строка (Header карточки) */
     .stat-card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 4px;
+      gap: 2px;
     }
     .stat-label {
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 700;
-      color: #728299;
+      color: #8fa0b8;
       text-transform: uppercase;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.3px;
       white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
-    /* Бейджи */
+    /* Аккуратные микро-бейджи */
     .badge-live {
-      font-size: 8.5px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
+      font-size: 7.5px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
       color: #00d2ff;
-      border: 1px solid #00d2ff;
+      border: 1px solid rgba(0, 210, 255, 0.5);
       background: rgba(0, 210, 255, 0.12);
-      padding: 2px 5px;
+      padding: 1.5px 4.5px;
       border-radius: 5px;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 3.5px;
       line-height: 1;
       white-space: nowrap;
+      flex-shrink: 0;
     }
     .live-dot {
-      width: 5px;
-      height: 5px;
+      width: 4px;
+      height: 4px;
       border-radius: 50%;
       background-color: #00d2ff;
       display: inline-block;
@@ -320,50 +323,54 @@
       }
     }
     .badge-airdrop {
-      font-size: 8.5px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
+      font-size: 7.5px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
       color: #f5c518;
-      border: 1px solid #f5c518;
+      border: 1px solid rgba(245, 197, 24, 0.5);
       background: rgba(245, 197, 24, 0.12);
-      padding: 2px 5px;
+      padding: 1.5px 4.5px;
       border-radius: 5px;
       display: inline-flex;
       align-items: center;
       line-height: 1;
       white-space: nowrap;
+      flex-shrink: 0;
     }
 
-    /* Нижняя строка (Value & Unit) */
+    /* Значения и единицы измерения */
     .stat-value-row {
       display: flex;
       align-items: baseline;
-      gap: 6px;
+      gap: 4px;
       white-space: nowrap;
+      overflow: hidden;
     }
     .stat-val-speed {
-      font-size: 22px;
-      font-weight: 700;
+      font-size: 19px;
+      font-weight: 800;
       color: #ffffff;
       font-family: 'JetBrains Mono', monospace;
       line-height: 1;
+      letter-spacing: -0.5px;
     }
     .stat-unit-speed {
-      font-size: 13px;
-      font-weight: 500;
-      color: #8da0b8;
+      font-size: 11px;
+      font-weight: 600;
+      color: #728299;
     }
     .stat-val-farmed {
-      font-size: 22px;
-      font-weight: 700;
+      font-size: 19px;
+      font-weight: 800;
       color: #f5c518;
       font-family: 'JetBrains Mono', monospace;
-      text-shadow: 0 0 16px rgba(245, 197, 24, 0.35);
+      text-shadow: 0 0 14px rgba(245, 197, 24, 0.35);
       line-height: 1;
+      letter-spacing: -0.5px;
     }
     .stat-unit-farmed {
-      font-size: 13px;
-      font-weight: 500;
+      font-size: 11px;
+      font-weight: 600;
       color: rgba(245, 197, 24, 0.7);
     }
 
@@ -616,20 +623,26 @@
     }
 
     .ref-box {
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px dashed rgba(255, 255, 255, 0.15);
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 12px;
-      padding: 12px;
+      padding: 10px 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 10px;
       margin: 14px 0;
     }
     .ref-code {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--primary);
-      word-break: break-all;
+      font-size: 11.5px;
+      color: #38bdf8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 1;
+      min-width: 0;
+      letter-spacing: -0.2px;
     }
 
     .info-tile {
@@ -3546,14 +3559,18 @@
       </div>
       
       <div class="partner-account-box">
-<!-- Дальше код остается без изменений (до закрытия hero-card) -->
-        <div>
-          <span style="font-size: 10px; color: var(--text-dim); display: block; font-weight: 600;" data-i18n="partner_acc_label">ПАРТНЕРСКИЙ СЧЕТ (РЕФЕРАЛ)</span>
+        <div style="min-width: 0; flex: 1;">
+          <span style="font-size: 9.5px; color: var(--text-dim); display: block; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase;" data-i18n="partner_acc_label">ПАРТНЕРСКИЙ СЧЕТ</span>
           <span class="partner-balance-val" id="partner-balance">$0.00 USDT</span>
         </div>
-        <button class="btn-withdraw-small" onclick="openWithdrawModal()" data-i18n="btn_withdraw">
-          Вывод
-        </button>
+        <div style="display: flex; gap: 6px; align-items: center; flex-shrink: 0;">
+          <button class="btn-withdraw-small" onclick="openTransferModal()" style="background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8 !important; box-shadow: none;">
+            Перевод
+          </button>
+          <button class="btn-withdraw-small" onclick="openWithdrawModal()" data-i18n="btn_withdraw">
+            Вывод
+          </button>
+        </div>
       </div>
 
       <!-- Web3 Dark Mode Виджеты: Скорость майнинга и Нафармлено PTS -->
@@ -3763,6 +3780,24 @@
         </div>
       </div>
 
+      <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); border-radius: 14px; padding: 12px; margin-bottom: 16px;">
+        <span style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 8px; font-weight: 700;">Списать средства с:</span>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div id="pay-source-invest" class="tier-box selected" onclick="selectPaySource('invest')" style="padding: 10px; margin: 0;">
+            <div>
+              <div style="font-size: 12px; font-weight: 700; color: #fff;">Инвест-счет</div>
+              <div style="font-size: 11px; color: #38bdf8; font-family: 'JetBrains Mono', monospace;" id="opt-invest-bal">$0.00</div>
+            </div>
+          </div>
+          <div id="pay-source-partner" class="tier-box" onclick="selectPaySource('partner')" style="padding: 10px; margin: 0;">
+            <div>
+              <div style="font-size: 12px; font-weight: 700; color: #fff;">Партнерский</div>
+              <div style="font-size: 11px; color: #38bdf8; font-family: 'JetBrains Mono', monospace;" id="opt-partner-bal">$0.00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <button class="btn" onclick="executeSharePurchase()" data-i18n="btn_confirm_deal">Подтвердить активацию</button>
       <button class="btn btn-secondary" onclick="switchTab('hub')" data-i18n="btn_back">Назад</button>
     </div>
@@ -3799,10 +3834,10 @@
         
         <div class="ref-box">
           <span class="ref-code" id="ref-link">Загрузка реферальной ссылки...</span>
-          <button style="background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 8px; cursor: pointer;" onclick="copyRefLink()" data-i18n="btn_copy">Копировать</button>
+          <button style="background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 8px; cursor: pointer; flex-shrink: 0;" onclick="copyRefLink()" data-i18n="btn_copy">Копировать</button>
         </div>
 
-        <button class="btn" onclick="copyRefLink()" data-i18n="btn_share_link">Поделиться ссылкой</button>
+        <button class="btn" onclick="shareRefLink()" data-i18n="btn_share_link">Поделиться ссылкой</button>
       </div>
 
       <div class="hero-stats" style="margin-top: 0; padding-top: 0; border: none; margin-bottom: 16px;">
@@ -5197,7 +5232,7 @@
         balance_label: "Баланс USDT",
         badge_locked: "🔒 Пул ликвидности",
         btn_deposit: "Пополнить",
-        partner_acc_label: "ПАРТНЕРСКИЙ СЧЕТ (РЕФЕРАЛ)",
+        partner_acc_label: "ПАРТНЕРСКИЙ СЧЕТ",
         btn_withdraw: "Вывод",
         shares_label: "СКОРОСТЬ",
         valuation_label: "НАФАРМЛЕНО",
@@ -5239,6 +5274,7 @@
         ref_desc: "Приглашайте партнеров и получайте до 27.5% в USDT с каждого пополнения: 20% с 1-й линии, 5% со 2-й линии и 2.5% с 3-й линии.",
         btn_copy: "Копировать",
         btn_share_link: "Поделиться ссылкой",
+        share_msg: "🚀 Присоединяйся к EquiCore! Получи приветственный бонус 25 USDT, разгоняй баланс в играх и зарабатывай на реальных активах:",
         ref_invited_label: "ПРИГЛАШЕНО ПАРТНЕРОВ",
         ref_earnings_label: "ДОСТУПНО К ВЫВОДУ",
         structure_title: "Ваша структура (3 линии)",
@@ -5283,7 +5319,7 @@
         balance_label: "USDT Balance",
         badge_locked: "🔒 Liquidity Pool",
         btn_deposit: "Deposit",
-        partner_acc_label: "PARTNER ACCOUNT (REFERRAL)",
+        partner_acc_label: "PARTNER ACCOUNT",
         btn_withdraw: "Withdraw",
         shares_label: "SPEED",
         valuation_label: "FARMED",
@@ -5325,6 +5361,7 @@
         ref_desc: "Invite partners and earn up to 27.5% in USDT from each deposit: 20% from tier 1, 5% from tier 2, and 2.5% from tier 3.",
         btn_copy: "Copy",
         btn_share_link: "Share Link",
+        share_msg: "🚀 Join EquiCore! Get a 25 USDT welcome bonus, boost your balance in games, and earn from real-world infrastructure assets:",
         ref_invited_label: "INVITED PARTNERS",
         ref_earnings_label: "AVAILABLE TO WITHDRAW",
         structure_title: "Your Structure (3 Tiers)",
@@ -5369,7 +5406,7 @@
         balance_label: "Solde USDT",
         badge_locked: "🔒 Pool de liquidité",
         btn_deposit: "Déposer",
-        partner_acc_label: "COMPTE PARTENAIRE (PARRAINAGE)",
+        partner_acc_label: "COMPTE PARTENAIRE",
         btn_withdraw: "Retrait",
         shares_label: "VITESSE",
         valuation_label: "FARMÉ",
@@ -5411,6 +5448,7 @@
         ref_desc: "Invitez des partenaires et gagnez jusqu'à 27.5% en USDT sur chaque dépôt : 20% au niveau 1, 5% au niveau 2 et 2.5% au niveau 3.",
         btn_copy: "Copier",
         btn_share_link: "Partager le lien",
+        share_msg: "🚀 Rejoins EquiCore ! Reçois 25 USDT de bonus de bienvenue, booste ton solde dans les jeux et gagne avec des actifs réels :",
         ref_invited_label: "PARTENAIRES INVITÉS",
         ref_earnings_label: "DISPONIBLE AU RETRAIT",
         structure_title: "Votre Structure (3 Niveaux)",
@@ -5455,7 +5493,7 @@
         balance_label: "Số dư USDT",
         badge_locked: "🔒 Quỹ thanh khoản",
         btn_deposit: "Nạp tiền",
-        partner_acc_label: "TÀI KHOẢN ĐỐI TÁC (GIỚI THIỆU)",
+        partner_acc_label: "TÀI KHOẢN ĐỐI TÁC",
         btn_withdraw: "Rút tiền",
         shares_label: "TỐC ĐỘ",
         valuation_label: "ĐÃ ĐÀO",
@@ -5497,6 +5535,7 @@
         ref_desc: "Mời đối tác và nhận tới 27.5% bằng USDT từ mỗi lần nạp: 20% tầng 1, 5% tầng 2 và 2.5% tầng 3.",
         btn_copy: "Sao chép",
         btn_share_link: "Chia sẻ liên kết",
+        share_msg: "🚀 Tham gia EquiCore ngay! Nhận 25 USDT thưởng chào mừng, tăng số dư trong trò chơi và kiếm tiền từ tài sản thực tế:",
         ref_invited_label: "ĐỐI TÁC ĐÃ MỜI",
         ref_earnings_label: "KHẢ DỤNG ĐỂ RÚT",
         structure_title: "Hệ thống của bạn (3 Tầng)",
@@ -6081,6 +6120,9 @@
       safeSetText('partner-balance', `${partnerBalance.toFixed(2)} USDT`);
       safeSetText('ref-earnings-display', `${partnerBalance.toFixed(2)} USDT`);
       safeSetText('modal-avail-balance', `${partnerBalance.toFixed(2)} USDT`);
+      safeSetText('modal-transfer-avail', `${partnerBalance.toFixed(2)} USDT`);
+      safeSetText('opt-invest-bal', `$${balance.toFixed(2)}`);
+      safeSetText('opt-partner-bal', `$${partnerBalance.toFixed(2)}`);
       safeSetText('ref-count', `${refCount} чел.`);
 
       let hourlyRate = 0;
@@ -8416,12 +8458,11 @@
       rouletteCurrentX = 0;
       void tape.offsetWidth; // Принудительный reflow для браузера
 
-      // 5. Расчет координат остановки со случайным смещением (Jitter +/- 18px)
+      // 5. Идеальная математическая центровка выигрышной карточки по центру рамки
       const viewport = safeGet('roulette-viewport');
-      const vpWidth = viewport ? viewport.offsetWidth : 350;
-      const jitter = Math.floor(Math.random() * 37) - 18; // Случайный сдвиг от -18px до +18px
+      const vpWidth = viewport ? viewport.clientWidth : 350;
       const cardCenterOffset = (winSlotIndex * ROULETTE_CARD_WIDTH) + 49;
-      const finalX = (vpWidth / 2) - cardCenterOffset + jitter;
+      const finalX = Math.round((vpWidth / 2) - cardCenterOffset);
 
       // 6. Запуск анимации прокрутки через 45 слотов
       tape.style.transition = 'transform 4.5s cubic-bezier(0.12, 0.95, 0.2, 1)';
@@ -9629,10 +9670,24 @@
     // ==========================================
     // 7. ИНВЕСТИЦИИ И РЕФЕРАЛЫ
     // ==========================================
+    let selectedPaySource = 'invest'; // 'invest' или 'partner'
+
+    function selectPaySource(source) {
+      selectedPaySource = source;
+      const btnInvest = safeGet('pay-source-invest');
+      const btnPartner = safeGet('pay-source-partner');
+      if (btnInvest) btnInvest.classList.toggle('selected', source === 'invest');
+      if (btnPartner) btnPartner.classList.toggle('selected', source === 'partner');
+      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+    }
+
     function openInvestScreen(projectName, pricePerShare, ticker) {
       selectedProject = projectName;
       selectedTicker = ticker;
       safeSetText('inv-project-name', `${projectName} (${ticker})`);
+      safeSetText('opt-invest-bal', `$${balance.toFixed(2)}`);
+      safeSetText('opt-partner-bal', `$${partnerBalance.toFixed(2)}`);
+      selectPaySource('invest');
       switchTab('invest');
     }
 
@@ -9644,16 +9699,25 @@
     }
 
     async function executeSharePurchase() {
-      if (balance < selectedCost) {
-        alert("Недостаточно средств на инвест-балансе!");
+      const currentAvailable = selectedPaySource === 'invest' ? balance : partnerBalance;
+
+      if (currentAvailable < selectedCost) {
+        alert(`Недостаточно средств на ${selectedPaySource === 'invest' ? 'инвест-балансе' : 'партнерском счете'}!`);
         return;
       }
-      const newBalance = balance - selectedCost;
+
       const certId = 'CERT-' + Math.floor(100000 + Math.random() * 900000);
 
       if (supabaseClient && dbUserId) {
         try {
-          await supabaseClient.from('accounts').update({ invest_balance: newBalance }).eq('user_id', dbUserId);
+          if (selectedPaySource === 'invest') {
+            balance -= selectedCost;
+            await supabaseClient.from('accounts').update({ invest_balance: balance }).eq('user_id', dbUserId);
+          } else {
+            partnerBalance -= selectedCost;
+            await supabaseClient.from('accounts').update({ partner_balance: partnerBalance }).eq('user_id', dbUserId);
+          }
+
           await supabaseClient.from('share_holdings').insert([{
             user_id: dbUserId,
             project_name: selectedProject,
@@ -9662,19 +9726,22 @@
             invested_amount: selectedCost,
             certificate_id: certId
           }]);
+
           await supabaseClient.from('transactions').insert([{
             user_id: dbUserId,
             type: 'BUY_SHARES',
             amount: selectedCost,
-            account_type: 'INVEST',
-            details: { project: selectedProject, shares: selectedShares, certId }
+            account_type: selectedPaySource === 'invest' ? 'INVEST' : 'PARTNER',
+            details: { project: selectedProject, shares: selectedShares, certId, paid_from: selectedPaySource }
           }]);
         } catch (e) {
           console.warn("DB write error:", e);
         }
+      } else {
+        if (selectedPaySource === 'invest') balance -= selectedCost;
+        else partnerBalance -= selectedCost;
       }
 
-      balance = newBalance;
       myPortfolio.push({
         project: selectedProject,
         ticker: selectedTicker,
@@ -9683,10 +9750,11 @@
         certId: certId,
         date: new Date().toLocaleDateString()
       });
+
       updateUI();
       renderPortfolio();
       if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
-      alert(`Успешно куплено!`);
+      alert(`Успешно активировано! Оплачено с ${selectedPaySource === 'invest' ? 'инвест-счета' : 'партнерского счета'}.`);
       switchTab('portfolio', document.querySelectorAll('.tab-btn')[1]);
     }
 
@@ -9783,6 +9851,24 @@
         });
       } else {
         alert("Ссылка для приглашения: " + link);
+      }
+    }
+
+    function shareRefLink() {
+      const link = `https://t.me/EquiCoreBot/launchpad?startapp=ref_${currentTgId}`;
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
+      const messageText = dict.share_msg || "🚀 Присоединяйся к EquiCore! Получи приветственный бонус 25 USDT, разгоняй баланс в играх и зарабатывай на реальных активах:";
+
+      // Передаем текст и ссылку в одном параметре text, чтобы текст всегда стоял первым
+      const fullPost = `${messageText}\n\n${link}`;
+      const shareUrl = `https://t.me/share/url?text=${encodeURIComponent(fullPost)}`;
+
+      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+
+      if (tg && tg.openTelegramLink) {
+        tg.openTelegramLink(shareUrl);
+      } else {
+        window.open(shareUrl, '_blank');
       }
     }
 
@@ -10009,6 +10095,81 @@
     }
 
     // ==========================================
+    // 8. P2P-ПЕРЕВОДЫ
+    // ==========================================
+    function openTransferModal() {
+      safeSetText('modal-transfer-avail', `${partnerBalance.toFixed(2)} USDT`);
+      const m = safeGet('transfer-modal');
+      if (m) m.classList.add('active');
+    }
+
+    function closeTransferModal() {
+      const m = safeGet('transfer-modal');
+      if (m) m.classList.remove('active');
+    }
+
+    async function submitP2PTransfer() {
+      const recipientInput = safeGet('transfer-recipient');
+      const amountInput = safeGet('transfer-amount');
+      const actionBtn = safeGet('transfer-action-btn');
+
+      const query = recipientInput?.value?.trim();
+      const amount = parseFloat(amountInput?.value);
+
+      if (!query) {
+        alert("Укажите @username или Telegram ID получателя!");
+        return;
+      }
+      if (!amount || amount <= 0) {
+        alert("Укажите корректную сумму перевода!");
+        return;
+      }
+      if (amount > partnerBalance) {
+        alert("Недостаточно средств на партнерском счете!");
+        return;
+      }
+
+      if (actionBtn) {
+        actionBtn.disabled = true;
+        actionBtn.innerText = "Выполняется перевод...";
+      }
+
+      try {
+        if (supabaseClient && dbUserId) {
+          const { data, error } = await supabaseClient.rpc('transfer_partner_funds', {
+            p_sender_id: dbUserId,
+            p_recipient_query: query,
+            p_amount: amount
+          });
+
+          if (error || !data || !data.success) {
+            alert(data?.message || "Ошибка перевода. Проверьте данные получателя.");
+            return;
+          }
+
+          partnerBalance -= amount;
+          updateUI();
+          if (recipientInput) recipientInput.value = '';
+          if (amountInput) amountInput.value = '';
+          closeTransferModal();
+
+          if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
+          alert(`Успешно переведено ${amount.toFixed(2)} USDT пользователю ${data.recipient_name}!`);
+        } else {
+          alert("Сервер базы данных недоступен");
+        }
+      } catch (err) {
+        console.error("P2P transfer error:", err);
+        alert("Произошла сетевая ошибка при выполнении перевода");
+      } finally {
+        if (actionBtn) {
+          actionBtn.disabled = false;
+          actionBtn.innerText = "Перевести средства";
+        }
+      }
+    }
+
+    // ==========================================
     // 9. БЕЗОПАСНЫЙ СТАРТ ПРИЛОЖЕНИЯ
     // ==========================================
     function initApp() {
@@ -10067,6 +10228,39 @@
 
       <button class="btn" onclick="closeWelcomeModal()" style="font-size: 15px; padding: 14px;">
         Начать зарабатывать 🚀
+      </button>
+    </div>
+  </div>
+
+  <!-- Модальное окно P2P-перевода -->
+  <div class="modal-overlay" id="transfer-modal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div class="modal-title">Перевод партнеру</div>
+        <button class="modal-close" onclick="closeTransferModal()">&times;</button>
+      </div>
+
+      <div style="background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 12px; padding: 12px; margin-bottom: 14px;">
+        <span style="font-size: 11px; color: var(--text-dim); display: block;">ДОСТУПНО НА ПАРТНЕРСКОМ СЧЕТЕ:</span>
+        <b style="font-family: 'JetBrains Mono', monospace; font-size: 18px; color: #38bdf8; text-shadow: 0 0 10px rgba(56, 189, 248, 0.35);" id="modal-transfer-avail">$0.00 USDT</b>
+      </div>
+
+      <div class="modal-input-group">
+        <label>Получатель (@username или Telegram ID):</label>
+        <input type="text" class="modal-input" id="transfer-recipient" placeholder="@username или 777000111" />
+      </div>
+
+      <div class="modal-input-group">
+        <label>Сумма перевода (USDT):</label>
+        <input type="number" class="modal-input" id="transfer-amount" placeholder="10.00" min="1" step="any" />
+      </div>
+
+      <div style="font-size: 11px; color: var(--text-dim); line-height: 1.4; margin-bottom: 16px;">
+        * Средства моментально поступают на инвест-счет получателя для покупки проектов или участия в играх. Без комиссии платформы.
+      </div>
+
+      <button id="transfer-action-btn" class="btn" onclick="submitP2PTransfer()">
+        Перевести средства
       </button>
     </div>
   </div>
