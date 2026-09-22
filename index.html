@@ -514,6 +514,165 @@
       display: block;
     }
 
+    /* Премиальный неоновый бейдж ACTIVE */
+    .portfolio-active-badge {
+      background: rgba(56, 189, 248, 0.12) !important;
+      color: #38bdf8 !important;
+      border: 1px solid rgba(56, 189, 248, 0.45) !important;
+      padding: 3px 9px;
+      border-radius: 8px;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.35), inset 0 0 6px rgba(56, 189, 248, 0.15);
+      text-shadow: 0 0 8px rgba(56, 189, 248, 0.85);
+    }
+
+    .portfolio-active-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 6px #38bdf8;
+      display: inline-block;
+      animation: pulseActiveCyan 1.6s ease-in-out infinite;
+    }
+
+    @keyframes pulseActiveCyan {
+      0%, 100% { opacity: 0.4; transform: scale(0.85); }
+      50% { opacity: 1; transform: scale(1.3); box-shadow: 0 0 10px #38bdf8; }
+    }
+
+    /* Строгий Web3-статус без молний */
+    .portfolio-status-live {
+      color: #38bdf8 !important;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+      letter-spacing: -0.2px;
+    }
+
+    .node-spec-badge {
+      background: rgba(56, 189, 248, 0.12);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 10.5px;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.3px;
+    }
+
+    /* --- БЛОК РАССРОЧКИ КЛАСТЕРА --- */
+    .installment-banner {
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.22) 0%, rgba(56, 189, 248, 0.12) 100%);
+      border: 1.5px solid rgba(99, 102, 241, 0.45);
+      border-radius: 16px;
+      padding: 14px;
+      margin-top: 14px;
+      margin-bottom: 14px;
+      box-shadow: 0 8px 24px rgba(79, 70, 229, 0.25);
+      animation: fadeIn 0.25s ease forwards;
+    }
+
+    .installment-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin: 10px 0;
+    }
+
+    .installment-tab {
+      background: #111827;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 8px 4px;
+      text-align: center;
+      cursor: pointer;
+      color: #94a3b8;
+      font-size: 11.5px;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+
+    .installment-tab.active {
+      background: rgba(56, 189, 248, 0.2);
+      border-color: #38bdf8;
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+    }
+
+    .installment-calc-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    /* Цветовая дифференциация пакетов с рассрочкой */
+    .tier-box-purple {
+      border-color: rgba(192, 132, 252, 0.35) !important;
+      background: rgba(192, 132, 252, 0.04) !important;
+    }
+    .tier-box-purple.selected {
+      border-color: #c084fc !important;
+      background: rgba(192, 132, 252, 0.12) !important;
+      box-shadow: 0 0 16px -4px rgba(192, 132, 252, 0.4) !important;
+    }
+
+    /* Пакет 125 нод — Неоновый рубин / красный */
+    .tier-box-red {
+      border-color: rgba(244, 63, 94, 0.35) !important;
+      background: rgba(244, 63, 94, 0.04) !important;
+    }
+    .tier-box-red.selected {
+      border-color: #f43f5e !important;
+      background: rgba(244, 63, 94, 0.12) !important;
+      box-shadow: 0 0 16px -4px rgba(244, 63, 94, 0.45) !important;
+    }
+
+    .tier-box-gold {
+      border-color: rgba(250, 204, 21, 0.4) !important;
+      background: rgba(250, 204, 21, 0.04) !important;
+    }
+    .tier-box-gold.selected {
+      border-color: #facc15 !important;
+      background: rgba(250, 204, 21, 0.12) !important;
+      box-shadow: 0 0 16px -4px rgba(250, 204, 21, 0.4) !important;
+    }
+
+    /* Информационная выноска о накопительном эффекте */
+    .cumulative-info-callout {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-left: 3px solid #38bdf8;
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 14px;
+    }
+
+    /* Обновленный превью-блок без зеленого цвета */
+    .invest-preview-box {
+      background: rgba(56, 189, 248, 0.08) !important;
+      border: 1px solid rgba(56, 189, 248, 0.22) !important;
+      border-radius: 12px;
+      padding: 11px 13px;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11.5px;
+    }
+
     .progress-box {
       margin-bottom: 14px;
     }
@@ -586,10 +745,11 @@
       background: var(--bg-card);
       border: 1px solid var(--card-border);
       border-radius: 14px;
-      padding: 14px;
+      padding: 12px 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 10px;
       cursor: pointer;
       transition: all 0.2s ease;
     }
@@ -598,28 +758,56 @@
       background: rgba(56, 189, 248, 0.08);
       box-shadow: 0 0 16px -4px rgba(56, 189, 248, 0.3);
     }
+
+    /* Защита от сжатия левой колонки */
+    .tier-box > div:first-child {
+      min-width: 0;
+      flex: 1;
+    }
+
     .tier-title {
-      font-size: 14px;
-      font-weight: 600;
+      font-size: 13.5px;
+      font-weight: 700;
       color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+      line-height: 1.2;
     }
+
     .tier-sub {
-      font-size: 11px;
+      font-size: 10.5px;
       color: var(--text-dim);
-      margin-top: 2px;
+      margin-top: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.2;
     }
+
+    /* Правая колонка цены — запрет переноса и сжатия */
     .tier-price {
       text-align: right;
+      flex-shrink: 0;
+      white-space: nowrap;
+      min-width: 80px;
     }
+
     .tier-price b {
       font-size: 15px;
-      color: var(--primary);
       font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
+      display: block;
+      line-height: 1.1;
     }
+
     .tier-price span {
       display: block;
-      font-size: 10px;
-      color: var(--text-dim);
+      font-size: 10.5px;
+      white-space: nowrap;
+      margin-top: 2px;
+      line-height: 1.1;
     }
 
     .ref-box {
@@ -3549,7 +3737,7 @@
         
         <!-- Правый блок: запрещаем сжиматься (flex-shrink: 0) -->
         <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0;">
-          <span class="hero-badge" data-i18n="badge_locked">🔒 Пул ликвидности</span>
+          <span class="hero-badge" data-i18n="badge_locked">Пул ликвидности</span>
           <button onclick="openDepositModal()" style="background: rgba(99, 102, 241, 0.18); color: #60a5fa; border: 1px solid rgba(99, 102, 241, 0.4); padding: 6px 14px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 0 12px rgba(99, 102, 241, 0.2);">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
             <span data-i18n="btn_deposit">Пополнить</span>
@@ -3603,181 +3791,292 @@
       </div>
     </div>
 
-    <!-- 1. Экран: Экосистема проектов -->
+    <!-- 1. Экран: Экосистема нод -->
     <div id="screen-hub" class="screen active">
       <div class="section-title">
-        <span data-i18n="section_rounds">Экосистема проектов</span>
-        <span class="section-sub" data-i18n="stage_label">Стадия: Запуск пула</span>
+        <span>Инфраструктурные Ноды</span>
+        <span class="section-sub">Ecosystem Node Sale</span>
       </div>
 
       <!-- Проект 1 -->
       <div class="project-card">
         <div class="project-top">
           <div>
-            <div class="project-name">Media Network X</div>
-            <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;" data-i18n="p1_ticker">Целевой тикер: $MNX</div>
+            <div class="project-name">Media Network Node</div>
+            <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">Целевой тикер: $MNX • 1 Нода = $20</div>
           </div>
           <span class="project-tag">AI Media</span>
         </div>
-        <p class="project-desc" data-i18n="p1_desc">Автоматизированная экосистема детских и развлекательных видеоканалов с глобальной монетизацией.</p>
+        <p class="project-desc">Узел обработки, AI-дубляжа и дистрибуции детских медиасетей с выручкой от рекламы YouTube AdSense.</p>
         
         <div class="equity-specs">
           <div class="equity-col">
-            <span data-i18n="col_share_price">СТОИМОСТЬ</span>
-            <b>$5.00</b>
+            <span>СТОИМОСТЬ</span>
+            <b style="color: #fff;">$20 / нода</b>
           </div>
           <div class="equity-col">
-            <span data-i18n="col_ipo_ratio">БУСТ PTS</span>
-            <b data-i18n="p1_ratio">+80 PTS/ч</b>
+            <span>ДИВИДЕНДЫ</span>
+            <b style="color: #34d399;">18% APY</b>
           </div>
           <div class="equity-col">
-            <span data-i18n="col_valuation">ПУЛ ФАРМИНГА</span>
-            <b>$2.5M</b>
+            <span>ФАРМИНГ</span>
+            <b style="color: #38bdf8;">+16 PTS/ч</b>
           </div>
         </div>
 
         <div class="progress-box">
           <div class="progress-bar"><div class="progress-fill" style="width: 68%;"></div></div>
           <div class="progress-labels">
-            <span><span data-i18n="raised">Собрано:</span> $68,000</span>
-            <span>Hard Cap: $100,000</span>
+            <span>Активировано: 3,400 нод</span>
+            <span>Пул раунда: 5,000 нод</span>
           </div>
         </div>
 
-        <button class="btn" onclick="openInvestScreen('Media Network X', 5, '$MNX')" data-i18n="btn_buy_shares">
-          Купить уровень
-        </button>
+        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 8px;">
+          <button class="btn btn-secondary" onclick="openProjectDetails('Media Network X')" style="margin-top: 0 !important; padding: 12px 6px; font-size: 13px;">
+            Паспорт ноды
+          </button>
+          <button class="btn" onclick="openInvestScreen('Media Network X', 20, '$MNX')" style="margin-top: 0 !important;">
+            Активировать ноды
+          </button>
+        </div>
       </div>
 
       <!-- Проект 2 -->
       <div class="project-card">
         <div class="project-top">
           <div>
-            <div class="project-name">Cloud Render Core</div>
-            <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;" data-i18n="p2_ticker">Целевой тикер: $CRND</div>
+            <div class="project-name">Cloud Render Node</div>
+            <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">Целевой тикер: $CRND • 1 Нода = $20</div>
           </div>
           <span class="project-tag">Compute</span>
         </div>
-        <p class="project-desc" data-i18n="p2_desc">Распределенная инфраструктура вычислительных мощностей для 3D-рендеринга и генерации видео.</p>
+        <p class="project-desc">Узел распределённой сети GPU-рендеринга и вычислений для генерации 3D-анимации и инференса нейросетей.</p>
         
         <div class="equity-specs">
           <div class="equity-col">
-            <span data-i18n="col_share_price">СТОИМОСТЬ</span>
-            <b>$10.00</b>
+            <span>СТОИМОСТЬ</span>
+            <b style="color: #fff;">$20 / нода</b>
           </div>
           <div class="equity-col">
-            <span data-i18n="col_ipo_ratio">БУСТ PTS</span>
-            <b data-i18n="p2_ratio">+160 PTS/ч</b>
+            <span>ДИВИДЕНДЫ</span>
+            <b style="color: #34d399;">24% APY</b>
           </div>
           <div class="equity-col">
-            <span data-i18n="col_valuation">ПУЛ ФАРМИНГА</span>
-            <b>$5.0M</b>
+            <span>ФАРМИНГ</span>
+            <b style="color: #38bdf8;">+16 PTS/ч</b>
           </div>
         </div>
 
         <div class="progress-box">
           <div class="progress-bar"><div class="progress-fill" style="width: 35%;"></div></div>
           <div class="progress-labels">
-            <span><span data-i18n="raised">Собрано:</span> $70,000</span>
-            <span>Hard Cap: $200,000</span>
+            <span>Активировано: 3,500 нод</span>
+            <span>Пул раунда: 10,000 нод</span>
           </div>
         </div>
 
-        <button class="btn" onclick="openInvestScreen('Cloud Render Core', 10, '$CRND')" data-i18n="btn_buy_shares">
-          Купить уровень
-        </button>
+        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 8px;">
+          <button class="btn btn-secondary" onclick="openProjectDetails('Cloud Render Core')" style="margin-top: 0 !important; padding: 12px 6px; font-size: 13px;">
+            Паспорт ноды
+          </button>
+          <button class="btn" onclick="openInvestScreen('Cloud Render Core', 20, '$CRND')" style="margin-top: 0 !important;">
+            Активировать ноды
+          </button>
+        </div>
       </div>
 
       <!-- Проект 3 -->
       <div class="project-card">
         <div class="project-top">
           <div>
-            <div class="project-name">MegaWatt Mining Cluster</div>
-            <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;" data-i18n="p3_ticker">Целевой тикер: $MWMC</div>
+            <div class="project-name">Green Hashrate Node</div>
+            <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">Целевой тикер: $MWMC • 1 Нода = $20</div>
           </div>
           <span class="project-tag" style="background: rgba(245, 158, 11, 0.12); color: #facc15; border: 1px solid rgba(245, 158, 11, 0.3);">Mining & Energy</span>
         </div>
-        <p class="project-desc" data-i18n="p3_desc">
-          Промышленный майнинг-кластер с прямым подключением к гидрогенерации. Инвестиции в доли хешрейта без покупки оборудования.
-        </p>
+        <p class="project-desc">Узел валидации промышленного майнинг-дата-центра 4.2 МВт с прямым подключением к гидроэлектростанции.</p>
         
         <div class="equity-specs">
           <div class="equity-col">
-            <span data-i18n="col_share_price">СТОИМОСТЬ</span>
-            <b>$15.00</b>
+            <span>СТОИМОСТЬ</span>
+            <b style="color: #fff;">$20 / нода</b>
           </div>
           <div class="equity-col">
-            <span data-i18n="col_ipo_ratio">БУСТ PTS</span>
-            <b data-i18n="p3_ratio">+240 PTS/ч</b>
+            <span>ДИВИДЕНДЫ</span>
+            <b style="color: #34d399;">28% APY</b>
           </div>
           <div class="equity-col">
-            <span data-i18n="col_valuation">ПУЛ ФАРМИНГА</span>
-            <b>$8.5M</b>
+            <span>ФАРМИНГ</span>
+            <b style="color: #38bdf8;">+16 PTS/ч</b>
           </div>
         </div>
 
         <div class="progress-box">
           <div class="progress-bar"><div class="progress-fill" style="width: 52%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);"></div></div>
           <div class="progress-labels">
-            <span><span data-i18n="raised">Собрано:</span> $156,000</span>
-            <span>Hard Cap: $300,000</span>
+            <span>Активировано: 7,800 нод</span>
+            <span>Пул раунда: 15,000 нод</span>
           </div>
         </div>
 
-        <button class="btn" onclick="openInvestScreen('MegaWatt Mining Cluster', 15, '$MWMC')" data-i18n="btn_buy_shares">
-          Купить уровень
-        </button>
+        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 8px;">
+          <button class="btn btn-secondary" onclick="openProjectDetails('MegaWatt Mining Cluster')" style="margin-top: 0 !important; padding: 12px 6px; font-size: 13px;">
+            Паспорт ноды
+          </button>
+          <button class="btn" onclick="openInvestScreen('MegaWatt Mining Cluster', 20, '$MWMC')" style="margin-top: 0 !important;">
+            Активировать ноды
+          </button>
+        </div>
       </div>
     </div>
 
-    <!-- 2. Экран: Оформление пакета долей -->
+    <!-- 2. Экран: Активация нод и рассрочка -->
     <div id="screen-invest" class="screen">
       <div class="section-title">
-        <span data-i18n="title_tiers">Выбор уровня актива</span>
+        <span>Активация и докупка нод</span>
+        <span class="section-sub">Неограниченное накопление</span>
       </div>
-      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
-        <span data-i18n="project_prefix">Проект:</span> <b id="inv-project-name" style="color: #fff;">Media Network X</b>
-      </p>
+      
+      <!-- Карточка текущего владения нодами -->
+      <div style="background: rgba(14, 20, 36, 0.9); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 14px; padding: 12px 14px; margin-bottom: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span style="font-size: 14px; font-weight: 700; color: #fff;" id="inv-project-name">Media Network Node</span>
+          <span id="inv-current-lvl" class="node-spec-badge">LVL 0</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 11px; color: var(--text-dim);">
+          <div>Активных нод: <b id="inv-current-shares" style="color: #fff; font-family: 'JetBrains Mono';">0 нод</b></div>
+          <div style="text-align: right;">Текущий фарминг: <b id="inv-current-rate" style="color: #38bdf8; font-family: 'JetBrains Mono';">+0 PTS/ч</b></div>
+        </div>
+      </div>
+
+      <!-- Информационная выноска о накопительной силе нод -->
+      <div class="cumulative-info-callout">
+        <div style="display: flex; align-items: flex-start; gap: 8px;">
+          <span style="font-size: 14px; line-height: 1;">💡</span>
+          <div style="font-size: 11.5px; color: #cbd5e1; line-height: 1.45;">
+            <b style="color: #38bdf8;">Все ноды суммируются в единый стек:</b> вы можете активировать ноды частями по $20 или сразу брать кластер — мощность объединяется. Чем больше суммарно нод на аккаунте, тем выше скорость майнинга PTS, дивиденды и ваша итоговая доля токенов на листинге (TGE).
+          </div>
+        </div>
+      </div>
+
+      <div style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin-bottom: 8px;">
+        Выберите пакет нод для добавления:
+      </div>
 
       <div class="tier-selector">
-        <div class="tier-box selected" onclick="selectTier(this, 20, 100)">
+        <!-- Базовые пакеты -->
+        <div class="tier-box selected" onclick="selectTier(this, 1, 20)">
           <div>
-            <div class="tier-title" data-i18n="tier_early">Пакет «Ранний инвестор»</div>
-            <div class="tier-sub" data-i18n="tier_early_sub">20 долей компании</div>
+            <div class="tier-title">+1 Нода сети</div>
+            <div class="tier-sub">Стартовый узел • $20</div>
+          </div>
+          <div class="tier-price">
+            <b>$20</b>
+            <span style="color: #38bdf8; font-size: 11px;">+16 PTS/ч</span>
+          </div>
+        </div>
+
+        <div class="tier-box" onclick="selectTier(this, 5, 100)">
+          <div>
+            <div class="tier-title">+5 Нод сети</div>
+            <div class="tier-sub">Стандартный узел • $100</div>
           </div>
           <div class="tier-price">
             <b>$100</b>
-            <span data-i18n="tier_early_conv">Скорость: +80 PTS/ч</span>
+            <span style="color: #38bdf8; font-size: 11px;">+80 PTS/ч</span>
           </div>
         </div>
 
-        <div class="tier-box" onclick="selectTier(this, 50, 250)">
+        <div class="tier-box" onclick="selectTier(this, 25, 500)">
           <div>
-            <div class="tier-title" data-i18n="tier_syndicate">Пакет «Синдикат»</div>
-            <div class="tier-sub" data-i18n="tier_syndicate_sub">50 долей компании</div>
-          </div>
-          <div class="tier-price">
-            <b>$250</b>
-            <span data-i18n="tier_syndicate_conv">Скорость: +200 PTS/ч</span>
-          </div>
-        </div>
-
-        <div class="tier-box" onclick="selectTier(this, 100, 500)">
-          <div>
-            <div class="tier-title" data-i18n="tier_strategist">Пакет «Стратег»</div>
-            <div class="tier-sub" data-i18n="tier_strategist_sub">100 долей компании</div>
+            <div class="tier-title">+25 Нод сети</div>
+            <div class="tier-sub">Синдикатный узел • $500</div>
           </div>
           <div class="tier-price">
             <b>$500</b>
-            <span data-i18n="tier_strategist_conv">Скорость: +400 PTS/ч</span>
+            <span style="color: #38bdf8; font-size: 11px;">+400 PTS/ч</span>
+          </div>
+        </div>
+
+        <!-- 1. ПАКЕТ $1000 С РАССРОЧКОЙ (ПУРПУРНЫЙ) -->
+        <div class="tier-box tier-box-purple" onclick="selectTier(this, 50, 1000, true)">
+          <div>
+            <div class="tier-title" style="color: #c084fc;">
+              <span>Мастер-Нода</span>
+              <span style="background: rgba(192, 132, 252, 0.18); color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.4); font-size: 8px; font-weight: 800; padding: 1.5px 5px; border-radius: 4px; letter-spacing: 0.3px; flex-shrink: 0;">РАССРОЧКА</span>
+            </div>
+            <div class="tier-sub">50 нод • от $41.66/мес • Приоритет TGE</div>
+          </div>
+          <div class="tier-price">
+            <b style="color: #c084fc;">$1,000</b>
+            <span style="color: #c084fc;">+800 PTS/ч</span>
+          </div>
+        </div>
+
+        <!-- 2. ПАКЕТ $2500 С РАССРОЧКОЙ (КРАСНЫЙ / РУБИНОВЫЙ) -->
+        <div class="tier-box tier-box-red" onclick="selectTier(this, 125, 2500, true)">
+          <div>
+            <div class="tier-title" style="color: #f43f5e;">
+              <span>Про-Кластер</span>
+              <span style="background: rgba(244, 63, 94, 0.18); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.45); font-size: 8px; font-weight: 800; padding: 1.5px 5px; border-radius: 4px; letter-spacing: 0.3px; flex-shrink: 0;">РАССРОЧКА</span>
+            </div>
+            <div class="tier-sub">125 нод • от $104.16/мес • Квота TGE</div>
+          </div>
+          <div class="tier-price">
+            <b style="color: #f43f5e;">$2,500</b>
+            <span style="color: #f43f5e;">+2,000 PTS/ч</span>
+          </div>
+        </div>
+
+        <!-- 3. ПАКЕТ $5000 С РАССРОЧКОЙ (ЗОЛОТОЙ VIP) -->
+        <div class="tier-box tier-box-gold" onclick="selectTier(this, 250, 5000, true)">
+          <div>
+            <div class="tier-title" style="color: #facc15;">
+              <span>Кластер Валидатора</span>
+              <span style="background: rgba(250, 204, 21, 0.18); color: #facc15; border: 1px solid rgba(250, 204, 21, 0.45); font-size: 8px; font-weight: 800; padding: 1.5px 4.5px; border-radius: 4px; letter-spacing: 0.3px; flex-shrink: 0;">РАССРОЧКА</span>
+              <span style="background: #facc15; color: #000; font-size: 8px; font-weight: 900; padding: 1.5px 4.5px; border-radius: 4px; flex-shrink: 0;">VIP</span>
+            </div>
+            <div class="tier-sub">250 нод • от $208.33/мес • Главный узел</div>
+          </div>
+          <div class="tier-price">
+            <b style="color: #facc15;">$5,000</b>
+            <span style="color: #facc15;">+4,000 PTS/ч</span>
           </div>
         </div>
       </div>
 
-      <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 12px; margin-bottom: 16px; border: 1px solid var(--card-border);">
-        <div style="font-size: 11px; color: var(--text-dim); line-height: 1.5;" data-i18n="tier_disclaimer">
-          * Активы закрепляются за вашим аккаунтом. Повышение уровня увеличивает скорость майнинга PTS и объем дропа.
+      <!-- ИНТЕРАКТИВНЫЙ БЛОК РАССРОЧКИ -->
+      <div class="installment-banner" id="cluster-installment-panel" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 12px; font-weight: 800; color: #fff;">Оплата в рассрочку:</span>
+          <span style="font-size: 10.5px; color: #38bdf8; font-weight: 700;">Без переплат • 0%</span>
         </div>
+
+        <div class="installment-tabs">
+          <div class="installment-tab" onclick="setInstallmentTerm(6, this)">6 мес</div>
+          <div class="installment-tab" onclick="setInstallmentTerm(12, this)">12 мес</div>
+          <div class="installment-tab active" onclick="setInstallmentTerm(24, this)">24 мес</div>
+        </div>
+
+        <div class="installment-calc-row">
+          <span style="color: var(--text-dim);">Ежемесячный платёж:</span>
+          <b id="inst-monthly-val" style="color: #38bdf8; font-family: 'JetBrains Mono'; font-size: 14px;">$41.66 / мес</b>
+        </div>
+
+        <div class="installment-calc-row" style="margin-top: 4px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 8px;">
+          <span style="color: #fff; font-weight: 700;">К списанию сейчас (1-й взнос):</span>
+          <b id="inst-first-pay" style="color: #facc15; font-family: 'JetBrains Mono'; font-size: 16px;">$41.66</b>
+        </div>
+        <div style="font-size: 10px; color: var(--text-dim); margin-top: 6px; line-height: 1.35;" id="inst-note-text">
+          * Все ноды активируются в сети сразу после внесения первого взноса.
+        </div>
+      </div>
+
+      <!-- ПРЕВЬЮ ПРИРОСТА ПОРТФЕЛЯ (САПФИРОВЫЙ НЕОН) -->
+      <div class="invest-preview-box">
+        <span style="color: #94a3b8;">Итого нод после активации:</span>
+        <b id="inv-preview-shares" style="color: #38bdf8; font-family: 'JetBrains Mono'; text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);">1 нода (+16 PTS/ч)</b>
       </div>
 
       <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); border-radius: 14px; padding: 12px; margin-bottom: 16px;">
@@ -3798,8 +4097,8 @@
         </div>
       </div>
 
-      <button class="btn" onclick="executeSharePurchase()" data-i18n="btn_confirm_deal">Подтвердить активацию</button>
-      <button class="btn btn-secondary" onclick="switchTab('hub')" data-i18n="btn_back">Назад</button>
+      <button class="btn" id="btn-activate-nodes" onclick="executeSharePurchase()">Подтвердить активацию</button>
+      <button class="btn btn-secondary" onclick="switchTab('hub')">Назад</button>
     </div>
 
     <!-- 3. Экран: Портфель долей -->
@@ -5230,7 +5529,7 @@
         const TRANSLATIONS = {
       ru: {
         balance_label: "Баланс USDT",
-        badge_locked: "🔒 Пул ликвидности",
+        badge_locked: "Пул ликвидности",
         btn_deposit: "Пополнить",
         partner_acc_label: "ПАРТНЕРСКИЙ СЧЕТ",
         btn_withdraw: "Вывод",
@@ -5242,6 +5541,7 @@
         p1_ticker: "Целевой тикер: $MNX",
         p1_desc: "Автоматизированная экосистема детских и развлекательных видеоканалов с глобальной монетизацией.",
         col_share_price: "СТОИМОСТЬ",
+        col_dividends: "ДИВИДЕНДЫ",
         col_ipo_ratio: "БУСТ PTS",
         p1_ratio: "+80 PTS/ч",
         col_valuation: "ПУЛ ФАРМИНГА",
@@ -5312,12 +5612,12 @@
         upline_direct: "Прямая регистрация",
         col_spent: "ПОТРАЧЕНО",
         col_status: "СТАТУС",
-        status_farming: "Фарминг ⚡",
+        status_farming: "В сети",
         empty_portfolio: "Пусто",
       },
       en: {
         balance_label: "USDT Balance",
-        badge_locked: "🔒 Liquidity Pool",
+        badge_locked: "Liquidity Pool",
         btn_deposit: "Deposit",
         partner_acc_label: "PARTNER ACCOUNT",
         btn_withdraw: "Withdraw",
@@ -5329,6 +5629,7 @@
         p1_ticker: "Target Ticker: $MNX",
         p1_desc: "Automated ecosystem of children's and entertainment video channels with global monetization.",
         col_share_price: "PRICE",
+        col_dividends: "DIVIDENDS",
         col_ipo_ratio: "PTS BOOST",
         p1_ratio: "+80 PTS/h",
         col_valuation: "FARMING POOL",
@@ -5399,12 +5700,12 @@
         upline_direct: "Direct registration",
         col_spent: "SPENT",
         col_status: "STATUS",
-        status_farming: "Farming ⚡",
+        status_farming: "Online",
         empty_portfolio: "Empty",
       },
       fr: {
         balance_label: "Solde USDT",
-        badge_locked: "🔒 Pool de liquidité",
+        badge_locked: "Pool de liquidité",
         btn_deposit: "Déposer",
         partner_acc_label: "COMPTE PARTENAIRE",
         btn_withdraw: "Retrait",
@@ -5416,6 +5717,7 @@
         p1_ticker: "Ticker cible: $MNX",
         p1_desc: "Écosystème automatisé de chaînes vidéo pour enfants et de divertissement avec monétisation mondiale.",
         col_share_price: "PRIX",
+        col_dividends: "DIVIDENDES",
         col_ipo_ratio: "BOOST PTS",
         p1_ratio: "+80 PTS/h",
         col_valuation: "POOL DE FARMING",
@@ -5486,12 +5788,12 @@
         upline_direct: "Inscription directe",
         col_spent: "DÉPENSÉ",
         col_status: "STATUT",
-        status_farming: "Farming ⚡",
+        status_farming: "En ligne",
         empty_portfolio: "Vide",
       },
       vi: {
         balance_label: "Số dư USDT",
-        badge_locked: "🔒 Quỹ thanh khoản",
+        badge_locked: "Quỹ thanh khoản",
         btn_deposit: "Nạp tiền",
         partner_acc_label: "TÀI KHOẢN ĐỐI TÁC",
         btn_withdraw: "Rút tiền",
@@ -5503,6 +5805,7 @@
         p1_ticker: "Mã dự kiến: $MNX",
         p1_desc: "Hệ sinh thái tự động gồm các kênh video thiếu nhi và giải trí với khả năng kiếm tiền toàn cầu.",
         col_share_price: "GIÁ",
+        col_dividends: "CỔ TỨC",
         col_ipo_ratio: "BOOST PTS",
         p1_ratio: "+80 PTS/h",
         col_valuation: "POOL ĐÀO",
@@ -5573,7 +5876,7 @@
         upline_direct: "Đăng ký trực tiếp",
         col_spent: "ĐÃ CHI",
         col_status: "TRẠNG THÁI",
-        status_farming: "Đang đào ⚡",
+        status_farming: "Trực tuyến",
         empty_portfolio: "Trống",
       }
     };
@@ -5890,8 +6193,8 @@
 
     let selectedProject = "Media Network X";
     let selectedTicker = "$MNX";
-    let selectedShares = 20;
-    let selectedCost = 100;
+    let selectedShares = 1;
+    let selectedCost = 20;
 
     const myPortfolio = [];
     const myReferrals = [];
@@ -9670,6 +9973,76 @@
     // ==========================================
     // 7. ИНВЕСТИЦИИ И РЕФЕРАЛЫ
     // ==========================================
+    const PROJECTS_DATA = {
+      'Media Network X': {
+        name: 'Media Network Node',
+        ticker: '$MNX',
+        tag: 'AI Media',
+        apy: '18% APY',
+        minEntry: '$20 / нода',
+        summary: 'Вычислительный узел генерации, AI-дубляжа и дистрибуции детских и познавательных YouTube-каналов с глобальной монетизацией в Tier-1 странах.',
+        model: 'Выручка от Google AdSense, спонсорских размещений и коммерческого лицензирования контента.',
+        assets: 'Сетка YouTube-каналов с верифицированной монетизацией, авторские медиа-библиотеки и права на AI-персонажей.',
+        payouts: 'Ежемесячное начисление дивидендов в USDT на баланс аккаунта.',
+        tokenomics: '35% ежемесячной прибыли сети направляется на выкуп токена ($MNX) на DEX. Нафармленные PTS гарантируют прямую квоту в Airdrop на TGE.'
+      },
+      'Cloud Render Core': {
+        name: 'Cloud Render Node',
+        ticker: '$CRND',
+        tag: 'Compute',
+        apy: '24% APY',
+        minEntry: '$20 / нода',
+        summary: 'Узел распределенной серверной инфраструктуры графических процессоров (RTX 4090 / A100) для 3D-рендеринга, видеогенерации и инференса нейросетей.',
+        model: 'Почасовая сдача мощностей независимым CGI/VFX-студиям, геймдев-командам и исследователям нейросетей.',
+        assets: 'Собственные серверные стойки с высокопроизводительными GPU в дата-центрах уровня Tier III.',
+        payouts: 'Ежемесячные начисления в USDT от фактической аренды рендер-серверов.',
+        tokenomics: 'Выручка формирует пул ликвидности торговой пары $CRND/TON. Владение нодами закрепляет статус валидатора ранней стадии.'
+      },
+      'MegaWatt Mining Cluster': {
+        name: 'Green Hashrate Node',
+        ticker: '$MWMC',
+        tag: 'Mining & Energy',
+        apy: '28% APY',
+        minEntry: '$20 / нода',
+        summary: 'Узел валидации промышленного дата-центра добычи криптовалют мощностью 4.2 МВт с прямым подключением к гидрогенерации по льготному тарифу.',
+        model: 'Генерация хешрейта энергоэффективными ASIC-майнерами с автоматической конвертацией добытых монет в стейблкоин USDT.',
+        assets: 'Модульные контейнерные дата-центры, трансформаторы и парки ASIC-устройств последнего поколения.',
+        payouts: 'Еженедельный майнинг-доход за вычетом себестоимости чистой гидроэнергии.',
+        tokenomics: 'Часть намайненного резерва отправляется в фонд казначейского обеспечения (Treasury Fund), формируя фундаментальную цену токена на листинге.'
+      }
+    };
+
+    function openProjectDetails(projectKey) {
+      const p = PROJECTS_DATA[projectKey];
+      if (!p) return;
+      safeSetText('p-modal-name', p.name || projectKey);
+      safeSetText('p-modal-ticker', p.ticker);
+      safeSetText('p-modal-tag', p.tag);
+      safeSetText('p-modal-summary', p.summary);
+      safeSetText('p-modal-model', p.model);
+      safeSetText('p-modal-assets', p.assets);
+      safeSetText('p-modal-payouts', p.payouts);
+      safeSetText('p-modal-apy', p.apy);
+      safeSetText('p-modal-tokenomics', p.tokenomics || '');
+
+      const investBtn = safeGet('p-modal-invest-btn');
+      if (investBtn) {
+        investBtn.onclick = () => {
+          closeProjectDetails();
+          openInvestScreen(projectKey, 20, p.ticker);
+        };
+      }
+
+      const modal = safeGet('project-details-modal');
+      if (modal) modal.classList.add('active');
+      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+    }
+
+    function closeProjectDetails() {
+      const modal = safeGet('project-details-modal');
+      if (modal) modal.classList.remove('active');
+    }
+
     let selectedPaySource = 'invest'; // 'invest' или 'partner'
 
     function selectPaySource(source) {
@@ -9681,40 +10054,128 @@
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
     }
 
+    // Состояние рассрочки с поддержкой произвольной базовой стоимости
+    let isInstallmentActive = false;
+    let installmentBaseCost = 5000;
+    let installmentMonths = 24;
+    let installmentMonthlyAmount = 208.33;
+
+    function setInstallmentTerm(months, el) {
+      installmentMonths = months;
+      document.querySelectorAll('.installment-tab').forEach(t => t.classList.remove('active'));
+      if (el) {
+        el.classList.add('active');
+      } else {
+        // Выделяем таб по значению months
+        const tabs = document.querySelectorAll('.installment-tab');
+        if (months === 6 && tabs[0]) tabs[0].classList.add('active');
+        else if (months === 12 && tabs[1]) tabs[1].classList.add('active');
+        else if (months === 24 && tabs[2]) tabs[2].classList.add('active');
+      }
+
+      installmentMonthlyAmount = parseFloat((installmentBaseCost / months).toFixed(2));
+      safeSetText('inst-monthly-val', `$${installmentMonthlyAmount.toFixed(2)} / мес`);
+      safeSetText('inst-first-pay', `$${installmentMonthlyAmount.toFixed(2)}`);
+
+      selectedCost = installmentMonthlyAmount;
+      const btn = safeGet('btn-activate-nodes');
+      if (btn) btn.innerText = `Активировать (1-й взнос $${installmentMonthlyAmount.toFixed(2)})`;
+      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+    }
+
+    function updateInvestPreview() {
+      const currentAsset = myPortfolio.filter(a => a.ticker === selectedTicker);
+      const currentNodes = currentAsset.reduce((acc, a) => acc + (a.shares || 0), 0);
+      const currentInvested = currentAsset.reduce((acc, a) => acc + (a.invested || 0), 0);
+      const currentRate = Math.floor(currentNodes * 16);
+      const currentLvl = Math.floor(currentInvested / 20) || 0;
+
+      safeSetText('inv-current-lvl', `LVL ${currentLvl}`);
+      safeSetText('inv-current-shares', `${currentNodes} нод`);
+      safeSetText('inv-current-rate', `+${currentRate} PTS/ч`);
+
+      const nextNodes = currentNodes + selectedShares;
+      const addedRate = Math.floor(selectedShares * 16);
+      const totalRate = currentRate + addedRate;
+      safeSetText('inv-preview-shares', `${nextNodes} нод (+${totalRate} PTS/ч)`);
+    }
+
     function openInvestScreen(projectName, pricePerShare, ticker) {
       selectedProject = projectName;
       selectedTicker = ticker;
-      safeSetText('inv-project-name', `${projectName} (${ticker})`);
+      selectedShares = 1;
+      selectedCost = 20;
+      isInstallmentActive = false;
+      installmentBaseCost = 5000;
+
+      const pData = PROJECTS_DATA[projectName];
+      const displayName = pData?.name || projectName;
+
+      safeSetText('inv-project-name', `${displayName} (${ticker})`);
       safeSetText('opt-invest-bal', `$${balance.toFixed(2)}`);
       safeSetText('opt-partner-bal', `$${partnerBalance.toFixed(2)}`);
+
+      const instPanel = safeGet('cluster-installment-panel');
+      if (instPanel) instPanel.style.display = 'none';
+
+      const btn = safeGet('btn-activate-nodes');
+      if (btn) btn.innerText = 'Подтвердить активацию';
+
+      const tiers = document.querySelectorAll('.tier-selector .tier-box');
+      tiers.forEach((t, idx) => t.classList.toggle('selected', idx === 0));
+
       selectPaySource('invest');
+      updateInvestPreview();
       switchTab('invest');
     }
 
-    function selectTier(element, shares, cost) {
-      document.querySelectorAll('.tier-box').forEach(b => b.classList.remove('selected'));
+    function selectTier(element, shares, cost, isInstallment = false) {
+      document.querySelectorAll('.tier-selector .tier-box').forEach(b => b.classList.remove('selected'));
       if (element) element.classList.add('selected');
+
       selectedShares = shares;
-      selectedCost = cost;
+      const instPanel = safeGet('cluster-installment-panel');
+      const btn = safeGet('btn-activate-nodes');
+
+      if (isInstallment) {
+        isInstallmentActive = true;
+        installmentBaseCost = cost;
+        if (instPanel) instPanel.style.display = 'block';
+
+        const noteEl = safeGet('inst-note-text');
+        if (noteEl) noteEl.innerText = `* Все ${shares} нод активируются в сети сразу после внесения первого взноса.`;
+
+        setInstallmentTerm(installmentMonths);
+      } else {
+        isInstallmentActive = false;
+        selectedCost = cost;
+        if (instPanel) instPanel.style.display = 'none';
+        if (btn) btn.innerText = 'Подтвердить активацию';
+      }
+
+      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+      updateInvestPreview();
     }
 
     async function executeSharePurchase() {
       const currentAvailable = selectedPaySource === 'invest' ? balance : partnerBalance;
+      const amountToCharge = selectedCost;
 
-      if (currentAvailable < selectedCost) {
-        alert(`Недостаточно средств на ${selectedPaySource === 'invest' ? 'инвест-балансе' : 'партнерском счете'}!`);
+      if (currentAvailable < amountToCharge) {
+        alert(`Недостаточно средств на ${selectedPaySource === 'invest' ? 'инвест-балансе' : 'партнерском счете'}!\nТребуется для активации: $${amountToCharge.toFixed(2)} USDT`);
         return;
       }
 
-      const certId = 'CERT-' + Math.floor(100000 + Math.random() * 900000);
+      const certId = 'NODE-' + Math.floor(100000 + Math.random() * 900000);
+      const investedFullValue = isInstallmentActive ? installmentBaseCost : selectedCost;
 
       if (supabaseClient && dbUserId) {
         try {
           if (selectedPaySource === 'invest') {
-            balance -= selectedCost;
+            balance -= amountToCharge;
             await supabaseClient.from('accounts').update({ invest_balance: balance }).eq('user_id', dbUserId);
           } else {
-            partnerBalance -= selectedCost;
+            partnerBalance -= amountToCharge;
             await supabaseClient.from('accounts').update({ partner_balance: partnerBalance }).eq('user_id', dbUserId);
           }
 
@@ -9723,30 +10184,38 @@
             project_name: selectedProject,
             project_ticker: selectedTicker,
             shares_count: selectedShares,
-            invested_amount: selectedCost,
+            invested_amount: investedFullValue,
             certificate_id: certId
           }]);
 
           await supabaseClient.from('transactions').insert([{
             user_id: dbUserId,
-            type: 'BUY_SHARES',
-            amount: selectedCost,
+            type: isInstallmentActive ? 'INSTALLMENT_NODE_PURCHASE' : 'BUY_NODES',
+            amount: amountToCharge,
             account_type: selectedPaySource === 'invest' ? 'INVEST' : 'PARTNER',
-            details: { project: selectedProject, shares: selectedShares, certId, paid_from: selectedPaySource }
+            details: {
+              project: selectedProject,
+              nodes: selectedShares,
+              full_cost: investedFullValue,
+              first_payment: amountToCharge,
+              term_months: isInstallmentActive ? installmentMonths : 0,
+              paid_from: selectedPaySource,
+              certId: certId
+            }
           }]);
         } catch (e) {
           console.warn("DB write error:", e);
         }
       } else {
-        if (selectedPaySource === 'invest') balance -= selectedCost;
-        else partnerBalance -= selectedCost;
+        if (selectedPaySource === 'invest') balance -= amountToCharge;
+        else partnerBalance -= amountToCharge;
       }
 
       myPortfolio.push({
         project: selectedProject,
         ticker: selectedTicker,
         shares: selectedShares,
-        invested: selectedCost,
+        invested: investedFullValue,
         certId: certId,
         date: new Date().toLocaleDateString()
       });
@@ -9754,7 +10223,14 @@
       updateUI();
       renderPortfolio();
       if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
-      alert(`Успешно активировано! Оплачено с ${selectedPaySource === 'invest' ? 'инвест-счета' : 'партнерского счета'}.`);
+
+      const addedSpeed = Math.floor(selectedShares * 16);
+      if (isInstallmentActive) {
+        alert(`🎉 Пакет на ${selectedShares} Нод ($${investedFullValue.toLocaleString()}) активирован в рассрочку на ${installmentMonths} мес!\nПервый взнос $${amountToCharge.toFixed(2)} списан. Скорость +${addedSpeed} PTS/ч запущена.`);
+      } else {
+        alert(`🎉 Успешно активировано +${selectedShares} нод! Добавлено +${addedSpeed} PTS/ч.`);
+      }
+
       switchTab('portfolio', document.querySelectorAll('.tab-btn')[1]);
     }
 
@@ -9763,7 +10239,7 @@
       if (!container) return;
       const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
       if (myPortfolio.length === 0) {
-        container.innerHTML = `<div style="text-align: center; padding: 40px 10px; color: var(--text-dim);">${dict.empty_portfolio || 'Пусто'}</div>`;
+        container.innerHTML = `<div style="text-align: center; padding: 40px 10px; color: var(--text-dim);">${dict.empty_portfolio || 'У вас пока нет активных нод.'}</div>`;
         return;
       }
 
@@ -9776,26 +10252,42 @@
           groupedPortfolio[asset.ticker] = { ...asset };
         }
       });
-      
-      const spentLabel = dict.col_spent || "ПОТРАЧЕНО";
-      const farmLabel = dict.shares_label || "СКОРОСТЬ ДОБЫЧИ";
-      const statusLabel = dict.col_status || "СТАТУС";
-      const farmingBadge = dict.status_farming || "Фарминг ⚡";
 
       container.innerHTML = Object.values(groupedPortfolio).map(item => {
-        const farmRate = Math.floor(item.invested * 0.8);
-        const level = Math.floor(item.invested / 100) || 1;
+        const farmRate = Math.floor(item.shares * 16);
+        const level = Math.floor(item.invested / 20) || 1;
+        const pData = PROJECTS_DATA[item.project];
+        const displayName = pData?.name || item.project;
+
         return `
-        <div class="project-card" style="margin-bottom: 14px; border-color: rgba(56, 189, 248, 0.25); background: linear-gradient(160deg, rgba(30,41,59,0.6) 0%, rgba(15,23,42,0.9) 100%);">
+        <div class="project-card" style="margin-bottom: 14px; border-color: rgba(56, 189, 248, 0.3); background: linear-gradient(160deg, rgba(20,29,48,0.7) 0%, rgba(10,15,28,0.95) 100%);">
           <div class="project-top" style="align-items: center;">
-            <div><b style="font-size: 16px; color: #fff; display: flex; align-items: center; gap: 6px;">${item.project} <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-size: 10px; padding: 2px 6px; border-radius: 6px; border: 1px solid rgba(56, 189, 248, 0.3);">LVL ${level}</span></b>
-            <div style="font-size: 11px; color: var(--text-dim); margin-top: 4px;">NFT ID: ${item.certId}</div></div>
-            <div><span class="project-tag" style="background: rgba(16, 185, 129, 0.12); color: var(--accent-green); border: 1px solid rgba(16,185,129,0.3);">ACTIVE</span></div>
+            <div>
+              <b style="font-size: 16px; color: #fff; display: flex; align-items: center; gap: 6px;">
+                ${displayName} 
+                <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-size: 10px; padding: 2px 6px; border-radius: 6px; border: 1px solid rgba(56, 189, 248, 0.35);">LVL ${level}</span>
+              </b>
+              <div style="font-size: 11px; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace;">NFT ID: ${item.certId} • ${item.shares} Нод в сети</div>
+            </div>
+            <div>
+              <span class="portfolio-active-badge">
+                <span class="portfolio-active-dot"></span>ACTIVE
+              </span>
+            </div>
           </div>
-          <div class="equity-specs" style="margin-top: 14px; margin-bottom: 0; background: rgba(0, 0, 0, 0.4);">
-            <div class="equity-col"><span>${spentLabel}</span><b style="color: #fff;">${item.invested} USDT</b></div>
-            <div class="equity-col"><span>${farmLabel}</span><b style="color: #38bdf8;">+${farmRate} PTS/ч</b></div>
-            <div class="equity-col"><span>${statusLabel}</span><b style="color: var(--accent-gold);">${farmingBadge}</b></div>
+          <div class="equity-specs" style="margin-top: 14px; margin-bottom: 0; background: rgba(0, 0, 0, 0.45); border-color: rgba(255, 255, 255, 0.08);">
+            <div class="equity-col">
+              <span>НОДЫ</span>
+              <b style="color: #fff;">${item.shares} шт. ($${item.invested})</b>
+            </div>
+            <div class="equity-col">
+              <span>СКОРОСТЬ</span>
+              <b style="color: #38bdf8;">+${farmRate} PTS/ч</b>
+            </div>
+            <div class="equity-col">
+              <span>СТАТУС</span>
+              <b class="portfolio-status-live">В сети</b>
+            </div>
           </div>
         </div>`;
       }).join('');
@@ -9859,13 +10351,13 @@
       const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
       const messageText = dict.share_msg || "🚀 Присоединяйся к EquiCore! Получи приветственный бонус 25 USDT, разгоняй баланс в играх и зарабатывай на реальных активах:";
 
-      // Передаем текст и ссылку в одном параметре text, чтобы текст всегда стоял первым
+      // Telegram требует обязательный параметр url=. Передаем в него текст со ссылкой, чтобы текст шел первым.
       const fullPost = `${messageText}\n\n${link}`;
-      const shareUrl = `https://t.me/share/url?text=${encodeURIComponent(fullPost)}`;
+      const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(fullPost)}`;
 
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
 
-      if (tg && tg.openTelegramLink) {
+      if (tg && typeof tg.openTelegramLink === 'function') {
         tg.openTelegramLink(shareUrl);
       } else {
         window.open(shareUrl, '_blank');
@@ -10261,6 +10753,63 @@
 
       <button id="transfer-action-btn" class="btn" onclick="submitP2PTransfer()">
         Перевести средства
+      </button>
+    </div>
+  </div>
+
+  <!-- Модальное окно: Паспорт проекта -->
+  <div class="modal-overlay" id="project-details-modal" onclick="if(event.target === this) closeProjectDetails()">
+    <div class="modal-window" style="max-height: 85vh; overflow-y: auto;">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title" id="p-modal-name">Название проекта</div>
+          <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">
+            Тикер: <span id="p-modal-ticker" style="color: #38bdf8; font-family: 'JetBrains Mono';">$TICKER</span> • <span id="p-modal-tag" style="color: #fff;">Сектор</span>
+          </div>
+        </div>
+        <button class="modal-close" onclick="closeProjectDetails()">&times;</button>
+      </div>
+
+      <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 12px; padding: 12px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <span style="font-size: 10px; color: var(--text-dim); display: block; text-transform: uppercase;">Ориентир доходности:</span>
+          <b id="p-modal-apy" style="font-size: 18px; color: #34d399; font-family: 'JetBrains Mono';">18% APY</b>
+        </div>
+        <div style="text-align: right;">
+          <span style="font-size: 10px; color: var(--text-dim); display: block; text-transform: uppercase;">Выплаты:</span>
+          <b style="font-size: 12px; color: #fff;">В USDT</b>
+        </div>
+      </div>
+
+      <div style="font-size: 12.5px; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px;" id="p-modal-summary"></div>
+
+      <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); border-radius: 12px; padding: 12px; margin-bottom: 12px;">
+        <span style="font-size: 10.5px; color: #38bdf8; font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 4px;">Бизнес-модель (откуда доход):</span>
+        <div style="font-size: 12px; color: #cbd5e1; line-height: 1.4;" id="p-modal-model"></div>
+      </div>
+
+      <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); border-radius: 12px; padding: 12px; margin-bottom: 12px;">
+        <span style="font-size: 10.5px; color: #38bdf8; font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 4px;">Физическое обеспечение (RWA):</span>
+        <div style="font-size: 12px; color: #cbd5e1; line-height: 1.4;" id="p-modal-assets"></div>
+      </div>
+
+      <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); border-radius: 12px; padding: 12px; margin-bottom: 12px;">
+        <span style="font-size: 10.5px; color: #38bdf8; font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 4px;">Регламент начислений:</span>
+        <div style="font-size: 12px; color: #cbd5e1; line-height: 1.4;" id="p-modal-payouts"></div>
+      </div>
+
+      <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px; padding: 12px; margin-bottom: 16px;">
+        <span style="font-size: 10.5px; color: #38bdf8; font-weight: 800; text-transform: uppercase; display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+          🔗 Связь с токеном и листингом:
+        </span>
+        <div style="font-size: 12px; color: #e2e8f0; line-height: 1.45;" id="p-modal-tokenomics"></div>
+      </div>
+
+      <button id="p-modal-invest-btn" class="btn" style="margin-bottom: 8px;">
+        Инвестировать от $20
+      </button>
+      <button class="btn btn-secondary" onclick="closeProjectDetails()" style="margin-top: 0 !important;">
+        Закрыть
       </button>
     </div>
   </div>
