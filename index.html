@@ -2516,6 +2516,7 @@
       justify-content: center;
       cursor: pointer;
       transition: background 0.15s ease;
+      flex-shrink: 0 !important;
     }
     .rubup-step-btn:active {
       background: rgba(255, 255, 255, 0.15);
@@ -2525,8 +2526,11 @@
       font-weight: 800;
       color: #fff;
       font-family: 'JetBrains Mono', monospace;
-      display: flex;
-      align-items: center;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      min-width: 0 !important;
+      padding: 0 6px !important;
       gap: 4px;
     }
     .rubup-bet-val span {
@@ -3642,11 +3646,13 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 17px;
       font-weight: 800;
-      text-align: center;
-      width: 85px;
+      width: auto !important;
+      min-width: 42px !important;
+      max-width: 65px !important;
+      text-align: right !important;
+      padding: 0 4px 0 0 !important;
+      margin: 0 !important;
       outline: none;
-      padding: 0;
-      margin: 0;
     }
     .mines-input-bet:focus {
       border-bottom: 1.5px solid #38bdf8;
@@ -3752,7 +3758,7 @@
           <span class="partner-balance-val" id="partner-balance">$0.00 USDT</span>
         </div>
         <div style="display: flex; gap: 6px; align-items: center; flex-shrink: 0;">
-          <button class="btn-withdraw-small" onclick="openTransferModal()" style="background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8 !important; box-shadow: none;">
+          <button class="btn-withdraw-small" onclick="openTransferModal()" style="background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8 !important; box-shadow: none;" data-i18n="btn_transfer">
             Перевод
           </button>
           <button class="btn-withdraw-small" onclick="openWithdrawModal()" data-i18n="btn_withdraw">
@@ -3794,8 +3800,8 @@
     <!-- 1. Экран: Экосистема нод -->
     <div id="screen-hub" class="screen active">
       <div class="section-title">
-        <span>Инфраструктурные Ноды</span>
-        <span class="section-sub">Ecosystem Node Sale</span>
+        <span data-i18n="hub_title">Инфраструктурные Ноды</span>
+        <span class="section-sub" data-i18n="hub_sub">Ecosystem Node Sale</span>
       </div>
 
       <!-- Проект 1 -->
@@ -3803,40 +3809,40 @@
         <div class="project-top">
           <div>
             <div class="project-name">Media Network Node</div>
-            <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">Целевой тикер: $MNX • 1 Нода = $20</div>
+            <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;" data-i18n="p1_ticker_sub">Целевой тикер: $MNX • 1 Нода = $20</div>
           </div>
           <span class="project-tag">AI Media</span>
         </div>
-        <p class="project-desc">Узел обработки, AI-дубляжа и дистрибуции детских медиасетей с выручкой от рекламы YouTube AdSense.</p>
+        <p class="project-desc" data-i18n="node_mnx_desc">Узел обработки, AI-дубляжа и дистрибуции детских медиасетей с выручкой от рекламы YouTube AdSense.</p>
         
         <div class="equity-specs">
           <div class="equity-col">
-            <span>СТОИМОСТЬ</span>
-            <b style="color: #fff;">$20 / нода</b>
+            <span data-i18n="col_cost">СТОИМОСТЬ</span>
+            <b style="color: #fff;" data-i18n="node_per_price">$20 / нода</b>
           </div>
           <div class="equity-col">
-            <span>ДИВИДЕНДЫ</span>
+            <span data-i18n="col_dividends">ДИВИДЕНДЫ</span>
             <b style="color: #34d399;">18% APY</b>
           </div>
           <div class="equity-col">
-            <span>ФАРМИНГ</span>
-            <b style="color: #38bdf8;">+16 PTS/ч</b>
+            <span data-i18n="col_farming">ФАРМИНГ</span>
+            <b style="color: #38bdf8;">+16 <span data-i18n="pts_hourly_unit">PTS/ч</span></b>
           </div>
         </div>
 
         <div class="progress-box">
           <div class="progress-bar"><div class="progress-fill" style="width: 68%;"></div></div>
           <div class="progress-labels">
-            <span>Активировано: 3,400 нод</span>
-            <span>Пул раунда: 5,000 нод</span>
+            <span><span data-i18n="pool_activated">Активировано</span>: 3,400 <span data-i18n="nodes_unit">нод</span></span>
+            <span><span data-i18n="pool_total">Пул раунда</span>: 5,000 <span data-i18n="nodes_unit">нод</span></span>
           </div>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 8px;">
-          <button class="btn btn-secondary" onclick="openProjectDetails('Media Network X')" style="margin-top: 0 !important; padding: 12px 6px; font-size: 13px;">
+          <button class="btn btn-secondary" onclick="openProjectDetails('Media Network X')" style="margin-top: 0 !important; padding: 12px 6px; font-size: 13px;" data-i18n="btn_node_passport">
             Паспорт ноды
           </button>
-          <button class="btn" onclick="openInvestScreen('Media Network X', 20, '$MNX')" style="margin-top: 0 !important;">
+          <button class="btn" onclick="openInvestScreen('Media Network X', 20, '$MNX')" style="margin-top: 0 !important;" data-i18n="btn_node_activate">
             Активировать ноды
           </button>
         </div>
@@ -3847,40 +3853,40 @@
         <div class="project-top">
           <div>
             <div class="project-name">Cloud Render Node</div>
-            <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">Целевой тикер: $CRND • 1 Нода = $20</div>
+            <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;" data-i18n="p2_ticker_sub">Целевой тикер: $CRND • 1 Нода = $20</div>
           </div>
           <span class="project-tag">Compute</span>
         </div>
-        <p class="project-desc">Узел распределённой сети GPU-рендеринга и вычислений для генерации 3D-анимации и инференса нейросетей.</p>
+        <p class="project-desc" data-i18n="node_crnd_desc">Узел распределённой сети GPU-рендеринга и вычислений для генерации 3D-анимации и инференса нейросетей.</p>
         
         <div class="equity-specs">
           <div class="equity-col">
-            <span>СТОИМОСТЬ</span>
-            <b style="color: #fff;">$20 / нода</b>
+            <span data-i18n="col_cost">СТОИМОСТЬ</span>
+            <b style="color: #fff;" data-i18n="node_per_price">$20 / нода</b>
           </div>
           <div class="equity-col">
-            <span>ДИВИДЕНДЫ</span>
+            <span data-i18n="col_dividends">ДИВИДЕНДЫ</span>
             <b style="color: #34d399;">24% APY</b>
           </div>
           <div class="equity-col">
-            <span>ФАРМИНГ</span>
-            <b style="color: #38bdf8;">+16 PTS/ч</b>
+            <span data-i18n="col_farming">ФАРМИНГ</span>
+            <b style="color: #38bdf8;">+16 <span data-i18n="pts_hourly_unit">PTS/ч</span></b>
           </div>
         </div>
 
         <div class="progress-box">
           <div class="progress-bar"><div class="progress-fill" style="width: 35%;"></div></div>
           <div class="progress-labels">
-            <span>Активировано: 3,500 нод</span>
-            <span>Пул раунда: 10,000 нод</span>
+            <span><span data-i18n="pool_activated">Активировано</span>: 3,500 <span data-i18n="nodes_unit">нод</span></span>
+            <span><span data-i18n="pool_total">Пул раунда</span>: 10,000 <span data-i18n="nodes_unit">нод</span></span>
           </div>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 8px;">
-          <button class="btn btn-secondary" onclick="openProjectDetails('Cloud Render Core')" style="margin-top: 0 !important; padding: 12px 6px; font-size: 13px;">
+          <button class="btn btn-secondary" onclick="openProjectDetails('Cloud Render Core')" style="margin-top: 0 !important; padding: 12px 6px; font-size: 13px;" data-i18n="btn_node_passport">
             Паспорт ноды
           </button>
-          <button class="btn" onclick="openInvestScreen('Cloud Render Core', 20, '$CRND')" style="margin-top: 0 !important;">
+          <button class="btn" onclick="openInvestScreen('Cloud Render Core', 20, '$CRND')" style="margin-top: 0 !important;" data-i18n="btn_node_activate">
             Активировать ноды
           </button>
         </div>
@@ -3891,40 +3897,40 @@
         <div class="project-top">
           <div>
             <div class="project-name">Green Hashrate Node</div>
-            <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">Целевой тикер: $MWMC • 1 Нода = $20</div>
+            <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;" data-i18n="p3_ticker_sub">Целевой тикер: $MWMC • 1 Нода = $20</div>
           </div>
           <span class="project-tag" style="background: rgba(245, 158, 11, 0.12); color: #facc15; border: 1px solid rgba(245, 158, 11, 0.3);">Mining & Energy</span>
         </div>
-        <p class="project-desc">Узел валидации промышленного майнинг-дата-центра 4.2 МВт с прямым подключением к гидроэлектростанции.</p>
+        <p class="project-desc" data-i18n="node_mwmc_desc">Узел валидации промышленного майнинг-дата-центра 4.2 МВт с прямым подключением к гидроэлектростанции.</p>
         
         <div class="equity-specs">
           <div class="equity-col">
-            <span>СТОИМОСТЬ</span>
-            <b style="color: #fff;">$20 / нода</b>
+            <span data-i18n="col_cost">СТОИМОСТЬ</span>
+            <b style="color: #fff;" data-i18n="node_per_price">$20 / нода</b>
           </div>
           <div class="equity-col">
-            <span>ДИВИДЕНДЫ</span>
+            <span data-i18n="col_dividends">ДИВИДЕНДЫ</span>
             <b style="color: #34d399;">28% APY</b>
           </div>
           <div class="equity-col">
-            <span>ФАРМИНГ</span>
-            <b style="color: #38bdf8;">+16 PTS/ч</b>
+            <span data-i18n="col_farming">ФАРМИНГ</span>
+            <b style="color: #38bdf8;">+16 <span data-i18n="pts_hourly_unit">PTS/ч</span></b>
           </div>
         </div>
 
         <div class="progress-box">
           <div class="progress-bar"><div class="progress-fill" style="width: 52%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);"></div></div>
           <div class="progress-labels">
-            <span>Активировано: 7,800 нод</span>
-            <span>Пул раунда: 15,000 нод</span>
+            <span><span data-i18n="pool_activated">Активировано</span>: 7,800 <span data-i18n="nodes_unit">нод</span></span>
+            <span><span data-i18n="pool_total">Пул раунда</span>: 15,000 <span data-i18n="nodes_unit">нод</span></span>
           </div>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 8px;">
-          <button class="btn btn-secondary" onclick="openProjectDetails('MegaWatt Mining Cluster')" style="margin-top: 0 !important; padding: 12px 6px; font-size: 13px;">
+          <button class="btn btn-secondary" onclick="openProjectDetails('MegaWatt Mining Cluster')" style="margin-top: 0 !important; padding: 12px 6px; font-size: 13px;" data-i18n="btn_node_passport">
             Паспорт ноды
           </button>
-          <button class="btn" onclick="openInvestScreen('MegaWatt Mining Cluster', 20, '$MWMC')" style="margin-top: 0 !important;">
+          <button class="btn" onclick="openInvestScreen('MegaWatt Mining Cluster', 20, '$MWMC')" style="margin-top: 0 !important;" data-i18n="btn_node_activate">
             Активировать ноды
           </button>
         </div>
@@ -3934,8 +3940,8 @@
     <!-- 2. Экран: Активация нод и рассрочка -->
     <div id="screen-invest" class="screen">
       <div class="section-title">
-        <span>Активация и докупка нод</span>
-        <span class="section-sub">Неограниченное накопление</span>
+        <span data-i18n="invest_title">Активация и докупка нод</span>
+        <span class="section-sub" data-i18n="invest_sub">Неограниченное накопление</span>
       </div>
       
       <!-- Карточка текущего владения нодами -->
@@ -3955,12 +3961,12 @@
         <div style="display: flex; align-items: flex-start; gap: 8px;">
           <span style="font-size: 14px; line-height: 1;">💡</span>
           <div style="font-size: 11.5px; color: #cbd5e1; line-height: 1.45;">
-            <b style="color: #38bdf8;">Все ноды суммируются в единый стек:</b> вы можете активировать ноды частями по $20 или сразу брать кластер — мощность объединяется. Чем больше суммарно нод на аккаунте, тем выше скорость майнинга PTS, дивиденды и ваша итоговая доля токенов на листинге (TGE).
+            <b style="color: #38bdf8;" data-i18n="callout_stack_title">Все ноды суммируются в единый стек:</b> <span data-i18n="callout_stack_desc">вы можете активировать ноды частями по $20 или сразу брать кластер — мощность объединяется. Чем больше суммарно нод на аккаунте, тем выше скорость майнинга PTS, дивиденды и ваша итоговая доля токенов на листинге (TGE).</span>
           </div>
         </div>
       </div>
 
-      <div style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin-bottom: 8px;">
+      <div style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin-bottom: 8px;" data-i18n="select_pack_lbl">
         Выберите пакет нод для добавления:
       </div>
 
@@ -3968,8 +3974,8 @@
         <!-- Базовые пакеты -->
         <div class="tier-box selected" onclick="selectTier(this, 1, 20)">
           <div>
-            <div class="tier-title">+1 Нода сети</div>
-            <div class="tier-sub">Стартовый узел • $20</div>
+            <div class="tier-title" data-i18n="pack_1_title">+1 Нода сети</div>
+            <div class="tier-sub" data-i18n="pack_1_sub">Стартовый узел • $20</div>
           </div>
           <div class="tier-price">
             <b>$20</b>
@@ -3979,8 +3985,8 @@
 
         <div class="tier-box" onclick="selectTier(this, 5, 100)">
           <div>
-            <div class="tier-title">+5 Нод сети</div>
-            <div class="tier-sub">Стандартный узел • $100</div>
+            <div class="tier-title" data-i18n="pack_5_title">+5 Нод сети</div>
+            <div class="tier-sub" data-i18n="pack_5_sub">Стандартный узел • $100</div>
           </div>
           <div class="tier-price">
             <b>$100</b>
@@ -3990,8 +3996,8 @@
 
         <div class="tier-box" onclick="selectTier(this, 25, 500)">
           <div>
-            <div class="tier-title">+25 Нод сети</div>
-            <div class="tier-sub">Синдикатный узел • $500</div>
+            <div class="tier-title" data-i18n="pack_25_title">+25 Нод сети</div>
+            <div class="tier-sub" data-i18n="pack_25_sub">Синдикатный узел • $500</div>
           </div>
           <div class="tier-price">
             <b>$500</b>
@@ -4003,10 +4009,10 @@
         <div class="tier-box tier-box-purple" onclick="selectTier(this, 50, 1000, true)">
           <div>
             <div class="tier-title" style="color: #c084fc;">
-              <span>Мастер-Нода</span>
-              <span style="background: rgba(192, 132, 252, 0.18); color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.4); font-size: 8px; font-weight: 800; padding: 1.5px 5px; border-radius: 4px; letter-spacing: 0.3px; flex-shrink: 0;">РАССРОЧКА</span>
+              <span data-i18n="pack_master_title">Мастер-Нода</span>
+              <span style="background: rgba(192, 132, 252, 0.18); color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.4); font-size: 8px; font-weight: 800; padding: 1.5px 5px; border-radius: 4px; letter-spacing: 0.3px; flex-shrink: 0;" data-i18n="badge_installment">РАССРОЧКА</span>
             </div>
-            <div class="tier-sub">50 нод • от $41.66/мес • Приоритет TGE</div>
+            <div class="tier-sub" data-i18n="pack_master_sub">50 нод • от $41.66/мес • Приоритет TGE</div>
           </div>
           <div class="tier-price">
             <b style="color: #c084fc;">$1,000</b>
@@ -4018,10 +4024,10 @@
         <div class="tier-box tier-box-red" onclick="selectTier(this, 125, 2500, true)">
           <div>
             <div class="tier-title" style="color: #f43f5e;">
-              <span>Про-Кластер</span>
-              <span style="background: rgba(244, 63, 94, 0.18); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.45); font-size: 8px; font-weight: 800; padding: 1.5px 5px; border-radius: 4px; letter-spacing: 0.3px; flex-shrink: 0;">РАССРОЧКА</span>
+              <span data-i18n="pack_pro_title">Про-Кластер</span>
+              <span style="background: rgba(244, 63, 94, 0.18); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.45); font-size: 8px; font-weight: 800; padding: 1.5px 5px; border-radius: 4px; letter-spacing: 0.3px; flex-shrink: 0;" data-i18n="badge_installment">РАССРОЧКА</span>
             </div>
-            <div class="tier-sub">125 нод • от $104.16/мес • Квота TGE</div>
+            <div class="tier-sub" data-i18n="pack_pro_sub">125 нод • от $104.16/мес • Квота TGE</div>
           </div>
           <div class="tier-price">
             <b style="color: #f43f5e;">$2,500</b>
@@ -4033,11 +4039,11 @@
         <div class="tier-box tier-box-gold" onclick="selectTier(this, 250, 5000, true)">
           <div>
             <div class="tier-title" style="color: #facc15;">
-              <span>Кластер Валидатора</span>
-              <span style="background: rgba(250, 204, 21, 0.18); color: #facc15; border: 1px solid rgba(250, 204, 21, 0.45); font-size: 8px; font-weight: 800; padding: 1.5px 4.5px; border-radius: 4px; letter-spacing: 0.3px; flex-shrink: 0;">РАССРОЧКА</span>
+              <span data-i18n="pack_val_title">Кластер Валидатора</span>
+              <span style="background: rgba(250, 204, 21, 0.18); color: #facc15; border: 1px solid rgba(250, 204, 21, 0.45); font-size: 8px; font-weight: 800; padding: 1.5px 4.5px; border-radius: 4px; letter-spacing: 0.3px; flex-shrink: 0;" data-i18n="badge_installment">РАССРОЧКА</span>
               <span style="background: #facc15; color: #000; font-size: 8px; font-weight: 900; padding: 1.5px 4.5px; border-radius: 4px; flex-shrink: 0;">VIP</span>
             </div>
-            <div class="tier-sub">250 нод • от $208.33/мес • Главный узел</div>
+            <div class="tier-sub" data-i18n="pack_val_sub">250 нод • от $208.33/мес • Главный узел</div>
           </div>
           <div class="tier-price">
             <b style="color: #facc15;">$5,000</b>
@@ -4075,29 +4081,29 @@
 
       <!-- ПРЕВЬЮ ПРИРОСТА ПОРТФЕЛЯ (САПФИРОВЫЙ НЕОН) -->
       <div class="invest-preview-box">
-        <span style="color: #94a3b8;">Итого нод после активации:</span>
+        <span style="color: #94a3b8;" data-i18n="preview_total_lbl">Итого нод после активации:</span>
         <b id="inv-preview-shares" style="color: #38bdf8; font-family: 'JetBrains Mono'; text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);">1 нода (+16 PTS/ч)</b>
       </div>
 
       <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--card-border); border-radius: 14px; padding: 12px; margin-bottom: 16px;">
-        <span style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 8px; font-weight: 700;">Списать средства с:</span>
+        <span style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 8px; font-weight: 700;" data-i18n="pay_source_lbl">Списать средства с:</span>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
           <div id="pay-source-invest" class="tier-box selected" onclick="selectPaySource('invest')" style="padding: 10px; margin: 0;">
             <div>
-              <div style="font-size: 12px; font-weight: 700; color: #fff;">Инвест-счет</div>
+              <div style="font-size: 12px; font-weight: 700; color: #fff;" data-i18n="src_invest">Инвест-счет</div>
               <div style="font-size: 11px; color: #38bdf8; font-family: 'JetBrains Mono', monospace;" id="opt-invest-bal">$0.00</div>
             </div>
           </div>
           <div id="pay-source-partner" class="tier-box" onclick="selectPaySource('partner')" style="padding: 10px; margin: 0;">
             <div>
-              <div style="font-size: 12px; font-weight: 700; color: #fff;">Партнерский</div>
+              <div style="font-size: 12px; font-weight: 700; color: #fff;" data-i18n="src_partner">Партнерский</div>
               <div style="font-size: 11px; color: #38bdf8; font-family: 'JetBrains Mono', monospace;" id="opt-partner-bal">$0.00</div>
             </div>
           </div>
         </div>
       </div>
 
-      <button class="btn" id="btn-activate-nodes" onclick="executeSharePurchase()">Подтвердить активацию</button>
+      <button class="btn" id="btn-activate-nodes" onclick="executeSharePurchase()" data-i18n="btn_confirm_activation">Подтвердить активацию</button>
       <button class="btn btn-secondary" onclick="switchTab('hub')">Назад</button>
     </div>
 
@@ -4166,7 +4172,7 @@
       <!-- ГЛАВНОЕ МЕНЮ ИГР (ВИТРИНА В СТИЛЕ RubUP) -->
       <div id="games-hub-view">
         <div class="section-title" style="margin-bottom: 14px;">
-          <span>Игры</span>
+          <span data-i18n="games_title">Игры</span>
         </div>
 
         <div class="games-grid">
@@ -4293,7 +4299,7 @@
 
             <!-- ПОДВАЛ КАРТОЧКИ: «Путь подарков» белым жирным (18px), онлайн • 4 -->
             <div class="gifts-card-footer">
-              <div class="g-title" style="font-size: 18px; font-weight: 900; color: #fff;">Путь подарков</div>
+              <div class="g-title" style="font-size: 18px; font-weight: 900; color: #fff;" data-i18n="game_gifts_title">Путь подарков</div>
               <div class="g-online" style="font-size: 13px; font-weight: 700;"><span class="dot"></span> 4</div>
             </div>
           </div>
@@ -4404,7 +4410,7 @@
             </div>
 
             <div class="g-card-footer">
-              <div class="g-title">Ракетка</div>
+              <div class="g-title" data-i18n="game_rocket_title">Ракетка</div>
               <div class="g-online"><span class="dot"></span> 3</div>
             </div>
           </div>
@@ -4507,7 +4513,7 @@
             </div>
 
             <div class="g-card-footer">
-              <div class="g-title">Рулетка</div>
+              <div class="g-title" data-i18n="game_roulette_title">Рулетка</div>
               <div class="g-online"><span class="dot"></span> 41</div>
             </div>
           </div>
@@ -4559,7 +4565,7 @@
             </div>
 
             <div class="g-card-footer">
-              <div class="g-title">Апгрейд</div>
+              <div class="g-title" data-i18n="game_upgrade_title">Апгрейд</div>
               <div class="g-online"><span class="dot"></span> 3</div>
             </div>
           </div>
@@ -4582,7 +4588,7 @@
             </div>
 
             <div class="g-card-footer">
-              <div class="g-title">Мины</div>
+              <div class="g-title" data-i18n="game_mines_title">Мины</div>
               <div class="g-online"><span class="dot"></span> 2</div>
             </div>
           </div>
@@ -4597,7 +4603,7 @@
         <div class="inner-game-header rubup-top-nav" style="margin-bottom: 12px;">
           <button class="rubup-back-btn" onclick="closeInnerGame()" style="display: flex; align-items: center; gap: 6px; width: auto; padding: 0 14px; font-weight: 700; font-size: 13px;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-            <span>Назад</span>
+            <span data-i18n="btn_back_game">Назад</span>
           </button>
 
           <div style="display: flex; align-items: center; gap: 8px;">
@@ -4617,8 +4623,8 @@
           <div class="rubup-promo-left">
             <div class="rubup-promo-dot"></div>
             <div>
-              <div class="rubup-promo-title">Мастер апгрейда</div>
-              <div class="rubup-promo-sub">сыграйте, чтобы участвовать</div>
+              <div class="rubup-promo-title" data-i18n="promo_upgrade_title">Мастер апгрейда</div>
+              <div class="rubup-promo-sub" data-i18n="promo_upgrade_sub">сыграйте, чтобы участвовать</div>
             </div>
           </div>
           <div class="rubup-promo-reward">50 000 PTS</div>
@@ -4626,18 +4632,18 @@
 
         <!-- Переключатель валюты игры: Очками PTS / USDT -->
         <div class="rubup-mode-tabs">
-          <div id="tab-mode-pts" class="rubup-mode-tab" onclick="switchUpgradeCurrency('pts')">Очками PTS</div>
+          <div id="tab-mode-pts" class="rubup-mode-tab" onclick="switchUpgradeCurrency('pts')" data-i18n="toggle_pts">Очками PTS</div>
           <div id="tab-mode-usdt" class="rubup-mode-tab active" onclick="switchUpgradeCurrency('usdt')">USDT</div>
         </div>
 
         <!-- Карточки статистики: Лучший сегодня / Рекорд режима -->
         <div class="rubup-stats-row">
           <div class="rubup-stat-card">
-            <span>ЛУЧШИЙ СЕГОДНЯ</span>
+            <span data-i18n="up_best_today">ЛУЧШИЙ СЕГОДНЯ</span>
             <b id="rubup-best-today">2 250 PTS</b>
           </div>
           <div class="rubup-stat-card">
-            <span>РЕКОРД РЕЖИМА</span>
+            <span data-i18n="up_record_mode">РЕКОРД РЕЖИМА</span>
             <b>105 200 PTS <span class="rubup-record-mult">×21.04</span></b>
           </div>
         </div>
@@ -4702,27 +4708,40 @@
         </div>
 
         <!-- Кнопка "Бесплатная ставка" -->
-        <div class="free-bet-banner" onclick="applyFreeBet()">
+        <div class="free-bet-banner" onclick="applyFreeBet()" data-i18n="up_free_bet_banner">
           🎁 Бесплатная ставка раз в день
         </div>
 
         <!-- ПАНЕЛЬ СТАВКИ И ЗАПУСКА -->
-        <div class="rubup-action-panel">
+        <div class="rubup-action-panel" style="margin-bottom: 8px;">
           
           <!-- Степпер ставки -->
           <div class="rubup-bet-stepper">
             <button class="rubup-step-btn" onclick="changeUpgradeBet(-1)">−</button>
-            <div class="rubup-bet-val">
-              <span id="upgrade-bet-display">100</span>
-              <span id="upgrade-bet-curr">PTS</span>
+            <div class="rubup-bet-val" style="flex: 1; justify-content: center; gap: 2px;">
+              <input type="number" id="upgrade-bet-input" class="mines-input-bet" oninput="onUpgradeCustomBetInput(this.value)" value="1.00" step="any" min="0.1">
+              <span id="upgrade-bet-curr" style="font-size: 12px; color: var(--text-dim); margin-left: 4px; margin-right: 8px; flex-shrink: 0;">USDT</span>
             </div>
             <button class="rubup-step-btn" onclick="changeUpgradeBet(1)">+</button>
           </div>
 
           <!-- Кнопка "Испытать удачу" -->
-          <button id="rubup-play-btn" class="rubup-spin-btn ready" onclick="playRubupUpgrade()">
+          <button id="rubup-play-btn" class="rubup-spin-btn ready" onclick="playRubupUpgrade()" data-i18n="btn_upgrade_try">
             Испытать удачу
           </button>
+        </div>
+
+        <!-- Меню быстрых ставок (чипсы) -->
+        <div class="gifts-chips-row" id="upgrade-chips-container" style="margin-bottom: 10px;"></div>
+
+        <!-- Подвал: Честная игра, Хеш раунда, Как играть -->
+        <div class="gifts-provably-fair" style="margin-top: 14px;">
+          <div class="gifts-fair-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+            <span data-i18n="fair_play_lbl">Честная игра</span>
+          </div>
+          <div class="gifts-hash-code" id="upgrade-round-hash">7f81b2...a410d3</div>
+          <button onclick="showUpgradeRulesModal()" style="background: none; border: none; color: #38bdf8; font-size: 11px; font-weight: 700; cursor: pointer;" data-i18n="btn_how_to_play">Как играть?</button>
         </div>
 
       </div>
@@ -4733,7 +4752,7 @@
         <div class="inner-game-header rubup-top-nav" style="margin-bottom: 12px;">
           <button class="rubup-back-btn" onclick="closeInnerGame()" style="display: flex; align-items: center; gap: 6px; width: auto; padding: 0 14px; font-weight: 700; font-size: 13px;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-            <span>Назад</span>
+            <span data-i18n="btn_back_game">Назад</span>
           </button>
           <div style="display: flex; align-items: center; gap: 8px;">
             <div class="rubup-balance-pill" title="Баланс USDT">
@@ -4749,7 +4768,7 @@
 
         <!-- Переключатель валюты -->
         <div class="rubup-mode-tabs">
-          <div id="tab-gifts-pts" class="rubup-mode-tab" onclick="switchGiftsCurrency('pts')">Очками PTS</div>
+          <div id="tab-gifts-pts" class="rubup-mode-tab" onclick="switchGiftsCurrency('pts')" data-i18n="toggle_pts">Очками PTS</div>
           <div id="tab-gifts-usdt" class="rubup-mode-tab active" onclick="switchGiftsCurrency('usdt')">USDT</div>
         </div>
 
@@ -4855,21 +4874,21 @@
 
         <!-- Информационная строка: Ставка, Сбитие, Статус -->
         <div class="gifts-info-bar">
-          <span class="gifts-info-title">Сумма ставки</span>
+          <span class="gifts-info-title" data-i18n="gifts_bet_amount_lbl">Сумма ставки</span>
           <div>
-            <span style="font-size: 12px; color: #8fa0c0;">Сбитие: </span>
+            <span style="font-size: 12px; color: #8fa0c0;" data-i18n="gifts_hazard_lbl">Сбитие: </span>
             <span class="gifts-hazard-pill" id="gifts-live-hazard">5.0%</span>
           </div>
-          <span class="gifts-status-val" id="gifts-status-warning">Готов к игре</span>
+          <span class="gifts-status-val" id="gifts-status-warning" data-i18n="gifts_status_ready">Готов к игре</span>
         </div>
 
         <!-- Степпер ставки -->
         <div class="rubup-action-panel" style="margin-bottom: 8px;">
           <div class="rubup-bet-stepper" style="width: 100%;">
             <button class="rubup-step-btn" onclick="changeGiftsBet(-1)">−</button>
-            <div class="rubup-bet-val" style="justify-content: center; flex: 1;">
-              <span id="gifts-bet-display" style="font-size: 19px;">100</span>
-              <span id="gifts-bet-curr" style="font-size: 13px; margin-left: 2px;">PTS</span>
+            <div class="rubup-bet-val" style="justify-content: center; flex: 1; gap: 2px;">
+              <input type="number" id="gifts-bet-input" class="mines-input-bet" oninput="onGiftsCustomBetInput(this.value)" value="1.00" step="any" min="0.1">
+              <span id="gifts-bet-curr" style="font-size: 12px; color: var(--text-dim); margin-left: 4px; margin-right: 8px; flex-shrink: 0;">USDT</span>
             </div>
             <button class="rubup-step-btn" onclick="changeGiftsBet(1)">+</button>
           </div>
@@ -4887,7 +4906,7 @@
 
         <!-- Кнопки действий: До старта или в раунде -->
         <div id="gifts-pre-actions" style="margin-bottom: 8px;">
-          <button id="gifts-start-btn" class="rubup-spin-btn ready" style="width: 100%;" onclick="handleGiftsAction()">
+          <button id="gifts-start-btn" class="rubup-spin-btn ready" style="width: 100%;" onclick="handleGiftsAction()" data-i18n="btn_start_game">
             Начать игру
           </button>
         </div>
@@ -4925,10 +4944,10 @@
         <div class="gifts-provably-fair">
           <div class="gifts-fair-badge">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
-            <span>Честная игра</span>
+            <span data-i18n="fair_play_lbl">Честная игра</span>
           </div>
           <div class="gifts-hash-code" id="gifts-round-hash">3d657b...c945e9</div>
-          <button onclick="showGiftsRulesModal()" style="background: none; border: none; color: #38bdf8; font-size: 11px; font-weight: 700; cursor: pointer;">Как играть?</button>
+          <button onclick="showGiftsRulesModal()" style="background: none; border: none; color: #38bdf8; font-size: 11px; font-weight: 700; cursor: pointer;" data-i18n="btn_how_to_play">Как играть?</button>
         </div>
       </div>
 
@@ -4938,7 +4957,7 @@
         <div class="inner-game-header rubup-top-nav" style="margin-bottom: 12px;">
           <button class="rubup-back-btn" onclick="closeInnerGame()" style="display: flex; align-items: center; gap: 6px; width: auto; padding: 0 14px; font-weight: 700; font-size: 13px;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-            <span>Назад</span>
+            <span data-i18n="btn_back_game">Назад</span>
           </button>
           <div style="display: flex; align-items: center; gap: 8px;">
             <div class="rubup-balance-pill" title="Баланс USDT">
@@ -4957,8 +4976,8 @@
           <div class="rubup-promo-left">
             <div class="rubup-promo-dot" style="background: #a855f7; box-shadow: 0 0 8px #a855f7;"></div>
             <div>
-              <div class="rubup-promo-title">Полёт месяца</div>
-              <div class="rubup-promo-sub">самый высокий икс раунда</div>
+              <div class="rubup-promo-title" data-i18n="promo_rocket_title">Полёт месяца</div>
+              <div class="rubup-promo-sub" data-i18n="promo_rocket_sub">самый высокий икс раунда</div>
             </div>
           </div>
           <div class="rubup-promo-reward" style="color: #c084fc;">100 000 PTS</div>
@@ -4966,7 +4985,7 @@
 
         <!-- Переключатель валюты -->
         <div class="rubup-mode-tabs">
-          <div id="tab-rocket-pts" class="rubup-mode-tab" onclick="switchRocketCurrency('pts')">Очками PTS</div>
+          <div id="tab-rocket-pts" class="rubup-mode-tab" onclick="switchRocketCurrency('pts')" data-i18n="toggle_pts">Очками PTS</div>
           <div id="tab-rocket-usdt" class="rubup-mode-tab active" onclick="switchRocketCurrency('usdt')">USDT</div>
         </div>
 
@@ -5048,7 +5067,7 @@
           <!-- 3. Блок отсчёта («Приём ставок», 8..1) -->
           <div id="rocket-countdown-box" class="rocket-countdown-box">
             <div id="rocket-countdown-num" class="rocket-countdown-num">8</div>
-            <div class="rocket-countdown-label">Приём ставок</div>
+            <div class="rocket-countdown-label" data-i18n="rocket_wait_bets">Приём ставок</div>
             <div class="rocket-countdown-bar-wrap">
               <div id="rocket-timer-fill" class="rocket-timer-fill"></div>
             </div>
@@ -5068,7 +5087,7 @@
         <div class="rocket-auto-row">
           <label style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #fff; cursor: pointer;">
             <input type="checkbox" id="rocket-auto-cashout-check" style="accent-color: #38bdf8; width: 16px; height: 16px;">
-            <span>Автовывод</span>
+            <span data-i18n="rocket_auto_cashout">Автовывод</span>
           </label>
           <div style="display: flex; align-items: center; gap: 4px;">
             <input type="number" id="rocket-auto-val" value="2.00" step="0.1" min="1.1" max="100" style="width: 70px; background: #0f172a; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 4px 8px; color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; text-align: center;">
@@ -5080,13 +5099,13 @@
         <div class="rubup-action-panel" style="margin-bottom: 8px;">
           <div class="rubup-bet-stepper">
             <button class="rubup-step-btn" onclick="changeRocketBet(-1)">−</button>
-            <div class="rubup-bet-val">
-              <span id="rocket-bet-display">100</span>
-              <span id="rocket-bet-curr">PTS</span>
+            <div class="rubup-bet-val" style="flex: 1; justify-content: center; gap: 2px;">
+              <input type="number" id="rocket-bet-input" class="mines-input-bet" oninput="onRocketCustomBetInput(this.value)" value="1.00" step="any" min="0.1">
+              <span id="rocket-bet-curr" style="font-size: 12px; color: var(--text-dim); margin-left: 4px; margin-right: 8px; flex-shrink: 0;">USDT</span>
             </div>
             <button class="rubup-step-btn" onclick="changeRocketBet(1)">+</button>
           </div>
-          <button id="rocket-action-btn" class="rubup-spin-btn ready" onclick="handleRocketAction()">
+          <button id="rocket-action-btn" class="rubup-spin-btn ready" onclick="handleRocketAction()" data-i18n="btn_place_bet">
             Сделать ставку
           </button>
         </div>
@@ -5098,6 +5117,16 @@
 
         <!-- Лента других игроков раунда -->
         <div class="rocket-players-feed" id="rocket-players-feed"></div>
+
+        <!-- Подвал: Честная игра, Хеш раунда, Как играть -->
+        <div class="gifts-provably-fair">
+          <div class="gifts-fair-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+            <span data-i18n="fair_play_lbl">Честная игра</span>
+          </div>
+          <div class="gifts-hash-code" id="rocket-round-hash">3d657b...c945e9</div>
+          <button onclick="showRocketRulesModal()" style="background: none; border: none; color: #38bdf8; font-size: 11px; font-weight: 700; cursor: pointer;" data-i18n="btn_how_to_play">Как играть?</button>
+        </div>
       </div>
 
       <!-- 3. ИГРА: РУЛЕТКА / ПОДАРКИ TELEGRAM -->
@@ -5106,7 +5135,7 @@
         <div class="inner-game-header rubup-top-nav" style="margin-bottom: 12px;">
           <button class="rubup-back-btn" onclick="closeInnerGame()" style="display: flex; align-items: center; gap: 6px; width: auto; padding: 0 14px; font-weight: 700; font-size: 13px;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-            <span>Назад</span>
+            <span data-i18n="btn_back_game">Назад</span>
           </button>
           <div style="display: flex; align-items: center; gap: 8px;">
             <div class="rubup-balance-pill" title="Баланс USDT">
@@ -5122,14 +5151,14 @@
 
         <!-- Заголовок и подзаголовок -->
         <div style="text-align: center; margin-bottom: 16px;">
-          <div style="font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px;">Подарки Telegram</div>
-          <div id="roulette-subtitle" style="font-size: 12px; color: #94a3b8; margin-top: 3px;">
+          <div style="font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px;" data-i18n="roulette_header_title">Подарки Telegram</div>
+          <div id="roulette-subtitle" style="font-size: 12px; color: #94a3b8; margin-top: 3px;" data-i18n="roulette_sub">
             Бесплатно раз в сутки. Забрать подарком или деньгами на баланс.
           </div>
         </div>
 
         <div class="rubup-mode-tabs" style="margin-bottom: 14px;">
-          <div id="tab-roulette-pts" class="rubup-mode-tab" onclick="switchRouletteCurrency('pts')">Очками PTS</div>
+          <div id="tab-roulette-pts" class="rubup-mode-tab" onclick="switchRouletteCurrency('pts')" data-i18n="toggle_pts">Очками PTS</div>
           <div id="tab-roulette-usdt" class="rubup-mode-tab active" onclick="switchRouletteCurrency('usdt')">USDT</div>
         </div>
 
@@ -5162,7 +5191,7 @@
         <!-- 4 режима выбора шанса -->
         <div class="roulette-chances-grid">
           <div class="roulette-chance-btn active" id="r-mode-0" onclick="setRouletteMode(0)">
-            <span class="roulette-chance-label" style="font-size: 14px;">Бесплатно</span>
+            <span class="roulette-chance-label" style="font-size: 14px;" data-i18n="roulette_chance_free">Бесплатно</span>
           </div>
           <div class="roulette-chance-btn" id="r-mode-1" onclick="setRouletteMode(1)">
             <span class="roulette-chance-badge">×3 шанс</span>
@@ -5181,8 +5210,18 @@
         <!-- Главная кнопка действия -->
         <button id="roulette-spin-btn" class="roulette-action-btn" onclick="spinRoulette()">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.19"/></svg>
-          <span id="roulette-btn-text">Крутить бесплатно</span>
+          <span id="roulette-btn-text" data-i18n="roulette_free_btn">Крутить бесплатно</span>
         </button>
+
+        <!-- Подвал: Честная игра, Хеш раунда, Как играть -->
+        <div class="gifts-provably-fair" style="margin-top: 14px;">
+          <div class="gifts-fair-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+            <span data-i18n="fair_play_lbl">Честная игра</span>
+          </div>
+          <div class="gifts-hash-code" id="roulette-round-hash">4e28c1...e992b0</div>
+          <button onclick="showRouletteRulesModal()" style="background: none; border: none; color: #38bdf8; font-size: 11px; font-weight: 700; cursor: pointer;" data-i18n="btn_how_to_play">Как играть?</button>
+        </div>
       </div>
 
       <!-- 4. ИГРА: МИНЫ 5x5 -->
@@ -5191,7 +5230,7 @@
         <div class="inner-game-header rubup-top-nav" style="margin-bottom: 12px;">
           <button class="rubup-back-btn" onclick="closeInnerGame()" style="display: flex; align-items: center; gap: 6px; width: auto; padding: 0 14px; font-weight: 700; font-size: 13px;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-            <span>Назад</span>
+            <span data-i18n="btn_back_game">Назад</span>
           </button>
           <div style="display: flex; align-items: center; gap: 8px;">
             <div class="rubup-balance-pill" title="Баланс USDT">
@@ -5207,21 +5246,21 @@
 
         <!-- Переключатель валюты -->
         <div class="rubup-mode-tabs">
-          <div id="tab-mines-pts" class="rubup-mode-tab" onclick="switchMinesCurrency('pts')">Очками PTS</div>
+          <div id="tab-mines-pts" class="rubup-mode-tab" onclick="switchMinesCurrency('pts')" data-i18n="toggle_pts">Очками PTS</div>
           <div id="tab-mines-usdt" class="rubup-mode-tab active" onclick="switchMinesCurrency('usdt')">USDT</div>
         </div>
 
         <!-- Инфо-панель: Найдено кристаллов / Текущий икс -->
         <div class="mines-info-banner">
           <div>
-            <div style="font-size: 10px; color: #94a3b8; font-weight: 700;">НАЙДЕНО</div>
+            <div style="font-size: 10px; color: #94a3b8; font-weight: 700;" data-i18n="mines_found_lbl">НАЙДЕНО</div>
             <div style="font-size: 15px; font-weight: 800; color: #38bdf8; display: flex; align-items: center; gap: 4px;" id="mines-gems-count">
               <img src="assets/AstralShard.webp" style="width: 17px; height: 17px; object-fit: contain;" alt="Shard">
               <span>0 / 24</span>
             </div>
           </div>
           <div style="text-align: right;">
-            <div style="font-size: 10px; color: #94a3b8; font-weight: 700;">ВЫИГРЫШ</div>
+            <div style="font-size: 10px; color: #94a3b8; font-weight: 700;" data-i18n="mines_win_lbl">ВЫИГРЫШ</div>
             <div style="font-size: 15px; font-weight: 800; color: #facc15;" id="mines-win-display">+0 PTS (×1.00)</div>
           </div>
         </div>
@@ -5235,10 +5274,10 @@
 
         <!-- Выбор количества бомб -->
         <div class="mines-bombs-row">
-          <div class="mines-bomb-btn active" onclick="setMinesBombs(1)">1 бомба</div>
-          <div class="mines-bomb-btn" onclick="setMinesBombs(2)">2 бомбы</div>
-          <div class="mines-bomb-btn" onclick="setMinesBombs(3)">3 бомбы</div>
-          <div class="mines-bomb-btn" onclick="setMinesBombs(5)">5 бомб</div>
+          <div class="mines-bomb-btn active" onclick="setMinesBombs(1)" data-i18n="mines_bomb_count_1">1 бомба</div>
+          <div class="mines-bomb-btn" onclick="setMinesBombs(2)" data-i18n="mines_bomb_count_2">2 бомбы</div>
+          <div class="mines-bomb-btn" onclick="setMinesBombs(3)" data-i18n="mines_bomb_count_3">3 бомбы</div>
+          <div class="mines-bomb-btn" onclick="setMinesBombs(5)" data-i18n="mines_bomb_count_5">5 бомб</div>
         </div>
 
         <!-- Панель ставки с полем прямого ввода любой суммы -->
@@ -5247,17 +5286,27 @@
             <button class="rubup-step-btn" onclick="changeMinesBet(-1)">−</button>
             <div class="rubup-bet-val" style="flex: 1; justify-content: center; gap: 2px;">
               <input type="number" id="mines-bet-input" class="mines-input-bet" oninput="onMinesCustomBetInput(this.value)" value="1.00" step="any" min="0.1">
-              <span id="mines-bet-curr" style="font-size: 12px; color: var(--text-dim); margin-left: 3px;">USDT</span>
+              <span id="mines-bet-curr" style="font-size: 12px; color: var(--text-dim); margin-left: 4px; margin-right: 8px; flex-shrink: 0;">USDT</span>
             </div>
             <button class="rubup-step-btn" onclick="changeMinesBet(1)">+</button>
           </div>
-          <button id="mines-action-btn" class="rubup-spin-btn ready" onclick="handleMinesAction()">
+          <button id="mines-action-btn" class="rubup-spin-btn ready" onclick="handleMinesAction()" data-i18n="btn_start_game">
             Начать игру
           </button>
         </div>
 
         <!-- Меню быстрых ставок (чипсы) -->
         <div class="gifts-chips-row" id="mines-chips-container" style="margin-bottom: 12px;"></div>
+
+        <!-- Подвал: Честная игра, Хеш раунда, Как играть -->
+        <div class="gifts-provably-fair">
+          <div class="gifts-fair-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+            <span data-i18n="fair_play_lbl">Честная игра</span>
+          </div>
+          <div class="gifts-hash-code" id="mines-round-hash">1a90c4...b712ef</div>
+          <button onclick="showMinesRulesModal()" style="background: none; border: none; color: #38bdf8; font-size: 11px; font-weight: 700; cursor: pointer;" data-i18n="btn_how_to_play">Как играть?</button>
+        </div>
       </div>
     </div>
 
@@ -5526,51 +5575,83 @@
       console.warn("Supabase init error:", e);
     }
 
-        const TRANSLATIONS = {
+    const TRANSLATIONS = {
       ru: {
         balance_label: "Баланс USDT",
         badge_locked: "Пул ликвидности",
         btn_deposit: "Пополнить",
         partner_acc_label: "ПАРТНЕРСКИЙ СЧЕТ",
         btn_withdraw: "Вывод",
+        btn_transfer: "Перевод",
         shares_label: "СКОРОСТЬ",
         valuation_label: "НАФАРМЛЕНО",
         pts_hourly_unit: "PTS/ч",
-        section_rounds: "Экосистема проектов",
-        stage_label: "Стадия: Запуск пула",
-        p1_ticker: "Целевой тикер: $MNX",
-        p1_desc: "Автоматизированная экосистема детских и развлекательных видеоканалов с глобальной монетизацией.",
-        col_share_price: "СТОИМОСТЬ",
+
+        hub_title: "Инфраструктурные Ноды",
+        hub_sub: "Ecosystem Node Sale",
+        col_cost: "СТОИМОСТЬ",
         col_dividends: "ДИВИДЕНДЫ",
-        col_ipo_ratio: "БУСТ PTS",
-        p1_ratio: "+80 PTS/ч",
-        col_valuation: "ПУЛ ФАРМИНГА",
-        raised: "Собрано:",
-        btn_buy_shares: "Купить уровень",
-        p2_ticker: "Целевой тикер: $CRND",
-        p2_desc: "Распределенная инфраструктура вычислительных мощностей для 3D-рендеринга и генерации видео.",
-        p2_ratio: "+160 PTS/ч",
-        p3_ticker: "Целевой тикер: $MWMC",
-        p3_desc: "Промышленный майнинг-кластер с прямым подключением к гидрогенерации. Активация мощностей без покупки оборудования.",
-        p3_ratio: "+240 PTS/ч",
-        title_tiers: "Выбор уровня актива",
-        project_prefix: "Проект:",
-        tier_early: "Уровень «Start»",
-        tier_early_sub: "20 активов проекта",
-        tier_early_conv: "Скорость: +80 PTS/ч",
-        tier_syndicate: "Уровень «Pro»",
-        tier_syndicate_sub: "50 активов проекта",
-        tier_syndicate_conv: "Скорость: +200 PTS/ч",
-        tier_strategist: "Уровень «Max»",
-        tier_strategist_sub: "100 активов проекта",
-        tier_strategist_conv: "Скорость: +400 PTS/ч",
-        tier_disclaimer: "* Активы закрепляются за вашим аккаунтом. Повышение уровня увеличивает скорость майнинга PTS и объем дропа.",
-        btn_confirm_deal: "Подтвердить активацию",
+        col_farming: "ФАРМИНГ",
+        pool_activated: "Активировано",
+        pool_total: "Пул раунда",
+        nodes_unit: "нод",
+        node_per_price: "$20 / нода",
+        btn_node_passport: "Паспорт ноды",
+        btn_node_activate: "Активировать ноды",
+        p1_ticker_sub: "Целевой тикер: $MNX • 1 Нода = $20",
+        p2_ticker_sub: "Целевой тикер: $CRND • 1 Нода = $20",
+        p3_ticker_sub: "Целевой тикер: $MWMC • 1 Нода = $20",
+        node_mnx_desc: "Узел обработки, AI-дубляжа и дистрибуции детских медиасетей с выручкой от рекламы YouTube AdSense.",
+        node_crnd_desc: "Узел распределённой сети GPU-рендеринга и вычислений для генерации 3D-анимации и инференса нейросетей.",
+        node_mwmc_desc: "Узел валидации промышленного майнинг-дата-центра 4.2 МВт с прямым подключением к гидроэлектростанции.",
+
+        invest_title: "Активация и докупка нод",
+        invest_sub: "Неограниченное накопление",
+        inv_active_nodes_lbl: "Активных нод:",
+        inv_current_rate_lbl: "Текущий фарминг:",
+        callout_stack_title: "Все ноды суммируются в единый стек:",
+        callout_stack_desc: "вы можете активировать ноды частями по $20 или сразу брать кластер — мощность объединяется. Чем больше суммарно нод на аккаунте, тем выше скорость майнинга PTS, дивиденды и ваша итоговая доля токенов на листинге (TGE).",
+        select_pack_lbl: "Выберите пакет нод для добавления:",
+        badge_installment: "РАССРОЧКА",
+        pack_1_title: "+1 Нода сети",
+        pack_1_sub: "Стартовый узел • $20",
+        pack_5_title: "+5 Нод сети",
+        pack_5_sub: "Стандартный узел • $100",
+        pack_25_title: "+25 Нод сети",
+        pack_25_sub: "Синдикатный узел • $500",
+        pack_master_title: "Мастер-Нода",
+        pack_master_sub: "50 нод • от $41.66/мес • Приоритет TGE",
+        pack_pro_title: "Про-Кластер",
+        pack_pro_sub: "125 нод • от $104.16/мес • Квота TGE",
+        pack_val_title: "Кластер Валидатора",
+        pack_val_sub: "250 нод • от $208.33/мес • Главный узел",
+
+        inst_title: "Оплата в рассрочку:",
+        inst_badge_zero: "Без переплат • 0%",
+        inst_month_suffix: "мес",
+        inst_monthly_lbl: "Ежемесячный платёж:",
+        inst_first_pay_lbl: "К списанию сейчас (1-й взнос):",
+        inst_activation_note: "* Все ноды активируются в сети сразу после внесения первого взноса.",
+        preview_total_lbl: "Итого нод после активации:",
+        pay_source_lbl: "Списать средства с:",
+        src_invest: "Инвест-счет",
+        src_partner: "Партнерский",
+        btn_confirm_activation: "Подтвердить активацию",
         btn_back: "Назад",
-        title_portfolio: "Мои активы",
-        sub_portfolio: "Активные бусты",
+
+        title_portfolio: "Реестр активов",
+        sub_portfolio: "Защищено реестром",
+        port_nft_id: "NFT ID:",
+        port_nodes_online: "Нод в сети",
+        port_status_online: "В сети",
+        port_col_nodes: "НОДЫ",
+        port_col_speed: "СКОРОСТЬ",
+        port_col_status: "СТАТУС",
+        empty_portfolio: "У вас пока нет активных нод.",
+
         title_partners: "Реферальная программа",
         upline_label: "Вас пригласил наставник:",
+        upline_direct: "Прямая регистрация",
         ref_desc: "Приглашайте партнеров и получайте до 27.5% в USDT с каждого пополнения: 20% с 1-й линии, 5% со 2-й линии и 2.5% с 3-й линии.",
         btn_copy: "Копировать",
         btn_share_link: "Поделиться ссылкой",
@@ -5579,174 +5660,464 @@
         ref_earnings_label: "ДОСТУПНО К ВЫВОДУ",
         structure_title: "Ваша структура (3 линии)",
         structure_empty: "У вас пока нет прямых партнеров.",
+        tier_l1_badge: "1-я линия • 20%",
+        tier_l2_badge: "2-я линия • 5%",
+        tier_l3_badge: "3-я линия • 2.5%",
+
+        tab_rounds: "Проекты",
+        tab_portfolio: "Активы",
+        tab_partners: "Партнеры",
+        tab_games: "Игры",
+        tab_profile: "Профиль",
+
         profile_accredited: "● Участник сообщества",
         prof_tg_id: "Telegram ID",
         support_menu: "Поддержка",
+        support_chat: "Поддержка",
+        support_terms: "Условия",
+        support_privacy: "Конфиденциальность",
         docs_title: "Информация и правила",
         doc_safe_title: "Пользовательское соглашение",
         doc_signed: "● Принято при регистрации",
-        doc_signed_ref: "● Бонус до 27.5% (3 линии)",
-        doc_view: "Открыть",
         doc_agent_title: "Реферальная программа",
+        doc_signed_ref: "● Бонус до 27.5% (3 линии)",
         doc_ledger_title: "Whitepaper / Токеномика",
         doc_auto: "● Экосистема EquiCore",
+        doc_view: "Открыть",
+        btn_close: "Понятно",
+
         modal_deposit_title: "Пополнить баланс",
         modal_deposit_desc: "Выберите удобный способ пополнения. Зачисление происходит моментально.",
         modal_deposit_min: "Мин. сумма: 10 USDT",
         btn_pay: "Перейти к оплате",
+
         modal_withdraw_title: "Вывод партнерских средств",
         modal_available_label: "ДОСТУПНО НА ПАРТНЕРСКОМ СЧЕТЕ:",
         modal_label_wallet: "Адрес кошелька (USDT TRC20 / TON):",
         modal_label_amount: "Сумма вывода (USDT):",
         modal_policy_note: "* Вывод осуществляется исключительно с партнерского счета.",
         btn_confirm_withdraw: "Подтвердить вывод",
-        btn_close: "Понятно",
-        support_chat: "Поддержка",
-        support_terms: "Условия",
-        support_privacy: "Конфиденциальность",
-        tab_rounds: "Проекты",
-        tab_portfolio: "Активы",
-        tab_partners: "Партнеры",
-        tab_games: "Игры",
-        tab_profile: "Профиль",
-        upline_direct: "Прямая регистрация",
-        col_spent: "ПОТРАЧЕНО",
-        col_status: "СТАТУС",
-        status_farming: "В сети",
-        empty_portfolio: "Пусто",
+
+        p2p_title: "Перевод партнеру",
+        p2p_avail_lbl: "ДОСТУПНО НА ПАРТНЕРСКОМ СЧЕТЕ:",
+        p2p_recipient_lbl: "Получатель (@username или Telegram ID):",
+        p2p_amount_lbl: "Сумма перевода (USDT):",
+        p2p_note: "* Средства моментально поступают на инвест-счет получателя для покупки проектов или участия в играх. Без комиссии платформы.",
+        btn_p2p_send: "Перевести средства",
+
+        welc_title: "Добро пожаловать в EquiCore!",
+        welc_desc_ref: "Вы зарегистрировались по приглашению партнера! Вам начислен повышенный бонус для старта в проектах и мини-играх.",
+        welc_desc_direct: "Вам начислен приветственный бонус для знакомства с возможностями экосистемы и тестирования игр.",
+        welc_bonus_lbl: "ВАШ ПРИВЕТСТВЕННЫЙ БОНУС",
+        welc_inviter_lbl: "Пригласитель:",
+        btn_welc_start: "Начать зарабатывать 🚀",
+
+        p_modal_target_ticker: "Целевой тикер:",
+        p_modal_apy_lbl: "Ориентир доходности:",
+        p_modal_payouts_lbl: "Выплаты:",
+        p_modal_payouts_val: "В USDT",
+        p_modal_model_lbl: "Бизнес-модель (откуда доход):",
+        p_modal_assets_lbl: "Физическое обеспечение (RWA):",
+        p_modal_rules_lbl: "Регламент начислений:",
+        p_modal_token_lbl: "🔗 Связь с токеном и листингом:",
+        btn_p_modal_invest: "Инвестировать от $20",
+        btn_p_modal_close: "Закрыть",
+
+        games_title: "Игры",
+        game_gifts_title: "Путь подарков",
+        game_rocket_title: "Ракетка",
+        game_roulette_title: "Рулетка",
+        game_upgrade_title: "Апгрейд",
+        game_mines_title: "Мины",
+
+        btn_back_game: "Назад",
+        toggle_pts: "Очками PTS",
+        gifts_bet_amount_lbl: "Сумма ставки",
+        gifts_hazard_lbl: "Сбитие:",
+        gifts_status_ready: "Готов к игре",
+        gifts_status_low_balance: "Не хватает на балансе",
+        gifts_status_in_game: "В игре (Шаг {step}/10)",
+        gifts_status_crashed: "Сбита машиной!",
+        chip_max: "Макс",
+        btn_start_game: "Начать игру",
+        btn_cashout: "Забрать",
+        btn_step: "Шаг",
+        gifts_diff_easy: "Лёгкая",
+        gifts_diff_medium: "Средняя",
+        gifts_diff_hard: "Тяжёлая",
+        gifts_diff_hardcore: "Хардкор",
+        gifts_diff_up_to: "до",
+        fair_play_lbl: "Честная игра",
+        btn_how_to_play: "Как играть?",
+
+        rocket_wait_bets: "Приём ставок",
+        rocket_auto_cashout: "Автовывод",
+        btn_place_bet: "Сделать ставку",
+        btn_bet_accepted: "СТАВКА ПРИНЯТА",
+        btn_round_finished: "РАУНД ЗАВЕРШЕН",
+        promo_rocket_title: "Полёт месяца",
+        promo_rocket_sub: "самый высокий икс раунда",
+
+        promo_upgrade_title: "Мастер апгрейда",
+        promo_upgrade_sub: "сыграйте, чтобы участвовать",
+        up_best_today: "ЛУЧШИЙ СЕГОДНЯ",
+        up_record_mode: "РЕКОРД РЕЖИМА",
+        up_free_bet_banner: "🎁 Бесплатная ставка раз в день",
+        btn_upgrade_try: "Испытать удачу",
+        btn_spinning: "Вращение...",
+        wheel_mimo: "МИМО",
+        wheel_chance: "шанс",
+
+        roulette_header_title: "Подарки Telegram",
+        roulette_sub: "Бесплатно раз в сутки. Забрать подарком или деньгами на баланс.",
+        roulette_free_btn: "Крутить бесплатно",
+        roulette_free_used: "Бесплатный спин использован",
+        roulette_chance_free: "Бесплатно",
+        roulette_wb_win: "ЧИСТЫЙ ВЫИГРЫШ",
+        roulette_wb_consolation: "УТЕШИТЕЛЬНЫЙ ПРИЗ",
+
+        mines_found_lbl: "НАЙДЕНО",
+        mines_win_lbl: "ВЫИГРЫШ",
+        mines_bomb_count_1: "1 бомба",
+        mines_bomb_count_2: "2 бомбы",
+        mines_bomb_count_3: "3 бомбы",
+        mines_bomb_count_5: "5 бомб",
+        btn_mines_pick: "ОТКРОЙТЕ КРИСТАЛЛ...",
+
+        rules_gifts_title: "Правила: Путь подарков",
+        rules_gifts: "<p><b>1. Выбор сложности:</b><br>Выберите один из 4 режимов: Лёгкая (до 28.52x), Средняя (до 3014x), Тяжёлая (до 13Kx) или Хардкор (до 20Kx).</p><p><b>2. Ставка и старт:</b><br>Укажите сумму ставки в PTS или USDT и нажмите «Начать игру».</p><p><b>3. Движение через трафик:</b><br>Переходите через полосы движения по люкам 🐮. С каждой успешной полосой потенциальный выигрыш возрастает.</p><p><b>4. Фиксация выигрыша:</b><br>Нажмите «Забрать» в любой момент после первого шага и мгновенно получите выигрыш на баланс.</p><p><b>5. Опасность:</b><br>Остерегайтесь мчащихся машин: если корову собьет автомобиль, ставка сгорает.</p>",
+
+        rules_rocket_title: "Правила: Ракетка (Crash)",
+        rules_rocket: "<p><b>1. Приём ставок:</b><br>Сделайте ставку в PTS или USDT до окончания обратного отсчёта.</p><p><b>2. Взлёт ракеты:</b><br>После старта ракета набирает высоту, а множитель плавно растёт от 1.00x вверх.</p><p><b>3. Кэшаут:</b><br>Нажмите «Забрать», чтобы зафиксировать прибыль по текущему коэффициенту.</p><p><b>4. Краш:</b><br>Ракета может взорваться в любой момент. Если взрыв произошёл до нажатия «Забрать», ставка сгорает.</p><p><b>5. Честная игра:</b><br>Точка краша зашифрована алгоритмом Provably Fair и отображается в виде хеша раунда.</p>",
+
+        rules_upgrade_title: "Правила: Апгрейд",
+        rules_upgrade: "<p><b>1. Выбор коэффициента:</b><br>Настройте слайдер множителя от x2.0 до x20.0. Выше множитель — крупнее выигрыш, но уже победный сектор.</p><p><b>2. Ставка:</b><br>Укажите сумму ставки в PTS или USDT с помощью кнопок, чипсов или поля ввода.</p><p><b>3. Вращение:</b><br>Нажмите «Испытать удачу». Колесо фортуны вращается 3 секунды с плавной остановкой стрелки.</p><p><b>4. Победа или промах:</b><br>Остановка стрелки в цветном секторе приносит выигрыш с заданным множителем! Сектор «МИМО» сжигает ставку.</p><p><b>5. Ежедневный фрибет:</b><br>Раз в сутки доступна бесплатная ставка без риска для баланса.</p>",
+
+        rules_roulette_title: "Правила: Подарки Telegram",
+        rules_roulette: "<p><b>1. Выбор режима:</b><br>Доступно 4 тарифа: бесплатный спин раз в сутки, а также x3, x15 и x50 повышенные шансы за Звёзды Telegram ★ или баланс.</p><p><b>2. Запуск рулетки:</b><br>Нажмите «Крутить». Лента призов совершит вращение с плавной остановкой на призе.</p><p><b>3. Выигрыш подарка:</b><br>Выпавший подарок можно забрать в профиль Telegram или мгновенно обменять на эквивалент USDT на баланс.</p><p><b>4. Утешительный бонус:</b><br>Даже при промахе начисляются утешительные баллы PTS, баланс всегда пополняется!</p>",
+
+        rules_mines_title: "Правила: Мины",
+        rules_mines: "<p><b>1. Настройка поля:</b><br>Выберите количество мин на сетке 5х5 (1, 2, 3 или 5). Чем больше мин, тем выше множители выигрыша.</p><p><b>2. Ставка и старт:</b><br>Задайте ставку в PTS или USDT и нажмите «Начать игру».</p><p><b>3. Открытие ячеек:</b><br>Открывайте закрытые плитки: каждый кристалл увеличивает текущий выигрыш.</p><p><b>4. Фиксация прибыли:</b><br>В любой момент после первого кристалла нажмите «Забрать» для зачисления выигрыша на счёт.</p><p><b>5. Подрыв:</b><br>Попадание на мину завершает раунд и сжигает ставку.</p>",
+
+        alerts: {
+          copy_success: "Ссылка скопирована!",
+          insufficient_funds: "Недостаточно средств на выбранном счете!",
+          node_activated: "Успешно активировано нод: ",
+          cluster_activated: "Пакет успешно активирован в рассрочку!",
+          withdraw_sent: "Заявка на вывод принята и отправлена администратору!",
+          transfer_success: "Средства успешно переведены партнеру!"
+        }
       },
+
       en: {
         balance_label: "USDT Balance",
         badge_locked: "Liquidity Pool",
         btn_deposit: "Deposit",
         partner_acc_label: "PARTNER ACCOUNT",
         btn_withdraw: "Withdraw",
+        btn_transfer: "Transfer",
         shares_label: "SPEED",
         valuation_label: "FARMED",
         pts_hourly_unit: "PTS/h",
-        section_rounds: "Project Ecosystem",
-        stage_label: "Stage: Pool Launch",
-        p1_ticker: "Target Ticker: $MNX",
-        p1_desc: "Automated ecosystem of children's and entertainment video channels with global monetization.",
-        col_share_price: "PRICE",
+
+        hub_title: "Infrastructure Nodes",
+        hub_sub: "Ecosystem Node Sale",
+        col_cost: "PRICE",
         col_dividends: "DIVIDENDS",
-        col_ipo_ratio: "PTS BOOST",
-        p1_ratio: "+80 PTS/h",
-        col_valuation: "FARMING POOL",
-        raised: "Raised:",
-        btn_buy_shares: "Upgrade Level",
-        p2_ticker: "Target Ticker: $CRND",
-        p2_desc: "Distributed computing power infrastructure for 3D rendering and video generation.",
-        p2_ratio: "+160 PTS/h",
-        p3_ticker: "Target Ticker: $MWMC",
-        p3_desc: "Industrial mining cluster with direct connection to hydro generation. Capacity activation without hardware purchase.",
-        p3_ratio: "+240 PTS/h",
-        title_tiers: "Select Asset Level",
-        project_prefix: "Project:",
-        tier_early: "Level 'Start'",
-        tier_early_sub: "20 project assets",
-        tier_early_conv: "Speed: +80 PTS/h",
-        tier_syndicate: "Level 'Pro'",
-        tier_syndicate_sub: "50 project assets",
-        tier_syndicate_conv: "Speed: +200 PTS/h",
-        tier_strategist: "Level 'Max'",
-        tier_strategist_sub: "100 project assets",
-        tier_strategist_conv: "Speed: +400 PTS/h",
-        tier_disclaimer: "* Assets are tied to your account. Higher levels increase PTS farming speed and upcoming token drop.",
-        btn_confirm_deal: "Confirm Activation",
+        col_farming: "FARMING",
+        pool_activated: "Activated",
+        pool_total: "Round Pool",
+        nodes_unit: "nodes",
+        node_per_price: "$20 / node",
+        btn_node_passport: "Node Passport",
+        btn_node_activate: "Activate Nodes",
+        p1_ticker_sub: "Target Ticker: $MNX • 1 Node = $20",
+        p2_ticker_sub: "Target Ticker: $CRND • 1 Node = $20",
+        p3_ticker_sub: "Target Ticker: $MWMC • 1 Node = $20",
+        node_mnx_desc: "Computing node for AI dubbing, automated production, and distribution of kids and infotainment YouTube channels.",
+        node_crnd_desc: "Distributed GPU server cluster for high-performance 3D rendering, video synthesis, and AI model inference.",
+        node_mwmc_desc: "Industrial 4.2 MW mining validation node powered by direct zero-emission hydroelectric generation.",
+
+        invest_title: "Node Activation & Stacking",
+        invest_sub: "Unlimited Accumulation",
+        inv_active_nodes_lbl: "Active Nodes:",
+        inv_current_rate_lbl: "Current Mining:",
+        callout_stack_title: "All nodes stack into a single pool:",
+        callout_stack_desc: "You can activate nodes incrementally in $20 batches or get an entire cluster — power combines. The more nodes on your account, the higher your PTS farming speed, dividends, and TGE airdrop allocation.",
+        select_pack_lbl: "Select node pack to add:",
+        badge_installment: "SPLIT 0%",
+        pack_1_title: "+1 Network Node",
+        pack_1_sub: "Starter node • $20",
+        pack_5_title: "+5 Network Nodes",
+        pack_5_sub: "Standard node • $100",
+        pack_25_title: "+25 Network Nodes",
+        pack_25_sub: "Syndicate node • $500",
+        pack_master_title: "Master Node",
+        pack_master_sub: "50 nodes • from $41.66/mo • TGE Priority",
+        pack_pro_title: "Pro Cluster",
+        pack_pro_sub: "125 nodes • from $104.16/mo • TGE Quota",
+        pack_val_title: "Validator Cluster",
+        pack_val_sub: "250 nodes • from $208.33/mo • Master Node",
+
+        inst_title: "Installment Plan:",
+        inst_badge_zero: "Zero Overpay • 0%",
+        inst_month_suffix: "mo",
+        inst_monthly_lbl: "Monthly Payment:",
+        inst_first_pay_lbl: "Due Now (1st payment):",
+        inst_activation_note: "* All nodes activate instantly upon making the first monthly installment.",
+        preview_total_lbl: "Total Nodes After Activation:",
+        pay_source_lbl: "Pay from:",
+        src_invest: "Invest Account",
+        src_partner: "Partner Account",
+        btn_confirm_activation: "Confirm Activation",
         btn_back: "Back",
-        title_portfolio: "My Assets",
-        sub_portfolio: "Active Boosts",
+
+        title_portfolio: "Asset Registry",
+        sub_portfolio: "Registry Secured",
+        port_nft_id: "NFT ID:",
+        port_nodes_online: "Nodes Online",
+        port_status_online: "Online",
+        port_col_nodes: "NODES",
+        port_col_speed: "SPEED",
+        port_col_status: "STATUS",
+        empty_portfolio: "You have no active nodes yet.",
+
         title_partners: "Referral Program",
-        upline_label: "You were invited by:",
+        upline_label: "Invited by:",
+        upline_direct: "Direct Registration",
         ref_desc: "Invite partners and earn up to 27.5% in USDT from each deposit: 20% from tier 1, 5% from tier 2, and 2.5% from tier 3.",
         btn_copy: "Copy",
         btn_share_link: "Share Link",
-        share_msg: "🚀 Join EquiCore! Get a 25 USDT welcome bonus, boost your balance in games, and earn from real-world infrastructure assets:",
+        share_msg: "🚀 Join EquiCore! Get a 25 USDT welcome bonus, multiply your balance in games, and earn from real-world infrastructure assets:",
         ref_invited_label: "INVITED PARTNERS",
         ref_earnings_label: "AVAILABLE TO WITHDRAW",
         structure_title: "Your Structure (3 Tiers)",
         structure_empty: "You have no direct partners yet.",
-        profile_accredited: "● Community Member",
-        prof_tg_id: "Telegram ID",
-        support_menu: "Support",
-        docs_title: "Info & Rules",
-        doc_safe_title: "User Agreement",
-        doc_signed: "● Accepted upon signup",
-        doc_signed_ref: "● Up to 27.5% bonus (3 tiers)",
-        doc_view: "Open",
-        doc_agent_title: "Referral Program",
-        doc_ledger_title: "Whitepaper / Tokenomics",
-        doc_auto: "● EquiCore Ecosystem",
-        modal_deposit_title: "Deposit Balance",
-        modal_deposit_desc: "Choose a convenient deposit method. Crediting is instant.",
-        modal_deposit_min: "Min. amount: 10 USDT",
-        btn_pay: "Proceed to Payment",
-        modal_withdraw_title: "Withdraw Partner Funds",
-        modal_available_label: "AVAILABLE ON PARTNER ACCOUNT:",
-        modal_label_wallet: "Wallet Address (USDT TRC20 / TON):",
-        modal_label_amount: "Withdrawal Amount (USDT):",
-        modal_policy_note: "* Withdrawals are made exclusively from the partner account.",
-        btn_confirm_withdraw: "Confirm Withdrawal",
-        btn_close: "Got it",
-        support_chat: "Support Chat",
-        support_terms: "Terms of Service",
-        support_privacy: "Privacy Policy",
+        tier_l1_badge: "Tier 1 • 20%",
+        tier_l2_badge: "Tier 2 • 5%",
+        tier_l3_badge: "Tier 3 • 2.5%",
+
         tab_rounds: "Projects",
         tab_portfolio: "Assets",
         tab_partners: "Partners",
         tab_games: "Games",
         tab_profile: "Profile",
-        upline_direct: "Direct registration",
-        col_spent: "SPENT",
-        col_status: "STATUS",
-        status_farming: "Online",
-        empty_portfolio: "Empty",
+
+        profile_accredited: "● Community Member",
+        prof_tg_id: "Telegram ID",
+        support_menu: "Support",
+        support_chat: "Support",
+        support_terms: "Terms",
+        support_privacy: "Privacy",
+        docs_title: "Info & Rules",
+        doc_safe_title: "User Agreement",
+        doc_signed: "● Accepted upon signup",
+        doc_agent_title: "Referral Program",
+        doc_signed_ref: "● Up to 27.5% bonus (3 tiers)",
+        doc_ledger_title: "Whitepaper / Tokenomics",
+        doc_auto: "● EquiCore Ecosystem",
+        doc_view: "Open",
+        btn_close: "Got it",
+
+        modal_deposit_title: "Deposit Balance",
+        modal_deposit_desc: "Choose a convenient payment method. Crediting is instant.",
+        modal_deposit_min: "Min. amount: 10 USDT",
+        btn_pay: "Proceed to Payment",
+
+        modal_withdraw_title: "Withdraw Partner Funds",
+        modal_available_label: "AVAILABLE ON PARTNER ACCOUNT:",
+        modal_label_wallet: "Wallet Address (USDT TRC20 / TON):",
+        modal_label_amount: "Withdrawal Amount (USDT):",
+        modal_policy_note: "* Withdrawals are processed exclusively from the partner account.",
+        btn_confirm_withdraw: "Confirm Withdrawal",
+
+        p2p_title: "Transfer to Partner",
+        p2p_avail_lbl: "AVAILABLE ON PARTNER ACCOUNT:",
+        p2p_recipient_lbl: "Recipient (@username or Telegram ID):",
+        p2p_amount_lbl: "Transfer Amount (USDT):",
+        p2p_note: "* Funds instantly arrive on the recipient's invest balance for activating nodes or playing games. Zero platform fee.",
+        btn_p2p_send: "Transfer Funds",
+
+        welc_title: "Welcome to EquiCore!",
+        welc_desc_ref: "You registered via a partner invitation! An enhanced bonus has been credited for your start in projects and games.",
+        welc_desc_direct: "A welcome bonus has been credited to explore ecosystem features and test mini-games.",
+        welc_bonus_lbl: "YOUR WELCOME BONUS",
+        welc_inviter_lbl: "Invited by:",
+        btn_welc_start: "Start Earning 🚀",
+
+        p_modal_target_ticker: "Target Ticker:",
+        p_modal_apy_lbl: "Estimated Yield:",
+        p_modal_payouts_lbl: "Payouts:",
+        p_modal_payouts_val: "In USDT",
+        p_modal_model_lbl: "Business Model (Cash Flow):",
+        p_modal_assets_lbl: "Physical Backing (RWA):",
+        p_modal_rules_lbl: "Distribution Schedule:",
+        p_modal_token_lbl: "🔗 Token & Listing Connection:",
+        btn_p_modal_invest: "Activate from $20",
+        btn_p_modal_close: "Close",
+
+        games_title: "Games",
+        game_gifts_title: "Gift Road",
+        game_rocket_title: "Rocket",
+        game_roulette_title: "Roulette",
+        game_upgrade_title: "Upgrade",
+        game_mines_title: "Mines",
+
+        btn_back_game: "Back",
+        toggle_pts: "PTS Points",
+        gifts_bet_amount_lbl: "Bet Amount",
+        gifts_hazard_lbl: "Hazard:",
+        gifts_status_ready: "Ready to play",
+        gifts_status_low_balance: "Insufficient balance",
+        gifts_status_in_game: "In game (Step {step}/10)",
+        gifts_status_crashed: "Hit by a car!",
+        chip_max: "Max",
+        btn_start_game: "Start Game",
+        btn_cashout: "Cash Out",
+        btn_step: "Step",
+        gifts_diff_easy: "Easy",
+        gifts_diff_medium: "Medium",
+        gifts_diff_hard: "Hard",
+        gifts_diff_hardcore: "Hardcore",
+        gifts_diff_up_to: "up to",
+        fair_play_lbl: "Provably Fair",
+        btn_how_to_play: "How to play?",
+
+        rocket_wait_bets: "Waiting for bets",
+        rocket_auto_cashout: "Auto Cashout",
+        btn_place_bet: "Place Bet",
+        btn_bet_accepted: "BET ACCEPTED",
+        btn_round_finished: "ROUND ENDED",
+        promo_rocket_title: "Flight of the Month",
+        promo_rocket_sub: "highest multiplier of the round",
+
+        promo_upgrade_title: "Upgrade Master",
+        promo_upgrade_sub: "play to participate",
+        up_best_today: "BEST TODAY",
+        up_record_mode: "ALL-TIME RECORD",
+        up_free_bet_banner: "🎁 Daily Free Bet",
+        btn_upgrade_try: "Try Your Luck",
+        btn_spinning: "Spinning...",
+        wheel_mimo: "MISS",
+        wheel_chance: "chance",
+
+        roulette_header_title: "Telegram Gifts",
+        roulette_sub: "Free once a day. Claim as gift or account balance.",
+        roulette_free_btn: "Spin for Free",
+        roulette_free_used: "Free spin claimed",
+        roulette_chance_free: "Free",
+        roulette_wb_win: "NET WIN",
+        roulette_wb_consolation: "CONSOLATION PRIZE",
+
+        mines_found_lbl: "FOUND",
+        mines_win_lbl: "WIN",
+        mines_bomb_count_1: "1 bomb",
+        mines_bomb_count_2: "2 bombs",
+        mines_bomb_count_3: "3 bombs",
+        mines_bomb_count_5: "5 bombs",
+        btn_mines_pick: "PICK A TILE...",
+
+        rules_gifts_title: "Rules: Gift Path",
+        rules_gifts: "<p><b>1. Select Difficulty:</b><br>Choose one of 4 modes: Easy (up to 28.52x), Medium (up to 3014x), Hard (up to 13Kx), or Hardcore (up to 20Kx). Higher difficulty offers massive multipliers with higher crash hazards.</p><p><b>2. Bet & Start:</b><br>Enter your wager in PTS or USDT and tap 'Start Game'.</p><p><b>3. Cross Traffic:</b><br>Navigate traffic lanes through manholes 🐮. Each completed lane increases your current payout multiplier.</p><p><b>4. Cashout Anytime:</b><br>Tap 'Cashout' at any time after the first step to claim your accumulated win directly to your balance.</p><p><b>5. Beware of Cars:</b><br>If hit by oncoming traffic, the round ends and the bet is lost.</p>",
+
+        rules_rocket_title: "Rules: Rocket (Crash)",
+        rules_rocket: "<p><b>1. Betting Phase:</b><br>Place your bet in PTS or USDT during the countdown before launch.</p><p><b>2. Rocket Flight:</b><br>Once launched, the rocket climbs and the payout multiplier continuously increases from 1.00x upward.</p><p><b>3. Cashout:</b><br>Tap 'Cashout' to secure your winnings at the current multiplier.</p><p><b>4. Crash:</b><br>The rocket can crash at any random millisecond. If it crashes before you cash out, your bet is forfeited.</p><p><b>5. Provably Fair:</b><br>Each crash point is predetermined cryptographically before launch and verified by the round hash.</p>",
+
+        rules_upgrade_title: "Rules: Upgrade",
+        rules_upgrade: "<p><b>1. Select Multiplier:</b><br>Adjust the slider from x2.0 up to x20.0. Higher multipliers increase rewards but reduce the size of the winning wheel sector.</p><p><b>2. Set Your Bet:</b><br>Choose PTS or USDT using stepper buttons, chips, or direct input.</p><p><b>3. Spin:</b><br>Tap 'Try Your Luck'. The wheel spins for 3 seconds before smoothly stopping.</p><p><b>4. Win or Miss:</b><br>If the pointer lands inside the colored winning sector, your bet is multiplied! Landing on 'MISS' loses the bet.</p><p><b>5. Daily Free Bet:</b><br>Claim a 100% risk-free daily bet once every 24 hours.</p>",
+
+        rules_roulette_title: "Rules: Telegram Gifts",
+        rules_roulette: "<p><b>1. Select Mode:</b><br>Choose between daily free spin or x3, x15, x50 boosted chance tiers using Telegram Stars ★ or balance.</p><p><b>2. Spin Reel:</b><br>Tap 'Spin for Free' or 'Spin Reel'. The carousel spins and aligns with the winning item.</p><p><b>3. Claim Prize:</b><br>When winning a gift, claim it directly to your Telegram profile or instantly convert its value to USDT balance.</p><p><b>4. Consolation Reward:</b><br>Near-miss spins always award consolation PTS points so you never leave empty-handed.</p>",
+
+        rules_mines_title: "Rules: Mines",
+        rules_mines: "<p><b>1. Setup Field:</b><br>Select the number of mines on the 5x5 grid (1, 2, 3, or 5). More mines yield higher multiplier growth per crystal.</p><p><b>2. Bet & Start:</b><br>Set your wager in PTS or USDT and tap 'Start Game'.</p><p><b>3. Reveal Tiles:</b><br>Click closed tiles. Each discovered crystal increases your payout multiplier.</p><p><b>4. Cashout:</b><br>Tap 'Cashout' anytime after revealing at least one crystal to bank your earnings.</p><p><b>5. Hitting a Mine:</b><br>Uncovering a mine detonates the field, ending the round and forfeiting your wager.</p>",
+
+        alerts: {
+          copy_success: "Link copied to clipboard!",
+          insufficient_funds: "Insufficient funds on selected account!",
+          node_activated: "Successfully activated nodes: ",
+          cluster_activated: "Cluster successfully activated on installment plan!",
+          withdraw_sent: "Withdrawal request submitted to admin!",
+          transfer_success: "Funds successfully transferred to partner!"
+        }
       },
+
       fr: {
         balance_label: "Solde USDT",
         badge_locked: "Pool de liquidité",
         btn_deposit: "Déposer",
         partner_acc_label: "COMPTE PARTENAIRE",
         btn_withdraw: "Retrait",
+        btn_transfer: "Transfert",
         shares_label: "VITESSE",
         valuation_label: "FARMÉ",
         pts_hourly_unit: "PTS/h",
-        section_rounds: "Écosystème de projets",
-        stage_label: "Phase: Lancement du pool",
-        p1_ticker: "Ticker cible: $MNX",
-        p1_desc: "Écosystème automatisé de chaînes vidéo pour enfants et de divertissement avec monétisation mondiale.",
-        col_share_price: "PRIX",
+
+        hub_title: "Nœuds d'Infrastructure",
+        hub_sub: "Vente de Nœuds Écosystème",
+        col_cost: "PRIX",
         col_dividends: "DIVIDENDES",
-        col_ipo_ratio: "BOOST PTS",
-        p1_ratio: "+80 PTS/h",
-        col_valuation: "POOL DE FARMING",
-        raised: "Collecté:",
-        btn_buy_shares: "Améliorer le niveau",
-        p2_ticker: "Ticker cible: $CRND",
-        p2_desc: "Infrastructure de puissance de calcul distribuée pour le rendu 3D et la génération vidéo.",
-        p2_ratio: "+160 PTS/h",
-        p3_ticker: "Ticker cible: $MWMC",
-        p3_desc: "Cluster minier industriel connecté à l'hydroélectricité. Activation sans achat de matériel.",
-        p3_ratio: "+240 PTS/h",
-        title_tiers: "Sélection du niveau d'actif",
-        project_prefix: "Projet:",
-        tier_early: "Niveau 'Start'",
-        tier_early_sub: "20 actifs de projet",
-        tier_early_conv: "Vitesse: +80 PTS/h",
-        tier_syndicate: "Niveau 'Pro'",
-        tier_syndicate_sub: "50 actifs de projet",
-        tier_syndicate_conv: "Vitesse: +200 PTS/h",
-        tier_strategist: "Niveau 'Max'",
-        tier_strategist_sub: "100 actifs de projet",
-        tier_strategist_conv: "Vitesse: +400 PTS/h",
-        tier_disclaimer: "* Les actifs sont liés à votre compte. Les niveaux plus élevés augmentent la vitesse de farming de PTS et le futur airdrop.",
-        btn_confirm_deal: "Confirmer l'activation",
+        col_farming: "FARMING",
+        pool_activated: "Activé",
+        pool_total: "Pool du round",
+        nodes_unit: "nœuds",
+        node_per_price: "20 $ / nœud",
+        btn_node_passport: "Passeport du nœud",
+        btn_node_activate: "Activer les nœuds",
+        p1_ticker_sub: "Ticker cible : $MNX • 1 Nœud = 20 $",
+        p2_ticker_sub: "Ticker cible : $CRND • 1 Nœud = 20 $",
+        p3_ticker_sub: "Ticker cible : $MWMC • 1 Nœud = 20 $",
+        node_mnx_desc: "Nœud de calcul pour le doublage IA, la génération et la diffusion de chaînes YouTube pour enfants monétisées.",
+        node_crnd_desc: "Grappe de serveurs GPU décentralisée dédiée au rendu 3D, à la génération vidéo et à l'inférence d'IA.",
+        node_mwmc_desc: "Nœud de validation d'un centre minier industriel de 4.2 MW alimenté en direct par énergie hydroélectrique.",
+
+        invest_title: "Activation et Cumul de Nœuds",
+        invest_sub: "Accumulation Illimitée",
+        inv_active_nodes_lbl: "Nœuds actifs :",
+        inv_current_rate_lbl: "Farming actuel :",
+        callout_stack_title: "Tous les nœuds sont cumulés dans un pool unique :",
+        callout_stack_desc: "Vous pouvez activer des nœuds par tranche de 20 $ ou acquérir un cluster complet — la puissance s'additionne. Plus vous détenez de nœuds, plus votre vitesse de minage PTS et votre part à l'airdrop TGE augmentent.",
+        select_pack_lbl: "Sélectionnez le pack de nœuds à ajouter :",
+        badge_installment: "ÉCHELONNÉ",
+        pack_1_title: "+1 Nœud réseau",
+        pack_1_sub: "Nœud initial • 20 $",
+        pack_5_title: "+5 Nœuds réseau",
+        pack_5_sub: "Nœud standard • 100 $",
+        pack_25_title: "+25 Nœuds réseau",
+        pack_25_sub: "Nœud syndicat • 500 $",
+        pack_master_title: "Master-Nœud",
+        pack_master_sub: "50 nœuds • dès 41.66 $/mois • Priorité TGE",
+        pack_pro_title: "Pro-Cluster",
+        pack_pro_sub: "125 nœuds • dès 104.16 $/mois • Quota TGE",
+        pack_val_title: "Cluster Validateur",
+        pack_val_sub: "250 nœuds • dès 208.33 $/mois • Nœud maître",
+
+        inst_title: "Paiement échelonné :",
+        inst_badge_zero: "Sans surcoût • 0%",
+        inst_month_suffix: "mois",
+        inst_monthly_lbl: "Paiement mensuel :",
+        inst_first_pay_lbl: "À régler maintenant (1er versement) :",
+        inst_activation_note: "* Tous les nœuds s'activent immédiatement après le 1er versement.",
+        preview_total_lbl: "Total de nœuds après activation :",
+        pay_source_lbl: "Débiter depuis :",
+        src_invest: "Compte Invest",
+        src_partner: "Compte Partenaire",
+        btn_confirm_activation: "Confirmer l'activation",
         btn_back: "Retour",
-        title_portfolio: "Mes Actifs",
-        sub_portfolio: "Boosts Actifs",
+
+        title_portfolio: "Registre des Actifs",
+        sub_portfolio: "Sécurisé par registre",
+        port_nft_id: "NFT ID :",
+        port_nodes_online: "Nœuds en ligne",
+        port_status_online: "En ligne",
+        port_col_nodes: "NŒUDS",
+        port_col_speed: "VITESSE",
+        port_col_status: "STATUT",
+        empty_portfolio: "Vous n'avez aucun nœud actif pour le moment.",
+
         title_partners: "Programme de Parrainage",
-        upline_label: "Invité par:",
+        upline_label: "Invité par :",
+        upline_direct: "Inscription directe",
         ref_desc: "Invitez des partenaires et gagnez jusqu'à 27.5% en USDT sur chaque dépôt : 20% au niveau 1, 5% au niveau 2 et 2.5% au niveau 3.",
         btn_copy: "Copier",
         btn_share_link: "Partager le lien",
@@ -5755,86 +6126,231 @@
         ref_earnings_label: "DISPONIBLE AU RETRAIT",
         structure_title: "Votre Structure (3 Niveaux)",
         structure_empty: "Vous n'avez pas encore de partenaires directs.",
-        profile_accredited: "● Membre de la communauté",
-        prof_tg_id: "Identifiant Telegram",
-        support_menu: "Assistance",
-        docs_title: "Info & Règles",
-        doc_safe_title: "Conditions d'utilisation",
-        doc_signed: "● Accepté lors de l'inscription",
-        doc_signed_ref: "● Jusqu'à 27.5% de bonus (3 niveaux)",
-        doc_view: "Ouvrir",
-        doc_agent_title: "Programme de Parrainage",
-        doc_ledger_title: "Whitepaper / Tokenomics",
-        doc_auto: "● Écosystème EquiCore",
-        modal_deposit_title: "Recharger le solde",
-        modal_deposit_desc: "Choisissez un mode de paiement pratique. Crédit instantané.",
-        modal_deposit_min: "Montant min.: 10 USDT",
-        btn_pay: "Procéder au paiement",
-        modal_withdraw_title: "Retrait des fonds partenaires",
-        modal_available_label: "DISPONIBLE SUR LE COMPTE PARTENAIRE:",
-        modal_label_wallet: "Adresse portefeuille (USDT TRC20 / TON):",
-        modal_label_amount: "Montant du retrait (USDT):",
-        modal_policy_note: "* Les retraits s'effectuent uniquement depuis le compte partenaire.",
-        btn_confirm_withdraw: "Confirmer le retrait",
-        btn_close: "Compris",
-        support_chat: "Chat d'assistance",
-        support_terms: "Conditions d'utilisation",
-        support_privacy: "Politique de confidentialité",
+        tier_l1_badge: "Niveau 1 • 20%",
+        tier_l2_badge: "Niveau 2 • 5%",
+        tier_l3_badge: "Niveau 3 • 2.5%",
+
         tab_rounds: "Projets",
         tab_portfolio: "Actifs",
         tab_partners: "Partenaires",
         tab_games: "Jeux",
         tab_profile: "Profil",
-        upline_direct: "Inscription directe",
-        col_spent: "DÉPENSÉ",
-        col_status: "STATUT",
-        status_farming: "En ligne",
-        empty_portfolio: "Vide",
+
+        profile_accredited: "● Membre de la communauté",
+        prof_tg_id: "Identifiant Telegram",
+        support_menu: "Assistance",
+        support_chat: "Assistance",
+        support_terms: "Conditions",
+        support_privacy: "Confidentialité",
+        docs_title: "Info & Règles",
+        doc_safe_title: "Conditions d'utilisation",
+        doc_signed: "● Accepté lors de l'inscription",
+        doc_agent_title: "Programme de Parrainage",
+        doc_signed_ref: "● Jusqu'à 27.5% de bonus (3 niveaux)",
+        doc_ledger_title: "Whitepaper / Tokenomics",
+        doc_auto: "● Écosystème EquiCore",
+        doc_view: "Ouvrir",
+        btn_close: "Compris",
+
+        modal_deposit_title: "Recharger le solde",
+        modal_deposit_desc: "Choisissez un mode de paiement sécurisé. Crédit instantané.",
+        modal_deposit_min: "Montant min. : 10 USDT",
+        btn_pay: "Procéder au paiement",
+
+        modal_withdraw_title: "Retrait des fonds partenaires",
+        modal_available_label: "DISPONIBLE SUR LE COMPTE PARTENAIRE :",
+        modal_label_wallet: "Adresse portefeuille (USDT TRC20 / TON) :",
+        modal_label_amount: "Montant du retrait (USDT) :",
+        modal_policy_note: "* Les retraits s'effectuent uniquement depuis le compte partenaire.",
+        btn_confirm_withdraw: "Confirmer le retrait",
+
+        p2p_title: "Virement à un partenaire",
+        p2p_avail_lbl: "DISPONIBLE SUR LE COMPTE PARTENAIRE :",
+        p2p_recipient_lbl: "Destinataire (@username ou Telegram ID) :",
+        p2p_amount_lbl: "Montant du virement (USDT) :",
+        p2p_note: "* Les fonds arrivent instantanément sur le compte invest du destinataire pour activer des nœuds. Zéro commission.",
+        btn_p2p_send: "Transférer les fonds",
+
+        welc_title: "Bienvenue sur EquiCore !",
+        welc_desc_ref: "Vous êtes inscrit via un lien de parrainage ! Un bonus amélioré a été crédité pour vos projets et jeux.",
+        welc_desc_direct: "Un bonus de bienvenue a été crédité pour explorer l'écosystème et tester les mini-jeux.",
+        welc_bonus_lbl: "VOTRE BONUS DE BIENVENUE",
+        welc_inviter_lbl: "Invité par :",
+        btn_welc_start: "Commencer à gagner 🚀",
+
+        p_modal_target_ticker: "Ticker cible :",
+        p_modal_apy_lbl: "Rendement estimé :",
+        p_modal_payouts_lbl: "Paiements :",
+        p_modal_payouts_val: "En USDT",
+        p_modal_model_lbl: "Modèle économique :",
+        p_modal_assets_lbl: "Garantie physique (RWA) :",
+        p_modal_rules_lbl: "Modalités de versement :",
+        p_modal_token_lbl: "🔗 Lien avec le token et le listing :",
+        btn_p_modal_invest: "Activer dès 20 $",
+        btn_p_modal_close: "Fermer",
+
+        games_title: "Jeux",
+        game_gifts_title: "Route des Cadeaux",
+        game_rocket_title: "Fusée",
+        game_roulette_title: "Roulette",
+        game_upgrade_title: "Amélioration",
+        game_mines_title: "Mines",
+
+        btn_back_game: "Retour",
+        toggle_pts: "Points PTS",
+        gifts_bet_amount_lbl: "Montant de la mise",
+        gifts_hazard_lbl: "Danger :",
+        gifts_status_ready: "Prêt à jouer",
+        gifts_status_low_balance: "Solde insuffisant",
+        gifts_status_in_game: "En jeu (Étape {step}/10)",
+        gifts_status_crashed: "Renversé par une voiture !",
+        chip_max: "Max",
+        btn_start_game: "Commencer",
+        btn_cashout: "Encaisser",
+        btn_step: "Étape",
+        gifts_diff_easy: "Facile",
+        gifts_diff_medium: "Moyen",
+        gifts_diff_hard: "Difficile",
+        gifts_diff_hardcore: "Hardcore",
+        gifts_diff_up_to: "jusqu'à",
+        fair_play_lbl: "Jeu Équitable",
+        btn_how_to_play: "Comment jouer ?",
+
+        rocket_wait_bets: "Prise des paris",
+        rocket_auto_cashout: "Retrait Auto",
+        btn_place_bet: "Parier",
+        btn_bet_accepted: "PARI ACCEPTÉ",
+        btn_round_finished: "ROUND TERMINÉ",
+        promo_rocket_title: "Vol du Mois",
+        promo_rocket_sub: "plus haut multiplicateur",
+
+        promo_upgrade_title: "Maître de l'amélioration",
+        promo_upgrade_sub: "jouez pour participer",
+        up_best_today: "MEILLEUR DU JOUR",
+        up_record_mode: "RECORD DU MODE",
+        up_free_bet_banner: "🎁 Pari gratuit quotidien",
+        btn_upgrade_try: "Tenter sa chance",
+        btn_spinning: "Rotation...",
+        wheel_mimo: "RATÉ",
+        wheel_chance: "chance",
+
+        roulette_header_title: "Cadeaux Telegram",
+        roulette_sub: "Gratuit une fois par jour. Réclamez en cadeau ou sur votre solde.",
+        roulette_free_btn: "Tourner gratuitement",
+        roulette_free_used: "Tour gratuit utilisé",
+        roulette_chance_free: "Gratuit",
+        roulette_wb_win: "GAIN NET",
+        roulette_wb_consolation: "PRIX DE CONSOLATION",
+
+        mines_found_lbl: "TROUVÉ",
+        mines_win_lbl: "GAIN",
+        mines_bomb_count_1: "1 bombe",
+        mines_bomb_count_2: "2 bombes",
+        mines_bomb_count_3: "3 bombes",
+        mines_bomb_count_5: "5 bombes",
+        btn_mines_pick: "OUVREZ UNE CASE...",
+
+        rules_gifts_title: "Règles : Route des Cadeaux",
+        rules_gifts: "<p><b>1. Choix de la difficulté :</b><br>Sélectionnez parmi 4 modes : Facile (jusqu'à 28.52x), Moyen (jusqu'à 3014x), Difficile (jusqu'à 13Kx) ou Hardcore (jusqu'à 20Kx).</p><p><b>2. Mise et départ :</b><br>Indiquez votre mise en PTS ou USDT et cliquez sur « Commencer ».</p><p><b>3. Traversée des voies :</b><br>Avancez de voie en voie via les bouches d'égout 🐮. Chaque étape franchie multiplie vos gains potentiels.</p><p><b>4. Encaisser :</b><br>Cliquez sur « Récupérer » à tout moment après la première étape pour créditer vos gains instantanément.</p><p><b>5. Attention au trafic :</b><br>Si un véhicule heurte la vache, la manche prend fin et la mise est perdue.</p>",
+
+        rules_rocket_title: "Règles : Fusée (Crash)",
+        rules_rocket: "<p><b>1. Prise des paris :</b><br>Placez votre mise en PTS ou USDT avant la fin du compte à rebours.</p><p><b>2. Décollage :</b><br>La fusée s'élance et le multiplicateur de gain grimpe en continu à partir de 1.00x.</p><p><b>3. Retrait :</b><br>Appuyez sur « Retirer » pour empocher vos gains selon le multiplicateur affiché.</p><p><b>4. Explosion :</b><br>La fusée peut exploser à tout instant. Si le crash survient avant votre retrait, la mise est perdue.</p><p><b>5. Équité garantie :</b><br>Le point de crash est scellé par Provably Fair avant le départ et attesté par le hash du tour.</p>",
+
+        rules_upgrade_title: "Règles : Upgrade",
+        rules_upgrade: "<p><b>1. Choix du multiplicateur :</b><br>Réglez le curseur de x2.0 à x20.0. Un multiplicateur élevé offre un gain plus grand avec un secteur gagnant plus étroit.</p><p><b>2. Mise :</b><br>Fixez votre mise en PTS ou USDT via les boutons, jetons ou champ de saisie.</p><p><b>3. Lancer la roue :</b><br>Cliquez sur « Tenter sa chance ». La roue tourne pendant 3 secondes.</p><p><b>4. Victoire ou raté :</b><br>Si l'aiguille termine dans la zone colorée, le gain multiplié est versé. Dans le secteur sombre (« RATÉ »), la mise est perdue.</p><p><b>5. Pari gratuit quotidien :</b><br>Profitez d'un pari gratuit offert toutes les 24 heures.</p>",
+
+        rules_roulette_title: "Règles : Cadeaux Telegram",
+        rules_roulette: "<p><b>1. Choix du mode :</b><br>Profitez d'un tour gratuit par jour, ou activez les chances x3, x15, x50 avec les étoiles Telegram ★ ou votre solde.</p><p><b>2. Lancement :</b><br>Appuyez sur « Tourner ». Le ruban défile et s'immobilise sur le lot gagnant.</p><p><b>3. Récupération :</b><br>En cas de gain, recevez le cadeau sur votre compte Telegram ou convertissez-le instantanément en USDT.</p><p><b>4. Prix de consolation :</b><br>Chaque tirage rapporte des points PTS de consolation en cas de non-obtention du gros lot.</p>",
+
+        rules_mines_title: "Règles : Démineur",
+        rules_mines: "<p><b>1. Configuration :</b><br>Choisissez le nombre de bombes sur la grille 5x5 (1, 2, 3 ou 5). Plus il y a de bombes, plus le multiplicateur monte vite.</p><p><b>2. Mise et début :</b><br>Indiquez votre mise en PTS ou USDT et cliquez sur « Commencer ».</p><p><b>3. Révéler les cases :</b><br>Cliquez sur les cases. Chaque cristal découvert fait grimper vos gains potentiels.</p><p><b>4. Encaisser :</b><br>Cliquez sur « Encaisser » à tout moment après le premier cristal pour sécuriser vos profits.</p><p><b>5. Explosion :</b><br>Si vous tombez sur une bombe, la manche s'arrête immédiatement et la mise est perdue.</p>",
+
+        alerts: {
+          copy_success: "Lien copié dans le presse-papier !",
+          insufficient_funds: "Solde insuffisant sur le compte sélectionné !",
+          node_activated: "Nœuds activés avec succès : ",
+          cluster_activated: "Cluster activé avec succès en paiement échelonné !",
+          withdraw_sent: "Demande de retrait transmise à l'administrateur !",
+          transfer_success: "Fonds transférés avec succès au partenaire !"
+        }
       },
+
       vi: {
         balance_label: "Số dư USDT",
         badge_locked: "Quỹ thanh khoản",
         btn_deposit: "Nạp tiền",
         partner_acc_label: "TÀI KHOẢN ĐỐI TÁC",
         btn_withdraw: "Rút tiền",
+        btn_transfer: "Chuyển khoản",
         shares_label: "TỐC ĐỘ",
         valuation_label: "ĐÃ ĐÀO",
         pts_hourly_unit: "PTS/h",
-        section_rounds: "Hệ sinh thái dự án",
-        stage_label: "Giai đoạn: Ra mắt pool",
-        p1_ticker: "Mã dự kiến: $MNX",
-        p1_desc: "Hệ sinh thái tự động gồm các kênh video thiếu nhi và giải trí với khả năng kiếm tiền toàn cầu.",
-        col_share_price: "GIÁ",
+
+        hub_title: "Node Hạ Tầng",
+        hub_sub: "Ecosystem Node Sale",
+        col_cost: "GIÁ",
         col_dividends: "CỔ TỨC",
-        col_ipo_ratio: "BOOST PTS",
-        p1_ratio: "+80 PTS/h",
-        col_valuation: "POOL ĐÀO",
-        raised: "Đã huy động:",
-        btn_buy_shares: "Nâng cấp cấp độ",
-        p2_ticker: "Mã dự kiến: $CRND",
-        p2_desc: "Hạ tầng năng lực tính toán phân tán phục vụ dựng hình 3D và tạo video.",
-        p2_ratio: "+160 PTS/h",
-        p3_ticker: "Mã dự kiến: $MWMC",
-        p3_desc: "Cụm khai thác công nghiệp kết nối trực tiếp thủy điện. Kích hoạt công suất không cần mua thiết bị.",
-        p3_ratio: "+240 PTS/h",
-        title_tiers: "Chọn cấp độ tài sản",
-        project_prefix: "Dự án:",
-        tier_early: "Cấp độ 'Start'",
-        tier_early_sub: "20 tài sản dự án",
-        tier_early_conv: "Tốc độ: +80 PTS/h",
-        tier_syndicate: "Cấp độ 'Pro'",
-        tier_syndicate_sub: "50 tài sản dự án",
-        tier_syndicate_conv: "Tốc độ: +200 PTS/h",
-        tier_strategist: "Cấp độ 'Max'",
-        tier_strategist_sub: "100 tài sản dự án",
-        tier_strategist_conv: "Tốc độ: +400 PTS/h",
-        tier_disclaimer: "* Tài sản được liên kết với tài khoản của bạn. Cấp độ cao hơn sẽ tăng tốc độ đào PTS và nhận airdrop sắp tới.",
-        btn_confirm_deal: "Xác nhận kích hoạt",
+        col_farming: "FARMING",
+        pool_activated: "Đã kích hoạt",
+        pool_total: "Tổng vòng",
+        nodes_unit: "node",
+        node_per_price: "$20 / node",
+        btn_node_passport: "Hồ sơ Node",
+        btn_node_activate: "Kích hoạt Node",
+        p1_ticker_sub: "Mã dự kiến: $MNX • 1 Node = $20",
+        p2_ticker_sub: "Mã dự kiến: $CRND • 1 Node = $20",
+        p3_ticker_sub: "Mã dự kiến: $MWMC • 1 Node = $20",
+        node_mnx_desc: "Node tính toán sản xuất, lồng tiếng AI và phân phối các kênh YouTube thiếu nhi kiếm tiền.",
+        node_crnd_desc: "Cụm máy chủ GPU phân tán phục vụ render 3D, tạo video và suy luận mô hình trí tuệ nhân tạo.",
+        node_mwmc_desc: "Node xác thực trung tâm khai thác tiền mã hóa công nghiệp 4.2 MW kết nối trực tiếp thủy điện.",
+
+        invest_title: "Kích Hoạt & Tích Lũy Node",
+        invest_sub: "Tích Lũy Không Giới Hạn",
+        inv_active_nodes_lbl: "Node đang hoạt động:",
+        inv_current_rate_lbl: "Tốc độ đào hiện tại:",
+        callout_stack_title: "Tất cả các node được cộng dồn vào cùng một bể:",
+        callout_stack_desc: "Bạn có thể kích hoạt từng phần với $20 hoặc mua cả cụm — công suất sẽ được cộng dồn. Càng sở hữu nhiều node, tốc độ đào PTS, cổ tức và tỷ lệ nhận airdrop TGE càng lớn.",
+        select_pack_lbl: "Chọn gói node muốn thêm:",
+        badge_installment: "TRẢ GÓP",
+        pack_1_title: "+1 Node mạng",
+        pack_1_sub: "Node khởi động • $20",
+        pack_5_title: "+5 Node mạng",
+        pack_5_sub: "Node tiêu chuẩn • $100",
+        pack_25_title: "+25 Node mạng",
+        pack_25_sub: "Node liên minh • $500",
+        pack_master_title: "Master-Node",
+        pack_master_sub: "50 node • từ $41.66/tháng • Ưu tiên TGE",
+        pack_pro_title: "Pro-Cluster",
+        pack_pro_sub: "125 node • từ $104.16/tháng • Hạn ngạch TGE",
+        pack_val_title: "Cụm Validator",
+        pack_val_sub: "250 node • từ $208.33/tháng • Node chính",
+
+        inst_title: "Thanh toán trả góp:",
+        inst_badge_zero: "Không lãi suất • 0%",
+        inst_month_suffix: "tháng",
+        inst_monthly_lbl: "Thanh toán hàng tháng:",
+        inst_first_pay_lbl: "Thanh toán đợt 1 ngay:",
+        inst_activation_note: "* Toàn bộ node sẽ kích hoạt đào ngay sau khi thanh toán đợt đầu tiên.",
+        preview_total_lbl: "Tổng node sau khi kích hoạt:",
+        pay_source_lbl: "Trừ tiền từ:",
+        src_invest: "Tài khoản Đầu tư",
+        src_partner: "Tài khoản Đối tác",
+        btn_confirm_activation: "Xác nhận kích hoạt",
         btn_back: "Quay lại",
-        title_portfolio: "Tài sản của tôi",
-        sub_portfolio: "Tăng tốc đang hoạt động",
+
+        title_portfolio: "Sổ Đăng Ký Tài Sản",
+        sub_portfolio: "Bảo vệ bởi hệ thống",
+        port_nft_id: "NFT ID:",
+        port_nodes_online: "Node trực tuyến",
+        port_status_online: "Trực tuyến",
+        port_col_nodes: "NODE",
+        port_col_speed: "TỐC ĐỘ",
+        port_col_status: "TRẠNG THÁI",
+        empty_portfolio: "Bạn chưa có node hoạt động nào.",
+
         title_partners: "Chương trình giới thiệu",
         upline_label: "Người giới thiệu bạn:",
+        upline_direct: "Đăng ký trực tiếp",
         ref_desc: "Mời đối tác và nhận tới 27.5% bằng USDT từ mỗi lần nạp: 20% tầng 1, 5% tầng 2 và 2.5% tầng 3.",
         btn_copy: "Sao chép",
         btn_share_link: "Chia sẻ liên kết",
@@ -5843,41 +6359,153 @@
         ref_earnings_label: "KHẢ DỤNG ĐỂ RÚT",
         structure_title: "Hệ thống của bạn (3 Tầng)",
         structure_empty: "Bạn chưa có đối tác trực tiếp nào.",
+        tier_l1_badge: "Tầng 1 • 20%",
+        tier_l2_badge: "Tầng 2 • 5%",
+        tier_l3_badge: "Tầng 3 • 2.5%",
+
+        tab_rounds: "Dự án",
+        tab_portfolio: "Tài sản",
+        tab_partners: "Đối tác",
+        tab_games: "Trò chơi",
+        tab_profile: "Hồ sơ",
+
         profile_accredited: "● Thành viên cộng đồng",
         prof_tg_id: "Telegram ID",
         support_menu: "Hỗ trợ",
+        support_chat: "Hỗ trợ",
+        support_terms: "Điều khoản",
+        support_privacy: "Bảo mật",
         docs_title: "Thông tin & Quy tắc",
         doc_safe_title: "Điều khoản sử dụng",
         doc_signed: "● Đã chấp nhận khi đăng ký",
-        doc_signed_ref: "● Thưởng tới 27.5% (3 tầng)",
-        doc_view: "Mở",
         doc_agent_title: "Chương trình giới thiệu",
+        doc_signed_ref: "● Thưởng tới 27.5% (3 tầng)",
         doc_ledger_title: "Whitepaper / Tokenomics",
         doc_auto: "● Hệ sinh thái EquiCore",
+        doc_view: "Mở",
+        btn_close: "Đã hiểu",
+
         modal_deposit_title: "Nạp tiền vào số dư",
         modal_deposit_desc: "Chọn phương thức nạp tiền thuận tiện. Tiền vào ngay lập tức.",
         modal_deposit_min: "Số tiền tối thiểu: 10 USDT",
         btn_pay: "Tiến hành thanh toán",
+
         modal_withdraw_title: "Rút tiền đối tác",
         modal_available_label: "KHẢ DỤNG TRÊN TÀI KHOẢN ĐỐI TÁC:",
         modal_label_wallet: "Địa chỉ ví (USDT TRC20 / TON):",
         modal_label_amount: "Số tiền rút (USDT):",
         modal_policy_note: "* Việc rút tiền chỉ thực hiện từ tài khoản đối tác.",
         btn_confirm_withdraw: "Xác nhận rút tiền",
-        btn_close: "Đã hiểu",
-        support_chat: "Kênh hỗ trợ",
-        support_terms: "Điều khoản dịch vụ",
-        support_privacy: "Chính sách bảo mật",
-        tab_rounds: "Dự án",
-        tab_portfolio: "Tài sản",
-        tab_partners: "Đối tác",
-        tab_games: "Trò chơi",
-        tab_profile: "Hồ sơ",
-        upline_direct: "Đăng ký trực tiếp",
-        col_spent: "ĐÃ CHI",
-        col_status: "TRẠNG THÁI",
-        status_farming: "Trực tuyến",
-        empty_portfolio: "Trống",
+
+        p2p_title: "Chuyển tiền cho đối tác",
+        p2p_avail_lbl: "KHẢ DỤNG TRÊN TÀI KHOẢN ĐỐI TÁC:",
+        p2p_recipient_lbl: "Người nhận (@username hoặc Telegram ID):",
+        p2p_amount_lbl: "Số tiền chuyển (USDT):",
+        p2p_note: "* Tiền sẽ được chuyển ngay vào tài khoản đầu tư của người nhận để kích hoạt node hoặc chơi game. Không mất phí nền tảng.",
+        btn_p2p_send: "Chuyển tiền",
+
+        welc_title: "Chào mừng đến với EquiCore!",
+        welc_desc_ref: "Bạn đã đăng ký theo liên kết giới thiệu! Phần thưởng khởi đầu nâng cao đã được cộng vào tài khoản của bạn.",
+        welc_desc_direct: "Bạn nhận được phần thưởng chào mừng để khám phá hệ sinh thái và trải nghiệm mini-game.",
+        welc_bonus_lbl: "PHẦN THƯỞNG CHÀO MỪNG CỦA BẠN",
+        welc_inviter_lbl: "Người giới thiệu:",
+        btn_welc_start: "Bắt đầu kiếm tiền 🚀",
+
+        p_modal_target_ticker: "Mã token dự kiến:",
+        p_modal_apy_lbl: "Lợi nhuận ước tính:",
+        p_modal_payouts_lbl: "Thanh toán:",
+        p_modal_payouts_val: "Bằng USDT",
+        p_modal_model_lbl: "Mô hình kinh doanh:",
+        p_modal_assets_lbl: "Bảo chứng thực tế (RWA):",
+        p_modal_rules_lbl: "Quy chế phân phối:",
+        p_modal_token_lbl: "🔗 Liên kết Token & Niêm yết:",
+        btn_p_modal_invest: "Kích hoạt từ $20",
+        btn_p_modal_close: "Đóng",
+
+        games_title: "Trò chơi",
+        game_gifts_title: "Đường Quà Tặng",
+        game_rocket_title: "Tên Lửa",
+        game_roulette_title: "Vòng Quay",
+        game_upgrade_title: "Nâng Cấp",
+        game_mines_title: "Dò Mìn",
+
+        btn_back_game: "Quay lại",
+        toggle_pts: "Điểm PTS",
+        gifts_bet_amount_lbl: "Số tiền cược",
+        gifts_hazard_lbl: "Tỷ lệ va chạm:",
+        gifts_status_ready: "Sẵn sàng chơi",
+        gifts_status_low_balance: "Số dư không đủ",
+        gifts_status_in_game: "Đang chơi (Bước {step}/10)",
+        gifts_status_crashed: "Bị xe tông!",
+        chip_max: "Tối đa",
+        btn_start_game: "Bắt đầu chơi",
+        btn_cashout: "Rút tiền",
+        btn_step: "Bước",
+        gifts_diff_easy: "Dễ",
+        gifts_diff_medium: "Vừa",
+        gifts_diff_hard: "Khó",
+        gifts_diff_hardcore: "Cực khó",
+        gifts_diff_up_to: "lên đến",
+        fair_play_lbl: "Minh bạch",
+        btn_how_to_play: "Cách chơi?",
+
+        rocket_wait_bets: "Đang nhận cược",
+        rocket_auto_cashout: "Tự động rút",
+        btn_place_bet: "Đặt cược",
+        btn_bet_accepted: "ĐÃ NHẬN CƯỢC",
+        btn_round_finished: "VÒNG KẾT THÚC",
+        promo_rocket_title: "Chuyến bay của tháng",
+        promo_rocket_sub: "hệ số cao nhất vòng",
+
+        promo_upgrade_title: "Bậc thầy nâng cấp",
+        promo_upgrade_sub: "chơi để tham gia",
+        up_best_today: "TỐT NHẤT HÔM NAY",
+        up_record_mode: "KỶ LỤC CHẾ ĐỘ",
+        up_free_bet_banner: "🎁 Cược miễn phí hàng ngày",
+        btn_upgrade_try: "Thử vận may",
+        btn_spinning: "Đang quay...",
+        wheel_mimo: "TRƯỢT",
+        wheel_chance: "cơ hội",
+
+        roulette_header_title: "Quà tặng Telegram",
+        roulette_sub: "Miễn phí mỗi ngày một lần. Nhận quà hoặc cộng vào số dư.",
+        roulette_free_btn: "Quay miễn phí",
+        roulette_free_used: "Đã dùng lượt quay miễn phí",
+        roulette_chance_free: "Miễn phí",
+        roulette_wb_win: "THẮNG RÒNG",
+        roulette_wb_consolation: "GIẢI AN ỦI",
+
+        mines_found_lbl: "ĐÃ TÌM THẤY",
+        mines_win_lbl: "TIỀN THẮNG",
+        mines_bomb_count_1: "1 quả bom",
+        mines_bomb_count_2: "2 quả bom",
+        mines_bomb_count_3: "3 quả bom",
+        mines_bomb_count_5: "5 quả bom",
+        btn_mines_pick: "CHỌN MỘT Ô...",
+
+        rules_gifts_title: "Quy tắc: Con Đường Quà Tặng",
+        rules_gifts: "<p><b>1. Chọn độ khó:</b><br>Chọn 1 trong 4 chế độ: Dễ (lên tới 28.52x), Trung bình (lên tới 3014x), Khó (lên tới 13Kx) hoặc Cực khó (lên tới 20Kx).</p><p><b>2. Đặt cược & Bắt đầu:</b><br>Nhập số tiền cược bằng PTS hoặc USDT và nhấn «Bắt đầu».</p><p><b>3. Vượt qua làn đường:</b><br>Di chuyển qua các làn đường thông qua nắp cống 🐮. Mỗi làn đường vượt qua sẽ tăng hệ số nhân thưởng.</p><p><b>4. Chốt lời:</b><br>Bạn có thể nhấn «Rút tiền» bất cứ lúc nào sau bước đầu tiên để nhận tiền thưởng vào số dư.</p><p><b>5. Cẩn thận xe cộ:</b><br>Nếu bị ô tô đâm trúng, vòng chơi sẽ kết thúc và mất tiền cược.</p>",
+
+        rules_rocket_title: "Quy tắc: Tên Lửa (Crash)",
+        rules_rocket: "<p><b>1. Đặt cược:</b><br>Đặt cược bằng PTS hoặc USDT trong thời gian đếm ngược nhận cược.</p><p><b>2. Tên lửa cất cánh:</b><br>Khi bắt đầu, tên lửa bay lên và hệ số nhân tăng liên tục từ 1.00x trở lên.</p><p><b>3. Rút tiền:</b><br>Nhấn «Rút tiền» để chốt lời theo hệ số nhân hiện tại.</p><p><b>4. Phát nổ:</b><br>Tên lửa có thể nổ bất kỳ lúc nào. Nếu phát nổ trước khi bạn rút, cược sẽ bị mất.</p><p><b>5. Minh bạch (Provably Fair):</b><br>Điểm nổ được mã hóa trước khi bay và xác thực bằng chuỗi hash của vòng chơi.</p>",
+
+        rules_upgrade_title: "Quy tắc: Nâng Cấp",
+        rules_upgrade: "<p><b>1. Chọn hệ số nhân:</b><br>Kéo thanh trượt từ x2.0 đến x20.0. Hệ số càng cao phần thưởng càng lớn nhưng cung thắng càng hẹp.</p><p><b>2. Đặt cược:</b><br>Chọn số tiền cược bằng PTS hoặc USDT qua nút tăng giảm, chip hoặc nhập trực tiếp.</p><p><b>3. Quay:</b><br>Nhấn «Thử vận may». Bánh xe quay trong 3 giây và dừng lại mượt mà.</p><p><b>4. Thắng hay trượt:</b><br>Nếu kim chỉ vào cung màu thắng lợi, bạn nhận tiền thưởng nhân lên! Nếu vào cung «TRƯỢT», cược sẽ mất.</p><p><b>5. Cược miễn phí hàng ngày:</b><br>Nhận 1 lượt cược miễn phí không rủi ro mỗi 24 giờ.</p>",
+
+        rules_roulette_title: "Quy tắc: Quà Tặng Telegram",
+        rules_roulette: "<p><b>1. Chọn chế độ:</b><br>Có 4 mức: quay miễn phí mỗi ngày, hoặc tăng cơ hội x3, x15, x50 bằng Sao Telegram ★ hoặc số dư.</p><p><b>2. Quay thưởng:</b><br>Nhấn «Quay miễn phí» hoặc «Quay». Băng chuyền giải thưởng sẽ quay và dừng tại ô trúng thưởng.</p><p><b>3. Nhận quà:</b><br>Khi trúng quà, bạn có thể nhận quà về tài khoản Telegram hoặc quy đổi sang USDT cộng vào số dư.</p><p><b>4. Giải an ủi:</b><br>Ngay cả khi không trúng quà lớn, bạn vẫn luôn nhận được điểm PTS an ủi.</p>",
+
+        rules_mines_title: "Quy tắc: Dò Mìn",
+        rules_mines: "<p><b>1. Cấu hình bàn cờ:</b><br>Chọn số lượng mìn trên lưới 5x5 (1, 2, 3 hoặc 5). Càng nhiều mìn thì hệ số nhân càng tăng nhanh.</p><p><b>2. Cược & Bắt đầu:</b><br>Nhập số tiền cược bằng PTS hoặc USDT và nhấn «Bắt đầu».</p><p><b>3. Mở ô:</b><br>Nhấn vào các ô chưa mở. Mỗi viên pha lê tìm thấy sẽ gia tăng hệ số tiền thưởng.</p><p><b>4. Rút tiền:</b><br>Nhấn «Rút tiền» bất cứ lúc nào sau khi mở được ít nhất 1 viên pha lê để nhận thưởng.</p><p><b>5. Trúng mìn:</b><br>Mở trúng ô mìn sẽ kích nổ toàn bộ, kết thúc vòng chơi và mất số tiền cược.</p>",
+
+        alerts: {
+          copy_success: "Đã sao chép liên kết vào bộ nhớ tạm!",
+          insufficient_funds: "Không đủ số dư trong tài khoản đã chọn!",
+          node_activated: "Kích hoạt thành công số node: ",
+          cluster_activated: "Cụm node đã kích hoạt trả góp thành công!",
+          withdraw_sent: "Yêu cầu rút tiền đã được gửi tới ban quản trị!",
+          transfer_success: "Đã chuyển tiền thành công cho đối tác!"
+        }
       }
     };
 
@@ -6229,6 +6857,39 @@
       // Обновляем динамические элементы с новым языком
       updateUplineUI();
       renderPortfolio();
+      if (typeof selectedTicker !== 'undefined' && selectedTicker) {
+        updateInvestPreview();
+      }
+      if (typeof renderGiftsChips === 'function') {
+        renderGiftsChips();
+      }
+      if (typeof renderGiftsDiffButtons === 'function') {
+        renderGiftsDiffButtons();
+      }
+      if (typeof updateGiftsUI === 'function' && safeGet('game-view-gifts')?.style.display === 'block') {
+        updateGiftsUI();
+      }
+      if (typeof updateUpgradeWheelUI === 'function') {
+        updateUpgradeWheelUI();
+      }
+      if (typeof renderUpgradeChips === 'function') {
+        renderUpgradeChips();
+      }
+      if (typeof renderRocketChips === 'function') {
+        renderRocketChips();
+      }
+      if (typeof updateRocketUI === 'function') {
+        updateRocketUI();
+      }
+      if (typeof setRouletteMode === 'function' && typeof rouletteMode !== 'undefined') {
+        setRouletteMode(rouletteMode);
+      }
+      if (typeof renderMinesChips === 'function') {
+        renderMinesChips();
+      }
+      if (typeof updateMinesUI === 'function') {
+        updateMinesUI(false);
+      }
 
       // Если пользователь авторизован в Supabase, сохраняем язык в профиле
       if (supabaseClient && dbUserId) {
@@ -6616,15 +7277,20 @@
       if (targetGame) {
         targetGame.style.display = 'block';
         if (gameId === 'upgrade') {
+          renderUpgradeChips();
           updateUpgradeWheelUI();
+          generateProvablyFairHash('upgrade-round-hash');
         } else if (gameId === 'gifts') {
           initGiftsGame();
         } else if (gameId === 'rocket') {
           initRocketGame();
+          generateProvablyFairHash('rocket-round-hash');
         } else if (gameId === 'roulette') {
           initRouletteGame();
+          generateProvablyFairHash('roulette-round-hash');
         } else if (gameId === 'mines') {
           initMinesGame();
+          generateProvablyFairHash('mines-round-hash');
         }
       } else {
         alert("Эта игра находится в разработке!");
@@ -6685,6 +7351,7 @@
         if (tabPts) tabPts.classList.remove('active');
       }
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+      renderUpgradeChips();
       updateUpgradeWheelUI();
     }
 
@@ -6756,7 +7423,54 @@
         }
       }
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-      updateUpgradeWheelUI();
+      updateUpgradeWheelUI(true);
+    }
+
+    function onUpgradeCustomBetInput(val) {
+      if (isUpgradeSpinning) return;
+      const num = parseFloat(val);
+      if (isNaN(num) || num <= 0) return;
+
+      if (upgradeCurrency === 'pts') {
+        upgradeBetPts = Math.max(1, Math.floor(num));
+      } else {
+        upgradeBetUsdt = Math.max(0.01, parseFloat(num.toFixed(2)));
+      }
+      updateUpgradeWheelUI(false);
+    }
+
+    function renderUpgradeChips() {
+      const container = safeGet('upgrade-chips-container');
+      if (!container) return;
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
+      const isPts = (upgradeCurrency === 'pts');
+      const chips = isPts ? [10, 50, 100, 500, 1000, 'max'] : [0.5, 1, 2, 5, 10, 'max'];
+      let html = '';
+      chips.forEach(c => {
+        const label = c === 'max' ? (dict.chip_max || 'Макс') : (isPts ? c : (c < 1 ? c.toFixed(1) : c));
+        const arg = c === 'max' ? `'max'` : c;
+        html += `<button class="gifts-chip-btn" onclick="setUpgradeQuickBet(${arg})">${label}</button>`;
+      });
+      container.innerHTML = html;
+    }
+
+    function setUpgradeQuickBet(val) {
+      if (isUpgradeSpinning) return;
+      if (val === 'max') {
+        if (upgradeCurrency === 'pts') {
+          upgradeBetPts = Math.max(10, Math.floor(window.totalPts || 0));
+        } else {
+          upgradeBetUsdt = Math.max(0.1, parseFloat((balance || 0).toFixed(2)));
+        }
+      } else {
+        if (upgradeCurrency === 'pts') {
+          upgradeBetPts = Math.max(10, parseInt(val));
+        } else {
+          upgradeBetUsdt = Math.max(0.1, parseFloat(val));
+        }
+      }
+      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+      updateUpgradeWheelUI(true);
     }
 
     function applyFreeBet() {
@@ -6785,7 +7499,9 @@
       }
     }
 
-    function updateUpgradeWheelUI() {
+    function updateUpgradeWheelUI(syncInput = true) {
+      if (!isUpgradeSpinning) generateGameHash('upgrade-round-hash');
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
       const mult = currentMultiplier;
       // Формула шанса: шанс = 95 / множитель
       const chance = 95 / mult;
@@ -6820,6 +7536,7 @@
       // 5. Положение надписи "МИМО" по центру темного сектора
       const mimoTag = safeGet('wheel-mimo-tag');
       if (mimoTag) {
+        mimoTag.innerText = dict.wheel_mimo || 'МИМО';
         const mimoCenterAngle = winSectorDeg + (360 - winSectorDeg) / 2;
         const angleRad = (mimoCenterAngle - 90) * (Math.PI / 180);
         const radius = 76;
@@ -6835,15 +7552,20 @@
         const winPts = Math.floor(upgradeBetPts * mult);
         safeSetText('upgrade-center-win-val', `+${winPts.toLocaleString()}`);
         safeSetText('upgrade-center-curr-val', 'PTS');
-        safeSetText('upgrade-bet-display', String(upgradeBetPts));
-        safeSetText('upgrade-bet-curr', 'PTS');
       } else {
         const winUsdt = (upgradeBetUsdt * mult).toFixed(2);
         safeSetText('upgrade-center-win-val', `+$${winUsdt}`);
         safeSetText('upgrade-center-curr-val', 'USDT');
-        safeSetText('upgrade-bet-display', upgradeBetUsdt.toFixed(2));
-        safeSetText('upgrade-bet-curr', 'USDT');
       }
+
+      const betInput = safeGet('upgrade-bet-input');
+      if (betInput) {
+        betInput.disabled = isUpgradeSpinning;
+        if (syncInput && document.activeElement !== betInput) {
+          betInput.value = (upgradeCurrency === 'pts') ? String(upgradeBetPts) : upgradeBetUsdt.toFixed(2);
+        }
+      }
+      safeSetText('upgrade-bet-curr', (upgradeCurrency === 'pts') ? 'PTS' : 'USDT');
 
       const centerWinVal = safeGet('upgrade-center-win-val');
       if (centerWinVal) {
@@ -6852,7 +7574,7 @@
 
       // Вывод шанса с одним знаком после запятой (ровно 13.5% при 7.0x)
       const chanceFormatted = (Math.floor((95 / mult) * 10) / 10).toFixed(1);
-      safeSetText('upgrade-center-chance-val', `шанс ${chanceFormatted}%`);
+      safeSetText('upgrade-center-chance-val', `${dict.wheel_chance || 'шанс'} ${chanceFormatted}%`);
 
       // 7. Ползунок range slider: динамический градиент заполнения трека
       const slider = safeGet('upgrade-slider');
@@ -6888,19 +7610,19 @@
       const spinBtn = safeGet('rubup-play-btn');
       if (spinBtn) {
         if (isUpgradeSpinning) {
-          spinBtn.innerText = 'ВРАЩЕНИЕ...';
+          spinBtn.innerText = (dict.btn_spinning || 'Вращение...').toUpperCase();
           spinBtn.className = 'rubup-spin-btn disabled';
           spinBtn.disabled = true;
         } else if (upgradeCurrency === 'pts' && (!window.totalPts || window.totalPts < upgradeBetPts)) {
-          spinBtn.innerText = 'НЕ ХВАТАЕТ PTS';
+          spinBtn.innerText = (dict.gifts_status_low_balance || 'Не хватает на балансе').toUpperCase();
           spinBtn.className = 'rubup-spin-btn disabled';
           spinBtn.disabled = true;
         } else if (upgradeCurrency === 'usdt' && (!balance || balance < upgradeBetUsdt)) {
-          spinBtn.innerText = 'НЕ ХВАТАЕТ USDT';
+          spinBtn.innerText = (dict.gifts_status_low_balance || 'Не хватает на балансе').toUpperCase();
           spinBtn.className = 'rubup-spin-btn disabled';
           spinBtn.disabled = true;
         } else {
-          spinBtn.innerText = 'ИСПЫТАТЬ УДАЧУ';
+          spinBtn.innerText = (dict.btn_upgrade_try || 'Испытать удачу').toUpperCase();
           spinBtn.className = 'rubup-spin-btn ready';
           spinBtn.disabled = false;
         }
@@ -6922,6 +7644,7 @@
         return;
       }
 
+      generateGameHash('upgrade-round-hash');
       isUpgradeSpinning = true;
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
 
@@ -7157,11 +7880,7 @@
     }
 
     function generateGiftsRoundHash() {
-      const chars = '0123456789abcdef';
-      let h = '';
-      for (let i = 0; i < 16; i++) h += chars[Math.floor(Math.random() * 16)];
-      giftsRoundHash = h.substring(0, 6) + '...' + h.substring(10, 16);
-      safeSetText('gifts-round-hash', giftsRoundHash);
+      generateGameHash('gifts-round-hash');
     }
 
     function initGiftsGame() {
@@ -7171,6 +7890,7 @@
       resetGiftsBoard();
       generateGiftsRoundHash();
       renderGiftsChips();
+      renderGiftsDiffButtons();
       updateGiftsLanePills();
       updateGiftsUI();
       startGiftsAmbientTraffic();
@@ -7245,20 +7965,60 @@
         }
       }
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-      updateGiftsUI();
+      updateGiftsUI(true);
+    }
+
+    function onGiftsCustomBetInput(val) {
+      if (giftsInRound) return;
+      const num = parseFloat(val);
+      if (isNaN(num) || num <= 0) return;
+
+      if (giftsCurrency === 'pts') {
+        giftsBetPts = Math.max(1, Math.floor(num));
+      } else {
+        giftsBetUsdt = Math.max(0.01, parseFloat(num.toFixed(2)));
+      }
+      updateGiftsUI(false);
     }
 
     function renderGiftsChips() {
       const container = safeGet('gifts-chips-container');
       if (!container) return;
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
+      const maxLabel = dict.chip_max || 'Макс';
       const isPts = (giftsCurrency === 'pts');
       const chips = isPts ? [10, 50, 100, 500, 1000, 'max'] : [0.5, 1, 2, 5, 10, 'max'];
       let html = '';
       chips.forEach(c => {
-        const label = c === 'max' ? 'Макс' : (isPts ? c : (c < 1 ? c.toFixed(1) : c));
+        const label = c === 'max' ? maxLabel : (isPts ? c : (c < 1 ? c.toFixed(1) : c));
         const arg = c === 'max' ? `'max'` : c;
         html += `<button class="gifts-chip-btn" onclick="setGiftsQuickBet(${arg})">${label}</button>`;
       });
+      container.innerHTML = html;
+    }
+
+    function renderGiftsDiffButtons() {
+      const container = document.querySelector('.gifts-diff-grid');
+      if (!container) return;
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
+      const upTo = dict.gifts_diff_up_to || 'до';
+      const diffNames = [
+        dict.gifts_diff_easy || 'Лёгкая',
+        dict.gifts_diff_medium || 'Средняя',
+        dict.gifts_diff_hard || 'Тяжёлая',
+        dict.gifts_diff_hardcore || 'Хардкор'
+      ];
+      const maxMults = ['28.52x', '3014x', '13Kx', '20Kx'];
+
+      let html = '';
+      for (let i = 0; i < 4; i++) {
+        const activeClass = (i === giftsDiff) ? 'active' : '';
+        html += `
+          <div class="gifts-diff-btn ${activeClass}" onclick="setGiftsDiff(${i})">
+            <b>${diffNames[i]}</b>
+            <span>${upTo} ${maxMults[i]}</span>
+          </div>`;
+      }
       container.innerHTML = html;
     }
 
@@ -7278,7 +8038,7 @@
         }
       }
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-      updateGiftsUI();
+      updateGiftsUI(true);
     }
 
     function setGiftsDiff(idx) {
@@ -7290,7 +8050,7 @@
       });
       updateGiftsLanePills();
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-      updateGiftsUI();
+      updateGiftsUI(true);
     }
 
     function updateGiftsLanePills() {
@@ -7310,12 +8070,19 @@
       }
     }
 
-    function updateGiftsUI() {
+    function updateGiftsUI(syncInput = true) {
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
       const isPts = (giftsCurrency === 'pts');
       safeSetText('gifts-inner-pts', Math.floor(window.totalPts || 0).toLocaleString());
       safeSetText('gifts-inner-usdt', `$${(balance || 0).toFixed(2)}`);
 
-      safeSetText('gifts-bet-display', isPts ? String(giftsBetPts) : giftsBetUsdt.toFixed(2));
+      const betInput = safeGet('gifts-bet-input');
+      if (betInput) {
+        betInput.disabled = giftsInRound;
+        if (syncInput && document.activeElement !== betInput) {
+          betInput.value = isPts ? String(giftsBetPts) : giftsBetUsdt.toFixed(2);
+        }
+      }
       safeSetText('gifts-bet-curr', isPts ? 'PTS' : 'USDT');
 
       const conf = GIFTS_DIFF_CONFIG[giftsDiff];
@@ -7340,23 +8107,27 @@
 
         if (!hasBalance) {
           if (warnEl) {
-            warnEl.innerText = 'Не хватает на балансе';
+            warnEl.innerText = dict.gifts_status_low_balance || 'Не хватает на балансе';
             warnEl.className = 'gifts-status-val warning';
           }
           if (startBtn) startBtn.disabled = true;
         } else {
           if (warnEl) {
-            warnEl.innerText = 'Готов к игре';
+            warnEl.innerText = dict.gifts_status_ready || 'Готов к игре';
             warnEl.className = 'gifts-status-val';
           }
           if (startBtn) startBtn.disabled = giftsIsAnimating;
+        }
+        if (startBtn) {
+          startBtn.innerText = dict.btn_start_game || 'Начать игру';
         }
       } else {
         if (preActions) preActions.style.display = 'none';
         if (liveActions) liveActions.style.display = 'flex';
 
         if (warnEl) {
-          warnEl.innerText = `В игре (Шаг ${giftsCurrentStep + 1}/10)`;
+          const inGameFmt = dict.gifts_status_in_game || 'В игре (Шаг {step}/10)';
+          warnEl.innerText = inGameFmt.replace('{step}', giftsCurrentStep + 1);
           warnEl.className = 'gifts-status-val';
         }
 
@@ -7364,18 +8135,20 @@
         const winVal = isPts ? `+${Math.floor(activeBet * currentMult).toLocaleString()} PTS` : `+$${(activeBet * currentMult).toFixed(2)} USDT`;
 
         if (cashoutBtn) {
+          const cashoutText = dict.btn_cashout || 'Забрать';
           if (giftsCurrentStep >= 0) {
             cashoutBtn.disabled = giftsIsAnimating;
-            cashoutBtn.innerText = `Забрать (${winVal})`;
+            cashoutBtn.innerText = `${cashoutText} (${winVal})`;
           } else {
             cashoutBtn.disabled = true;
-            cashoutBtn.innerText = `Забрать (+0 ${isPts ? 'PTS' : 'USDT'})`;
+            cashoutBtn.innerText = `${cashoutText} (+0 ${isPts ? 'PTS' : 'USDT'})`;
           }
         }
 
         if (stepBtn) {
+          const stepText = dict.btn_step || 'Шаг';
           if (giftsCurrentStep < 9) {
-            stepBtn.innerText = `Шаг ${giftsCurrentStep + 2} 🐮`;
+            stepBtn.innerText = `${stepText} ${giftsCurrentStep + 2} 🐮`;
             stepBtn.disabled = giftsIsAnimating;
           } else {
             stepBtn.innerText = 'Финиш! 🏆';
@@ -7572,7 +8345,8 @@
             updateUI();
             const warnEl = safeGet('gifts-status-warning');
             if (warnEl) {
-              warnEl.innerText = 'Сбита машиной!';
+              const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
+              warnEl.innerText = dict.gifts_status_crashed || 'Сбита машиной!';
               warnEl.className = 'gifts-status-val warning';
             }
             startGiftsAmbientTraffic();
@@ -7633,8 +8407,38 @@
       startGiftsAmbientTraffic();
     }
 
+    function generateGameHash(elementId) {
+      const chars = '0123456789abcdef';
+      let h = '';
+      for (let i = 0; i < 16; i++) h += chars[Math.floor(Math.random() * 16)];
+      const formatted = h.substring(0, 6) + '...' + h.substring(10, 16);
+      safeSetText(elementId, formatted);
+    }
+    const generateProvablyFairHash = generateGameHash;
+
     function showGiftsRulesModal() {
-      alert("🐮 ПРАВИЛА ИГРЫ «ПУТЬ ПОДАРКОВ»\n\n1. Выберите уровень сложности: Лёгкая (до 28.52x), Средняя (до 3014x), Тяжёлая (до 13Kx) или Хардкор (до 20Kx).\n2. Сделайте ставку в PTS или USDT и нажмите «Начать игру».\n3. Переходите по полосам движения через люки 🐮.\n4. На каждой полосе множитель выигрыша растёт.\n5. Забирайте выигрыш в любой момент после первого шага!\n6. Остерегайтесь машин: при сбитии ставка сгорает.");
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
+      openDocModal(dict.rules_gifts_title || "Правила: Путь подарков", dict.rules_gifts || "");
+    }
+
+    function showRocketRulesModal() {
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
+      openDocModal(dict.rules_rocket_title || "Правила: Ракетка (Crash)", dict.rules_rocket || "");
+    }
+
+    function showUpgradeRulesModal() {
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
+      openDocModal(dict.rules_upgrade_title || "Правила: Апгрейд", dict.rules_upgrade || "");
+    }
+
+    function showRouletteRulesModal() {
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
+      openDocModal(dict.rules_roulette_title || "Правила: Подарки Telegram", dict.rules_roulette || "");
+    }
+
+    function showMinesRulesModal() {
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
+      openDocModal(dict.rules_mines_title || "Правила: Мины", dict.rules_mines || "");
     }
 
     // ==================================================
@@ -7663,6 +8467,7 @@
 
     // Инициализация онлайн-подключения
     async function initRocketGame() {
+      generateGameHash('rocket-round-hash');
       updateRocketUI();
       renderRocketChips();
       connectRocketRealtime();
@@ -7789,11 +8594,12 @@
     function renderRocketChips() {
       const container = safeGet('rocket-chips-container');
       if (!container) return;
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
       const isPts = (rocketCurrency === 'pts');
       const chips = isPts ? [10, 50, 100, 500, 1000, 'max'] : [0.5, 1, 2, 5, 10, 'max'];
       let html = '';
       chips.forEach(c => {
-        const label = c === 'max' ? 'Макс' : (isPts ? c : (c < 1 ? c.toFixed(1) : c));
+        const label = c === 'max' ? (dict.chip_max || 'Макс') : (isPts ? c : (c < 1 ? c.toFixed(1) : c));
         const arg = c === 'max' ? `'max'` : c;
         html += `<button class="gifts-chip-btn" onclick="setRocketQuickBet(${arg})">${label}</button>`;
       });
@@ -7801,7 +8607,7 @@
     }
 
     function setRocketQuickBet(val) {
-      if (rocketHasUserBet && rocketPhase === 'flying') return;
+      if (rocketHasUserBet || rocketPhase === 'flying') return;
       if (val === 'max') {
         if (rocketCurrency === 'pts') {
           rocketBetPts = Math.max(10, Math.floor(window.totalPts || 0));
@@ -7816,11 +8622,24 @@
         }
       }
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-      updateRocketUI();
+      updateRocketUI(true);
+    }
+
+    function onRocketCustomBetInput(val) {
+      if (rocketHasUserBet || rocketPhase === 'flying') return;
+      const num = parseFloat(val);
+      if (isNaN(num) || num <= 0) return;
+
+      if (rocketCurrency === 'pts') {
+        rocketBetPts = Math.max(1, Math.floor(num));
+      } else {
+        rocketBetUsdt = Math.max(0.01, parseFloat(num.toFixed(2)));
+      }
+      updateRocketUI(false);
     }
 
     function changeRocketBet(dir) {
-      if (rocketHasUserBet && rocketPhase === 'flying') return;
+      if (rocketHasUserBet || rocketPhase === 'flying') return;
       if (rocketCurrency === 'pts') {
         rocketBetPts = Math.max(10, rocketBetPts + dir * 50);
         if (dir > 0 && window.totalPts && rocketBetPts > window.totalPts && window.totalPts >= 10) {
@@ -7833,28 +8652,35 @@
         }
       }
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-      updateRocketUI();
+      updateRocketUI(true);
     }
 
-    function updateRocketUI() {
+    function updateRocketUI(syncInput = true) {
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
       const isPts = (rocketCurrency === 'pts');
       safeSetText('rocket-inner-pts', Math.floor(window.totalPts || 0).toLocaleString());
       safeSetText('rocket-inner-usdt', `$${(balance || 0).toFixed(2)}`);
 
-      safeSetText('rocket-bet-display', isPts ? String(rocketBetPts) : rocketBetUsdt.toFixed(2));
+      const betInput = safeGet('rocket-bet-input');
+      if (betInput) {
+        betInput.disabled = (rocketHasUserBet || rocketPhase === 'flying');
+        if (syncInput && document.activeElement !== betInput) {
+          betInput.value = isPts ? String(rocketBetPts) : rocketBetUsdt.toFixed(2);
+        }
+      }
       safeSetText('rocket-bet-curr', isPts ? 'PTS' : 'USDT');
 
       const btn = safeGet('rocket-action-btn');
       if (btn) {
         if (rocketPhase === 'waiting') {
           if (rocketHasUserBet) {
-            btn.innerText = 'СТАВКА ПРИНЯТА';
+            btn.innerText = dict.btn_bet_accepted || 'СТАВКА ПРИНЯТА';
             btn.className = 'rubup-spin-btn disabled';
             btn.style.background = '#1e293b';
             btn.style.color = '#94a3b8';
             btn.disabled = true;
           } else {
-            btn.innerText = 'СДЕЛАТЬ СТАВКУ';
+            btn.innerText = (dict.btn_place_bet || 'Сделать ставку').toUpperCase();
             btn.className = 'rubup-spin-btn ready';
             btn.style.background = '';
             btn.style.color = '';
@@ -7863,26 +8689,26 @@
         } else if (rocketPhase === 'flying') {
           if (rocketHasUserBet && !rocketUserCashedOut) {
             const curWin = isPts ? Math.floor(rocketBetPts * rocketMultiplier) : (rocketBetUsdt * rocketMultiplier).toFixed(2);
-            btn.innerText = `ЗАБРАТЬ ${curWin} ${isPts ? 'PTS' : 'USDT'}`;
+            btn.innerText = `${(dict.btn_cashout || 'Забрать').toUpperCase()} ${curWin} ${isPts ? 'PTS' : 'USDT'}`;
             btn.className = 'rubup-spin-btn ready';
             btn.style.background = 'linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%)';
             btn.style.boxShadow = '0 6px 22px rgba(59, 130, 246, 0.5)';
             btn.disabled = false;
           } else if (rocketUserCashedOut) {
-            btn.innerText = 'ВЫИГРЫШ ЗАБРАН!';
+            btn.innerText = dict.btn_bet_accepted || 'СТАВКА ПРИНЯТА';
             btn.className = 'rubup-spin-btn disabled';
             btn.style.background = '';
             btn.style.boxShadow = '';
             btn.disabled = true;
           } else {
-            btn.innerText = 'СТАВКА НА СЛЕДУЮЩИЙ РАУНД';
+            btn.innerText = dict.btn_round_finished || 'РАУНД ЗАВЕРШЕН';
             btn.className = 'rubup-spin-btn disabled';
             btn.style.background = '';
             btn.style.boxShadow = '';
             btn.disabled = true;
           }
         } else {
-          btn.innerText = 'РАУНД ЗАВЕРШЕН';
+          btn.innerText = dict.btn_round_finished || 'РАУНД ЗАВЕРШЕН';
           btn.className = 'rubup-spin-btn disabled';
           btn.style.background = '';
           btn.style.boxShadow = '';
@@ -7989,6 +8815,7 @@
 
     // ФАЗА 1: Ожидание ставок (получено от сервера)
     function onServerRoundWaiting(payload) {
+      generateGameHash('rocket-round-hash');
       if (payload.serverTime) {
         serverClockOffset = Date.now() - payload.serverTime;
       }
@@ -8514,6 +9341,7 @@
     const ROULETTE_CARD_WIDTH = 98;
 
     function initRouletteGame() {
+      generateGameHash('roulette-round-hash');
       safeSetText('roulette-inner-pts', Math.floor(window.totalPts || 0).toLocaleString());
       safeSetText('roulette-inner-usdt', `$${(balance || 0).toFixed(2)}`);
 
@@ -8617,6 +9445,7 @@
       if (isRouletteSpinning) return;
       rouletteMode = idx;
 
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
       const isUsdt = (rouletteCurrency === 'usdt');
       const currencyConfig = ROULETTE_CONFIG[rouletteCurrency];
 
@@ -8629,7 +9458,7 @@
 
           const conf = currencyConfig[i];
           if (i === 0) {
-            btn.innerHTML = `<span class="roulette-chance-label" style="font-size: 14px;">${conf.label}</span>`;
+            btn.innerHTML = `<span class="roulette-chance-label" style="font-size: 14px;" data-i18n="roulette_chance_free">${dict.roulette_chance_free || conf.label}</span>`;
           } else {
             const symbol = isUsdt ? '$' : '★';
             btn.innerHTML = `
@@ -8645,8 +9474,8 @@
       const currentCost = currencyConfig[idx].cost;
 
       if (idx === 0) {
-        if (sub) sub.innerHTML = 'Бесплатно раз в сутки. Забрать подарком или на баланс.';
-        if (btnText) btnText.innerHTML = rouletteFreeClaimed ? 'Бесплатный спин использован' : 'Крутить бесплатно';
+        if (sub) sub.innerHTML = dict.roulette_sub || 'Бесплатно раз в сутки. Забрать подарком или деньгами на баланс.';
+        if (btnText) btnText.innerHTML = rouletteFreeClaimed ? (dict.roulette_free_used || 'Бесплатный спин использован') : (dict.roulette_free_btn || 'Крутить бесплатно');
       } else {
         if (isUsdt) {
           if (sub) sub.innerHTML = `Ставка $${currentCost.toFixed(2)} USDT за прокрут. Редкие подарки на барабане!`;
@@ -8665,6 +9494,7 @@
 
     function spinRoulette() {
       if (isRouletteSpinning) return;
+      generateGameHash('roulette-round-hash');
 
       const isUsdt = (rouletteCurrency === 'usdt');
       const currentTier = ROULETTE_CONFIG[rouletteCurrency][rouletteMode];
@@ -8800,19 +9630,20 @@
 
         const netProfit = isUsdt ? parseFloat((chosenItem.val - cost).toFixed(2)) : (chosenItem.val - cost);
         const isFree = (cost === 0);
+        const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
 
         if (isFree) {
-          if (wbTitle) wbTitle.innerText = 'БЕСПЛАТНЫЙ ПРИЗ';
+          if (wbTitle) wbTitle.innerText = dict.roulette_chance_free ? dict.roulette_chance_free.toUpperCase() : 'БЕСПЛАТНЫЙ ПРИЗ';
           if (wbVal) wbVal.innerHTML = isUsdt ? `+$${chosenItem.val.toFixed(2)} USDT` : `<span class="star-gold">★</span> +${chosenItem.val.toLocaleString()} PTS`;
           if (wbSub) wbSub.innerText = chosenItem.name;
           if (winBanner) winBanner.className = 'roulette-win-banner status-win active';
         } else if (netProfit >= 0) {
-          if (wbTitle) wbTitle.innerText = 'ЧИСТЫЙ ВЫИГРЫШ';
+          if (wbTitle) wbTitle.innerText = dict.roulette_wb_win || 'ЧИСТЫЙ ВЫИГРЫШ';
           if (wbVal) wbVal.innerHTML = isUsdt ? `+$${netProfit.toFixed(2)} USDT` : `+${netProfit.toLocaleString()} PTS`;
           if (wbSub) wbSub.innerText = isUsdt ? `Приз: $${chosenItem.val.toFixed(2)} | Ставка: $${cost.toFixed(2)}` : `Приз: ★ ${chosenItem.val.toLocaleString()} | Ставка: ${cost.toLocaleString()}`;
           if (winBanner) winBanner.className = 'roulette-win-banner status-win active';
         } else {
-          if (wbTitle) wbTitle.innerText = 'УТЕШИТЕЛЬНЫЙ ПРИЗ';
+          if (wbTitle) wbTitle.innerText = dict.roulette_wb_consolation || 'УТЕШИТЕЛЬНЫЙ ПРИЗ';
           if (wbVal) wbVal.innerHTML = isUsdt ? `+$${chosenItem.val.toFixed(2)} USDT` : `+${chosenItem.val.toLocaleString()} PTS`;
           if (wbSub) wbSub.innerText = isUsdt ? `Возврат части ставки $${cost.toFixed(2)}` : `Возврат части ставки ${cost.toLocaleString()} ★`;
           if (winBanner) winBanner.className = 'roulette-win-banner status-loss active';
@@ -8897,6 +9728,7 @@
     let minesCurrentMult = 1.00;
 
     function initMinesGame() {
+      generateGameHash('mines-round-hash');
       renderMinesChips();
       updateMinesUI();
       renderMinesGrid();
@@ -8954,11 +9786,12 @@
     function renderMinesChips() {
       const container = safeGet('mines-chips-container');
       if (!container) return;
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
       const isPts = (minesCurrency === 'pts');
       const chips = isPts ? [10, 50, 100, 500, '2X', 'max'] : [0.5, 1, 2, 5, '2X', 'max'];
       let html = '';
       chips.forEach(c => {
-        const label = c === 'max' ? 'Макс' : (c === '2X' ? '2X' : (isPts ? c : (c < 1 ? c.toFixed(1) : c)));
+        const label = c === 'max' ? (dict.chip_max || 'Макс') : (c === '2X' ? '2X' : (isPts ? c : (c < 1 ? c.toFixed(1) : c)));
         const arg = typeof c === 'string' ? `'${c}'` : c;
         html += `<button class="gifts-chip-btn" onclick="setMinesQuickBet(${arg})">${label}</button>`;
       });
@@ -8996,7 +9829,8 @@
       if (minesInRound) return;
       minesBombsCount = count;
       document.querySelectorAll('.mines-bomb-btn').forEach(btn => {
-        if (btn.innerText.includes(String(count))) btn.classList.add('active');
+        const onclickAttr = btn.getAttribute('onclick') || '';
+        if (onclickAttr.includes(`(${count})`)) btn.classList.add('active');
         else btn.classList.remove('active');
       });
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
@@ -9014,6 +9848,7 @@
     }
 
     function updateMinesUI(syncInput = true) {
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
       const isPts = (minesCurrency === 'pts');
       safeSetText('mines-inner-pts', Math.floor(window.totalPts || 0).toLocaleString());
       safeSetText('mines-inner-usdt', `$${(balance || 0).toFixed(2)}`);
@@ -9043,20 +9878,20 @@
       const btn = safeGet('mines-action-btn');
       if (btn) {
         if (!minesInRound) {
-          btn.innerText = 'НАЧАТЬ ИГРУ';
+          btn.innerText = (dict.btn_start_game || 'Начать игру').toUpperCase();
           btn.className = 'rubup-spin-btn ready';
           btn.style.background = '';
           btn.style.boxShadow = '';
           btn.disabled = false;
         } else {
           if (minesGemsFound > 0) {
-            btn.innerText = `ЗАБРАТЬ ВЫИГРЫШ (${winVal})`;
+            btn.innerText = `${(dict.btn_cashout || 'Забрать').toUpperCase()} (${winVal})`;
             btn.className = 'rubup-spin-btn ready';
             btn.style.background = 'linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%)';
             btn.style.boxShadow = '0 6px 22px rgba(59, 130, 246, 0.5)';
             btn.disabled = false;
           } else {
-            btn.innerText = 'ОТКРОЙТЕ КРИСТАЛЛ...';
+            btn.innerText = dict.btn_mines_pick || 'ОТКРОЙТЕ КРИСТАЛЛ...';
             btn.className = 'rubup-spin-btn disabled';
             btn.style.background = '';
             btn.style.boxShadow = '';
@@ -9075,6 +9910,7 @@
     }
 
     function startMinesRound() {
+      generateGameHash('mines-round-hash');
       const isPts = (minesCurrency === 'pts');
       const bet = isPts ? minesBetPts : minesBetUsdt;
 
@@ -9973,65 +10809,150 @@
     // ==========================================
     // 7. ИНВЕСТИЦИИ И РЕФЕРАЛЫ
     // ==========================================
-    const PROJECTS_DATA = {
-      'Media Network X': {
-        name: 'Media Network Node',
-        ticker: '$MNX',
-        tag: 'AI Media',
-        apy: '18% APY',
-        minEntry: '$20 / нода',
-        summary: 'Вычислительный узел генерации, AI-дубляжа и дистрибуции детских и познавательных YouTube-каналов с глобальной монетизацией в Tier-1 странах.',
-        model: 'Выручка от Google AdSense, спонсорских размещений и коммерческого лицензирования контента.',
-        assets: 'Сетка YouTube-каналов с верифицированной монетизацией, авторские медиа-библиотеки и права на AI-персонажей.',
-        payouts: 'Ежемесячное начисление дивидендов в USDT на баланс аккаунта.',
-        tokenomics: '35% ежемесячной прибыли сети направляется на выкуп токена ($MNX) на DEX. Нафармленные PTS гарантируют прямую квоту в Airdrop на TGE.'
+        const PROJECTS_DATA = {
+      "Media Network X": {
+            "ticker": "$MNX",
+            "tag": "AI Media",
+            "apy": "18% APY",
+            "minEntry": "$20",
+            "ru": {
+                  "name": "Media Network Node",
+                  "summary": "Вычислительный узел генерации, AI-дубляжа и дистрибуции детских и познавательных YouTube-каналов с глобальной монетизацией в Tier-1 странах.",
+                  "model": "Выручка от Google AdSense, спонсорских размещений и коммерческого лицензирования контента.",
+                  "assets": "Сетка YouTube-каналов с верифицированной монетизацией, авторские медиа-библиотеки и права на AI-персонажей.",
+                  "payouts": "Ежемесячное начисление дивидендов в USDT на баланс аккаунта.",
+                  "tokenomics": "35% ежемесячной прибыли сети направляется на выкуп токена ($MNX) на DEX. Нафармленные PTS гарантируют прямую квоту в Airdrop на TGE."
+            },
+            "en": {
+                  "name": "Media Network Node",
+                  "summary": "Computing node for AI dubbing, automated production, and distribution of kids and infotainment YouTube channels monetized in Tier-1 countries.",
+                  "model": "Revenue from Google AdSense, sponsorship integrations, and content licensing.",
+                  "assets": "Established YouTube channel network with verified monetization, proprietary animation libraries, and character IP.",
+                  "payouts": "Monthly dividend accrual in USDT directly to account balance.",
+                  "tokenomics": "35% of monthly net revenue funds DEX market buybacks ($MNX). Farmed PTS directly secure your TGE Airdrop allocation."
+            },
+            "fr": {
+                  "name": "Media Network Node",
+                  "summary": "Nœud de calcul pour le doublage IA, la génération et la diffusion de chaînes YouTube pour enfants monétisées dans les pays Tier-1.",
+                  "model": "Revenus publicitaires Google AdSense, partenariats et licences de contenu.",
+                  "assets": "Réseau de chaînes YouTube monétisées, bibliothèques 3D propriétaires et droits de propriété intellectuelle.",
+                  "payouts": "Versement mensuel des dividendes en USDT sur le solde du compte.",
+                  "tokenomics": "35% des bénéfices mensuels sont alloués au rachat (Buyback) du token sur DEX. Les PTS garantissent votre allocation Airdrop."
+            },
+            "vi": {
+                  "name": "Media Network Node",
+                  "summary": "Node tính toán sản xuất, lồng tiếng AI và phân phối các kênh YouTube thiếu nhi kiếm tiền tại các quốc gia Tier-1.",
+                  "model": "Doanh thu từ Google AdSense, quảng cáo tài trợ và cấp phép bản quyền nội dung.",
+                  "assets": "Mạng lưới kênh YouTube đã bật kiếm tiền, thư viện hoạt hình 3D độc quyền và bản quyền nhân vật.",
+                  "payouts": "Cổ tức được trả hàng tháng bằng USDT vào tài khoản.",
+                  "tokenomics": "35% lợi nhuận hàng tháng dùng để mua lại (Buyback) token trên sàn DEX. Điểm PTS đảm bảo trực tiếp tỷ lệ nhận Airdrop TGE."
+            }
       },
-      'Cloud Render Core': {
-        name: 'Cloud Render Node',
-        ticker: '$CRND',
-        tag: 'Compute',
-        apy: '24% APY',
-        minEntry: '$20 / нода',
-        summary: 'Узел распределенной серверной инфраструктуры графических процессоров (RTX 4090 / A100) для 3D-рендеринга, видеогенерации и инференса нейросетей.',
-        model: 'Почасовая сдача мощностей независимым CGI/VFX-студиям, геймдев-командам и исследователям нейросетей.',
-        assets: 'Собственные серверные стойки с высокопроизводительными GPU в дата-центрах уровня Tier III.',
-        payouts: 'Ежемесячные начисления в USDT от фактической аренды рендер-серверов.',
-        tokenomics: 'Выручка формирует пул ликвидности торговой пары $CRND/TON. Владение нодами закрепляет статус валидатора ранней стадии.'
+      "Cloud Render Core": {
+            "ticker": "$CRND",
+            "tag": "Compute",
+            "apy": "24% APY",
+            "minEntry": "$20",
+            "ru": {
+                  "name": "Cloud Render Node",
+                  "summary": "Узел распределенной серверной инфраструктуры графических процессоров (RTX 4090 / A100) для 3D-рендеринга, видеогенерации и инференса нейросетей.",
+                  "model": "Почасовая сдача мощностей независимым CGI/VFX-студиям, геймдев-командам и исследователям нейросетей.",
+                  "assets": "Собственные серверные стойки с высокопроизводительными GPU в дата-центрах уровня Tier III.",
+                  "payouts": "Ежемесячные начисления в USDT от фактической аренды рендер-серверов.",
+                  "tokenomics": "Выручка формирует пул ликвидности торговой пары $CRND/TON. Владение нодами закрепляет статус валидатора ранней стадии."
+            },
+            "en": {
+                  "name": "Cloud Render Node",
+                  "summary": "Distributed GPU server cluster (RTX 4090 / A100) for high-performance 3D rendering, video synthesis, and AI model inference.",
+                  "model": "Hourly computing lease to independent VFX/CGI animation studios, game devs, and AI researchers.",
+                  "assets": "Dedicated GPU server racks hosted in Tier III data centers.",
+                  "payouts": "Monthly USDT payouts based on verified commercial compute utilization.",
+                  "tokenomics": "Lease revenues establish the liquidity pool for $CRND on DEX. Node ownership secures early-stage validator status."
+            },
+            "fr": {
+                  "name": "Cloud Render Node",
+                  "summary": "Grappe de serveurs GPU décentralisée (RTX 4090 / A100) dédiée au rendu 3D, à la génération vidéo et à l'inférence d'IA.",
+                  "model": "Location horaire de puissance de calcul à des studios VFX, créateurs de jeux et chercheurs en IA.",
+                  "assets": "Baies de serveurs GPU propriétaires hébergées dans des centres de données Tier III.",
+                  "payouts": "Versements mensuels en USDT basés sur la location réelle des serveurs.",
+                  "tokenomics": "Les revenus alimentent le pool de liquidité DEX. La possession de nœuds octroie le statut de validateur précoce."
+            },
+            "vi": {
+                  "name": "Cloud Render Node",
+                  "summary": "Cụm máy chủ GPU phân tán (RTX 4090 / A100) phục vụ render 3D, tạo video và suy luận mô hình trí tuệ nhân tạo.",
+                  "model": "Cho thuê công suất tính toán theo giờ cho các studio hoạt hình, nhà phát triển game và chuyên gia AI.",
+                  "assets": "Dàn máy chủ GPU chuyên dụng đặt tại các trung tâm dữ liệu chuẩn Tier III.",
+                  "payouts": "Thanh toán hàng tháng bằng USDT theo sản lượng cho thuê thực tế.",
+                  "tokenomics": "Doanh thu cho thuê tạo lập bể thanh khoản trên sàn DEX. Nắm giữ node xác lập vị thế validator giai đoạn sớm."
+            }
       },
-      'MegaWatt Mining Cluster': {
-        name: 'Green Hashrate Node',
-        ticker: '$MWMC',
-        tag: 'Mining & Energy',
-        apy: '28% APY',
-        minEntry: '$20 / нода',
-        summary: 'Узел валидации промышленного дата-центра добычи криптовалют мощностью 4.2 МВт с прямым подключением к гидрогенерации по льготному тарифу.',
-        model: 'Генерация хешрейта энергоэффективными ASIC-майнерами с автоматической конвертацией добытых монет в стейблкоин USDT.',
-        assets: 'Модульные контейнерные дата-центры, трансформаторы и парки ASIC-устройств последнего поколения.',
-        payouts: 'Еженедельный майнинг-доход за вычетом себестоимости чистой гидроэнергии.',
-        tokenomics: 'Часть намайненного резерва отправляется в фонд казначейского обеспечения (Treasury Fund), формируя фундаментальную цену токена на листинге.'
+      "MegaWatt Mining Cluster": {
+            "ticker": "$MWMC",
+            "tag": "Mining & Energy",
+            "apy": "28% APY",
+            "minEntry": "$20",
+            "ru": {
+                  "name": "Green Hashrate Node",
+                  "summary": "Узел валидации промышленного дата-центра добычи криптовалют мощностью 4.2 МВт с прямым подключением к гидрогенерации по льготному тарифу.",
+                  "model": "Генерация хешрейта энергоэффективными ASIC-майнерами с автоматической конвертацией добытых монет в стейблкоин USDT.",
+                  "assets": "Модульные контейнерные дата-центры, трансформаторы и парки ASIC-устройств последнего поколения.",
+                  "payouts": "Еженедельный майнинг-доход за вычетом себестоимости чистой гидроэнергии.",
+                  "tokenomics": "Часть намайненного резерва отправляется в фонд казначейского обеспечения (Treasury Fund), формируя фундаментальную цену токена на листинге."
+            },
+            "en": {
+                  "name": "Green Hashrate Node",
+                  "summary": "Industrial 4.2 MW mining validation node powered by direct zero-emission hydroelectric generation at preferential power tariffs.",
+                  "model": "Hashrate generation via latest-gen ASIC miners with automated revenue hedging into USDT.",
+                  "assets": "Modular containerized data centers, transformers, and enterprise ASIC fleets.",
+                  "payouts": "Weekly mining payouts net of clean hydro energy operating costs.",
+                  "tokenomics": "Portion of mined assets strengthens the Treasury Reserve, providing a solid price floor for the token at TGE."
+            },
+            "fr": {
+                  "name": "Green Hashrate Node",
+                  "summary": "Nœud de validation d'un centre minier industriel de 4.2 MW alimenté en direct par énergie hydroélectrique à tarif préférentiel.",
+                  "model": "Production de hashrate par des mineurs ASIC nouvelle génération avec conversion automatique en USDT.",
+                  "assets": "Centres de données conteneurisés, transformateurs et parcs d'ASIC de pointe.",
+                  "payouts": "Revenus miniers hebdomadaires nets des coûts de l'hydroélectricité.",
+                  "tokenomics": "Une réserve d'actifs minés alimente le Trésor de l'écosystème pour consolider le cours du token au listing."
+            },
+            "vi": {
+                  "name": "Green Hashrate Node",
+                  "summary": "Node xác thực trung tâm khai thác tiền mã hóa công nghiệp 4.2 MW kết nối trực tiếp thủy điện với biểu giá ưu đãi.",
+                  "model": "Tạo hashrate bằng các máy đào ASIC thế hệ mới với cơ chế tự động chuyển đổi lợi nhuận sang USDT.",
+                  "assets": "Trung tâm dữ liệu dạng container mô-đun, trạm biến áp và dàn thiết bị ASIC hiện đại.",
+                  "payouts": "Chi trả lợi nhuận khai thác hàng tuần sau khi trừ chi phí thủy điện sạch.",
+                  "tokenomics": "Một phần dự trữ khai thác được chuyển vào Quỹ Ngân khố (Treasury) nhằm củng cố giá sàn của token khi niêm yết."
+            }
       }
-    };
+};
 
-    function openProjectDetails(projectKey) {
+function openProjectDetails(projectKey) {
       const p = PROJECTS_DATA[projectKey];
       if (!p) return;
-      safeSetText('p-modal-name', p.name || projectKey);
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
+      const langData = p[currentLang] || p.ru;
+
+      safeSetText('p-modal-name', langData.name || projectKey);
       safeSetText('p-modal-ticker', p.ticker);
       safeSetText('p-modal-tag', p.tag);
-      safeSetText('p-modal-summary', p.summary);
-      safeSetText('p-modal-model', p.model);
-      safeSetText('p-modal-assets', p.assets);
-      safeSetText('p-modal-payouts', p.payouts);
+      safeSetText('p-modal-summary', langData.summary);
+      safeSetText('p-modal-model', langData.model);
+      safeSetText('p-modal-assets', langData.assets);
+      safeSetText('p-modal-payouts', langData.payouts);
       safeSetText('p-modal-apy', p.apy);
-      safeSetText('p-modal-tokenomics', p.tokenomics || '');
+      safeSetText('p-modal-tokenomics', langData.tokenomics || '');
 
       const investBtn = safeGet('p-modal-invest-btn');
       if (investBtn) {
+        investBtn.innerText = dict.btn_p_modal_invest || 'Инвестировать от $20';
         investBtn.onclick = () => {
           closeProjectDetails();
           openInvestScreen(projectKey, 20, p.ticker);
         };
       }
+
+      const closeBtn = safeGet('p-modal-close-btn');
+      if (closeBtn) closeBtn.innerText = dict.btn_p_modal_close || 'Закрыть';
 
       const modal = safeGet('project-details-modal');
       if (modal) modal.classList.add('active');
@@ -10090,14 +11011,18 @@
       const currentRate = Math.floor(currentNodes * 16);
       const currentLvl = Math.floor(currentInvested / 20) || 0;
 
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
+      const unit = dict.nodes_unit || 'nodes';
+      const ptsUnit = dict.pts_hourly_unit || 'PTS/h';
+
       safeSetText('inv-current-lvl', `LVL ${currentLvl}`);
-      safeSetText('inv-current-shares', `${currentNodes} нод`);
-      safeSetText('inv-current-rate', `+${currentRate} PTS/ч`);
+      safeSetText('inv-current-shares', `${currentNodes} ${unit}`);
+      safeSetText('inv-current-rate', `+${currentRate} ${ptsUnit}`);
 
       const nextNodes = currentNodes + selectedShares;
       const addedRate = Math.floor(selectedShares * 16);
       const totalRate = currentRate + addedRate;
-      safeSetText('inv-preview-shares', `${nextNodes} нод (+${totalRate} PTS/ч)`);
+      safeSetText('inv-preview-shares', `${nextNodes} ${unit} (+${totalRate} ${ptsUnit})`);
     }
 
     function openInvestScreen(projectName, pricePerShare, ticker) {
@@ -10109,7 +11034,7 @@
       installmentBaseCost = 5000;
 
       const pData = PROJECTS_DATA[projectName];
-      const displayName = pData?.name || projectName;
+      const displayName = (pData && pData[currentLang] && pData[currentLang].name) || (pData && pData.ru && pData.ru.name) || projectName;
 
       safeSetText('inv-project-name', `${displayName} (${ticker})`);
       safeSetText('opt-invest-bal', `$${balance.toFixed(2)}`);
@@ -10257,7 +11182,7 @@
         const farmRate = Math.floor(item.shares * 16);
         const level = Math.floor(item.invested / 20) || 1;
         const pData = PROJECTS_DATA[item.project];
-        const displayName = pData?.name || item.project;
+        const displayName = (pData && pData[currentLang] && pData[currentLang].name) || (pData && pData.ru && pData.ru.name) || item.project;
 
         return `
         <div class="project-card" style="margin-bottom: 14px; border-color: rgba(56, 189, 248, 0.3); background: linear-gradient(160deg, rgba(20,29,48,0.7) 0%, rgba(10,15,28,0.95) 100%);">
@@ -10378,17 +11303,22 @@
       }
     }
 
-            function openDocModal(docType) {
+    function openDocModal(docType, customContent) {
       const modal = safeGet('doc-modal');
       const title = safeGet('doc-modal-title');
       const content = safeGet('doc-modal-content');
       const btnClose = modal ? modal.querySelector('.btn[data-i18n="btn_close"]') : null;
       if (btnClose) btnClose.innerText = TRANSLATIONS[currentLang]?.btn_close || "Понятно";
 
-      const doc = DOCS_DATA[docType]?.[currentLang] || DOCS_DATA[docType]?.['ru'];
-      if (doc) {
-        if (title) title.innerText = doc.title;
-        if (content) content.innerHTML = doc.content;
+      if (customContent !== undefined) {
+        if (title) title.innerText = docType;
+        if (content) content.innerHTML = customContent;
+      } else {
+        const doc = DOCS_DATA[docType]?.[currentLang] || DOCS_DATA[docType]?.['ru'];
+        if (doc) {
+          if (title) title.innerText = doc.title;
+          if (content) content.innerHTML = doc.content;
+        }
       }
       if (modal) modal.classList.add('active');
     }
